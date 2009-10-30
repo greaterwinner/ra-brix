@@ -43,7 +43,6 @@
         <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra"/>
         <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra"/>
         <add assembly="Components" namespace="Components" tagPrefix="ext"/>
-        <add assembly="Imatis.WebObserver" namespace="Imatis.WebObserver" tagPrefix="ra"/>
       </controls>
     </pages>
     <compilation debug="true"/>
