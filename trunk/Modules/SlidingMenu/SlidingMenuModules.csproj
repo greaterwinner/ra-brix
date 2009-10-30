@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEA510A9-9E2E-4F3F-86DC-BF8A2B892C21}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SlidingMenuModules</RootNamespace>
+    <AssemblyName>SlidingMenuModules</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Builder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Builder.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Selector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SlidingMenu.ascx.cs">
+      <DependentUpon>SlidingMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ActiveRecords\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
+      <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
+      <Name>Ra.Brix.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
+      <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
+      <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SlidingMenu.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

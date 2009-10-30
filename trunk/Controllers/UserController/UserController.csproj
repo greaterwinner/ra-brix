@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1BDC8E37-02BA-4A2A-92E7-789A16E30997}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UserController</RootNamespace>
+    <AssemblyName>UserController</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ActiveRecords\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ActiveRecords\User\UserRecords.csproj">
+      <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
+      <Name>UserRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
+      <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
+      <Name>Ra.Brix.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
+      <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
+      <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

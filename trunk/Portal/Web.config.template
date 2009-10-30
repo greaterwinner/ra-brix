@@ -1,0 +1,52 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <!-- Portal plugin, our "viewport driver"... -->
+    <add key="PortalViewDriver" value="Viewport.Main" />
+
+    <!-- MSSQL 
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
+    <add key="LegoConnectionString" value="Data Source=thomas-laptop\MSSQL;Initial Catalog=Lego;User ID=sa;Password=8pr4ms" />
+    -->
+
+    <!-- MySQL connection string (doesn't work) 
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
+    <add key="LegoConnectionString" value="SERVER=localhost;DATABASE=Lego;UID=root;PASSWORD=8pr4ms" />
+    -->
+
+    <!-- XML connection string -->
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
+    <add key="LegoConnectionString" value="~/data.xml" />
+
+
+    <add key="IntranetURL" value="http://ringerike-sykehus.no" />
+    <add key="IntranetHeader" value="Ringerike Hospital" />
+
+    <add key="CandyStoreURL" value="http://imatis.no" />
+    <add key="CandyStoreHeader" value="News from Imatis" />
+
+    <add key="SupportURL" value="http://google.com" />
+    <add key="SupportHeader" value="Support" />
+
+    <add key="PowerUser" value="polterguy.blogspot.com" />
+
+    <add key="NumberOfChatsToShow" value="5" />
+    <add key="MinutesToShowChats" value="5" />
+
+
+  </appSettings>
+
+  <system.web>
+    <pages>
+      <controls>
+        <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra"/>
+        <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra"/>
+        <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra"/>
+        <add assembly="Components" namespace="Components" tagPrefix="ext"/>
+        <add assembly="Imatis.WebObserver" namespace="Imatis.WebObserver" tagPrefix="ra"/>
+      </controls>
+    </pages>
+    <compilation debug="true"/>
+    <authentication mode="Windows"/>
+  </system.web>
+</configuration>

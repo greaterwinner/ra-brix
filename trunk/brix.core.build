@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="brix.core" default="all" xmlns="http://nant.sf.net/release/0.86-beta1/nant.xsd">
+
+  <loadtasks assembly="References/Ra.Build.Tasks.dll" />
+  <load-properties properties-file="build.properties" />
+
+  <!--property name="nant.settings.currentframework" value="net-2.0" /-->
+
+
+  <!-- Targets -->
+  <target name="all" depends="clean,init,compile.brix.core" />
+
+  <target name="clean" description="Remove Old Build Output Files">
+    <delete dir="${output.dir}" />
+  </target>
+
+  <target name="init" description="Necessary Initializations">
+    <mkdir dir="${output.dir}/${library.dir}/${brix.core.name}" />
+    <mkdir dir="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.adapters.name}" />
+  </target>
+
+  <target name="compile.brix.core" depends="clean,init" description="Compile Ra HTML Builder">
+    
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512" 
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.types.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.types.name}/obj/**/*.*" />
+      </sources>
+      <references basedir="${framework.dir}">
+        <include name="System.Data.dll" />
+        <include name="System.Xml.dll" />
+      </references>
+    </csc>
+
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512"
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.data.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.data.name}/obj/**/*.*" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" />
+      </references>
+    </csc>
+
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512"
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.loader.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.loader.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.loader.name}/obj/**/*.*" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" />
+      </references>
+    </csc>
+
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512"
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}/obj/**/*.*" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" />
+      </references>
+    </csc>
+
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512"
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/obj/**/*.*" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${references.dir}/MySql.Data.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" />
+      </references>
+    </csc>
+    
+    <csc target="library" optimize="${not debug}" noconfig="true" filealign="512"
+         output="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.adapters.name}/${brix.data.xml.name}.dll" debug="${debug}">
+      <sources>
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.xml.name}/**/*.cs" />
+        <exclude name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.xml.name}/obj/**/*.*" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.core.name}/${brix.types.name}.dll" />
+      </references>
+    </csc>
+    
+  </target>
+</project>

@@ -1,0 +1,1279 @@
+﻿
+html
+{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+body
+{
+	background-color: #6DD0FF;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+table tr td
+{
+	border-collapse: collapse;
+	border: none 0;
+}
+
+th
+{
+	padding: 0;
+}
+
+th, td
+{
+	border: none 0;
+	padding: 0;
+}
+
+h1, h2
+{
+	margin: 10px 0 5px 0;
+}
+
+ul.list, ol.list, ul
+{
+	margin: 15px;
+}
+
+ul.list li, ol.list li, ul li
+{
+	margin-left: 15px;
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+.tree ul, .tab-header ul, .sliding-menu ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+.tree ul li, .tab-header ul li, .sliding-menu ul li
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a.noHoverLink:hover
+{
+	padding: 0;
+	margin: 0;
+	border: none 0;
+}
+
+.logo
+{
+	width: 170px;
+	height: 89px;
+	display: block;
+	background: Transparent url(Images/Logo.png) no-repeat 0 0;
+}
+
+.dynamic-content
+{
+	height: 100%;
+	overflow: auto;
+}
+
+.dynamic-content-no-overflow
+{
+	overflow: inherit;
+}
+
+.noHoverLink
+{
+	position: absolute;
+	top: 0px;
+}
+
+.noHoverLink:hover
+{
+	background-color: Transparent;
+	padding-left: 1px;
+}
+
+
+.loginPanel
+{
+	width: 200px;
+	font-size: 10px;
+}
+
+.loginPanel table
+{
+	border-collapse: collapse;
+}
+
+.loginPanel table tr td
+{
+	margin: 0;
+	padding: 1px;
+}
+
+.showLoginBtn
+{
+	font-size: 10px;
+	margin: 5px;
+}
+
+.topHeader
+{
+	background: url( 'Images/PortalToolbar.png' ) repeat-x 0 0;
+	height: 89px;
+	width: 100%;
+	padding: 5px 0 5px 0;
+}
+
+.sliding-menu-btn
+{
+	padding: 0px !important;
+}
+
+.sliding-menu-btn:hover
+{
+	background-color: Transparent !important;
+}
+
+.sliding-leaf
+{
+	margin-top: 8px;
+}
+
+.menuBtn
+{
+	width: 100%;
+	padding: 0;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	background-color: #eee;
+}
+
+a.disabled
+{
+	color: #999;
+}
+
+.sliding-menu
+{
+	border: none 0 !important;
+}
+
+.bread-crumb-parent
+{
+	background-image: none !important;
+}
+
+.openIDTextBoxWrapper
+{
+	position: absolute;
+	float: right;
+	top: 25px;
+	right: 95px;
+}
+
+.openIDTextBox
+{
+	padding-left: 23px;
+	padding-top: 2px;
+	background: White url(Images/logo_openid.png) no-repeat 0 0;
+	height: 19px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.filterTextBox
+{
+	right: 15px;
+	width: 80px !important;
+	margin-bottom: 5px;
+	background: White url(filter-icon.png) no-repeat 0 0;
+	border: solid 1px #99e;
+	padding-left: 15px;
+}
+
+.informationPanel
+{
+	position: absolute;
+	top: 8px;
+	display: none;
+	font-weight: bold;
+	left: 250px;
+	width: 700px;
+	background-color: #E6F4FF;
+	border: 1px dashed #CCCCCC;
+	z-index: 2000;
+}
+
+.logoutLinkButton a
+{
+	background:Transparent url(login.png) no-repeat 0 -57px;
+	height: 57px;
+	top: 9px;
+	right: 15px;
+	float: right;
+	position: absolute;
+	width: 72px;
+}
+
+.logoutLinkButton a:hover
+{
+	background:Transparent url(login.png) no-repeat 0 0;
+	height: 57px;
+	top: 9px;
+	right: 15px;
+	float: right;
+	position: absolute;
+	width: 72px;
+}
+
+.loginLinkButton input[type="button"]
+{
+	background:Transparent url(login.png) no-repeat 0 -57px;
+	height: 57px;
+	top: -16px;
+	right: -80px;
+	float: right;
+	position: absolute;
+	width: 72px;
+	cursor:pointer;
+}
+
+.loginLinkButton input[type="button"]:hover
+{
+	background:Transparent url(login.png) no-repeat 0 0;
+}
+
+.informationPanelInner
+{
+	padding: 20px;
+}
+
+.informationLabel
+{
+	display: block;
+	margin-right: 80px;
+}
+
+.wholeChatAre
+{
+	background-color: #c3c3c4;
+}
+
+.chatOutput
+{
+	margin: 15px;
+}
+
+.chatOutput li
+{
+	padding: 3px;
+}
+
+.chatOutput .time
+{
+	width: 40px;
+	display: block;
+	float: left;
+}
+
+.chatOutput .username
+{
+	width: 100px;
+	display: block;
+	float: left;
+	font-weight: bold;
+}
+
+.chatOutput .content
+{
+	display: block;
+	clear: both;
+	border: none 0;
+	padding: 0;
+	background-color: Transparent;
+}
+
+.gridBoldText
+{
+	font-weight: bold;
+	color: #a80;
+}
+
+.newRow
+{
+	background: url( 'Images/light_bulb.png' ) no-repeat 0 0;
+	padding-left: 18px;
+}
+
+.window_content
+{
+	background-color: #E6F4FF;
+}
+
+.treeLinkButton
+{
+	padding-left: 2px;
+}
+
+.flags-arabian, .flags-norwegian, .flags-britain, .flags-german, .flags-france, .flags-spain, .flags-sweden, .flags-USA
+{
+	width: 120px;
+	height: 75px;
+	display: block;
+	float: left;
+	margin: 5px;
+}
+
+.flags-arabian:hover, .flags-norwegian:hover, .flags-britain:hover, .flags-german:hover, .flags-france:hover, .flags-spain:hover, .flags-sweden:hover, .flags-USA:hover
+{
+	text-decoration: none;
+	background-color: Transparent;
+}
+
+.flags-arabian
+{
+	background: transparent url(Images/flags.png) no-repeat 0 0;
+}
+
+.flags-norwegian
+{
+	background: transparent url(Images/flags.png) no-repeat -120px 0;
+}
+
+.flags-britain
+{
+	background: transparent url(Images/flags.png) no-repeat -360px 0;
+}
+
+.flags-german
+{
+	background: transparent url(Images/flags.png) no-repeat -240px 0;
+}
+
+.flags-france
+{
+	background: transparent url(Images/flags.png) no-repeat -480px 0;
+}
+
+.flags-spain
+{
+	background: transparent url(Images/flags.png) no-repeat -600px 0;
+}
+
+.flags-sweden
+{
+	background: transparent url(Images/flags.png) no-repeat -720px 0;
+}
+
+.flags-USA
+{
+	background: transparent url(Images/flags.png) no-repeat -840px 0;
+}
+
+.hideCaption .window_title
+{
+	display: none !important;
+}
+
+.favouriteButton
+{
+	background: transparent url(Images/pluss.png) no-repeat 0 0;
+	display: block;
+	width: 29px;
+	height: 30px;
+}
+
+.favouriteButton:hover
+{
+	background-color: Transparent;
+}
+
+
+
+.grid
+{
+	width: 94%;
+	margin-left: 3%;
+}
+
+.grid .gridWrapper
+{
+	width: 100%;
+}
+
+.grid .gridWrapper .table
+{
+	width: 100%;
+	margin-top: 25px;
+}
+
+.grid .gridWrapper .table tr td
+{
+	padding: 5px 0px 5px 0px;
+}
+
+.grid .gridWrapper .table tr td a
+{
+	display: block;
+}
+
+.grid .gridWrapper .table tr.even
+{
+	border: thin solid #aaaaCC;
+	background-color: #c9E0FF;
+}
+.grid .gridWrapper .table tr.odd
+{
+	background-color: #E6F4FF;
+	border: thin solid #aaaaCC;
+}
+
+.grid .gridWrapper .table tr.even td, .grid .gridWrapper .table tr.odd td
+{
+	padding: 0.5em;
+}
+
+.grid .gridWrapper .table .headerButton
+{
+	width: 100% !important;
+	margin-left: -10px;
+}
+
+div.edit
+{
+	color: Blue;
+	cursor: pointer;
+	padding-left: 20px;
+	background: Transparent url( 'editable.png' ) no-repeat 0 0;
+}
+
+div.edit:hover
+{
+	background-color: #FFFFFF;
+}
+
+div.edit span
+{
+	display: block;
+}
+
+div.edit input, div.edit textarea
+{
+	display: block;
+	width: 90%;
+}
+
+.filter
+{
+	width: 80px !important;
+	margin: 15px 15px 5px 15px;
+	background: White url(filter-icon.png) no-repeat 0 0;
+	border: solid 1px #99e;
+	padding-left: 15px;
+	color: #777;
+	font-size: 11px;
+}
+
+.grid .count
+{
+	font-size: 12px;
+	color: Black;
+}
+
+.grid .previous
+{
+	color: Blue;
+	font-size: 12px;
+	padding-right: 15px;
+}
+
+.grid .previous-disabled
+{
+	color: #999;
+	font-size: 12px;
+	padding-right: 15px;
+}
+
+.grid .next
+{
+	color: Blue;
+	font-size: 12px;
+	padding-left: 15px;
+}
+
+.grid .next-disabled
+{
+	color: #999;
+	font-size: 12px;
+	padding-left: 15px;
+}
+
+.grid .previous-disabled:hover, .grid .next-disabled:hover
+{
+	text-decoration: none;
+	background-color: Transparent;
+}
+
+.clicked .bCenter span
+{
+	background: url( 'steel/window-sprite.png' ) no-repeat -16px -81px;
+	padding-left: 15px;
+}
+
+.clicked-backwards .bCenter span
+{
+	background: url( 'steel/window-sprite.png' ) no-repeat -16px -65px;
+	padding-left: 15px;
+}
+
+.deleteBtn
+{
+	display: block;
+	background: url( 'Images/delete.png' ) no-repeat 0 0;
+	width: 16px;
+	height: 16px;
+}
+
+.deleteBtn:hover
+{
+	background: url( 'Images/delete-hover.png' ) no-repeat 0 0;
+}
+
+
+
+
+
+.colorLabel
+{
+	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+	display: block;
+	width: 25px;
+	height: 25px;
+	position: relative;
+	cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Red
+{
+	background: Transparent url(Images/Red.png) no-repeat 0 0;
+}
+
+.Blue
+{
+	background: Transparent url(Images/Blue.png) no-repeat 0 0;
+}
+
+.Green
+{
+	background: Transparent url(Images/Green.png) no-repeat 0 0;
+}
+
+.Gray
+{
+	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+}
+
+.Yellow
+{
+	background: Transparent url(Images/Yellow.png) no-repeat 0 0;
+}
+
+.colorPanel
+{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 150px;
+	z-index: 500;
+	cursor: default;
+}
+
+.colorPanel .colorButton
+{
+	width: 25px;
+	height: 25px;
+	float: left;
+	margin: 3px;
+	cursor: pointer;
+}
+
+.colorPanel .Gray
+{
+	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+}
+
+.colorPanel .Red
+{
+	background: Transparent url(Images/Red.png) no-repeat 0 0;
+}
+
+.colorPanel .Blue
+{
+	background: Transparent url(Images/Blue.png) no-repeat 0 0;
+}
+
+.colorPanel .Green
+{
+	background: Transparent url(Images/Green.png) no-repeat 0 0;
+}
+
+.colorPanel .Yellow
+{
+	background: Transparent url(Images/Yellow.png) no-repeat 0 0;
+}
+
+.candy
+{
+	width: 250px;
+	height: 210px;
+	margin: 10px;
+	padding: 15px;
+	float: left;
+	border: dashed 1px #999;
+	cursor: pointer;
+	text-align: center;
+}
+
+.menuSearch
+{
+	position: absolute;
+	display: block;
+	top: 0px;
+	right: 10px;
+	width: 100px !important;
+	z-index: 100;
+	margin: 0 !important;
+}
+
+.searchResults
+{
+	position: absolute;
+	top: 20px;
+	right: 0px;
+	z-index: 101;
+	width: 165px;
+}
+
+.searchResults ul
+{
+	margin: 0;
+}
+
+.searchResults ul li
+{
+	list-style-type: none;
+}
+
+.menuSearch
+{
+	position: absolute;
+	display: block;
+	top: 5px;
+	right: 23px;
+	width: 100px !important;
+	z-index: 100;
+	margin: 0 !important;
+}
+
+.smallSelectList
+{
+	font-size: 10px;
+	width: 120px;
+}
+
+tr.strike td
+{
+	text-decoration: line-through;
+}
+
+
+/* Activities */
+.previous-activities, .next-activities
+{
+	display: block;
+	width: 33px;
+	height: 33px;
+	bottom: 10px;
+	position: absolute;
+	z-index: 1000;
+}
+
+.previous-activities:hover, .next-activities:hover
+{
+	background-color: inherit;
+}
+
+.previous-activities
+{
+	background: Transparent url(Images/arrows.png) no-repeat 0 0;
+	left: 10px;
+}
+
+.next-activities
+{
+	background: Transparent url(Images/arrows.png) no-repeat -33px 0;
+	right: 10px;
+}
+
+.activityFilter
+{
+	margin-left: 5px;
+	margin-top: 5px;
+	display: block;
+	right: inherit;
+	left: inherit;
+	position: relative;
+}
+
+.sumActivities
+{
+	margin-left: 15px;
+	margin-top: 5px;
+	display: block;
+	float: left;
+	color: #999;
+	font-style: italic;
+}
+
+.days
+{
+	position: relative;
+	padding: 5px;
+	height: 90%;
+}
+
+.day
+{
+	width: 100px;
+	padding: 1px;
+	position: absolute;
+}
+
+.header
+{
+	display: block;
+	height: 18px;
+	background-color: #dfd;
+	border: solid 1px #999;
+	margin: 1px 1px 2px 1px;
+	font-size: 12px;
+	color: #333;
+	text-align: center;
+}
+
+.days .weekEnd
+{
+	background-color: #fdd;
+}
+
+.days .hour
+{
+	display: block;
+	height: 14px;
+	background-color: #eee;
+	margin: 1px;
+	font-size: 8px;
+	color: #666;
+	text-align: right;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.days .hour:hover
+{
+	background-color: #aaf;
+}
+
+.days .work
+{
+	background-color: #ddd;
+}
+
+.days .now
+{
+	background-color: #afa;
+	font-weight: bolder;
+}
+
+
+.days .activity, .days .activitySelected
+{
+	position: absolute;
+	display: block;
+	width: 40px;
+	background-color: #fafaff;
+	font-size: 10px;
+	color: #444;
+	overflow: hidden;
+	border: dashed 1px #333;
+	padding: 2px;
+	cursor: pointer;
+}
+
+.days .activitySelected
+{
+	border: solid 1px #333;
+}
+
+.days .actOpenBottom
+{
+	border-bottom: none 0;
+}
+
+.days .actOpenTop
+{
+	border-top: none 0;
+}
+
+.ShowActivity
+{
+	position: absolute;
+	background-color: #eee;
+	z-index: 1000;
+	border: solid 1px Black;
+}
+
+
+/* Tree Menu */
+.treeMenu
+{
+	border: none 0;
+	background-color: Transparent !important;
+	height: auto !important;
+	padding: 0 !important;
+}
+
+.treeMenu .item:hover
+{
+	background-color: #ddf;
+}
+.treeMenu .item:hover ul
+{
+	background-color: #E6F4FF;
+}
+.treeMenu .selected
+{
+	background-color: #bbf;
+}
+.treeMenu .selected ul
+{
+	background-color: #E6F4FF;
+}
+.treeMenu .selected:hover
+{
+	background-color: #d0d0f0;
+}
+
+.treeMenuSearchWrapper
+{
+	background: Transparent url(tree-search-background.png) no-repeat 0 bottom;
+	z-index: 100;
+	height: 25px;
+	position: absolute;
+	top: 0px;
+	right: 16px;
+	overflow: auto;
+	padding-left: 25px;
+	padding-right: 8px;
+}
+
+.treeMenuSearch
+{
+	width: 100px !important;
+	margin: 0 !important;
+}
+
+.treeMenuSpacer
+{
+	height: 25px;
+}
+
+.treeMenuWrapper
+{
+	height: 100%;
+	overflow: auto !important;
+	white-space: nowrap;
+}
+
+.wait-gif
+{
+	background: Transparent url(wait.gif) no-repeat 0 0;
+	position: absolute;
+	top: 25px;
+	left: 50%;
+	width: 70px;
+	height: 70px;
+	z-index: 2000;
+	display: block;
+}
+
+
+
+
+
+/* CMS parts */
+
+span.button
+{
+	width: auto;
+	border: none 0;
+	background-color: Transparent;
+	margin-bottom: 6px;
+	font-family: Verdana;
+	display: block;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.menuLink
+{
+	display: block;
+	color: Blue;
+	margin-right: 15px;
+}
+
+.button .menuLink:hover
+{
+	background-color: Transparent !important;
+	color: Orange;
+}
+
+.CMSTree
+{
+}
+
+.CMSEditPage
+{
+	float: left;
+	width: 76%;
+	height: 100%;
+	padding: 0;
+	margin-left: 1%;
+	position: relative;
+}
+
+
+/* WYSIWYG Editor */
+.editor
+{
+	height: 100%;
+	position: relative;
+}
+
+.editor .toolbar
+{
+	background-color: #CCD1FF;
+	padding: 2px;
+	width: 100%;
+	height: 62px;
+}
+
+.editor .editorMain
+{
+	width: 100%;
+	border: solid 2px #CCD1FF;
+	overflow: auto;
+	background-color: White;
+}
+
+.editor .strip
+{
+	height: 25px;
+	width: auto;
+	display: inline-block;
+	margin: 5px 0 0 5px;
+}
+
+.editor .strip .right
+{
+	background: url( 'RichEdit/sprite-toolbar.png' ) no-repeat right -50px;
+	padding-right: 2px;
+	display: block;
+}
+
+.editor .strip .left
+{
+	background: url( 'RichEdit/sprite-toolbar.png' ) no-repeat 0 0;
+	padding-left: 2px;
+	display: block;
+}
+
+.editor .strip .center
+{
+	background: url( 'RichEdit/sprite-toolbar.png' ) repeat-x 0 -25px;
+	display: block;
+	height: 25px;
+}
+
+.editor .strip .stripContent
+{
+	display: block;
+	text-align: left;
+	white-space: nowrap;
+	padding: 3px;
+}
+
+.editor .editorBtn
+{
+	display: inline-block;
+	width: 22px;
+	height: 21px;
+	background-image: url( 'RichEdit/sprite-buttons.png' );
+	background-repeat: no-repeat;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	border: solid 1px Transparent;
+}
+
+.editor .editorBtn:hover
+{
+	border: solid 1px #316ac5;
+	background-color: #c1d2ee;
+}
+
+.editor .bold
+{
+	background-position: -63px 0;
+}
+
+.editor .italic
+{
+	background-position: 0 -20px;
+}
+
+.editor .underline
+{
+	background-position: -42px 0;
+}
+
+.editor .justifyleft
+{
+	background-position: -42px -20px;
+}
+
+.editor .justifyright
+{
+	background-position: -126px -20px;
+}
+
+.editor .justifycenter
+{
+	background-position: -84px 0;
+}
+
+.editor .justifyfull
+{
+	background-position: -21px -20px;
+}
+
+.insertunorderedlist
+{
+	background-position: 0 0;
+}
+
+.insertorderedlist
+{
+	background-position: -84px -20px;
+}
+
+.indent
+{
+	background-position: -147px 0;
+}
+
+.outdent
+{
+	background-position: -105px -20px;
+}
+
+.image
+{
+	background-position: -126px 0;
+}
+
+.hyperlink
+{
+	background-position: -63px -20px;
+}
+
+.bottomBar
+{
+	height: 28px;
+}
+
+.designButton
+{
+	background-color: #CCD1FF;
+	padding: 5px;
+	border: none 0;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.designButton:hover
+{
+	background-color: #dCe1FF;
+}
+
+.htmlButton
+{
+	background-color: #CCD1FF;
+	padding: 5px;
+	border: none 0;
+	cursor: pointer;
+}
+
+.htmlButton:hover
+{
+	background-color: #dCe1FF;
+}
+
+.activeTypeButton
+{
+	background-color: #9Cb1cF;
+	cursor: default;
+}
+
+.activeTypeButton:hover
+{
+	background-color: #9Cb1cF;
+}
+
+.editorSelect
+{
+	background-color: White;
+	border: none 0;
+	font-size: 8pt;
+	padding: 0;
+	margin: 2px 2px 0 2px;
+}
+
+.resourceExplorerFiles
+{
+	float: left;
+	width: 66%;
+	padding: 1%;
+	margin-left: 1%;
+	background-color: #fff;
+	border: 1px solid #CCD1FF;
+	height: 250px;
+}
+
+.createLink tr td
+{
+	padding: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+/* CMS Flat Type Button */
+.buttonFlat
+{
+	width: auto;
+	border: none 0;
+	background-color: Transparent;
+	font-family: Verdana;
+}
+.buttonFlat .bLeft
+{
+	padding-left: 10px;
+	display: block;
+}
+.buttonFlat .bCenter
+{
+	display: block;
+	height: 21px;
+}
+.buttonFlat .bCenter span
+{
+	display: block;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.buttonFlat .bRight
+{
+	padding-right: 10px;
+	display: block;
+}
+.buttonFlat:hover
+{
+}
+.buttonFlat:hover .bLeft
+{
+}
+.buttonFlat:hover .bCenter
+{
+}
+.buttonFlat:hover .bRight
+{
+}
+.buttonFlat-selected .bLeft
+{
+}
+.buttonFlat-selected .bCenter
+{
+}
+.buttonFlat-selected .bRight
+{
+}
+.buttonFlat-selected:hover .bLeft
+{
+}
+.buttonFlat-selected:hover .bCenter
+{
+}
+.buttonFlat-selected:hover .bRight
+{
+}
+
+span.buttonFlat
+{
+	width: auto;
+	border: none 0;
+	background-color: Transparent;
+	font-family: Verdana;
+	display: block;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.buttonFlat .menuLink:hover
+{
+	background-color: #d6e4eF;
+}
+
+.menuFlat .sliding-leaf
+{
+	background-position: 0 0;
+	margin-top: 2px !important;
+}
+
+.menuFlat .sliding-leaf:hover
+{
+	background-color: #d6e4eF !important;
+}
+

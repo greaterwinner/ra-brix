@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+
+    <!-- MSSQL 
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
+    <add key="LegoConnectionString" value="Data Source=thomas-laptop\MSSQL;Initial Catalog=LegoTest;User ID=sa;Password=8pr4ms" />
+    -->
+
+    <!-- XML -->
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
+    <add key="LegoConnectionString" value="~/data.xml" />
+
+
+    <!-- MySQL 
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
+    <add key="LegoConnectionString" value="SERVER=localhost;DATABASE=LegoTest;UID=root;PASSWORD=8pr4ms" />
+    -->
+
+  </appSettings>
+</configuration>
