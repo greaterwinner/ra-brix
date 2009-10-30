@@ -1,0 +1,328 @@
+﻿
+html
+{
+	height:100%;
+	width:100%;
+	margin:0;
+}
+
+body
+{
+	background-color:#ddd;
+	height:100%;
+	width:100%;
+	margin:0;
+}
+
+table tr td
+{
+	border-collapse:collapse;
+	border:none 0;
+}
+
+th
+{
+	padding:0;
+}
+
+ul.list li
+{
+	margin-left:15px;
+	list-style-type:disc;
+	list-style-position:inside;
+}
+
+.dynamic-content
+{
+	height:100%;
+	overflow:auto;
+}
+
+.dynamic-content-no-overflow
+{
+	overflow:inherit;
+}
+
+
+.loginPanel
+{
+	width:200px;
+	font-size:10px;
+}
+
+.loginPanel table
+{
+	border-collapse:collapse;
+}
+
+.loginPanel table tr td
+{
+	margin:0;
+	padding:1px;
+}
+
+.showLoginBtn
+{
+	font-size:10px;
+	margin:5px;
+}
+
+.sliding-menu-btn
+{
+	padding:0px !important;
+}
+
+.sliding-menu-btn:hover
+{
+	background-color:Transparent !important;
+}
+
+.sliding-leaf
+{
+	margin-top:8px;
+}
+
+.menuBtn
+{
+	width:100%;
+}
+
+a
+{
+	text-decoration:none;
+}
+
+a:hover
+{
+	background-color:#eee;
+}
+
+a.disabled
+{
+	color:#999;
+}
+
+.dataSourceCount
+{
+	font-size:12px;
+	color:#999;
+}
+
+.filterTextBox
+{
+	right:15px;
+	width:80px !important;
+	margin-bottom:5px;
+	background:url('filter-icon.png') no-repeat 0 0;
+	border:solid 1px #99e;
+	padding-left:15px;
+}
+
+.customerGrids .button .bCenter span,
+.allContactGrids .button .bCenter span
+{
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.customerGrids .clicked .bCenter span,
+.allContactGrids .clicked .bCenter span
+{
+	background:url('steel/window-sprite.png') no-repeat -15px -65px;
+}
+
+.customerGrids .clickedBackwards .bCenter span,
+.allContactGrids .clickedBackwards .bCenter span
+{
+	background:url('steel/window-sprite.png') no-repeat -15px -81px;
+}
+
+.createContact input[type=text],
+.createUser input[type=text],
+.createCustomer input[type=text]
+{
+	width:100px;
+}
+
+p.editable,
+h2.editable,
+div.editable
+{
+	padding-left:15px;
+	background:url('editable.png') no-repeat 0 0;
+}
+
+h2.editable,
+div.editable
+{
+	cursor:pointer;
+}
+
+.previous, 
+.next
+{
+	display:block;
+	width:33px;
+	height:33px;
+	bottom:10px;
+	position:absolute;
+	z-index:1000;
+}
+
+.previous:hover, 
+.next:hover
+{
+	background-color:inherit;
+}
+
+.previous
+{
+	background:url('arrows.png') no-repeat 0 0;
+	left:10px;
+}
+
+.next
+{
+	background:url('arrows.png') no-repeat -33px 0;
+	right:10px;
+}
+
+.activityFilter
+{
+	margin-left:5px;
+	margin-top:5px;
+	display:block;
+	float:left;
+	right:inherit;
+	left:inherit;
+	position:relative;
+}
+
+.sumActivities
+{
+	margin-left:15px;
+	margin-top:5px;
+	display:block;
+	float:left;
+	color:#999;
+	font-style:italic;
+}
+
+.days
+{
+	position:relative;
+	padding:5px;
+	height:90%;
+}
+
+.day
+{
+	width:100px;
+	background-color:#fff;
+	padding:1px;
+	position:absolute;
+}
+
+.header
+{
+	display:block;
+	height:18px;
+	background-color:#dfd;
+	border:solid 1px #999;
+	margin:1px 1px 2px 1px;
+	font-size:12px;
+	color:#333;
+	text-align:center;
+}
+
+.days .weekEnd
+{
+	background-color:#fdd;
+}
+
+.days .hour
+{
+	display:block;
+	height:14px;
+	background-color:#eee;
+	margin:1px;
+	font-size:8px;
+	color:#666;
+	text-align:right;
+	vertical-align:top;
+	cursor:pointer;
+}
+
+.days .hour:hover
+{
+	background-color:#aaf;
+}
+
+.days .work
+{
+	background-color:#ddd;
+}
+
+.days .now
+{
+	background-color:#afa;
+	font-weight:bolder;
+}
+
+
+.days .activity,
+.days .activitySelected
+{
+	position:absolute;
+	display:block;
+	width:40px;
+	background-color:#fafaff;
+	font-size:10px;
+	color:#444;
+	overflow:hidden;
+	border:dashed 1px #333;
+	padding:2px;
+	cursor:pointer;
+}
+
+.days .activitySelected
+{
+	border:solid 1px #333;
+}
+
+.days .actOpenBottom
+{
+	border-bottom:none 0;
+}
+
+.days .actOpenTop
+{
+	border-top:none 0;
+}
+
+.taskFinished
+{
+	text-decoration:line-through;
+	font-style:italic;
+	color:#999;
+}
+
+.taskNotFinished
+{
+	font-weight:bold;
+}
+
+.login table
+{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+.errorLbl
+{
+	background:Transparent url('images/icon_error.png') no-repeat 0 0;
+	padding-left:20px;
+	color:Red;
+}	
+

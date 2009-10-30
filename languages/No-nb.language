@@ -1,0 +1,204 @@
+<Ra.Brix.Language language="nb">
+  <Entity key="Close" value="Lukk" />
+  <Entity key="InfoHandleButton" value="Håndter" />
+  <Entity key="AccessControlHeader" value="Kun administrator..." />
+  <Entity key="ButtonAdmin" value="Administrer" />
+  <Entity key="ButtonAppl" value="Programmer" />
+  <Entity key="ButtonHelp" value="Hjepp" />
+  <Entity key="InitializeWelcomeInfo" value="Hei {0} og velkommen til denne portalen for første gang. Du ønsker kanskje å ta en titt på hjelp siden dette er den første gangen du er her..." />
+  <Entity key="DidYouKnow" value="Var du klar over...?" />
+  <Entity key="TipOfADMappings" value="&#xD;&#xA;Når du logger på via Active Directory, så har du muligheten til å&#xD;&#xA;koble Active Directory grupper til roller i portalen. Når en bruker logger inn i portalen via Active Directory vil rollen brukeren tilhører&#xD;&#xA;bli overskrevet av den nye rollen.&#xD;&#xA;" />
+  <Entity key="TipOfCandyStore" value="&#xD;&#xA;Godteributikken gjør det mulig for deg å integrere dine egne moduler, eller&#xD;&#xA;a 3dje parts moduler som du kan laste ned og installere i portalen.&#xD;&#xA;" />
+  <Entity key="TipOfFavorites" value="&#xD;&#xA;Programmer du ofte bruker kan legges i favoritter. Disse blir da tilgjengelig&#xD;&#xA;som snarveier fra favoritt programmet. Oppstart av dine favorittprogrammer&#xD;&#xA;kan du gjøre enkelt ved å velge fra favorittmenyen.&lt;br/&gt;&lt;br/&gt;NB! Favorittmodulen legger til favoritt utifra det siste programmet du åpnet,&#xD;&#xA;og ikke nødvendigvis det programmet som er aktivt.&#xD;&#xA;" />
+  <Entity key="TipOfHelp" value="&#xD;&#xA;Står du fast? Trenger du hjelp i portalen? Bruk&#xD;&#xA;hjelpemodulen som vil gi deg gode beskrivelser av funksjonaliten i&#xD;&#xA;portalen.&lt;br/&gt;&lt;br/&gt;Du får tilgang til hjelpemodulen under Programmer i menyen. Denne vil vises helt til du&#xD;&#xA;lukker den, eller til du åpner et annet program som bruker det samme sprettoppvinduet.&#xD;&#xA;" />
+  <Entity key="TipOfEditLanguage" value="&#xD;&#xA;Ønsker u å endre på tekst i portalen?&#xD;&#xA;Dette gjøres i&quot;Administrer&quot;menyen.&#xD;&#xA;Språkendringene er globale for alle brukere som bruker det samme språket.&lt;br/&gt;&lt;br/&gt;Denne funksjonaliteten kan være spesielt nyttig for oppdatering av språk som ikke er en del av&#xD;&#xA;din installasjon av portalen.&#xD;&#xA;" />
+  <Entity key="TipOfImportLanguage" value="&#xD;&#xA;Ønsker du å importere et nytt språk i portalen?&lt;br/&gt;&lt;br/&gt;Du kan finne eller laste ned språkfil på nett for din portal.&#xD;&#xA;Kontakt din portalleverandør for nye språkfiler.&#xD;&#xA;" />
+  <Entity key="TipOfExportLanguage" value="&#xD;&#xA;Du har mulighet til å eksportere språendringer til fil. Disse språkfilene kan&#xD;&#xA;bli importert inn i andre installasjoner av portalen eller bli brukt som en kopi til framtidig bruk.&#xD;&#xA;" />
+  <Entity key="TipOfLanguageSelector" value="&#xD;&#xA;Under Administrer i menyen kan du bytte språk - dersom du har tilgang til den.&#xD;&#xA;Denne bytter språket i portalen og vil bli lagre på den brukeren som er innlogget.&lt;br/&gt;&lt;br/&gt;Ved førstegangs pålogging vil portalen bruke samme språk som språkinstillingen til nettleseren. Dersom dette språket ikke&#xD;&#xA;finnes i portalen, settes språket til engelsk.&#xD;&#xA;" />
+  <Entity key="TipOfAccessControl" value="&#xD;&#xA;Du kan gi tilgang til alle elementer i menyen i portalen ut i fra roller&#xD;&#xA;brukeren tilhører. På denne måten kan du ha flere roller som kan ha tilgang&#xD;&#xA;til ulik funksjonalitet.&lt;br/&gt;&lt;br/&gt;Brukere kan bli medlem av roller som har tilgang til spesifikk&#xD;&#xA;funksjonalitet i portalen.&#xD;&#xA;" />
+  <Entity key="TipOfTodayFromSettings" value="&#xD;&#xA;Hver innstilling kan endres fra 'Innstillinger' i menyen, som normalt er lokalisert under 'Administrer' i menyen.&lt;br/&gt;&lt;br/&gt;Husk! Alle disse instillingene er globale og vil få innvirkning for alle brukere.&#xD;&#xA;" />
+  <Entity key="TipOfSlidingMenu" value="&#xD;&#xA;Glidemenyen brukes til å navigere i portalen. Denne har også en søkefunksjon som kan være nyttig når det blir mange elementer i menyen. Denne funksjonen øker hastigheten og&#xD;&#xA;tilgjengligheten til alle elementer i menyen.&#xD;&#xA;" />
+  <Entity key="TipOfTodayFromTipOfToday" value="&#xD;&#xA;Hver gang du logger deg inn i portalen vil du bli presentert med dagens tips. Dagens tips gir deg nyttig&#xD;&#xA;informasjon om hva du kan få til i portalen.&lt;br/&gt;&lt;br/&gt;De fleste modulene inneholder sine egne tips&#xD;&#xA;Tipsene som vises er derfor avhengig av modulene som er installert." />
+  <Entity key="TipOfInitialLoading" value="&#xD;&#xA;Du kan overskrive hjemmesidene som blir åpnet i portalen i programmet innstillinger.&lt;br/&gt;&lt;br/&gt;Dette er globale innstillinger som påvirker alle brukere av portalen.&#xD;&#xA;" />
+  <Entity key="ButtonCandyStore" value="Godteributikk" />
+  <Entity key="ButtonChat" value="Send Melding" />
+  <Entity key="ButtonFavourites" value="Favoritter" />
+  <Entity key="ButtonHistory" value="Historie" />
+  <Entity key="ButtonWhiteboards" value="Whiteboards" />
+  <Entity key="ButtonRoles" value="Roller" />
+  <Entity key="ButtonChangeSkin" value="Forandre skin" />
+  <Entity key="ButtonLang" value="Språk" />
+  <Entity key="ButtonSettings" value="Innstillinger" />
+  <Entity key="ButtonUsers" value="Brukere" />
+  <Entity key="ButtonEditLanguage" value="Endre Tekst" />
+  <Entity key="ButtonSelectLanguage" value="Velg Språk" />
+  <Entity key="ButtonLangExport" value="Eksporter Språk" />
+  <Entity key="ButtonLangImport" value="Importer Språk" />
+  <Entity key="HistoryMenuItemCaption" value="Favorittliste" />
+  <Entity key="HistoryWhenCaption" value="Tidspunkt" />
+  <Entity key="ImportLanguageCaption" value="Importer språk" />
+  <Entity key="LanguageImportButton" value="Importer Språk" />
+  <Entity key="OpenIDLoginLabel" value="Logg inn" />
+  <Entity key="OpenIDLogoutLabel" value="Logg ut" />
+  <Entity key="ButtonCreateWhiteboard" value="Lag nytt Whiteboard" />
+  <Entity key="ButtonViewAllWhiteboards" value="Se alle Whiteboards" />
+  <Entity key="ButtonEditWhiteboard" value="Endre Whiteboard" />
+  <Entity key="ButtonViewWhiteboard" value="Se Whiteboard" />
+  <Entity key="WhiteboardCaption" value="Lag nytt Whiteboard" />
+  <Entity key="WhiteboardName" value="Navn på Whiteboard" />
+  <Entity key="WhiteboardSubmitButton" value="Lagre" />
+  <Entity key="WhiteboardNameText" value="Navn på Whiteboard" />
+  <Entity key="WhiteboardEditCaption" value="Endre Whiteboard: " />
+  <Entity key="WhiteboardEnableFilteringTooltip" value="Avgjør om Whiteboard skal støtte filtrering." />
+  <Entity key="WhiteboardEnableFiltering" value="Aktiver filtrering." />
+  <Entity key="WhiteboardPageSizeToolTip" value="Antall rader for visning i Whiteboardet før du trenger å klikke på 'Neste-knappen'. -1 er det samme som aldri..." />
+  <Entity key="WhiteboardEnableColumnsTooltip" value="Avgjør hvorvidt Whiteboard skal inneholde kolonner som det kan sorteres på." />
+  <Entity key="WhiteboardEnableGridColumns" value="Aktiver overskrift" />
+  <Entity key="WhiteboardEnableDeletionTooltip" value="Avgjør om Whiteboard tillater sletting av linjer" />
+  <Entity key="WhiteboardEnableGridDeletion" value="Aktiver sletting." />
+  <Entity key="WhiteboardColumnCaption" value="Kolonne" />
+  <Entity key="WhiteboardColumnTypeCaption" value="Kolonnetype" />
+  <Entity key="WhiteboardPositionCaption" value="Posisjon" />
+  <Entity key="WhiteboardOutOfSyncInfo" value="Menyen ble oppdatert siden&#xD;&#xA;den ble endret." />
+  <Entity key="WhiteboardAddColumnCaption" value="Lag ny kolonne" />
+  <Entity key="WhiteboardCreateLabel" value="Navn på Whiteboard" />
+  <Entity key="WhiteboardCreateSubmitLabel" value="Lagre" />
+  <Entity key="OBS post" value="OBS post" />
+  <Entity key="ClickToChange" value="Klikk for å forandre" />
+  <Entity key="InitializeLastLoggedInInfo" value="Hei {0}, sist du var innlogget var &#xD;&#xA;&lt;span style=&quot;text-decoration:underline;&quot;&gt;{1}&lt;/span&gt;. &#xD;&#xA;Hvis dette ikke er riktig, vær så snill å trykke på knappen..." />
+  <Entity key="PluginInstalled" value="Plugin er installert" />
+  <Entity key="HelpTabCaption" value="Hjelp" />
+  <Entity key="ADGroups2RolesHelpLabel" value="AD grupper til roller" />
+  <Entity key="IFrameHelpLabel" value="Om IFrames" />
+  <Entity key="EditLanguageHelpLabel" value="Endre språkmodul" />
+  <Entity key="SettingsHelpLabel" value="Innstillingsmodul" />
+  <Entity key="SlidingMenuHelpLabel" value="Om Menyen" />
+  <Entity key="ViewportHelpLabel" value="Om Viewport" />
+  <Entity key="WhiteboardCreateHelpLabel" value="Hvordan lage et nytt Whiteboard" />
+  <Entity key="WhiteboardHelpLabel" value="Om Whiteboards" />
+  <Entity key="WiteboardHelp" value="Om Whiteboards" />
+  <Entity key="HelpHeaderText" value="Hjelp" />
+  <Entity key="HelpParagraph" value="Programmet du nå ser er bygget ved hjelp av moduler. Dette betyr at du kan&#xD;&#xA;            skaffe flere moduler ved helt enkelt å kontakte leverandøren som har utviklet programmet, eller&#xD;&#xA;            ved å utvikle moduler selv.&lt;p&gt;Vær så god å velg hvilket modul du ønsker å vite mer om.&lt;/p&gt;" />
+  <Entity key="HelpViewInfo" value="For å navigere i hjelpen: Flytt musepekeren over blinken, øverst i høyre hjørne." />
+  <Entity key="WhiteboardHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Whiteboard modulen skal forestille et slags tradisjoenlt whiteboard hvor du normalt &#xD;&#xA;kan ha oversikt over forskjellige oppgaver som assosieres til ansatte i en bedrift eller lignende. Whiteboard&#xD;&#xA;modulen kan brukes for å holde orden på to dimensjonale akser av data.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Whiteboard vil automatisk oppdateres hvert ved gitte konfigurerbare tidsintervall med hvilket som helst nye data&#xD;&#xA;fra en tilgjengelig server. Alle kolonnene i Whiteboardet er konfigurerbare.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Noen predefinerte kolonnetyper eksisterer for at du kan spore data, men noen kolonnetyper vil også&#xD;&#xA;være pluggbare som alt annet i portalen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="FavouritesViewInfo" value="For å se dine favoritter: Flytt musepekeren over blinken, øverst i høyre hjørne" />
+  <Entity key="FavouritesCaption" value="Favorittliste" />
+  <Entity key="SettingsKeyButton" value="Nøkkel" />
+  <Entity key="SettingsValueButton" value="Verdi" />
+  <Entity key="ButtonOpenWhiteboard" value="Åpne Whiteboard" />
+  <Entity key="NameOfWhiteboard" value="Navn på Whiteboard" />
+  <Entity key="Submit" value="Lagre" />
+  <Entity key="All Whiteboards" value="Alle Whiteboards" />
+  <Entity key="Whiteboard Name" value="Navn på Whiteboard" />
+  <Entity key="Some thing" value="Noenting" />
+  <Entity key="ButtonADMappings" value="AD Mapping" />
+  <Entity key="ButtonViewAllRoles" value="Se Alle Roller" />
+  <Entity key="ButtonCreateRole" value="Lag Ny Rolle" />
+  <Entity key="ButtonAccessControl" value="Tilgangskontroll" />
+  <Entity key="Role" value="Rolle" />
+  <Entity key="Rick Gibson" value="Rick Gibson" />
+  <Entity key="InitAndLoginReportAbuseCaption" value="Blokker min bruker" />
+  <Entity key="OpenIDAbuseInfoHeader" value="Rapporter misbruk" />
+  <Entity key="OpenIDAbuseInfo" value="Du har kommet hit fordi du tror noen har misbrukt brukernavnet og passordet ditt. Dette kan ha flere årsaker." />
+  <Entity key="OpenIDAbuseFixInfoHeader" value="Hvordan fikse" />
+  <Entity key="OpenIDAbuseFixInfo" value="Måten du kan fikse dette på er ved å først trykke på knappen under for å midlertidig blokkere din bruker, for så å forandre passordet på din OpenID tilbyder, for så å få sys-admin til å åpne brukeren din igjen." />
+  <Entity key="OpenIDAbuseList1" value="Midlertidig blokker brukeren din ved å trykke på knappen under" />
+  <Entity key="OpenIDAbuseList2" value="Forandre passordet ditt hos din OpenID tilbyder" />
+  <Entity key="OpenIDAbuseList3" value="Få sys-admin til å av-blokkere brukeren din" />
+  <Entity key="OpenIDBlockButton" value="Blokker min bruker" />
+  <Entity key="IFrameHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;IFrame Module brukes til å laste andre websider i portalen.&#xD;&#xA;Disse websidene vil oppleves som en integrert del av portalen, men i virkeligheten er de ikke det siden de&#xD;&#xA;egne websider i portalen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;De fleste portaler som bruker denne modulen har innebygd støtte for å bytte linken til hver enkelt IFrame.&#xD;&#xA;For eksempel gjennom innstillinger.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="ADGroups2RolesHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;AD grupe til rolle mapper gir deg mulighet til å assosiere roller i portalen&#xD;&#xA;med grupper fra Active Directory. Dette betyr at du kan administrere din Active Directory for så å ha&#xD;&#xA;grupper i Active Directory til å matche roller i portalen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Dette medfører at en bruker som autentiseres via Active Directory vil få sine roller oppdatert&#xD;&#xA;i samsvar med hvilket gruppe brukeren tilhører i Active Directory, og hvilket roller&#xD;&#xA;disse gruppene tilhører i portalen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="EditLanguageModuleHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Endre språk modulen brukes til å endre gjeldende språk i portalen. Hvis du ønsker &#xD;&#xA;å endre andre språk enn det gjeldende må du velge dette språket med &#xD;&#xA;&quot;Velg Språk&quot; modulen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Hvis du velger et språk som ennå ikke har en oversettelse vil engelsk språk brukes&#xD;&#xA;til dette endres.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;De fleste &quot;Nøkler&quot; har navn som gjør at du kan se hvilket del av portalen disse&#xD;&#xA;tilhører. Som for eksempel et meny element som har navnet&quot;Hjelp&quot; vil normalt bruke&quot;ButtonHelp&quot; som&#xD;&#xA;språk nøkkel.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="SettingsHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Innstillings modulen brukes generelt sett for hele portalen. Hovedformålet er&#xD;&#xA;å holde orden på globale innstillinger som påvirker alle brukere av portalen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;De fleste innstillinger har en verdi i portalens konfigurasjonsfil, eller gjennom&#xD;&#xA;andre mekanismer får en verdi første gangen den brukes. Du kan endre&#xD;&#xA;enhver innstillingsverdi. Du kan også slette en verdi. Husk at når du sletter en innstillingsverdi&#xD;&#xA;vil den ofte bli opprettet på nytt med en grunninnstilling neste gang den blir brukt&#xD;&#xA;i modulen som bruker den.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Dette betyr at når verdien slettes vil den få samme verdi som grunninstillingen.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="SlidingMenuHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Den glidende menyen er menyen på venstre side. Denne sørger for navigering i portalen. Denne er annerledes enn tradisjonelle menyer, &#xD;&#xA;men vil forhåpentligvis være intuitiv etter å ha klikket i denne noen ganger.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Den glidende menyen fungerer slik at nå du klikker på en knapp i menyen og denne har knapper under seg, &#xD;&#xA;så vil disse knappene&quot;skli inn fra siden&quot; og &quot;dytte&quot; ut de gamle knappene til venstre.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Meny knapper kan også inneholde avanserte kontrollere. Hvis de gjør det kan du bruke disse&#xD;&#xA;på innsiden av menyen isteden for å åpne den opp i programmet som du&#xD;&#xA;må gjøre i andre lignende programmer.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="ViewPortHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Viewports er konteinere for dine moduler og&quot;utseende&quot; til din portal. Viewportene inneholder&#xD;&#xA;flere tjenester for dine programmer. &#xD;&#xA;I tillegg gir Viewportene støtte for å inneholde flere moduler på samme tid. Menyen på venstre side&#xD;&#xA;er en modul og det du leser akkurat nå er en annen modul.(&quot;Hjelpe&quot; modulen)&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;En annen kjerne funksjonalitet til Viewportene er at de gir støtte for notifikasjonstjenester i tillegg til å&#xD;&#xA;støtte flere faner, som igjen kan inneholde moduler.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Legg merke til&quot;plinge lyden&quot;, som er en tjeneste støttet av Viewporten og som kan skrues av ved å&#xD;&#xA;endre på en innstilling som heter; &quot;UseNotificationSounds&quot;.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="WhiteboardCreateHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;I Lag nytt Whiteboard menyen kan du lage et nytt Whiteboard som du senere kan&#xD;&#xA;i din Whiteboard konfigurerings håndterer.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="RoleViewAllCaption" value="Se alle roller" />
+  <Entity key="ButtonShowADMappings" value="Se alle AD maps" />
+  <Entity key="ButtonCreateADMapping" value="Lag ny AD map" />
+  <Entity key="ADGroups2RoleMapRolesCaption" value="Map Roller" />
+  <Entity key="ADGroups2RoleGroupCaption" value="Gruppe navn" />
+  <Entity key="ADGroups2RoleCaption" value="Rolle navn" />
+  <Entity key="ADGroups2RoleCreateCaption" value="Ny AD map" />
+  <Entity key="ADGroups2RolesNameText" value="Navn på alle grupper" />
+  <Entity key="ADGroups2RolesCreateNewLabel" value="AD-Gruppenavn: " />
+  <Entity key="ADGroups2RolesCreateNewButton" value="Lagre" />
+  <Entity key="RoleCreateCaption" value="Lag ny rolle" />
+  <Entity key="RolesSaveButton" value="Lagre" />
+  <Entity key="RolesRoleNameText" value="Rolle Navn" />
+  <Entity key="RolesRoleName" value="Rollenavn" />
+  <Entity key="ButtonViewAllUsers" value="Se Alle Brukere" />
+  <Entity key="ButtonCreateNewUser" value="Lag Ny Bruker" />
+  <Entity key="UserViewAllCaption" value="Vis alle brukere" />
+  <Entity key="UsersUsernameButton" value="Brukernavn" />
+  <Entity key="UsersLastLoggedInButton" value="Sist logget inn" />
+  <Entity key="UsersRolesButton" value="Roller" />
+  <Entity key="UsersTypeUserNameText" value="Skriv inn brukernavn" />
+  <Entity key="CaptionImportLanguage" value="Importer Språk" />
+  <Entity key="CaptionExportLanguage" value="Eksporter Språk" />
+  <Entity key="LanguageExportSaveButton" value="Lagre" />
+  <Entity key="LanguageSelectorFlagArabianTooltip" value="Arabisk" />
+  <Entity key="LanguageSelectorFlagNorwegianTooltip" value="Norsk" />
+  <Entity key="LanguageSelectorFlagEnglishTooltip" value="Engelsk" />
+  <Entity key="LanguageSelectorFlagGermanTooltip" value="Tysk" />
+  <Entity key="LanguageSelectorFlagFrenchTooltip" value="Fransk" />
+  <Entity key="LanguageEditCaption" value="Rediger språk" />
+  <Entity key="LanguageEditKeyCaption" value="Nøkkel" />
+  <Entity key="ExportLanguageCaption" value="Eksporter språk" />
+  <Entity key="LanguageSelectCaption" value="Velg språk" />
+  <Entity key="LanguageSelectorFlagSpanishTooltip" value="Spansk" />
+  <Entity key="LanguageChangeInfo" value="Språket er byttet til {0} - {1}. Endringene vil ikke tre i kraft før nettsiden blir lastet på nytt. PS! Last siden på nytt ved å trykke på logoen." />
+  <Entity key="UsersSaveButton" value="Lagre" />
+  <Entity key="UsersCreateNewUserLabel" value="Brukernavn..." />
+  <Entity key="ButtonAvailableUsers" value="Tilgj. brukere" />
+  <Entity key="ButtonViewHistory" value="Se Historie" />
+  <Entity key="UserCreateNewCaption" value="Lag ny bruker" />
+  <Entity key="ChatClientCaption" value="Meldingsklient" />
+  <Entity key="ChatHistoryCaption" value="Meldingshistorikk" />
+  <Entity key="WhiteboardAllCaption" value="Vis alle Whiteboards" />
+  <Entity key="AccessControlListItem" value="Velg rolle..." />
+  <Entity key="ChatButton" value="Brukere" />
+  <Entity key="ChatSentByCaption" value="Avsender" />
+  <Entity key="ChatWhenCaption" value="Tidspunkt" />
+  <Entity key="ChatMessageCaption" value="Melding" />
+  <Entity key="AccessControlCaption" value="Tilgangskontroll" />
+  <Entity key="HistoryCaption" value="Se Historikk" />
+  <Entity key="ViewHistoryMenuItemCaption" value="Navn" />
+  <Entity key="ViewHistoryWhen" value="Tidspunkt" />
+  <Entity key="ADGroups2RoleChooseExistingRoleInfo" value="Du må velge en eksisterende rolle. Ingenting ble lagret...!" />
+  <Entity key="RoleAlreadyAssociatedInfo" value="Rollen; '{0}' er allerede assosiert med et element..." />
+  <Entity key="RoleYouCanNotInfo" value="Du kan ikke endre tilgangskontrollen til dette elementet siden det ikke har en 'Verdi'" />
+  <Entity key="InitializeBlockedUserInfo" value="Din bruker er blokkert, vær vennlig å kontakte administratoren for portalen for å fikse problemet." />
+  <Entity key="InitializeUserIsBlockedInfo" value="Brukeren; {0} er nå blokkert" />
+  <Entity key="InitializeCannotBlockInfo" value="Brukeren {0} er den siste ublokkerte administrator i portalen og kan derfor ikke bli blokkert." />
+  <Entity key="ChatWithYourselfInfo" value="Beklager, men du kan ikke starte en dialog med deg selv... " />
+  <Entity key="ChatYouGotNewChatsInfo" value="Du har nye meldinger som venter på deg..." />
+  <Entity key="EditUserSelectRoleListItem0" value="Velg rolle..." />
+  <Entity key="UserEditCaption" value="Endre profilen til " />
+  <Entity key="EditUserImageTooltip" value="Bildet hentes fra Gravatar.com ved bruk av epostadressen." />
+  <Entity key="EditUserEmailLabel" value="Epost: " />
+  <Entity key="EditUserEmailTooltip" value="Klikk for å endre..." />
+  <Entity key="EditUserPhoneLabel" value="Telefon: " />
+  <Entity key="EditUserPhoneTooltip" value="Klikk for å endre..." />
+  <Entity key="UserDeleteRoleNoticeInfo" value="Husk! Neste gang brukeren logger seg inn via Active Directory vil alle roller bli overskrevet av Active Directory mappingene." />
+  <Entity key="EditUserLastLoggedInLabel" value="Du var sist innlogget " />
+  <Entity key="HistoryViewInfo" value="For å se din historikk: Flytt musepekeren over blinken, øverst i høyre hjørne." />
+  <Entity key="CandyStoreColumnHeader" value="Tilgj. Moduler" />
+  <Entity key="Whiteboard 1" value="Whiteboard 1" />
+  <Entity key="Username" value="Brukernavn" />
+  <Entity key="LastLoggedIn" value="Sist logget inn" />
+  <Entity key="RolesString" value="Roller" />
+  <Entity key="ChatInitiateCaption" value="Initier samtale" />
+  <Entity key="FavouritesBookmarkInfo" value="Du må åpne noe før du kan bokmerke det" />
+  <Entity key="FavouritesItemAlreadyInfo" value="Denne er allerede bokmerket" />
+  <Entity key="Params" value="Params" />
+  <Entity key="PleaseChooseNewSkin" value="Vennligst velg språk fra nedtrekksmenyen" />
+  <Entity key="PleaseChoose..." value="Vennligst velg..." />
+  <Entity key="TextNewChat" value="Skriv inn din melding her..." />
+  <Entity key="ChatChannelButton" value="Send" />
+  <Entity key="Whiteboard2" value="Whiteboard2" />
+  <Entity key="LanguageSelectorFlagSwedishTooltip" value="Swedish" />
+  <Entity key="LanguageChanged" value="Språket ble byttet. Dette vil kun innvirke på din bruker. For å få gjennomført byttet av språk, måtte vi refreshe portalen." />
+  <Entity key="SkinChanged" value="Utseendet på portalen ble forandret. Dette har kun effekt på din bruker. For å gjennomføre forandringen av utseende, måtte vi refreshe portalen." />
+  <Entity key="LanguageSelectorFlagAmericanTooltip" value="American" />
+</Ra.Brix.Language>

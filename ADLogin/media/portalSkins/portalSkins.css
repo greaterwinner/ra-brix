@@ -1,0 +1,74 @@
+
+
+
+
+.light-window
+{
+	display:block;
+}
+
+.light-window_nw
+{
+	background: transparent url(light-window.png) no-repeat 0 0;
+	padding-left:16px;
+	position:relative;
+}
+
+.light-window_ne
+{
+	background: transparent url(light-window.png) no-repeat right 0;
+	padding-right:16px;
+}
+
+.light-window_n
+{
+	background: transparent url(light-window-vert.png) repeat-x 0 0;
+	overflow:hidden;
+	height:19px;
+}
+
+.light-window_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.light-window_w
+{
+	background: transparent url(light-window-horz.png) repeat-y 0 0;
+	padding-left:16px;
+}
+
+.light-window_e
+{
+	background: transparent url(light-window-horz.png) repeat-y right 0;
+	padding-right:16px;
+}
+
+.light-window_title
+{
+	display:none;
+}
+
+.light-window_content
+{
+	background-color:#c3c3c4;
+}
+
+.light-window_sw
+{
+	background: transparent url(light-window.png) no-repeat 0 -19px;
+	padding-left:16px;
+}
+
+.light-window_se
+{
+	background: transparent url(light-window.png) no-repeat right -19px;
+	padding-right:16px;
+}
+
+.light-window_s
+{
+	background: transparent url(light-window-vert.png) repeat-x 0 -19px;
+	height:20px;
+}

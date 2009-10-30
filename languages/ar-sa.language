@@ -1,0 +1,203 @@
+﻿<Ra.Brix.Language language="ar-sa">
+  <Entity key="Close" value="إغلاق" />
+  <Entity key="InfoHandleButton" value="مقبض" />
+  <Entity key="OpenIDLoginLabel" value="دخول" />
+  <Entity key="OpenIDLogoutLabel" value="خروج" />
+  <Entity key="AccessControlHeader" value="القائمة" />
+  <Entity key="ButtonAdmin" value="إداري" />
+  <Entity key="ButtonAppl" value="تطبيقات" />
+  <Entity key="ButtonHelp" value="مساعدة" />
+  <Entity key="InitializeWelcomeInfo" value="Hello {0} and welcome to this portal for the first time. &#xD;&#xA;You might want to take a look at the help system since this is your first time here..." />
+  <Entity key="TipOfTodayFromSettings" value="All settings can be edited from the 'Setting' menu item, which normally is within the admin menu hierarchy.&lt;br/&gt;&lt;br/&gt;Just remember that all these settings are *global* and will have effect for *all* users." />
+  <Entity key="TipOfTodayFromTipOfToday" value="Every time you start the portal you will be presented with a 'tip of today' which will give you useful&#xA;hints about features and things you can do within the portal.&lt;br/&gt;&lt;br/&gt;These tips will be presented to you every time you log in. Most modules will provide their own&#xA;tips which means that thse tips will vary according to which modules you've installed and such." />
+  <Entity key="ButtonCandyStore" value="محل الحلوى" />
+  <Entity key="ButtonChat" value="إرسال" />
+  <Entity key="ButtonFavourites" value="المفضلة" />
+  <Entity key="ButtonHistory" value="التاريخ" />
+  <Entity key="ButtonWhiteboards" value="السبورة" />
+  <Entity key="ButtonCreateWhiteboard" value="سبورة جديدة" />
+  <Entity key="ButtonViewAllWhiteboards" value="عرض الكل" />
+  <Entity key="ButtonEditWhiteboard" value="تعديل السبورة" />
+  <Entity key="ButtonViewWhiteboard" value="عرض السبورة" />
+  <Entity key="HistoryMenuItemCaption" value="عنصر قائمة" />
+  <Entity key="HistoryWhenCaption" value="متى" />
+  <Entity key="WhiteboardCaption" value="عمل سبورة جديدة" />
+  <Entity key="WhiteboardName" value="إسم السبورة" />
+  <Entity key="WhiteboardSubmitButton" value="إرسال" />
+  <Entity key="WhiteboardNameText" value="إسم السبورة" />
+  <Entity key="WhiteboardEditCaption" value="تعديل السبورة " />
+  <Entity key="WhiteboardEnableFilteringTooltip" value="السماح للمستخدم يتصفية أو فلترة المحتوى في السبورة أم لا" />
+  <Entity key="WhiteboardEnableFiltering" value="السماح بالتصفية" />
+  <Entity key="WhiteboardPageSizeToolTip" value="Number of records to show in Whiteboard before clicking next-button is needed. -1 means never..." />
+  <Entity key="WhiteboardEnableColumnsTooltip" value="Whether or not the Whiteboard should have headers for columns that can sort on columns etc..." />
+  <Entity key="WhiteboardEnableGridColumns" value="السماح برؤوس المواضيع" />
+  <Entity key="WhiteboardEnableDeletionTooltip" value="The ability to change whether or not the Whiteboard allows for deletion of records" />
+  <Entity key="WhiteboardEnableGridDeletion" value="السماح بإلغائها" />
+  <Entity key="WhiteboardColumnCaption" value="العمود" />
+  <Entity key="WhiteboardColumnTypeCaption" value="نوع العمود" />
+  <Entity key="WhiteboardPositionCaption" value="الوضع" />
+  <Entity key="WhiteboardOutOfSyncInfo" value="The Menu has been refreshed since &#xD;&#xA;it was modified and hence out of sync in regards to its data..." />
+  <Entity key="WhiteboardAddColumnCaption" value="عمل عمود جديد" />
+  <Entity key="WhiteboardCreateLabel" value="إسم السبورة" />
+  <Entity key="WhiteboardCreateSubmitLabel" value="إرسال" />
+  <Entity key="OBS post" value="OBS post" />
+  <Entity key="ClickToChange" value="إضغط للتغيير" />
+  <Entity key="InitializeLastLoggedInInfo" value="Hello {0}, the last time you logged on was &#xD;&#xA;&lt;span style=&quot;text-decoration:underline;&quot;&gt;{1}&lt;/span&gt;. &#xD;&#xA;If this is not correct, then please click the button..." />
+  <Entity key="ButtonRoles" value="الأدوار" />
+  <Entity key="ButtonLang" value="اللغة" />
+  <Entity key="ButtonSettings" value="الإعدادات" />
+  <Entity key="ButtonUsers" value="المستخدمين" />
+  <Entity key="PluginInstalled" value="A new plugin was installed, and so we had to 'reboot' the portal and you probably need to login again, in addition to that it'll take some time before you can access the portal while it is being 'rebooted'..." />
+  <Entity key="HelpTabCaption" value="مساعدة" />
+  <Entity key="ADGroups2RolesHelpLabel" value="مجموعات أد للأدوار" />
+  <Entity key="IFrameHelpLabel" value="عن ال الإطار" />
+  <Entity key="EditLanguageHelpLabel" value="تعديل اللغة" />
+  <Entity key="SettingsHelpLabel" value="الإعدادات" />
+  <Entity key="SlidingMenuHelpLabel" value="عن القائمة" />
+  <Entity key="ViewportHelpLabel" value="عن الواجهة" />
+  <Entity key="WhiteboardCreateHelpLabel" value="عن عمل سبورة جديدة" />
+  <Entity key="WhiteboardHelpLabel" value="عن السبورة" />
+  <Entity key="WiteboardHelp" value="عن السبورة" />
+  <Entity key="HelpHeaderText" value="ملفات المساعدة" />
+  <Entity key="HelpParagraph" value="The application you're now looking at is built as a modular application, which means that you can&#xD;&#xA;            get additional modules for it easily by contacting the vendor that created the application, or&#xD;&#xA;            by developing these modules yourself.&lt;p&gt;Please choose which module you need to read about below.&lt;/p&gt;" />
+  <Entity key="HelpViewInfo" value="To view help: Move the cursor over the bull's eye on the right side of this information message." />
+  <Entity key="WhiteboardHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Whiteboard module is a computer synthesis of a traditional whiteboard, where you would normally &#xD;&#xA;keep track of all the different tasks associated with an employee, or something similar. But the Whiteboard&#xD;&#xA;module can mostly be used for keeping track of any two dimensional array of data you wish to keep track of.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Whiteboard will also automatically refresh itself every n'th second (configurable) with any new data&#xD;&#xA;from the server, if available. And also, all columns and rows are configurable.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Some pre-defined column types exist in which you can use for tracking your data, but the types of the whiteboard&#xD;&#xA;are also plugable like everything else in this portal.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="FavouritesViewInfo" value="To view favorites: &#xA;Move the cursor over the bull's eye on the right side of this information message." />
+  <Entity key="FavouritesCaption" value="عنصر قائمة" />
+  <Entity key="SettingsKeyButton" value="المفتاح" />
+  <Entity key="SettingsValueButton" value="القيمة" />
+  <Entity key="ButtonEditLanguage" value="تعديل اللغة" />
+  <Entity key="ButtonSelectLanguage" value="إختيار اللغة" />
+  <Entity key="ButtonLangExport" value="حفظ اللغة" />
+  <Entity key="ButtonLangImport" value="إستيراد لغة" />
+  <Entity key="ImportLanguageCaption" value="إستيراد لغة" />
+  <Entity key="LanguageImportButton" value="إستيراد لغة" />
+  <Entity key="ButtonOpenWhiteboard" value="عرض السبورة" />
+  <Entity key="NameOfWhiteboard" value="إسم السبورة" />
+  <Entity key="Submit" value="إرسال" />
+  <Entity key="All Whiteboards" value="جميع السبورات" />
+  <Entity key="Whiteboard Name" value="إسم السبورة" />
+  <Entity key="Some thing" value="شيء ما" />
+  <Entity key="ButtonADMappings" value="توصيلات أد" />
+  <Entity key="ButtonViewAllRoles" value="عرض كل الأدوار" />
+  <Entity key="ButtonCreateRole" value="إنشاء دور" />
+  <Entity key="ButtonAccessControl" value="التحكم في الدخول" />
+  <Entity key="Role" value="الأدوار الموجودة" />
+  <Entity key="Rick Gibson" value="ريك جبسون" />
+  <Entity key="InitAndLoginReportAbuseCaption" value="أغلق المستخدم الخاص بي" />
+  <Entity key="OpenIDAbuseInfoHeader" value="أبلغ عن إساءة" />
+  <Entity key="OpenIDAbuseInfo" value="&lt;p&gt;You have come here because you think someone &#xD;&#xA;        has abused your credentials on this portal. This might have happend due to several reasons. &#xD;&#xA;        One being that you've logged in from another person's computer, and then either you've &#xD;&#xA;        allowed your OpenID provider to authenticate you every time from that computer. &#xD;&#xA;        Or something similar. If you do this then there's a high risk of that the next person &#xD;&#xA;        on that computer can actually log in as you.&lt;/p&gt; &lt;p&gt;For the reasons stated above it's &#xD;&#xA;        therefor highly important that you explicitly choose to Logout when you're done with your &#xD;&#xA;        session on this portal, in addition to that you also close all instances of the browser &#xD;&#xA;        when finished browsing this portal. &lt;/p&gt;" />
+  <Entity key="OpenIDAbuseFixInfoHeader" value="كيفية الإصلاح" />
+  <Entity key="OpenIDAbuseFixInfo" value="The way to fix this is to first click &#xD;&#xA;        the button below to temporary block your user. Then to change your password on your OpenID provider.&#xD;&#xA;        Before requesting an unblock by the administrator of this portal. It's also important to &#xD;&#xA;        use passwords which are not easy to guess, like for instance your birthday or something similar." />
+  <Entity key="OpenIDAbuseList1" value="Temporary block your user by clicking the button below" />
+  <Entity key="OpenIDAbuseList2" value="Change your password at your OpenID provider" />
+  <Entity key="OpenIDAbuseList3" value="Request an unblock by the administrator of this portal" />
+  <Entity key="OpenIDBlockButton" value="أغلق المستخدم الخاص بي" />
+  <Entity key="IFrameHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The IFrame Module is used to load other websites and host them as modules inside of the portal.&#xD;&#xA;These websites will seem as an integrated part of the Portal, but really aren's since they're&#xD;&#xA;just hosted completely as their own websites inside of the portal.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Most portals that uses this module will have support for changing whatever the IFrames are linking&#xD;&#xA;to, for instance through some settings or similar way.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="ADGroups2RolesHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The AD-Groups to Role Mapper makes it possible for you to associate Roles in the portal&#xD;&#xA;with Groups in AD. This means that you can administrate your Active Directory and then have&#xD;&#xA;groups in AD map to roles in the portal.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Then whenever a user logs on through the AD mechanism, he will have all his roles updated&#xD;&#xA;according to what groups in Active Directory he belongs to, and what Roles in the portal&#xD;&#xA;those Groups are mapped to.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="EditLanguageModuleHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Edit Language Module can be used to edit the current language in the portal. If you want to &#xD;&#xA;edit another language, other than the current one, you need to switch to that language with the&#xD;&#xA;&quot;Select Language&quot; module.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;If you switch to a language that doesn't have a translation yet, English will be used as&#xD;&#xA;the default language until you edit it.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Most &quot;Keys&quot; have the same names which means you can guess which parts of the portal they&#xD;&#xA;belong to. Like for instance a Menu item called &quot;Help&quot; would normally use &quot;ButtonHelp&quot; for&#xD;&#xA;its language key.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="SettingsHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Settings Module is used generically around the entire Portal. Its main purpose is&#xD;&#xA;to keep track of Global Settings which are affecting all users of the system.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Most Settings will have a default value in the portal configuration file, or through&#xD;&#xA;some other mechanism have a default value the first time it is being used. You can change&#xD;&#xA;any setting value, and you can also delete any Setting value. But when a setting value&#xD;&#xA;is deleted it will often be re-created with its default value whenever it's accessed again&#xD;&#xA;in the module that uses it somehow.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;This means that effectively to delete a setting will revert that value back to its default value.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="SlidingMenuHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Sliding Menu is where you see the buttons to the left which makes navigation possible. It might seem different at &#xD;&#xA;first, but will hopefully prove invaluable and quite intuitive after you've clicked it a couple of times.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;By clicking on the Sliding Menu you will see that if that item has child menu items, &#xD;&#xA;then those child menu items will &quot;fade in&quot; and be shown and &quot;push&quot; the old items to the left.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Menu Items can also have advanced controls contained inside of them, if they do you can interact directly&#xD;&#xA;with those controls inside of the menu instead of having to open up the application or module that you&#xD;&#xA;would need to do in other similar applications.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="ViewPortHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;The Viewport is the container for your modules and the &quot;skin&quot; of your portal. The viewport has&#xD;&#xA;several services it provides to your applications, like for instance, it a host for your modules. &#xD;&#xA;In addition it gives support for hosting multiple modules at the same time. The menu to the left&#xD;&#xA;for instance is a module, and the section you're reading right now is another module (the &quot;Help&quot; module)&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Another core feature of the Viewport is that it provides the notifcation services in addition to that it&#xD;&#xA;also provides support for hosting multiple tabs, each with its own set of modules hosted within.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;&#xD;&#xA;Notice that the &quot;ping sound&quot;, which is a service provided by the Viewport, it can be turned off by &#xD;&#xA;changing the setting called; &quot;UseNotificationSounds&quot;.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="WhiteboardCreateHelp" value="&#xD;&#xA;&lt;p&gt;&#xD;&#xA;In the Create New Whiteboard menu command you can create a new whiteboard which you can later configure in&#xD;&#xA;your whiteboard configuration manager.&#xD;&#xA;&lt;/p&gt;&#xD;&#xA;" />
+  <Entity key="RoleViewAllCaption" value="عرض جميع الأدوار" />
+  <Entity key="ButtonShowADMappings" value="عرض كل توصيلات أد" />
+  <Entity key="ButtonCreateADMapping" value="إنشاء توصيلة أد جديدة" />
+  <Entity key="ADGroups2RoleMapRolesCaption" value="توصيل الأدوار" />
+  <Entity key="ADGroups2RoleGroupCaption" value="إسم المجموعة" />
+  <Entity key="ADGroups2RoleCaption" value="إسم الدور" />
+  <Entity key="ADGroups2RoleCreateCaption" value="توصيلة أد جديدة" />
+  <Entity key="ADGroups2RolesNameText" value="إسم مجموعة أد" />
+  <Entity key="ADGroups2RolesCreateNewLabel" value="إسم مجموعة أد:" />
+  <Entity key="ADGroups2RolesCreateNewButton" value="إرسال" />
+  <Entity key="RoleCreateCaption" value="إنشاء دور جديد" />
+  <Entity key="RolesSaveButton" value="حفظ" />
+  <Entity key="RolesRoleNameText" value="إسم الدور" />
+  <Entity key="RolesRoleName" value="إسم الدور" />
+  <Entity key="ButtonViewAllUsers" value="عرض كل المستخدمين" />
+  <Entity key="ButtonCreateNewUser" value="إنشاء مستخدم جديد" />
+  <Entity key="UserViewAllCaption" value="كل المستخدمين" />
+  <Entity key="UsersUsernameButton" value="إسم المستخدم" />
+  <Entity key="UsersLastLoggedInButton" value="آخر دخول" />
+  <Entity key="UsersRolesButton" value="الأدوار" />
+  <Entity key="UsersTypeUserNameText" value="أكتب إسم المستخدم" />
+  <Entity key="CaptionImportLanguage" value="إستيراد لغة" />
+  <Entity key="CaptionExportLanguage" value="تصدير لغة" />
+  <Entity key="LanguageExportSaveButton" value="حفظ" />
+  <Entity key="LanguageSelectorFlagArabianTooltip" value="عربي" />
+  <Entity key="LanguageSelectorFlagNorwegianTooltip" value="نرويجي" />
+  <Entity key="LanguageSelectorFlagEnglishTooltip" value="إنجليزي" />
+  <Entity key="LanguageSelectorFlagGermanTooltip" value="ألماني" />
+  <Entity key="LanguageSelectorFlagFrenchTooltip" value="فرنسي" />
+  <Entity key="TipOfADMappings" value="If you are using the integrated AD Login to OpenID features of the Portal, you can actually&#xA;map the AD Groups to Roles in the Portal. This works so that one AD Group will effectively &#xA;&quot;&quot;translate&quot;&quot; to a Role object within the Portal.&lt;br/&gt;&lt;br/&gt;Then whenever someone logs into the Portal from the AD Login, the Roles that the User belongs&#xA;to will be overridden by the AD Mappings." />
+  <Entity key="TipOfCandyStore" value="The Candy Store makes it possible for you to integrate towards either your own module repository or &#xA;a 3rd party repository where you can download and install new modules, updates and such.&lt;br/&gt;&lt;br/&gt;These modules will be downloadable to your portal and easily integrate towards your existing code.&lt;br/&gt;&lt;br/&gt;Whenever you install new modules, you will have to &quot;&quot;reboot&quot;&quot; your portal, which might take some few&#xA;minutes. You might also - dependent upon your portal installation - be forced to login again." />
+  <Entity key="TipOfFavorites" value="You can add Favorites, which are applications you use very frequently and that will be accessible&#xA;as shortcuts from the Favorites application. Then to switch between these different applications&#xA;can be easily done by starting the Favorites module and then switching applications from that.&lt;br/&gt;&lt;br/&gt;Notice however that the Favorites module will create a Favorite of your last opened application &#xA;and not your currently active one (necessarily)." />
+  <Entity key="TipOfHelp" value="If you're stuck and you need help for some features of the portal, it is highly likely&#xA;that the Help module will give you advice in regards to how to use some specific feature&#xA;of the portal.&lt;br/&gt;&lt;br/&gt;The Help module can be easily accessed through the Applications menu, and will stay open until&#xA;you explicitly close it or open up another application which uses the same Viewport Container&#xA;as the Help module." />
+  <Entity key="TipOfEditLanguage" value="You can edit the current language of the portal yourself - if you have access to it.&#xA;This can be done within the &quot;&quot;Admin&quot;&quot; menu.&#xA;This will change that language globally for all users that are using your same language.&lt;br/&gt;&lt;br/&gt;This might be particulary useful for updating languages that are either not explicitly a part&#xA;of your portal installation, or that your cannot find some other way.&#xA;" />
+  <Entity key="TipOfImportLanguage" value="You can import new languages in the portal.&lt;br/&gt;&lt;br/&gt;Often you can also either find or purchase new languages online for your portal installation.&#xA;You might want to ask your portal vendor if he has languages that you need in his repository." />
+  <Entity key="TipOfExportLanguage" value="You can export languages once you have translated the portal, these languages can then&#xA;be imported into either other installations or kept as backups for the future." />
+  <Entity key="TipOfLanguageSelector" value="You can switch the language by going to the Admin menu - if you have access to it.&#xA;This will change the language of your portal, but only locally for the user you're logged in as.&lt;br/&gt;&lt;br/&gt;By default the portal will use the language defined in the browser, if that language doesn't&#xA;exist in your portal installation the default language - which is English - will be used." />
+  <Entity key="TipOfAccessControl" value="You can fine-grain the access to every item in your portal according to which roles your&#xA;user belongs to. This way you can have multiple different roles, which each will have access to&#xA;different things.&lt;br/&gt;&lt;br/&gt;Then users can be members of roles which have access - or don't have access - to specific &#xA;features of the Portal." />
+  <Entity key="TipOfSlidingMenu" value="The Sliding Menu - which you use to navigate - has a search function, which you can use&#xA;for faster access to menu items, if you know what you're searching for." />
+  <Entity key="TipOfInitialLoading" value="You can override the websites which are by default opened in the portal through the Settings&#xA;editing module.&lt;br/&gt;&lt;br/&gt;This is a global setting though and will make those changes for all users of the Portal." />
+  <Entity key="ButtonChangeSkin" value="تغيير الواجهة" />
+  <Entity key="LanguageEditCaption" value="تعديل اللغة" />
+  <Entity key="LanguageEditKeyCaption" value="مفتاح" />
+  <Entity key="ExportLanguageCaption" value="تصدير لغة" />
+  <Entity key="LanguageSelectCaption" value="إختيار اللغة" />
+  <Entity key="LanguageSelectorFlagSpanishTooltip" value="أسباني" />
+  <Entity key="LanguageChangeInfo" value="تم تغيير اللغة {0} - {1} برجاء إعادة تحميل الصفحة" />
+  <Entity key="UsersSaveButton" value="حفظ" />
+  <Entity key="UsersCreateNewUserLabel" value="إسم المستخدم" />
+  <Entity key="ButtonAvailableUsers" value="المستخدمين الموجودين" />
+  <Entity key="ButtonViewHistory" value="عرض التاريخ" />
+  <Entity key="UserCreateNewCaption" value="إنشاء مستخدم جديد" />
+  <Entity key="ChatClientCaption" value="المحادثة" />
+  <Entity key="ChatHistoryCaption" value="تاريخ المحادثات" />
+  <Entity key="WhiteboardAllCaption" value="عرض كل السبورات" />
+  <Entity key="AccessControlListItem" value="إختر الدور" />
+  <Entity key="ChatButton" value="المستخدمين" />
+  <Entity key="ChatSentByCaption" value="إرسل بواسطة" />
+  <Entity key="ChatWhenCaption" value="متى" />
+  <Entity key="ChatMessageCaption" value="الرسالة" />
+  <Entity key="AccessControlCaption" value="التحكم في الدخول" />
+  <Entity key="HistoryCaption" value="عرض التاريخ" />
+  <Entity key="ViewHistoryMenuItemCaption" value="الإسم" />
+  <Entity key="ViewHistoryWhen" value="متى" />
+  <Entity key="ADGroups2RoleChooseExistingRoleInfo" value="You must choose an existing role. Nothing was saved...!" />
+  <Entity key="RoleAlreadyAssociatedInfo" value="Role; '{0}' already associated with item..." />
+  <Entity key="RoleYouCanNotInfo" value="You cannot change the accessibility of that item since it has no 'Value' property" />
+  <Entity key="InitializeBlockedUserInfo" value="Your user have been blocked, please contact administrator of portal to fix this.." />
+  <Entity key="InitializeUserIsBlockedInfo" value="User; {0} is now blocked" />
+  <Entity key="InitializeCannotBlockInfo" value="The user {0} is the last unblocked administrator in the portal and hence cannot be blocked." />
+  <Entity key="ChatWithYourselfInfo" value="نأسف لا يمكنك عم محادثات جديدة بنفسك" />
+  <Entity key="ChatYouGotNewChatsInfo" value="لديك محادثات جديدة في غرفة المحادثات" />
+  <Entity key="EditUserSelectRoleListItem0" value="إختر الدور" />
+  <Entity key="UserEditCaption" value="تعديل المستخدم:" />
+  <Entity key="EditUserImageTooltip" value="الصورة من gravatar.com بواسطة البريد الإلكتروني " />
+  <Entity key="EditUserEmailLabel" value="البريد الإلكتروني:" />
+  <Entity key="EditUserEmailTooltip" value="أضغط للتعدل" />
+  <Entity key="EditUserPhoneLabel" value="الهاتف:" />
+  <Entity key="EditUserPhoneTooltip" value="أضغط للتعدل" />
+  <Entity key="UserDeleteRoleNoticeInfo" value="Please notice that when user logs on the next time, any roles might be overridden by the Active Directory groups if user is an Active Directory user..." />
+  <Entity key="EditUserLastLoggedInLabel" value="آخر دخول:" />
+  <Entity key="HistoryViewInfo" value="To view history: Move the cursor over the bull's eye on the right side of this information message." />
+  <Entity key="CandyStoreColumnHeader" value="الوحدات المتاحة" />
+  <Entity key="Whiteboard 1" value="السبورة 1" />
+  <Entity key="Username" value="أسم المستخدم" />
+  <Entity key="LastLoggedIn" value="آخر دخول" />
+  <Entity key="RolesString" value="الأدوار" />
+  <Entity key="ChatInitiateCaption" value="بدء المحادثة" />
+  <Entity key="FavouritesBookmarkInfo" value="You need to open something before you can bookmark..." />
+  <Entity key="FavouritesItemAlreadyInfo" value="Item already bookmarked" />
+  <Entity key="Params" value="Params" />
+  <Entity key="PleaseChooseNewSkin" value="برجاء أختيار واجهة" />
+  <Entity key="PleaseChoose..." value="فضلاً أختر" />
+  <Entity key="TextNewChat" value="أكتب رسالتك هنا" />
+  <Entity key="ChatChannelButton" value="إرسال" />
+  <Entity key="Whiteboard2" value="السبورة 2" />
+  <Entity key="LanguageSelectorFlagSwedishTooltip" value="LanguageSelectorFlagSwedishTooltip" />
+  <Entity key="DidYouKnow" value="هل تعرف؟" />
+  <Entity key="LanguageChanged" value="Language was changed, this change will affect only your user. To propagate this language change, you needed to do a refresh of the portal." />
+  <Entity key="SkinChanged" value="The skin of the portal was changed, this change will only affect for your user when your user is logged in. To propagate these changes, we needed to do a refresh of the portal." />
+</Ra.Brix.Language>

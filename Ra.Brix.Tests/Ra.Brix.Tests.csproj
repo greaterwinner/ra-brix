@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3E847F44-BC2C-4C42-B612-2C9934E8BB38}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ra.Brix.Tests</RootNamespace>
+    <AssemblyName>Ra.Brix.Tests</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.core, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\BaseTest.cs" />
+    <Compile Include="Data\WhiteboardTest.cs" />
+    <Compile Include="Data\UserUnitTest.cs" />
+    <Compile Include="Data\LanguageTest.cs" />
+    <Compile Include="Data\CriteriaWithChildValue.cs" />
+    <Compile Include="Data\PortalSettingsTest.cs" />
+    <Compile Include="Data\SettingsTest.cs" />
+    <Compile Include="Data\VerifyLazyNotRetrievedOnSave.cs" />
+    <Compile Include="Data\TransactionThrowsOnSaveBeforeBase.cs" />
+    <Compile Include="Data\ParentChildAssertRemoveNoList.cs" />
+    <Compile Include="Data\ParentChildAssertRemoveNoLazy.cs" />
+    <Compile Include="Data\ParentChildAssertRemove.cs" />
+    <Compile Include="Data\StaticEventHandlersModules.cs" />
+    <Compile Include="Data\MultipleListChildrenOfSameTypeIsOwner.cs" />
+    <Compile Include="Data\MultipleListChildrenOfSameTypeNoOwner.cs" />
+    <Compile Include="Data\MultipleSingleChildrenOfSameTypeIsOwner.cs" />
+    <Compile Include="Data\MultipleSingleChildrenOfSameTypeNoOwner.cs" />
+    <Compile Include="Data\StaticEventHandlers.cs" />
+    <Compile Include="Data\ParentChild.cs" />
+    <Compile Include="Data\RecursiveTypesNotLazy.cs" />
+    <Compile Include="Data\EntityTypesComplexCompositionTest.cs" />
+    <Compile Include="Data\EntityTypesCompositionTest.cs" />
+    <Compile Include="Data\EntityTypesInheritanceTest.cs" />
+    <Compile Include="Data\EntityTypesTest.cs" />
+    <Compile Include="Data\RecursiveTypes.cs" />
+    <Compile Include="Data\RecursiveTypesNotOwner.cs" />
+    <Compile Include="Data\RichEntityTypesTest.cs" />
+    <Compile Include="Data\SelectByCriteriaParentTest.cs" />
+    <Compile Include="Data\SelectByCriteriaTest.cs" />
+    <Compile Include="Data\SelectByIDTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\NodeTest.cs" />
+    <Compile Include="Types\PeriodCollectionTests.cs" />
+    <Compile Include="Types\PeriodTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveRecords\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveRecords\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveRecords\User\UserRecords.csproj">
+      <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
+      <Name>UserRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ActiveRecords\WhiteBoardRecords\WhiteBoardRecords.csproj">
+      <Project>{A3F4F9D4-AD60-46A1-85D1-AA396AF92065}</Project>
+      <Name>WhiteBoardRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Data.Adapters\Ra.Brix.Data.Adapters.MSSQL\Ra.Brix.Data.Adapters.MSSQL.csproj">
+      <Project>{853598D1-F9CF-48C2-90DD-354480F34F91}</Project>
+      <Name>Ra.Brix.Data.Adapters.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Data.Adapters\Ra.Brix.Data.Adapters.MySQL\Ra.Brix.Data.Adapters.MySQL.csproj">
+      <Project>{B2969964-A410-4A2B-B1E2-528BF9D435D0}</Project>
+      <Name>Ra.Brix.Data.Adapters.MySQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Data.Adapters\Ra.Brix.Data.Adapters.XML\Ra.Brix.Data.Adapters.XML.csproj">
+      <Project>{87C08A87-ACE9-4B8C-95A9-73DA83EE1F0A}</Project>
+      <Name>Ra.Brix.Data.Adapters.XML</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
+      <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
+      <Name>Ra.Brix.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
+      <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
+      <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App.config.template" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
