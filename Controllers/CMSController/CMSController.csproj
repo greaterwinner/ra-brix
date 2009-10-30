@@ -57,14 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ActiveRecords\CMSRecords\CMSRecords.csproj">
-      <Project>{5959A08D-1E79-471C-A1F7-7EC5B1B8C06A}</Project>
-      <Name>CMSRecords</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
       <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
       <Name>Ra.Brix.Data</Name>
@@ -76,6 +68,14 @@
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\CMSRecords\CMSRecords.csproj">
+      <Project>{5959A08D-1E79-471C-A1F7-7EC5B1B8C06A}</Project>
+      <Name>CMSRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

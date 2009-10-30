@@ -64,10 +64,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Controllers\Language\LanguageController.csproj">
       <Project>{9590BE7F-6577-433A-AAB5-E8C8EDFBEA6E}</Project>
       <Name>LanguageController</Name>
@@ -83,6 +79,10 @@
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

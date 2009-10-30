@@ -57,22 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ActiveRecords\Chat\ChatRecords.csproj">
-      <Project>{1C64BA8C-9AC2-4E38-929D-C1BF84DB3361}</Project>
-      <Name>ChatRecords</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\Settings\SettingsRecords.csproj">
-      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
-      <Name>SettingsRecords</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\User\UserRecords.csproj">
-      <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
-      <Name>UserRecords</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Helpers\Commons\Commons.csproj">
       <Project>{EA4DB865-734B-44D3-9AD9-132FD680446D}</Project>
       <Name>Commons</Name>
@@ -88,6 +72,18 @@
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Chat\ChatRecords.csproj">
+      <Project>{1C64BA8C-9AC2-4E38-929D-C1BF84DB3361}</Project>
+      <Name>ChatRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

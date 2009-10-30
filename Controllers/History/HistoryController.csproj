@@ -40,14 +40,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ActiveRecords\History\HistoryRecords.csproj">
-      <Project>{85213D5F-4F3D-400A-AA42-EFFB2BE681E1}</Project>
-      <Name>HistoryRecords</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Helpers\Commons\Commons.csproj">
       <Project>{EA4DB865-734B-44D3-9AD9-132FD680446D}</Project>
       <Name>Commons</Name>
@@ -64,13 +56,21 @@
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Types\History\HistoryRecords.csproj">
+      <Project>{85213D5F-4F3D-400A-AA42-EFFB2BE681E1}</Project>
+      <Name>HistoryRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Initializer\InitializeController.csproj">
       <Project>{1B0F8110-77F5-468D-B49D-1CBD063E45C2}</Project>
       <Name>InitializeController</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ActiveRecords\Settings\SettingsRecords.csproj">
-      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
-      <Name>SettingsRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
