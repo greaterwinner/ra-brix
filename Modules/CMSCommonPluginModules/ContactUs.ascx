@@ -8,6 +8,7 @@
 
 <ra:Panel 
     runat="server" 
+    style="padding:5px;"
     id="wrp">
     <table class="spacedTable">
         <tr>

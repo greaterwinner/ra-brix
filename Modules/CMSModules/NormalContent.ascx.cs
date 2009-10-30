@@ -52,6 +52,10 @@ namespace CMSModules
 
         private void CreateContent(string text)
         {
+            if (string.IsNullOrEmpty(text) || text.Trim() == "")
+            {
+                return;
+            }
             string[] entities = 
                 text.Split(
                     new[]{"{||", "||}"}, 
