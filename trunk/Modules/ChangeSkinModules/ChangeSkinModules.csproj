@@ -67,10 +67,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ActiveRecords\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
       <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
       <Name>Ra.Brix.Loader</Name>
