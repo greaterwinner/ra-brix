@@ -9,6 +9,7 @@
  */
 
 using System;
+using LanguageRecords;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using Ra.Extensions.Widgets;
@@ -72,6 +73,41 @@ namespace CMSModules
                 "CMSGetBodyForURL",
                 node);
             editor.Text = node["Body"].Get<string>();
+        }
+
+        protected void editor_GetPluginControls(object sender, Components.RichEdit.PluginEventArgs e)
+        {
+            Node node = new Node();
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "CMSGetPluginTypes",
+                node);
+            SelectList list = new SelectList();
+            list.ID = "plugins";
+            list.CssClass = "editorSelect";
+            list.SelectedIndexChanged +=
+                delegate(object sender2, EventArgs e2)
+                {
+                    SelectList l = sender2 as SelectList;
+                    if (l == null)
+                        return;
+                    string pluginValue = l.SelectedItem.Value;
+                    editor.PasteHTML(string.Format(@"
+{{||{0}||}}", pluginValue));
+                    l.SelectedIndex = 0;
+                };
+            ListItem item = new ListItem(
+                Language.Instance["InsertPlugin", null, "Insert Plugin..."],
+                "xxx");
+            list.Items.Add(item);
+            foreach (Node idx in node)
+            {
+                ListItem l = new ListItem(
+                    idx["Name"].Get<string>(), 
+                    idx["Value"].Get<string>().Replace(" ", "q"));
+                list.Items.Add(l);
+            }
+            e.Controls.Add(list);
         }
 
         [ActiveEvent(Name = "MainViewportResized")]

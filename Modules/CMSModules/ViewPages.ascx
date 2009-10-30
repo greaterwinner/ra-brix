@@ -43,6 +43,7 @@
             CssClass="editor"
             OnGetImageDialog="editor_GetImageDialog"
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
+            OnGetPluginControls="editor_GetPluginControls"
             runat="server" />
         <ra:ExtButton 
             runat="server" 
