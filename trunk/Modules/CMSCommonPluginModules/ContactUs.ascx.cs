@@ -69,7 +69,7 @@ Something went wrong while trying to send email, message from server was: {0}", 
             MailMessage msg = new MailMessage();
             msg.To.Add(adminEmail);
             msg.From = new MailAddress(email.Text);
-            msg.Subject = header.Text;
+            msg.Subject = email.Text + ": " + header.Text;
             msg.Body = body.Text;
             msg.IsBodyHtml = false;
             SmtpClient smtp = new SmtpClient();
