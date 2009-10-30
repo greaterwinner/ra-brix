@@ -24,8 +24,21 @@ namespace Components
     [ToolboxData("<{0}:RichEdit runat=server></{0}:RichEdit>")]
     public class RichEdit : RaWebControl, IRaControl
     {
+        public class PluginEventArgs : EventArgs
+        {
+            internal PluginEventArgs(ControlCollection col)
+            {
+                Controls = col;
+            }
+
+            public ControlCollection Controls { get; internal set; }
+        }
+
+        private Panel _plugins = new Panel();
+
         public event EventHandler GetImageDialog;
         public event EventHandler GetHyperLinkDialog;
+        public event EventHandler<PluginEventArgs> GetPluginControls;
 
         [DefaultValue("")]
         public string Text
@@ -58,6 +71,19 @@ namespace Components
                 ViewState["Text"] = value;
             }
             base.OnInit(e);
+            EnsureChildControls();
+        }
+
+        protected override void CreateChildControls()
+        {
+            base.CreateChildControls();
+            _plugins.ID = "plugins";
+            if (GetPluginControls != null)
+            {
+                PluginEventArgs e = new PluginEventArgs(_plugins.Controls);
+                GetPluginControls(this, e);
+            }
+            Controls.Add(_plugins);
         }
 
         protected override void LoadViewState(object savedState)
@@ -170,7 +196,7 @@ namespace Components
                 // Text style strip...
                 CreateStrip(builder,
                     delegate
-                        {
+                    {
                         using (Element textType = builder.CreateElement("select"))
                         {
                             textType.AddAttribute("class", "editorSelect");
@@ -219,7 +245,7 @@ namespace Components
                 // Font-Style strip
                 CreateStrip(builder,
                     delegate
-                        {
+                    {
                         CreateButton(builder, "bold");
                         CreateButton(builder, "italic");
                         CreateButton(builder, "underline");
@@ -228,7 +254,7 @@ namespace Components
                 // Justify strip
                 CreateStrip(builder,
                     delegate
-                        {
+                    {
                         CreateButton(builder, "justifyleft");
                         CreateButton(builder, "justifycenter");
                         CreateButton(builder, "justifyright");
@@ -238,7 +264,7 @@ namespace Components
                 // Insert strip
                 CreateStrip(builder,
                     delegate
-                        {
+                    {
                         CreateButton(builder, "insertunorderedlist");
                         CreateButton(builder, "insertorderedlist");
                     });
@@ -246,7 +272,7 @@ namespace Components
                 // Indent strip
                 CreateStrip(builder,
                     delegate
-                        {
+                    {
                         CreateButton(builder, "indent");
                         CreateButton(builder, "outdent");
                     });
@@ -256,7 +282,7 @@ namespace Components
                     // Image strip
                     CreateStrip(builder,
                         delegate
-                            {
+                        {
                             if (GetImageDialog != null)
                             {
                                 CreateButton(builder, "image");
@@ -266,7 +292,14 @@ namespace Components
                                 CreateButton(builder, "hyperlink");
                             }
                         });
-                    
+                }
+                if (GetPluginControls != null)
+                {
+                    CreateStrip(builder,
+                        delegate
+                        {
+                            _plugins.RenderControl(builder.Writer);
+                        });
                 }
             }
         }

@@ -5,6 +5,7 @@
 
 <div style="padding:5px;">
     <h1 runat="server" id="header"></h1>
-    <div runat="server" id="content">
-    </div>
+    <ra:Panel 
+        runat="server" 
+        id="content" />
 </div>
