@@ -286,18 +286,6 @@ changing the setting called; ""UseNotificationSounds"".
             }
         }
 
-        [ActiveEvent(Name = "UserLoggedOut")]
-        protected void UserLoggedOut(object sender, ActiveEventArgs e)
-        {
-            customBreadParent.Visible = false;
-        }
-
-        [ActiveEvent(Name = "UserLoggedIn")]
-        protected void UserLoggedIn(object sender, ActiveEventArgs e)
-        {
-            customBreadParent.Visible = true;
-        }
-
         [ActiveEvent(Name = "ClearControls")]
         protected void ClearControls(object sender, ActiveEventArgs e)
         {

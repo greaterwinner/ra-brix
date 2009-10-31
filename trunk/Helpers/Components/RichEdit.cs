@@ -237,6 +237,15 @@ namespace Components
                         }
                     });
 
+                if (GetPluginControls != null)
+                {
+                    CreateStrip(builder,
+                        delegate
+                        {
+                            _plugins.RenderControl(builder.Writer);
+                        });
+                }
+
                 // Making sure we've got a carriage return
                 using (builder.CreateElement("br"))
                 {
@@ -291,14 +300,6 @@ namespace Components
                             {
                                 CreateButton(builder, "hyperlink");
                             }
-                        });
-                }
-                if (GetPluginControls != null)
-                {
-                    CreateStrip(builder,
-                        delegate
-                        {
-                            _plugins.RenderControl(builder.Writer);
                         });
                 }
             }
