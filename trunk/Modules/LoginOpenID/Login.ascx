@@ -15,7 +15,12 @@
                     <ra:TextBox
                         runat="server"
                         CssClass="openIDTextBox"
-                        ID="openIdURL" />
+                        style="opacity:0.3"
+                        ID="openIdURL">
+                        <ra:BehaviorUnveiler 
+                            runat="server" 
+                            id="unveilLogin" />
+                    </ra:TextBox>
                     <ra:Button
                         runat="server"
                         ID="logInButton"

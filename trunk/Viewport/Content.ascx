@@ -50,6 +50,16 @@
 
 <div id="paper">
     <div id="header">
+        <ra:Panel 
+            runat="server" 
+            id="pnlLogo" 
+            style="opacity:0.3;"
+            CssClass="logoRaBrix">
+            <a href="~/" runat="server" id="logo" class="logoImg">&nbsp;</a>
+            <ra:BehaviorUnveiler 
+                runat="server" 
+                id="logoUnveiler" />
+        </ra:Panel>
         <ra:Dynamic 
             runat="server" 
             CssClass="dynamic-content"
@@ -77,13 +87,13 @@
             <ra:Dynamic 
                 runat="server" 
                 CssClass="dynamic-content dynamic-content-no-overflow"
-                style="width:160px;height:350px;"
+                style="width:160px;height:280px;"
                 OnReload="dynamic_LoadControls"
                 ID="dynLeft" />
         </ra:Window>
 
         <!-- Center window... -->
-        <div style="float:left;min-height:500px;width:804px;">
+        <div style="float:left;min-height:500px;width:804px;position:relative;">
             <ra:Dynamic 
                 runat="server" 
                 CssClass="dynamic-content"
@@ -92,5 +102,11 @@
                 OnReload="dynamic_LoadControls" />
         </div>
     </div>
+    <p class="copyright">
+        Copyright 2009 - <a href="mailto:thomas@ra-ajax.org">Thomas Hansen</a>. 
+        <br />
+        All text is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC Share-Alike</a>. 
+        Ra-Brix is Affero GPL licensed.
+    </p>
 </div>
 

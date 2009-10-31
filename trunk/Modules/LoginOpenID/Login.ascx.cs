@@ -141,16 +141,16 @@ namespace LoginOpenIDModules
             AjaxManager.Instance.Redirect(getRequest.ToString());
         }
 
-        private bool _isInitialRendering;
+        private bool _shouldGiveTextBoxFocus;
         public void InitialLoading(Node node)
         {
             GetUserNameFromCookie();
-            _isInitialRendering = true;
+            _shouldGiveTextBoxFocus = node["GiveFocus"].Get<bool>();
         }
 
         protected override void OnPreRender(EventArgs e)
         {
-            if (_isInitialRendering)
+            if (_shouldGiveTextBoxFocus)
             {
                 new EffectFocusAndSelect(openIdURL)
                     .Render();
