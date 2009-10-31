@@ -53,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content.ascx.cs">
+      <DependentUpon>Content.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -100,6 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Login.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

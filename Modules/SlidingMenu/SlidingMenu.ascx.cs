@@ -436,8 +436,10 @@ would have had to done in other similar applications.
 
         public void InitialLoading(Node node)
         {
-            _breadCrumbID = ((RaWebControl)node["CustomBreadCrumb"].Value).ID;
-            Load +=
+            if (node["CustomBreadCrumb"].Value != null)
+            {
+                _breadCrumbID = ((RaWebControl)node["CustomBreadCrumb"].Value).ID;
+            } Load +=
                 delegate
                     {
                         string id = Request.Params["ContentID"];

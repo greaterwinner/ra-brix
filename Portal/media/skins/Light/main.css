@@ -4,6 +4,7 @@ html
 	height: 100%;
 	width: 100%;
 	margin: 0;
+	overflow:auto;
 }
 
 body
@@ -12,6 +13,7 @@ body
 	height: 100%;
 	width: 100%;
 	margin: 0;
+	overflow:auto;
 }
 
 table tr td
@@ -990,6 +992,7 @@ span.button
 	border: solid 2px #CCD1FF;
 	overflow: auto;
 	background-color: White;
+	min-height:250px;
 }
 
 .editor .strip
@@ -1282,6 +1285,23 @@ span.buttonFlat
 	padding:3px;
 }
 
+#paper
+{
+	width:1056px;
+	background:Transparent url('bg.png') repeat-y 0 0;
+	margin:0 auto 0 auto;
+	overflow:auto;
+	padding:0 16px 0 16px;
+	min-height:720px;
+}
+
+#header
+{
+	height:140px;
+	background:url('sun_background.jpg') no-repeat 0 0;
+	width:1024px;
+	position:relative;
+}
 
 
 
