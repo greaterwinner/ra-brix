@@ -9,11 +9,16 @@ html
 
 body
 {
-	background-color: #6DD0FF;
 	height: 100%;
 	width: 100%;
 	margin: 0;
 	overflow:auto;
+}
+
+form
+{
+	overflow:auto;
+	height:100%;
 }
 
 table tr td
@@ -1301,6 +1306,37 @@ span.buttonFlat
 	background:url('sun_background.jpg') no-repeat 0 0;
 	width:1024px;
 	position:relative;
+}
+
+.logoRaBrix
+{
+	position:absolute;
+	top:25px;
+	left:25px;
+	width:218px;
+	height:80px;
+}
+
+.logoImg
+{
+	background:Transparent url(logo.png) no-repeat 0 0;
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+.logoImg:hover
+{
+	background-color:Transparent;
+}
+
+.copyright
+{
+	display:block;
+	text-align:center;
+	width:100%;
+	margin:50px 0 25px 0;
+	clear:both;
 }
 
 

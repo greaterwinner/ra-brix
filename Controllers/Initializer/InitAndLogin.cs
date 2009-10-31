@@ -267,16 +267,19 @@ If this is not correct, then please click the button..."],
 
         private void LoadLoginModule()
         {
+            Node node = new Node();
+            node["GiveFocus"].Value = Settings.Instance["AutoGiveLoginFocus"] == "True";
             ActiveEvents.Instance.RaiseLoadControl(
                 "LoginOpenIDModules.Login",
                 "dynTop");
-            if (Settings.Instance["HideLogin"] != "True")
-                return;
-            if (HttpContext.Current.Request.Params["ShowLogin"] != "true")
+            if (Settings.Instance["HideLogin"] == "True")
             {
-                ActiveEvents.Instance.RaiseActiveEvent(
-                    this,
-                    "HideLoginModule");
+                if (HttpContext.Current.Request.Params["ShowLogin"] != "true")
+                {
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "HideLoginModule");
+                }
             }
         }
 
