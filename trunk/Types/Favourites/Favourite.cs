@@ -12,8 +12,8 @@ using Ra.Brix.Data;
 
 namespace FavouritesRecords
 {
-    [ActiveRecord]
-    public class Favourite : ActiveRecord<Favourite>
+    [ActiveType]
+    public class Favourite : ActiveType<Favourite>
     {
         [ActiveField]
         public string EventName { get; set; }

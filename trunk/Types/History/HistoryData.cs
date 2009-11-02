@@ -13,8 +13,8 @@ using Ra.Brix.Data;
 
 namespace HistoryRecords
 {
-    [ActiveRecord]
-    public class HistoryData : ActiveRecord<HistoryData>
+    [ActiveType]
+    public class HistoryData : ActiveType<HistoryData>
     {
         [ActiveField]
         public string MenuEventName { get; set; }

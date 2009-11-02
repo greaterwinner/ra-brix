@@ -12,8 +12,8 @@ using Ra.Brix.Data;
 
 namespace RssReaderRecords
 {
-    [ActiveRecord]
-    public class RssItem : ActiveRecord<RssItem>
+    [ActiveType]
+    public class RssItem : ActiveType<RssItem>
     {
         [ActiveField]
         public string URL { get; set; }

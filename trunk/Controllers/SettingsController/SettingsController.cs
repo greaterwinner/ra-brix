@@ -65,7 +65,7 @@ namespace SettingsController
         [ActiveEvent(Name = "SettingEdited")]
         protected void SettingEdited(object sender, ActiveEventArgs e)
         {
-            Settings.Setting setting = ActiveRecord<Settings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            Settings.Setting setting = ActiveType<Settings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             Settings.Instance[setting.Name] = e.Params["Value"].Get<string>();
         }
 

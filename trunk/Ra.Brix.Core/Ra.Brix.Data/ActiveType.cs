@@ -20,7 +20,7 @@ namespace Ra.Brix.Data
      * ActiveRecordAttribute attribute in addition to marking all your serializable 
      * properties with the ActiveFieldAttribute.
      */
-    public class ActiveRecord<T>
+    public class ActiveType<T>
     {
         /**
          * The data storage associated ID of the object. Often the primary
@@ -107,7 +107,7 @@ namespace Ra.Brix.Data
          */
         public override bool Equals(object obj)
         {
-            return obj != null && (obj is ActiveRecord<T>) && (obj as ActiveRecord<T>).ID == ID;
+            return obj != null && (obj is ActiveType<T>) && (obj as ActiveType<T>).ID == ID;
         }
 
         public override int GetHashCode()
@@ -123,7 +123,7 @@ namespace Ra.Brix.Data
         /**
          * Returns true if the two given objects does not have the same ID.
          */
-        public static bool operator != (ActiveRecord<T> left, ActiveRecord<T> right)
+        public static bool operator != (ActiveType<T> left, ActiveType<T> right)
         {
             if ((object)left == null && (object)right != null)
                 return true;
@@ -133,7 +133,7 @@ namespace Ra.Brix.Data
         /**
          * Returns true if the two given objects do have the same ID.
          */
-        public static bool operator ==(ActiveRecord<T> left, ActiveRecord<T> right)
+        public static bool operator ==(ActiveType<T> left, ActiveType<T> right)
         {
             if ((object)left == null && (object)right != null)
                 return false;

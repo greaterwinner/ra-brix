@@ -13,8 +13,8 @@ using Ra.Brix.Types;
 
 namespace CMSRecords
 {
-    [ActiveRecord]
-    public class Page : ActiveRecord<Page>
+    [ActiveType]
+    public class Page : ActiveType<Page>
     {
         public Page()
         {

@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class SelectByIDTest : BaseTest
     {
-        [ActiveRecord]
-        public class Dummy : ActiveRecord<Dummy>
+        [ActiveType]
+        public class Dummy : ActiveType<Dummy>
         {
             [ActiveField]
             public int Value { get; set; }

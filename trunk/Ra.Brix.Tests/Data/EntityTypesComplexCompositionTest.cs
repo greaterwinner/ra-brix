@@ -20,22 +20,22 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class EntityTypesComplexCompositionTest : BaseTest
     {
-        [ActiveRecord]
-        internal class Contact : ActiveRecord<Contact>
+        [ActiveType]
+        internal class Contact : ActiveType<Contact>
         {
             [ActiveField]
             public string ContactName { get; set; }
         }
 
-        [ActiveRecord]
-        internal class CustomerExtraData : ActiveRecord<CustomerExtraData>
+        [ActiveType]
+        internal class CustomerExtraData : ActiveType<CustomerExtraData>
         {
             [ActiveField]
             public string Extra { get; set; }
         }
 
-        [ActiveRecord]
-        internal class Address : ActiveRecord<Address>
+        [ActiveType]
+        internal class Address : ActiveType<Address>
         {
             [ActiveField]
             public string PostalPlace { get; set; }
@@ -44,8 +44,8 @@ namespace Ra.Brix.Tests.Data
             public int ZipCode { get; set; }
         }
 
-        [ActiveRecord]
-        internal class Customer : ActiveRecord<Customer>
+        [ActiveType]
+        internal class Customer : ActiveType<Customer>
         {
             private LazyList<Contact> _contacts = new LazyList<Contact>();
 
@@ -284,8 +284,8 @@ namespace Ra.Brix.Tests.Data
 
 
         // Has many tests
-        [ActiveRecord]
-        public class User : ActiveRecord<User>
+        [ActiveType]
+        public class User : ActiveType<User>
         {
             private LazyList<Role> _roles = new LazyList<Role>();
 
@@ -303,8 +303,8 @@ namespace Ra.Brix.Tests.Data
             }
         }
 
-        [ActiveRecord]
-        public class Role : ActiveRecord<Role>
+        [ActiveType]
+        public class Role : ActiveType<Role>
         {
             [ActiveField]
             public string Name { get; set; }

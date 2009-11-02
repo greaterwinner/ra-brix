@@ -52,7 +52,7 @@ namespace UserController
         [ActiveEvent(Name = "EditUser")]
         protected void EditUser(object sender, ActiveEventArgs e)
         {
-            User user = ActiveRecord<User>.SelectByID(int.Parse(e.Params["UserID"].Get<string>()));
+            User user = ActiveType<User>.SelectByID(int.Parse(e.Params["UserID"].Get<string>()));
             if (user == null)
             {
                 Node nodeDoesntExist = new Node();
@@ -80,7 +80,7 @@ namespace UserController
                 }
 
                 idxNo = 0;
-                foreach (Role idxRole in ActiveRecord<Role>.Select())
+                foreach (Role idxRole in ActiveType<Role>.Select())
                 {
                     init["ModuleSettings"]["ExistingRoles"]["Role" + idxNo].Value = idxRole.Name;
                     idxNo += 1;
@@ -107,7 +107,7 @@ namespace UserController
 
             // Checking to see if username already is taken...
             string username = e.Params["Username"].Get<string>();
-            User oldExisting = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User oldExisting = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             if (oldExisting != null)
             {
                 // A user with that username already exists
@@ -138,7 +138,7 @@ namespace UserController
         protected void DeleteUser(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["UserID"].Get<string>());
-            User user = ActiveRecord<User>.SelectByID(id);
+            User user = ActiveType<User>.SelectByID(id);
             user.Delete();
         }
 
@@ -148,7 +148,7 @@ namespace UserController
             string username = e.Params["Username"].Get<string>();
             string roleNameToAdd = e.Params["RoleToAdd"].Get<string>();
 
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             if (user.InRole(roleNameToAdd))
             {
                 Node information = new Node();
@@ -161,7 +161,7 @@ namespace UserController
             }
             else
             {
-                user.Roles.Add(ActiveRecord<Role>.SelectFirst(Criteria.Eq("Name", roleNameToAdd)));
+                user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", roleNameToAdd)));
                 user.Save();
             }
 
@@ -180,7 +180,7 @@ namespace UserController
             string roleName = e.Params["RoleToDelete"].Value.ToString();
             string username = e.Params["Username"].Value.ToString();
 
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
 
             if (roleName == "Administrator" && username == Settings.Instance["PowerUser"])
             {
@@ -235,7 +235,7 @@ any roles might be overridden by the Active Directory groups if user is an Activ
         [ActiveEvent(Name = "UpdateUser")]
         protected void UpdateUser(object sender, ActiveEventArgs e)
         {
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", e.Params["Username"].Get<string>()));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", e.Params["Username"].Get<string>()));
             user.Email = e.Params["Email"].Get<string>();
             user.Phone = e.Params["Phone"].Get<string>();
             user.Save();
@@ -266,7 +266,7 @@ any roles might be overridden by the Active Directory groups if user is an Activ
             init["ModuleSettings"]["Grid"]["Columns"]["RolesString"]["Caption"].Value = Language.Instance["RolesString"];
             init["ModuleSettings"]["Grid"]["Columns"]["RolesString"]["ControlType"].Value = "Label";
             int idxNo = 0;
-            foreach (User idx in ActiveRecord<User>.Select())
+            foreach (User idx in ActiveType<User>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["Username"].Value = idx.Username;

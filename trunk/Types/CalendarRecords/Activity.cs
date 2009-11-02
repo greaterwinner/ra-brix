@@ -14,8 +14,8 @@ using UserRecords;
 
 namespace CalendarRecords
 {
-    [ActiveRecord]
-    public class Activity : ActiveRecord<Activity>
+    [ActiveType]
+    public class Activity : ActiveType<Activity>
     {
         [ActiveField(IsOwner = false)]
         public User Creator { get; set; }

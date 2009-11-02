@@ -87,7 +87,7 @@ This is a global setting though and will make those changes for all users of the
         protected void BlockUser(object sender, ActiveEventArgs e)
         {
             string username = e.Params["Username"].Value.ToString();
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             if (user == null)
             {
                 throw new ApplicationException("User; " + username + " doesn't exist");
@@ -97,7 +97,7 @@ This is a global setting though and will make those changes for all users of the
                 // Checking to see if this is the ONLY administrator and if
                 // so we cannot blck this user since then the portal would be useless...
                 bool shouldBlock = false;
-                foreach (User idxUser in ActiveRecord<User>.Select())
+                foreach (User idxUser in ActiveType<User>.Select())
                 {
                     if (idxUser.Username != username && 
                         idxUser.InRole("Administrator") && 
@@ -119,7 +119,7 @@ This is a global setting though and will make those changes for all users of the
                     return;
                 }
             }
-            user.Roles.Add(ActiveRecord<Role>.SelectFirst(Criteria.Eq("Name", "Blocked")));
+            user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", "Blocked")));
             user.Save();
             Node node = new Node();
             node["Message"].Value = string.Format(Language.Instance["InitializeUserIsBlockedInfo", null, @"User; {0} is now blocked"], username);
@@ -160,7 +160,7 @@ This is a global setting though and will make those changes for all users of the
         protected void UserLoggedIn(object sender, ActiveEventArgs e)
         {
             string username = e.Params.Value.ToString();
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             
             // Need to check if user exists from before
             if (user == null)
@@ -193,7 +193,7 @@ please contact administrator of portal to fix this."]);
             {
                 if (!user.InRole("Administrator"))
                 {
-                    user.Roles.Add(ActiveRecord<Role>.SelectFirst(Criteria.Eq("Name", "Administrator")));
+                    user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", "Administrator")));
                     user.Save();
                 }
             }

@@ -20,15 +20,15 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class EntityTypesCompositionTest : BaseTest
     {
-        [ActiveRecord]
-        internal class Contact : ActiveRecord<Contact>
+        [ActiveType]
+        internal class Contact : ActiveType<Contact>
         {
             [ActiveField]
             public string ContactName { get; set; }
         }
 
-        [ActiveRecord]
-        internal class Customer : ActiveRecord<Customer>
+        [ActiveType]
+        internal class Customer : ActiveType<Customer>
         {
             private LazyList<Contact> _contacts = new LazyList<Contact>();
 
@@ -196,8 +196,8 @@ namespace Ra.Brix.Tests.Data
             Assert.AreEqual(c2.ID, after.Contacts[1].ID);
         }
 
-        [ActiveRecord]
-        internal class Customer2 : ActiveRecord<Customer2>
+        [ActiveType]
+        internal class Customer2 : ActiveType<Customer2>
         {
             [ActiveField]
             public string CustomerName { get; set; }
@@ -206,8 +206,8 @@ namespace Ra.Brix.Tests.Data
             public Contact2 Contact { get; set; }
         }
 
-        [ActiveRecord]
-        internal class Contact2 : ActiveRecord<Contact2>
+        [ActiveType]
+        internal class Contact2 : ActiveType<Contact2>
         {
             [ActiveField]
             public string ContactName { get; set; }

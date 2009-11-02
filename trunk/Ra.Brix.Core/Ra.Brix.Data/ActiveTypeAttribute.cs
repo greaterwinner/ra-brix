@@ -19,7 +19,7 @@ namespace Ra.Brix.Data
      * mark every property that you wish to serialize with the ActiveFieldAttribute.
      */
     [AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]
-    public class ActiveRecordAttribute : Attribute
+    public class ActiveTypeAttribute : Attribute
     {
     }
 }

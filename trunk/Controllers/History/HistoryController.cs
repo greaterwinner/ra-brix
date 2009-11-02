@@ -50,7 +50,7 @@ Move the cursor over the bull's eye on the right side of this information messag
             node["TabCaption"].Value = Language.Instance["HistoryCaption", null, "View History"];
 
             List<HistoryData> list = new List<HistoryData>(
-                ActiveRecord<HistoryData>.Select(
+                ActiveType<HistoryData>.Select(
                     Criteria.Eq("Username", Users.LoggedInUserName)));
             list.Sort(
                 delegate(HistoryData left, HistoryData right)
@@ -89,7 +89,7 @@ Move the cursor over the bull's eye on the right side of this information messag
         protected void OpenHistoryItem(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["ID"].Get<string>());
-            HistoryData h = ActiveRecord<HistoryData>.SelectByID(id);
+            HistoryData h = ActiveType<HistoryData>.SelectByID(id);
             Node node = new Node();
             node["Params"].Value = h.Params;
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -112,7 +112,7 @@ Move the cursor over the bull's eye on the right side of this information messag
             // Checking to see if we need to delete older items...
             // This is done since we only store the x last items, where x == a setting which
             // defaults to 5...
-            int numberOfExistingItems = ActiveRecord<HistoryData>.CountWhere(
+            int numberOfExistingItems = ActiveType<HistoryData>.CountWhere(
                 Criteria.Eq("Username", Users.LoggedInUserName));
             int maxItems = Settings.Instance.Get("NumberOfHistoryItemsPerUser", 50);
             if (numberOfExistingItems >= maxItems)
@@ -120,7 +120,7 @@ Move the cursor over the bull's eye on the right side of this information messag
                 int itemsToDelete = (numberOfExistingItems - maxItems) + 1;
                 List<HistoryData> items = 
                     new List<HistoryData>(
-                        ActiveRecord<HistoryData>.Select(
+                        ActiveType<HistoryData>.Select(
                             Criteria.Eq("Username", Users.LoggedInUserName)));
                 items.Sort(
                     delegate(HistoryData left, HistoryData right)
@@ -147,7 +147,7 @@ Move the cursor over the bull's eye on the right side of this information messag
             // Sending the "HistoryUpdated" event...
             Node node = new Node();
             List<HistoryData> list = new List<HistoryData>(
-                ActiveRecord<HistoryData>.Select(
+                ActiveType<HistoryData>.Select(
                     Criteria.Eq("Username", Users.LoggedInUserName)));
             list.Sort(
                 delegate(HistoryData left, HistoryData right)

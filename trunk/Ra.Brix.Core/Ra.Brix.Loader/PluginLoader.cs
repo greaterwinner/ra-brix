@@ -55,7 +55,7 @@ namespace Ra.Brix.Loader
                 });
 
             // Initializing all Active Records
-            FindAllTypesWithAttribute<ActiveRecordAttribute>(
+            FindAllTypesWithAttribute<ActiveTypeAttribute>(
                 delegate(Type type)
                 {
                     InitializeEventHandlers(null, type);

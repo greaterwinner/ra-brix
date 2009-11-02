@@ -37,7 +37,7 @@ namespace CMSController
             e.Params["ButtonCMS"]["ButtonCMSCreatePage"].Value = "Menu-CMS-CreatePage";
 
             // Pages...
-            foreach (Page idx in ActiveRecord<Page>.Select(Criteria.NotLike("URL", "%/%")))
+            foreach (Page idx in ActiveType<Page>.Select(Criteria.NotLike("URL", "%/%")))
             {
                 AddPageToMenu(idx, e.Params);
             }
@@ -65,7 +65,7 @@ namespace CMSController
             node["Width"].Value = 300;
             node["Height"].Value = 100;
             int idxNo = 0;
-            foreach (Page idx in ActiveRecord<Page>.Select())
+            foreach (Page idx in ActiveType<Page>.Select())
             {
                 node["ModuleSettings"]["Pages"]["Page" + idxNo]["Header"].Value = idx.Header;
                 if (idx.URL == "home")
@@ -130,7 +130,7 @@ namespace CMSController
             else
             {
                 parentURL = parentURL.Replace("xxx-value", "");
-                Page p = ActiveRecord<Page>.SelectFirst(Criteria.Eq("URL", parentURL));
+                Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", parentURL));
                 Page n = new Page();
                 n.Header = name;
                 p.Children.Add(n);
@@ -180,7 +180,7 @@ namespace CMSController
             }
             else
             {
-                Page p = ActiveRecord<Page>.SelectFirst(Criteria.Eq("URL", url));
+                Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", url));
                 p.Delete();
 #pragma warning disable 168
                 // Making sure we get the language right...
@@ -196,7 +196,7 @@ namespace CMSController
             string url = e.Params["URL"].Get<string>();
             string header = e.Params["Header"].Get<string>();
             string body = e.Params["Body"].Get<string>();
-            Page p = ActiveRecord<Page>.SelectFirst(Criteria.Eq("URL", url));
+            Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", url));
             p.Header = header;
             p.Body = body;
             p.Save();
@@ -219,7 +219,7 @@ namespace CMSController
             Node node = new Node();
             node["TabCaption"].Value = Language.Instance["CMSCreateNewPage", null, "Create New Page"];
             int idxNo = 0;
-            foreach (Page idx in ActiveRecord<Page>.Select())
+            foreach (Page idx in ActiveType<Page>.Select())
             {
                 node["ModuleSettings"]["Pages"]["Page" + idxNo]["Name"].Value = idx.Header;
                 node["ModuleSettings"]["Pages"]["Page" + idxNo]["URL"].Value = "xxx-value" + idx.URL;
@@ -242,7 +242,7 @@ namespace CMSController
             Node node = new Node();
             node["TabCaption"].Value = Language.Instance["CMS-ViewPages", null, "View CMS-Pages"];
             int idxNo = 0;
-            foreach (Page idx in ActiveRecord<Page>.Select(Criteria.NotLike("URL", "%/%")))
+            foreach (Page idx in ActiveType<Page>.Select(Criteria.NotLike("URL", "%/%")))
             {
                 AddPageToNode(node["ModuleSettings"]["Pages"]["Page" + idxNo], idx);
                 idxNo += 1;
@@ -268,7 +268,7 @@ namespace CMSController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected void RequestBegin(object sender, ActiveEventArgs e)
         {
-            if (ActiveRecord<Page>.Count == 0)
+            if (ActiveType<Page>.Count == 0)
             {
                 Page p = new Page();
                 p.Header = "Home";
@@ -283,7 +283,7 @@ namespace CMSController
         [ActiveEvent(Name = "CMSGetBodyForURL")]
         protected void CMSGetBodyForURL(object sender, ActiveEventArgs e)
         {
-            Page p = ActiveRecord<Page>.SelectFirst(Criteria.Eq("URL", e.Params["URL"].Get<string>()));
+            Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", e.Params["URL"].Get<string>()));
             e.Params["Body"].Value = p.Body;
         }
 

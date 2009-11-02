@@ -13,11 +13,11 @@ using System.Collections.Generic;
 
 namespace WhiteBoardRecords
 {
-    [ActiveRecord]
-    public class Whiteboard : ActiveRecord<Whiteboard>
+    [ActiveType]
+    public class Whiteboard : ActiveType<Whiteboard>
     {
-        [ActiveRecord]
-        public class Column : ActiveRecord<Column>
+        [ActiveType]
+        public class Column : ActiveType<Column>
         {
             [ActiveField]
             public string Caption { get; set; }
@@ -29,8 +29,8 @@ namespace WhiteBoardRecords
             public int Position { get; set; }
         }
 
-        [ActiveRecord]
-        public class Row : ActiveRecord<Row>
+        [ActiveType]
+        public class Row : ActiveType<Row>
         {
             public Row()
             {
@@ -41,8 +41,8 @@ namespace WhiteBoardRecords
             public List<Cell> Cells { get; set; }
         }
 
-        [ActiveRecord]
-        public class Cell : ActiveRecord<Cell>
+        [ActiveType]
+        public class Cell : ActiveType<Cell>
         {
             [ActiveField]
             public string Value { get; set; }

@@ -14,8 +14,8 @@ using Ra.Brix.Types;
 
 namespace UserRecords
 {
-    [ActiveRecord]
-    public class User : ActiveRecord<User>
+    [ActiveType]
+    public class User : ActiveType<User>
     {
         public User()
         {

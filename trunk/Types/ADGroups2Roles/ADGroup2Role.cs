@@ -12,8 +12,8 @@ using Ra.Brix.Data;
 
 namespace ADGroups2RolesRecords
 {
-    [ActiveRecord]
-    public class AdGroup2Role : ActiveRecord<AdGroup2Role>
+    [ActiveType]
+    public class AdGroup2Role : ActiveType<AdGroup2Role>
     {
         [ActiveField]
         public string GroupName { get; set; }

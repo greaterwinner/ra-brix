@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class MultipleListChildrenOfSameTypeIsOwner : BaseTest
     {
-        [ActiveRecord]
-        public class Role : ActiveRecord<Role>
+        [ActiveType]
+        public class Role : ActiveType<Role>
         {
             public Role() 
             {
@@ -35,8 +35,8 @@ namespace Ra.Brix.Tests.Data
             public List<Role> ChildRoles { get; set; }
         }
 
-        [ActiveRecord]
-        public class User : ActiveRecord<User>
+        [ActiveType]
+        public class User : ActiveType<User>
         {
             public User()
             {

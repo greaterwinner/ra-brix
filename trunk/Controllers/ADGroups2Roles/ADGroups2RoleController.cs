@@ -55,7 +55,7 @@ namespace ADGroup2RoleController
         protected void DeleteAdGroup2RoleMappin(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["ID"].Get<string>());
-            AdGroup2Role a = ActiveRecord<AdGroup2Role>.SelectByID(id);
+            AdGroup2Role a = ActiveType<AdGroup2Role>.SelectByID(id);
             a.Delete();
         }
 
@@ -86,7 +86,7 @@ namespace ADGroup2RoleController
             init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["Caption"].Value = Language.Instance["ADGroups2RoleCaption", null, "Role Name"];
             init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["ControlType"].Value = "InPlaceEdit";
             int idxNo = 0;
-            foreach (AdGroup2Role idx in ActiveRecord<AdGroup2Role>.Select())
+            foreach (AdGroup2Role idx in ActiveType<AdGroup2Role>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["GroupName"].Value = idx.GroupName;
@@ -110,7 +110,7 @@ namespace ADGroup2RoleController
         protected void UserLoggedIn(object sender, ActiveEventArgs e)
         {
             string username = e.Params.Value.ToString();
-            User user = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", username));
+            User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             if (e.Params["Groups"].Count > 0)
             {
                 user.Roles.RemoveAll(
@@ -121,18 +121,18 @@ namespace ADGroup2RoleController
                 foreach (Node idx in e.Params["Groups"])
                 {
                     string groupName = idx.Get<string>();
-                    if (ActiveRecord<AdGroup2Role>.CountWhere(Criteria.Eq("GroupName", groupName)) == 0)
+                    if (ActiveType<AdGroup2Role>.CountWhere(Criteria.Eq("GroupName", groupName)) == 0)
                     {
                         AdGroup2Role newMapping = new AdGroup2Role();
                         newMapping.GroupName = groupName;
                         newMapping.Save();
                     }
-                    foreach (AdGroup2Role idxMap in ActiveRecord<AdGroup2Role>.Select(Criteria.Eq("GroupName", groupName)))
+                    foreach (AdGroup2Role idxMap in ActiveType<AdGroup2Role>.Select(Criteria.Eq("GroupName", groupName)))
                     {
                         string roleName = idxMap.RoleName;
                         if (!string.IsNullOrEmpty(roleName))
                         {
-                            Role role = ActiveRecord<Role>.SelectFirst(Criteria.Eq("Name", roleName));
+                            Role role = ActiveType<Role>.SelectFirst(Criteria.Eq("Name", roleName));
                             if (role != null)
                             {
                                 user.Roles.Add(role);
@@ -150,7 +150,7 @@ namespace ADGroup2RoleController
             string roleName = e.Params["RoleName"].Get<string>();
             string groupName = e.Params["GroupName"].Get<string>();
             int id = int.Parse(e.Params["ID"].Get<string>());
-            AdGroup2Role a = ActiveRecord<AdGroup2Role>.SelectByID(id);
+            AdGroup2Role a = ActiveType<AdGroup2Role>.SelectByID(id);
 
             if (!string.IsNullOrEmpty(groupName))
             {
@@ -158,7 +158,7 @@ namespace ADGroup2RoleController
             }
             if (!string.IsNullOrEmpty(roleName))
             {
-                if (ActiveRecord<Role>.CountWhere(Criteria.Eq("Name", roleName)) == 0)
+                if (ActiveType<Role>.CountWhere(Criteria.Eq("Name", roleName)) == 0)
                 {
                     Node nodeInfo = new Node();
                     string message = "You must choose an existing role.<br/>Nothing was saved...!";

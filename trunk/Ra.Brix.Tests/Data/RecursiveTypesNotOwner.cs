@@ -20,15 +20,15 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class RecursiveTypesNotOwner : BaseTest
     {
-        [ActiveRecord]
-        public class Role : ActiveRecord<Role>
+        [ActiveType]
+        public class Role : ActiveType<Role>
         {
             [ActiveField]
             public int Value { get; set; }
         }
 
-        [ActiveRecord]
-        public class User : ActiveRecord<User>
+        [ActiveType]
+        public class User : ActiveType<User>
         {
             public User()
             {
@@ -42,8 +42,8 @@ namespace Ra.Brix.Tests.Data
             public LazyList<Role> Roles { get; set; }
         }
 
-        [ActiveRecord]
-        public class AdministratorUser : ActiveRecord<AdministratorUser>
+        [ActiveType]
+        public class AdministratorUser : ActiveType<AdministratorUser>
         {
             [ActiveField(IsOwner=false)]
             public User User { get; set; }

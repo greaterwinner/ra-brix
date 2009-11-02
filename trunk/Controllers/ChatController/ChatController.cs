@@ -67,13 +67,13 @@ namespace ChatController
             init["TabCaption"].Value = Language.Instance["ChatHistoryCaption", null, "Chat History"];
             List<ChatMessage> chats = new List<ChatMessage>();
             foreach (ChatMessage idx in
-                ActiveRecord<ChatMessage>.Select(
+                ActiveType<ChatMessage>.Select(
                     Criteria.Eq("SentToUsername", Users.LoggedInUserName)))
             {
                 chats.Add(idx);
             }
             foreach (ChatMessage idx in
-                ActiveRecord<ChatMessage>.Select(
+                ActiveType<ChatMessage>.Select(
                     Criteria.Eq("SentByUsername", Users.LoggedInUserName)))
             {
                 chats.Add(idx);
@@ -154,7 +154,7 @@ namespace ChatController
         {
             List<ChatMessage>  chats = new List<ChatMessage>();
             foreach (ChatMessage idx in
-                ActiveRecord<ChatMessage>.Select(
+                ActiveType<ChatMessage>.Select(
                     Criteria.Eq("SentByUsername", chattingWith),
                     Criteria.Eq("SentToUsername", Users.LoggedInUserName),
                     Criteria.Mt("When",
@@ -164,7 +164,7 @@ namespace ChatController
                 chats.Add(idx);
             }
             foreach (ChatMessage idx in
-                ActiveRecord<ChatMessage>.Select(
+                ActiveType<ChatMessage>.Select(
                     Criteria.Eq("SentToUsername", chattingWith),
                     Criteria.Eq("SentByUsername", Users.LoggedInUserName),
                     Criteria.Mt("When",
@@ -241,7 +241,7 @@ namespace ChatController
 
             foreach (string idxUser in Users.Instance)
             {
-                int noChats = ActiveRecord<ChatMessage>.CountWhere(
+                int noChats = ActiveType<ChatMessage>.CountWhere(
                     Criteria.Eq("SentToUsername", Users.LoggedInUserName),
                     Criteria.Eq("SentByUsername", idxUser),
                     Criteria.Mt("When",
