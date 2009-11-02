@@ -145,7 +145,7 @@ namespace CalendarModules
         {
             List<Activity> activities = 
                 new List<Activity>(
-                    ActiveRecord<Activity>.Select(
+                    ActiveType<Activity>.Select(
                         Criteria.Mt("End", FirstDate.Date),
                         Criteria.Lt("Start", FirstDate.Date.AddDays(7))));
             activities.RemoveAll(
@@ -267,7 +267,7 @@ namespace CalendarModules
                     new EffectSize(pnlShowActivity, 500, 250, 400)
                         .JoinThese(new EffectFadeIn()))
                 .Render();
-            Activity a = ActiveRecord<Activity>.SelectByID(int.Parse(id));
+            Activity a = ActiveType<Activity>.SelectByID(int.Parse(id));
             txtHeader.Text = a.Header;
             txtBody.Text = a.Body;
             lblStart.Text = a.Start.ToString("d MMM - HH:mm");
@@ -315,7 +315,7 @@ namespace CalendarModules
         protected void deleteBtn_Click(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
-            Activity a = ActiveRecord<Activity>.SelectByID(id);
+            Activity a = ActiveType<Activity>.SelectByID(id);
             a.Delete();
             actWrp.Controls.Clear();
             BuildActivities();
@@ -341,7 +341,7 @@ namespace CalendarModules
         protected void dateStart_DateClicked(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
-            Activity a = ActiveRecord<Activity>.SelectByID(id);
+            Activity a = ActiveType<Activity>.SelectByID(id);
             a.Start = dateStart.Value;
             a.Save();
             lblStart.Text = a.Start.ToString("d MMM - HH:mm");
@@ -357,7 +357,7 @@ namespace CalendarModules
         protected void dateEnd_DateClicked(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
-            Activity a = ActiveRecord<Activity>.SelectByID(id);
+            Activity a = ActiveType<Activity>.SelectByID(id);
             a.End = dateEnd.Value;
             a.Save();
             lblEnd.Text = a.End.ToString("d MMM - HH:mm");
@@ -373,7 +373,7 @@ namespace CalendarModules
         protected void txtHeader_TextChanged(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
-            Activity a = ActiveRecord<Activity>.SelectByID(id);
+            Activity a = ActiveType<Activity>.SelectByID(id);
             a.Header = txtHeader.Text;
             a.Save();
             actWrp.Controls.Clear();
@@ -386,7 +386,7 @@ namespace CalendarModules
         protected void txtBody_TextChanged(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
-            Activity a = ActiveRecord<Activity>.SelectByID(id);
+            Activity a = ActiveType<Activity>.SelectByID(id);
             a.Body = txtBody.Text;
             a.Save();
             actWrp.Controls.Clear();

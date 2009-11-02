@@ -20,11 +20,11 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class SettingsTest : BaseTest
     {
-        [ActiveRecord]
-        internal class Settings : ActiveRecord<Settings>
+        [ActiveType]
+        internal class Settings : ActiveType<Settings>
         {
-            [ActiveRecord]
-            internal class Setting : ActiveRecord<Setting>
+            [ActiveType]
+            internal class Setting : ActiveType<Setting>
             {
                 [ActiveField]
                 public string Name { get; set; }

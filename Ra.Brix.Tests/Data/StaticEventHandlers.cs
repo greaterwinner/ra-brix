@@ -21,8 +21,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class StaticEventHandlers : BaseTest
     {
-        [ActiveRecord]
-        internal class User : ActiveRecord<User>
+        [ActiveType]
+        internal class User : ActiveType<User>
         {
             [ActiveField]
             public string Username { get; set; }

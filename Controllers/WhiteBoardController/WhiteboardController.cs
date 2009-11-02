@@ -38,7 +38,7 @@ namespace WhiteBoardController
             e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewAllWhiteboards"].Value = "Menu-ViewAllWhiteboards";
             e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"].Value = "Menu-EditWhiteboard";
             e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"].Value = "Menu-ViewWhiteboard";
-            foreach (Whiteboard idx in ActiveRecord<Whiteboard>.Select())
+            foreach (Whiteboard idx in ActiveType<Whiteboard>.Select())
             {
                 // First the edit parts...
                 e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
@@ -70,7 +70,7 @@ namespace WhiteBoardController
             init["ModuleSettings"]["Grid"]["Columns"]["Name"]["ControlType"].Value = "LinkButton";
 
             int idxNo = 0;
-            foreach (Whiteboard idx in ActiveRecord<Whiteboard>.Select())
+            foreach (Whiteboard idx in ActiveType<Whiteboard>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["Name"].Value = Language.Instance[idx.Name];
@@ -116,7 +116,7 @@ namespace WhiteBoardController
             string columnName = e.Params["ColumnName"].Get<string>();
             string value = e.Params["Value"].Get<string>();
 
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(whiteboardId);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(whiteboardId);
             Whiteboard.Row row = w.Rows.Find(
                 delegate(Whiteboard.Row idx)
                 {
@@ -180,7 +180,7 @@ but currently installed plugins allows;
             int id = int.Parse(e.Params["ID"].Get<string>());
             string colName = e.Params["Column"].Get<string>();
             string value = e.Params["Value"].Get<string>();
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(whiteBoardId);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(whiteBoardId);
             Whiteboard.Column col = w.Columns.Find(
                 delegate(Whiteboard.Column idx)
                 {
@@ -242,7 +242,7 @@ but currently installed plugins allows;
         protected void UpdateWhiteboard(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["WhiteboardID"].Get<string>());
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(id);
             if (e.Params["EnableFiltering", false] != null)
                 w.EnableFiltering = e.Params["EnableFiltering"].Get<bool>();
             if (e.Params["EnableHeaders", false] != null)
@@ -276,7 +276,7 @@ You must type in an integer value, nothing was saved..."];
         protected void DeleteWhiteboard(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["ID"].Get<string>());
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(id);
             w.Delete();
 
             RefreshMenu();
@@ -288,7 +288,7 @@ You must type in an integer value, nothing was saved..."];
 
         private static void EditWhiteboard(int id)
         {
-            Whiteboard board = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard board = ActiveType<Whiteboard>.SelectByID(id);
 
             Node init = new Node();
             init["TabCaption"].Value = Language.Instance["WhiteboardEditCaption", null, "Editing Whiteboard; "] + board.Name;
@@ -317,7 +317,7 @@ You must type in an integer value, nothing was saved..."];
 
         private static void ViewWhiteboard(int id)
         {
-            Whiteboard board = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard board = ActiveType<Whiteboard>.SelectByID(id);
 
             Node init = new Node();
             init["TabCaption"].Value = "Whiteboard; " + board.Name;
@@ -369,7 +369,7 @@ You must type in an integer value, nothing was saved..."];
         {
             int whiteboardId = int.Parse(e.Params["WhiteboardID"].Get<string>());
             int rowId = int.Parse(e.Params["RowID"].Get<string>());
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(whiteboardId);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(whiteboardId);
 
             w.Rows.RemoveAll(
                 delegate(Whiteboard.Row idx)
@@ -383,7 +383,7 @@ You must type in an integer value, nothing was saved..."];
         protected void AddRowToWhiteboard(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["WhiteboardID"].Get<string>());
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(id);
             w.AddRow();
 
             // Creating our Columns
@@ -430,7 +430,7 @@ You must type in an integer value, nothing was saved..."];
             string columnName = e.Params["ColumnName"].Get<string>();
             int id = int.Parse(e.Params["WhiteboardID"].Get<string>());
 
-            Whiteboard board = ActiveRecord<Whiteboard>.SelectByID(id);
+            Whiteboard board = ActiveType<Whiteboard>.SelectByID(id);
             Whiteboard.Column col = new Whiteboard.Column {Type = "Label", Caption = columnName};
             board.Columns.Add(col);
             board.Save();
@@ -462,7 +462,7 @@ You must type in an integer value, nothing was saved..."];
             int columnId = int.Parse(e.Params["ColumnID"].Get<string>());
 
             // Getting new Whiteboard data...
-            Whiteboard board = ActiveRecord<Whiteboard>.SelectByID(whiteboardId);
+            Whiteboard board = ActiveType<Whiteboard>.SelectByID(whiteboardId);
             board.Columns.RemoveAll(
                 delegate(Whiteboard.Column idx)
                 {
@@ -484,7 +484,7 @@ You must type in an integer value, nothing was saved..."];
         protected void ChangeNameOfSpecificWhiteboard(object sender, ActiveEventArgs e)
         {
             string name = e.Params["Name"].Get<string>();
-            Whiteboard w = ActiveRecord<Whiteboard>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            Whiteboard w = ActiveType<Whiteboard>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             w.Name = name;
             w.Save();
         }

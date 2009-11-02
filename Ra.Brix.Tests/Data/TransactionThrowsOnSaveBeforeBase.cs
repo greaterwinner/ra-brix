@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class TransactionThrowsOnSaveBeforeBase : BaseTest
     {
-        [ActiveRecord]
-        internal class User : ActiveRecord<User>
+        [ActiveType]
+        internal class User : ActiveType<User>
         {
             [ActiveField]
             public string Name { get; set; }

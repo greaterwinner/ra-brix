@@ -12,8 +12,8 @@ using Ra.Brix.Data;
 
 namespace UserRecords
 {
-    [ActiveRecord]
-    public class AccessEntity : ActiveRecord<AccessEntity>
+    [ActiveType]
+    public class AccessEntity : ActiveType<AccessEntity>
     {
         [ActiveField]
         public string RoleName { get; set; }

@@ -15,11 +15,11 @@ using System.Collections.Generic;
 
 namespace LanguageRecords
 {
-    [ActiveRecord]
-    public sealed class Language : ActiveRecord<Language>
+    [ActiveType]
+    public sealed class Language : ActiveType<Language>
     {
-        [ActiveRecord]
-        private sealed class LanguageEntity : ActiveRecord<LanguageEntity>
+        [ActiveType]
+        private sealed class LanguageEntity : ActiveType<LanguageEntity>
         {
             [ActiveField]
             public string Key { get; set; }

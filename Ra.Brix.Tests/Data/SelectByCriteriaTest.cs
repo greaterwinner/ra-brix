@@ -23,8 +23,8 @@ namespace Ra.Brix.Tests.Data
         private DateTime date1 = new DateTime(1800, 1, 1, 23, 59, 37);
         private DateTime date2 = new DateTime(1954, 11, 24, 21, 37, 31);
 
-        [ActiveRecord]
-        public class Dummy : ActiveRecord<Dummy>
+        [ActiveType]
+        public class Dummy : ActiveType<Dummy>
         {
             [ActiveField]
             public int IntValue { get; set; }

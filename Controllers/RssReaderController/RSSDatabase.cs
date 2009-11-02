@@ -24,7 +24,7 @@ namespace RssReaderController
                 if (HttpContext.Current.Application["RssReaderController.RssDatabase.Database"] == null)
                 {
                     List<Rss> tmp = new List<Rss>();
-                    foreach (RssReaderRecords.RssItem idx in ActiveRecord<RssReaderRecords.RssItem>.Select())
+                    foreach (RssReaderRecords.RssItem idx in ActiveType<RssReaderRecords.RssItem>.Select())
                     {
                         tmp.Add(new Rss(idx.URL));
                     }

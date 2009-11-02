@@ -46,8 +46,6 @@
     </div>
 
 </ra:Panel>
-
-
 <div id="paper">
     <div id="header">
         <ra:Panel 

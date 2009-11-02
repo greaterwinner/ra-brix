@@ -20,15 +20,15 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class CriteriaWithChildValue : BaseTest
     {
-        [ActiveRecord]
-        public class Role : ActiveRecord<Role>
+        [ActiveType]
+        public class Role : ActiveType<Role>
         {
             [ActiveField]
             public string Name { get; set; }
         }
 
-        [ActiveRecord]
-        public class User : ActiveRecord<User>
+        [ActiveType]
+        public class User : ActiveType<User>
         {
             [ActiveField]
             public string Name { get; set; }

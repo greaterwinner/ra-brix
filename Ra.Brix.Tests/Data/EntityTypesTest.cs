@@ -19,8 +19,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class EntityTypesTest : BaseTest
     {
-        [ActiveRecord]
-        internal class User : ActiveRecord<User>
+        [ActiveType]
+        internal class User : ActiveType<User>
         {
             [ActiveField]
             public string Username { get; set; }
@@ -29,8 +29,8 @@ namespace Ra.Brix.Tests.Data
             public string Password { get; set; }
         }
 
-        [ActiveRecord]
-        internal class User2 : ActiveRecord<User2>
+        [ActiveType]
+        internal class User2 : ActiveType<User2>
         {
             [ActiveField]
             public string Username { get; set; }

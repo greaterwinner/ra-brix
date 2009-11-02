@@ -43,7 +43,7 @@ namespace RssReaderController
             node["ModuleSettings"]["Grid"]["Columns"]["URL"]["ControlType"].Value = "InPlaceEdit";
 
             int idxNo = 0;
-            foreach (RssReaderRecords.RssItem idx in ActiveRecord<RssReaderRecords.RssItem>.Select())
+            foreach (RssReaderRecords.RssItem idx in ActiveType<RssReaderRecords.RssItem>.Select())
             {
                 node["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 node["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["URL"].Value = idx.URL;
@@ -87,7 +87,7 @@ namespace RssReaderController
         [ActiveEvent(Name = "DeleteRSSItem")]
         protected static void DeleteRSSItem(object sender, ActiveEventArgs e)
         {
-            RssReaderRecords.RssItem item = ActiveRecord<RssReaderRecords.RssItem>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            RssReaderRecords.RssItem item = ActiveType<RssReaderRecords.RssItem>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             item.Delete();
             RssDatabase.Reset();
         }
@@ -95,7 +95,7 @@ namespace RssReaderController
         [ActiveEvent(Name = "EditRSSItemURL")]
         protected static void EditRSSItemURL(object sender, ActiveEventArgs e)
         {
-            RssReaderRecords.RssItem item = ActiveRecord<RssReaderRecords.RssItem>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            RssReaderRecords.RssItem item = ActiveType<RssReaderRecords.RssItem>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             item.URL = e.Params["URL"].Get<string>();
             item.Save();
             RssDatabase.Reset();
@@ -130,7 +130,7 @@ namespace RssReaderController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
-            if (ActiveRecord<RssReaderRecords.RssItem>.Count == 0)
+            if (ActiveType<RssReaderRecords.RssItem>.Count == 0)
             {
                 RssReaderRecords.RssItem item = new RssReaderRecords.RssItem
                 {

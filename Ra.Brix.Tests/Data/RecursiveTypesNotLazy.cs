@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class RecursiveTypesNotLazy : BaseTest
     {
-        [ActiveRecord]
-        public class Tree : ActiveRecord<Tree>
+        [ActiveType]
+        public class Tree : ActiveType<Tree>
         {
             public Tree()
             {

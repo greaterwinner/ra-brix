@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class ParentChildAssertRemoveNoLazy : BaseTest
     {
-        [ActiveRecord]
-        internal class Role : ActiveRecord<Role>
+        [ActiveType]
+        internal class Role : ActiveType<Role>
         {
             public Role()
             {

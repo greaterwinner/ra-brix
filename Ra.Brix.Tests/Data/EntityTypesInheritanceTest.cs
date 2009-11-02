@@ -19,8 +19,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class EntityTypesInheritanceTest : BaseTest
     {
-        [ActiveRecord]
-        internal class Mammal<T> : ActiveRecord<T>
+        [ActiveType]
+        internal class Mammal<T> : ActiveType<T>
         {
             [ActiveField]
             public string Name { get; set; }

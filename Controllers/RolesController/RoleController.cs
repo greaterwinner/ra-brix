@@ -28,7 +28,7 @@ namespace RolesController
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             // Checking to see if our default roles exists, and if not we create them...
-            if (ActiveRecord<Role>.Count == 0)
+            if (ActiveType<Role>.Count == 0)
             {
                 // Creating default roles
                 Role admin = new Role {Name = "Administrator"};
@@ -59,6 +59,7 @@ namespace RolesController
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
+            Language.Instance.SetDefaultValue("ButtonRoles", "Roles");
             e.Params["ButtonAdmin"]["ButtonRoles"].Value = "Menu-AdministrateRoles";
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonViewAllRoles"].Value = "Menu-ViewAllRoles";
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonCreateRole"].Value = "Menu-CreateRole";
@@ -71,14 +72,14 @@ namespace RolesController
             User current = null;
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
             {
-                current = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                current = ActiveType<User>.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             }
 
             // We do NOT filter menu items at all if user is in Administrator role...
             if (current != null && current.InRole("Administrator"))
                 return;
 
-            _accessEntities = new List<AccessEntity>(ActiveRecord<AccessEntity>.Select());
+            _accessEntities = new List<AccessEntity>(ActiveType<AccessEntity>.Select());
             List<string> dnaCodesToRemove = new List<string>();
             foreach (Node idx in e.Params)
             {
@@ -153,7 +154,7 @@ namespace RolesController
         protected void DeleteRole(object sender, ActiveEventArgs e)
         {
             int roleId = int.Parse(e.Params["ID"].Get<string>());
-            Role role = ActiveRecord<Role>.SelectByID(roleId);
+            Role role = ActiveType<Role>.SelectByID(roleId);
             role.Delete();
         }
 
@@ -163,7 +164,7 @@ namespace RolesController
             Node node = new Node();
             node["TabCaption"].Value = Language.Instance["AccessControlCaption", null, "Access Control"];
             int idxNo = 0;
-            foreach (Role idx in ActiveRecord<Role>.Select())
+            foreach (Role idx in ActiveType<Role>.Select())
             {
                 node["ModuleSettings"]["Roles"]["Role" + idxNo].Value = idx.Name;
                 idxNo += 1;
@@ -174,7 +175,7 @@ namespace RolesController
                 node["ModuleSettings"]["MenuItems"]);
 
             idxNo = 0;
-            foreach (AccessEntity idx in ActiveRecord<AccessEntity>.Select())
+            foreach (AccessEntity idx in ActiveType<AccessEntity>.Select())
             {
                 node["ModuleSettings"]["Access"]["Access" + idxNo]["MenuValue"].Value = idx.MenuValue;
                 node["ModuleSettings"]["Access"]["Access" + idxNo]["RoleName"].Value = idx.RoleName;
@@ -194,7 +195,7 @@ namespace RolesController
             string roleName = e.Params["RoleName"].Get<string>();
             string menuValue = e.Params["MenuValue"].Get<string>();
 
-            AccessEntity a = ActiveRecord<AccessEntity>.SelectFirst(
+            AccessEntity a = ActiveType<AccessEntity>.SelectFirst(
                 Criteria.Eq("RoleName", roleName),
                 Criteria.Eq("MenuValue", menuValue));
             a.Delete();
@@ -223,7 +224,7 @@ namespace RolesController
 
             // Dummy to make sure the "Access" node actually is there...!
             e.Params["Access"].Value = true;
-            foreach (AccessEntity idx in ActiveRecord<AccessEntity>.Select())
+            foreach (AccessEntity idx in ActiveType<AccessEntity>.Select())
             {
                 e.Params["Access"]["Access" + idxNo]["MenuValue"].Value = idx.MenuValue;
                 e.Params["Access"]["Access" + idxNo]["RoleName"].Value = idx.RoleName;
@@ -233,7 +234,7 @@ namespace RolesController
 
         private static void DeleteRoleFromChild(Node idx, string roleName)
         {
-            AccessEntity a = ActiveRecord<AccessEntity>.SelectFirst(
+            AccessEntity a = ActiveType<AccessEntity>.SelectFirst(
                 Criteria.Eq("RoleName", roleName),
                 Criteria.Eq("MenuValue", idx.Value));
             if (a != null)
@@ -272,7 +273,7 @@ item since it has no 'Value' property"];
                     "ShowInformationMessage",
                     node);
             }
-            else if (ActiveRecord<AccessEntity>.CountWhere(crit.ToArray()) > 0)
+            else if (ActiveType<AccessEntity>.CountWhere(crit.ToArray()) > 0)
             {
                 Node node = new Node();
                 node["Message"].Value = String.Format(Language.Instance["RoleAlreadyAssociatedInfo", null, @"Role; '{0}' already associated with item..."], roleName);
@@ -302,7 +303,7 @@ item since it has no 'Value' property"];
                     string parentMenuValue = parent["MenuValue"].Get<string>();
                     if (parentMenuValue == null)
                         break;
-                    if (ActiveRecord<AccessEntity>.CountWhere(
+                    if (ActiveType<AccessEntity>.CountWhere(
                             Criteria.Eq("RoleName", parentRoleName),
                             Criteria.Eq("MenuValue", parentMenuValue)) == 0)
                     {
@@ -318,7 +319,7 @@ item since it has no 'Value' property"];
 
                 // Sending back updates...
                 int idxNo = 0;
-                foreach (AccessEntity idx in ActiveRecord<AccessEntity>.Select())
+                foreach (AccessEntity idx in ActiveType<AccessEntity>.Select())
                 {
                     e.Params["Access"]["Access" + idxNo]["MenuValue"].Value = idx.MenuValue;
                     e.Params["Access"]["Access" + idxNo]["RoleName"].Value = idx.RoleName;
@@ -351,7 +352,7 @@ item since it has no 'Value' property"];
             init["ModuleSettings"]["Grid"]["Columns"]["Role"]["ControlType"].Value = "Label";
 
             int idxNo = 0;
-            foreach (Role idx in ActiveRecord<Role>.Select())
+            foreach (Role idx in ActiveType<Role>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["Role"].Value = idx.Name;

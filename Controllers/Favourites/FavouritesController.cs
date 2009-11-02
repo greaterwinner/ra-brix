@@ -83,7 +83,7 @@ namespace FavouritesController
                };
                 if( !string.IsNullOrEmpty(LastClickedMenu.Value.Left.Left))
                     crits.Add(Criteria.Eq("Param", LastClickedMenu.Value.Left.Left));
-                if (ActiveRecord<Favourite>.CountWhere(crits.ToArray()) > 0)
+                if (ActiveType<Favourite>.CountWhere(crits.ToArray()) > 0)
                 {
                     Node node = new Node();
                     const string message = @"Item already bookmarked";
@@ -110,7 +110,7 @@ namespace FavouritesController
             e.Params["Grid"]["Columns"]["MenuItem"]["ControlType"].Value = "LinkButton";
 
             int idxNo = 0;
-            foreach (Favourite idx in ActiveRecord<Favourite>.Select(Criteria.Eq("Username", Users.LoggedInUserName)))
+            foreach (Favourite idx in ActiveType<Favourite>.Select(Criteria.Eq("Username", Users.LoggedInUserName)))
             {
                 e.Params["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 e.Params["Grid"]["Rows"]["Row" + idxNo]["MenuItem"].Value = idx.Name;
@@ -122,7 +122,7 @@ namespace FavouritesController
         protected void OpenFavourite(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["ID"].Get<string>());
-            Favourite fav = ActiveRecord<Favourite>.SelectByID(id);
+            Favourite fav = ActiveType<Favourite>.SelectByID(id);
             Node node = new Node();
             node["Params"].Value = fav.Param;
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -135,7 +135,7 @@ namespace FavouritesController
         protected void DeleteFavourite(object sender, ActiveEventArgs e)
         {
             int id = int.Parse(e.Params["ID"].Get<string>());
-            ActiveRecord<Favourite>.SelectByID(id).Delete();
+            ActiveType<Favourite>.SelectByID(id).Delete();
         }
 
         [ActiveEvent(Name = "Menu-ViewFavourites")]
@@ -157,7 +157,7 @@ Move the cursor over the bull's eye on the right side of this information messag
 
             List<Favourite> lst = 
                 new List<Favourite>(
-                    ActiveRecord<Favourite>.Select(Criteria.Eq("Username", Users.LoggedInUserName)));
+                    ActiveType<Favourite>.Select(Criteria.Eq("Username", Users.LoggedInUserName)));
             lst.Sort(
                 delegate(Favourite left, Favourite right)
                     {

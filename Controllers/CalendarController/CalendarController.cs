@@ -52,7 +52,7 @@ namespace CalendarController
             Activity a = new Activity();
             a.Start = dt;
             a.End = dt.AddHours(1);
-            a.Creator = ActiveRecord<User>.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            a.Creator = ActiveType<User>.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             a.Header = "Name of activity";
             a.Body = "Body of activity";
             a.Save();

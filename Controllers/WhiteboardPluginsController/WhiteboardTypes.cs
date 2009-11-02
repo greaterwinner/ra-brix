@@ -112,7 +112,7 @@ namespace WhiteboardPluginsController
                             {
                                 string[] xtra = bt.Xtra.Split('|');
                                 int rowId = int.Parse(xtra[0]);
-                                Whiteboard.Row row = ActiveRecord<Whiteboard.Row>.SelectByID(rowId);
+                                Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
                                 Whiteboard.Cell cell = row.Cells.Find(
                                     delegate(Whiteboard.Cell idx)
                                         {
@@ -142,7 +142,7 @@ namespace WhiteboardPluginsController
                             return;
                         string[] xtra = bt.Xtra.Split('|');
                         int rowId = int.Parse(xtra[0]);
-                        Whiteboard.Row row = ActiveRecord<Whiteboard.Row>.SelectByID(rowId);
+                        Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
                         Whiteboard.Cell cell = row.Cells.Find(
                             delegate(Whiteboard.Cell idx)
                                 {
@@ -181,7 +181,7 @@ namespace WhiteboardPluginsController
             list.Items.Add(top);
 
             string curValue = e.Params["Value"].Get<string>();
-            foreach (User idxUser in ActiveRecord<User>.Select())
+            foreach (User idxUser in ActiveType<User>.Select())
             {
                 ListItem i = new ListItem(idxUser.Username, idxUser.Username);
                 list.Items.Add(i);
@@ -199,7 +199,7 @@ namespace WhiteboardPluginsController
                             return;
                         string[] xtra = lst.Xtra.Split('|');
                         int rowId = int.Parse(xtra[0]);
-                        Whiteboard.Row row = ActiveRecord<Whiteboard.Row>.SelectByID(rowId);
+                        Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
                         Whiteboard.Cell cell = row.Cells.Find(
                             delegate(Whiteboard.Cell idx)
                                 {
@@ -230,7 +230,7 @@ namespace WhiteboardPluginsController
                             return;
                         string[] xtra = bx.Xtra.Split('|');
                         int rowId = int.Parse(xtra[0]);
-                        Whiteboard.Row row = ActiveRecord<Whiteboard.Row>.SelectByID(rowId);
+                        Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
                         Whiteboard.Cell cell = row.Cells.Find(
                             delegate(Whiteboard.Cell idx)
                                 {
@@ -300,7 +300,7 @@ namespace WhiteboardPluginsController
                                 return;
                             string[] xtra = bx.Xtra.Split('|');
                             rowId = int.Parse(xtra[0]);
-                            Whiteboard.Row row = ActiveRecord<Whiteboard.Row>.SelectByID(rowId);
+                            Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
                             Whiteboard.Cell cell = row.Cells.Find(
                                 delegate(Whiteboard.Cell idxCell)
                                     {

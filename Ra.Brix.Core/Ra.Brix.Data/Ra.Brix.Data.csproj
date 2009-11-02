@@ -38,12 +38,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveRecordAttribute.cs">
+    <Compile Include="ActiveTypeAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Adapter.cs" />
     <Compile Include="Helpers.cs" />
-    <Compile Include="ActiveRecord.cs" />
+    <Compile Include="ActiveType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActiveFieldAttribute.cs" />
     <Compile Include="Criteria.cs" />

@@ -69,14 +69,14 @@ namespace UserSettingsController
         [ActiveEvent(Name = "UserSettingEdited")]
         protected void UserSettingEdited(object sender, ActiveEventArgs e)
         {
-            UserSettings.Setting setting = ActiveRecord<UserSettings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            UserSettings.Setting setting = ActiveType<UserSettings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             UserSettings.Instance[setting.Name, Users.LoggedInUserName] = e.Params["Value"].Get<string>();
         }
 
         [ActiveEvent(Name = "UserSettingDeleted")]
         protected void UserSettingDeleted(object sender, ActiveEventArgs e)
         {
-            UserSettings.Setting set = ActiveRecord<UserSettings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
+            UserSettings.Setting set = ActiveType<UserSettings.Setting>.SelectByID(int.Parse(e.Params["ID"].Get<string>()));
             UserSettings.Instance.Remove(set);
 
             Node node = new Node();

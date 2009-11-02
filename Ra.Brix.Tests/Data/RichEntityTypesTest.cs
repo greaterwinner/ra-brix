@@ -19,8 +19,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class RichEntityTypesTest : BaseTest
     {
-        [ActiveRecord]
-        internal class AllProperties : ActiveRecord<AllProperties>
+        [ActiveType]
+        internal class AllProperties : ActiveType<AllProperties>
         {
             [ActiveField]
             public int IntBugger { get; set; }

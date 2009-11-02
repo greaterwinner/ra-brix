@@ -15,15 +15,15 @@ using System.Globalization;
 
 namespace UserSettingsRecords
 {
-    [ActiveRecord]
-    public class UserSettings : ActiveRecord<UserSettings>, IList<UserSettings.Setting>
+    [ActiveType]
+    public class UserSettings : ActiveType<UserSettings>, IList<UserSettings.Setting>
     {
         /**
          * Represents one setting in the database, but should almost never be directly
          * used unless you wish to traverse all settings in database.
          */
-        [ActiveRecord]
-        public class Setting : ActiveRecord<Setting>
+        [ActiveType]
+        public class Setting : ActiveType<Setting>
         {
             /**
              * Name of setting (key)

@@ -20,8 +20,8 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class ParentChild : BaseTest
     {
-        [ActiveRecord]
-        internal class User : ActiveRecord<User>
+        [ActiveType]
+        internal class User : ActiveType<User>
         {
             public User()
             {
@@ -38,8 +38,8 @@ namespace Ra.Brix.Tests.Data
             public LazyList<Role> Roles { get; set; }
         }
 
-        [ActiveRecord]
-        internal class Role : ActiveRecord<Role>
+        [ActiveType]
+        internal class Role : ActiveType<Role>
         {
             [ActiveField]
             public string Name { get; set; }

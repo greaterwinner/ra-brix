@@ -20,15 +20,15 @@ namespace Ra.Brix.Tests.Data
     [TestFixture]
     public class MultipleListChildrenOfSameTypeNoOwner : BaseTest
     {
-        [ActiveRecord]
-        public class Role : ActiveRecord<Role>
+        [ActiveType]
+        public class Role : ActiveType<Role>
         {
             [ActiveField]
             public int Value { get; set; }
         }
 
-        [ActiveRecord]
-        public class User : ActiveRecord<User>
+        [ActiveType]
+        public class User : ActiveType<User>
         {
             public User()
             {

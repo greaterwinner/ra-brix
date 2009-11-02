@@ -13,8 +13,8 @@ using Ra.Brix.Data;
 
 namespace ChatRecords
 {
-    [ActiveRecord]
-    public class ChatMessage : ActiveRecord<ChatMessage>
+    [ActiveType]
+    public class ChatMessage : ActiveType<ChatMessage>
     {
         [ActiveField]
         public string SentByUsername { get; set; }
