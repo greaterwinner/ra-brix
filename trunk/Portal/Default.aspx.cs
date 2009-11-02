@@ -74,7 +74,7 @@ namespace Ra.Brix.Portal
         
         protected string GetRedirectUrl()
         {
-            return this.Request.Url.ToString();
+            return Request.Url.ToString();
         }
 
         void MainWebPage_LoadComplete(object sender, EventArgs e)
