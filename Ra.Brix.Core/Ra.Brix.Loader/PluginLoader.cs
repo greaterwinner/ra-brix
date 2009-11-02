@@ -69,6 +69,10 @@ namespace Ra.Brix.Loader
         {
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
+                // Consciously skipping Aall GAC assemblies since these are 
+                // expected to be .Net Framework assemblies...
+                if(assembly.GlobalAssemblyCache)
+                    continue;
                 try
                 {
                     foreach (Type type in assembly.GetTypes())
@@ -76,8 +80,7 @@ namespace Ra.Brix.Loader
                         TAttrType[] attributes = type.GetCustomAttributes(
                             typeof(TAttrType),
                             true) as TAttrType[];
-                        bool isWhatWereLookingFor = attributes != null && attributes.Length > 0;
-                        if (isWhatWereLookingFor)
+                        if (attributes != null && attributes.Length > 0)
                         {
                             // Calling our given delegate with the type...
                             functor(type);
@@ -173,7 +176,7 @@ namespace Ra.Brix.Loader
             }
         }
 
-        private void InitializeEventHandlers(object retVal, Type pluginType)
+        private static void InitializeEventHandlers(object retVal, Type pluginType)
         {
             // If the context passed is null, then what we're trying to retrieve
             // are the stat event handlers...
@@ -186,53 +189,54 @@ namespace Ra.Brix.Loader
                     idx.GetCustomAttributes(
                         typeof(ActiveEventAttribute),
                         true) as ActiveEventAttribute[];
-                if (attr != null && attr.Length > 0)
+                if (attr == null || attr.Length <= 0)
+                    continue;
+                foreach (ActiveEventAttribute idxAttr in attr)
                 {
-                    foreach (ActiveEventAttribute idxAttr in attr)
-                    {
-                        ActiveEvents.Instance.AddListener(retVal, idx, idxAttr.Name);
-                    }
+                    ActiveEvents.Instance.AddListener(retVal, idx, idxAttr.Name);
                 }
             }
         }
 
-        private void MakeSureAllDLLsAreLoaded()
+        private static void MakeSureAllDLLsAreLoaded()
         {
             // Only doing this on WEB...!
-            if (HttpContext.Current != null)
+            if (HttpContext.Current == null)
+                return;
+
+            // Sometimes not all DLLs in the bin folder will be included in the
+            // current AppDomain. This often happens due to that no types from
+            // the DLLs are actually references within the website itself
+            // This logic runs through all DLLs in the bin folder of the
+            // website to check if they're inside the current AppDomain, and
+            // if not loads them up
+            List<Assembly> initialAssemblies = new List<Assembly>(AppDomain.CurrentDomain.GetAssemblies());
+            DirectoryInfo di = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin"));
+            foreach (FileInfo idxFile in di.GetFiles("*.dll"))
             {
-                // Sometimes not all DLLs in the bin folder will be included in the
-                // current AppDomain. This often happens due to that no types from
-                // the DLLs are actually references within the website itself
-                // This logic runs through all DLLs in the bin folder of the
-                // website to check if they're inside the current AppDomain, and
-                // if not loads them up
-                List<Assembly> initialAssemblies = new List<Assembly>(AppDomain.CurrentDomain.GetAssemblies());
-                DirectoryInfo di = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin"));
-                foreach (FileInfo idxFile in di.GetFiles("*.dll"))
+                try
                 {
-                    try
-                    {
-                        if (initialAssemblies.Exists(
-                            delegate(Assembly idx)
+                    FileInfo info = idxFile;
+                    if (initialAssemblies.Exists(
+                        delegate(Assembly idx)
                             {
-                                return idx.ManifestModule.Name.ToLower() == idxFile.Name.ToLower();
+                                return idx.ManifestModule.Name.ToLower() == info.Name.ToLower();
                             }))
-                            continue;
-                        Assembly a = Assembly.ReflectionOnlyLoad(idxFile.Name.Replace(".dll", "").Replace(".DLL", ""));
-                        if (!initialAssemblies.Exists(
-                            delegate(Assembly idx)
-                            {
-                                return idx.FullName == a.FullName;
-                            }))
-                            Assembly.LoadFrom(idxFile.FullName);
-                    }
-                    catch (Exception)
-                    {
-                        ; // Intentionally do nothing in case assembly loading throws...!
-                        // Especially true for C++ compiled assemblies...
-                        // Sample here is the MySQL DLL...
-                    }
+                        continue;
+                    Assembly a = Assembly.ReflectionOnlyLoad(
+                        idxFile.Name.Replace(".dll", "").Replace(".DLL", ""));
+                    if (!initialAssemblies.Exists(
+                         delegate(Assembly idx)
+                         {
+                             return idx.FullName == a.FullName;
+                         }))
+                        Assembly.LoadFrom(idxFile.FullName);
+                }
+                catch (Exception)
+                {
+                    ; // Intentionally do nothing in case assembly loading throws...!
+                    // Especially true for C++ compiled assemblies...
+                    // Sample here is the MySQL DLL...
                 }
             }
         }
