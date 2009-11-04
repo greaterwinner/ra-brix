@@ -27,7 +27,7 @@ namespace CMSModules
         protected global::Ra.Widgets.Panel url;
         protected global::Ra.Widgets.Panel editWrp;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor hyperlink;
-        protected global::Components.RichEdit editor;
+        protected global::Ra.Extensions.Widgets.RichEdit editor;
         protected global::Ra.Extensions.Widgets.ExtButton submit;
         protected global::Ra.Extensions.Widgets.ExtButton delete;
 
@@ -75,7 +75,7 @@ namespace CMSModules
             editor.Text = node["Body"].Get<string>();
         }
 
-        protected void editor_GetPluginControls(object sender, Components.RichEdit.PluginEventArgs e)
+        protected void editor_GetExtraToolbarControls(object sender, Ra.Extensions.Widgets.RichEdit.ExtraToolbarControlsEventArgs e)
         {
             Node node = new Node();
             ActiveEvents.Instance.RaiseActiveEvent(

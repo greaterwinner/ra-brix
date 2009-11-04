@@ -38,12 +38,12 @@
                 target="_blank"
                 id="hyperlink" />
         </ra:Panel>
-        <ext:RichEdit
+        <ra:RichEdit
             ID="editor" 
             CssClass="editor"
             OnGetImageDialog="editor_GetImageDialog"
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
-            OnGetPluginControls="editor_GetPluginControls"
+            OnGetExtraToolbarControls="editor_GetExtraToolbarControls"
             runat="server" />
         <ra:ExtButton 
             runat="server" 
