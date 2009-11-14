@@ -40,7 +40,7 @@ namespace LanguageController
         protected void EditLanguageMethod(object sender, ActiveEventArgs e)
         {
             Node init = new Node();
-            init["TabCaption"].Value = Language.Instance["LanguageEditCaption", null, "Edit Language"];
+            init["TabCaption"].Value = Language.Instance["LanguageEditCaption", null, "Edit Language; "] + Language.Instance.UserLanguage;
             ActiveEvents.Instance.RaiseLoadControl(
                 "LanguageEditModules.EditLanguage",
                 "dynMid",

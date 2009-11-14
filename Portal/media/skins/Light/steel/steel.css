@@ -466,19 +466,85 @@ http://ra-ajax.org
 	margin-bottom: 3px;
 	font-family: Verdana;
 }
-.button .bLeft { background:url('button.png') no-repeat 0 0; padding-left:10px; display:block; *display:inline-block; }
-.button .bCenter { background:url('button.png') repeat-x 0 -52px; display:block; height:21px; padding-top:5px; *display:inline-block; }
-.button .bCenter span { display:block; text-align:left; white-space:nowrap; }
-.button .bRight { background:url('button.png') no-repeat right -26px; padding-right:10px; display:block; *display:inline-block; }
+
+
+.button .bLeft
+{
+	background:Transparent url('button.png') no-repeat 0 0;
+	padding-left:10px;
+	display:block;
+	*display:inline-block;
+}
+
+.button .bCenter
+{
+	background:Transparent url('button.png') repeat-x 0 -52px;
+	display:block;
+	height:21px;
+	padding-top:5px;
+	*display:inline-block;
+}
+
+.button .bCenter span
+{
+	display:block;
+	text-align:left;
+	white-space:nowrap;
+}
+
+.button .bRight
+{
+	background:Transparent url('button.png') no-repeat right -26px;
+	padding-right:10px;
+	display:block;
+	*display:inline-block;
+}
+
 .button:hover { }
-.button:hover .bLeft { background-image:url('button-hover.png'); }
-.button:hover .bCenter { background-image:url('button-hover.png'); }
-.button:hover .bRight { background-image:url('button-hover.png'); }
-.button-selected .bLeft { background-image:url('button-selected.png'); }
-.button-selected .bCenter { background-image:url('button-selected.png'); }
-.button-selected .bRight { background-image:url('button-selected.png'); }
-.button-selected:hover .bLeft { background-image:url('button-selected.png'); }
-.button-selected:hover .bCenter { background-image:url('button-selected.png'); }
-.button-selected:hover .bRight { background-image:url('button-selected.png'); }
+
+.button:hover .bLeft
+{
+	background:Transparent url('button.png') no-repeat 0 -78px;
+}
+
+.button:hover .bCenter
+{
+	background:Transparent url('button.png') repeat-x 0 -130px;
+}
+
+.button:hover .bRight
+{
+	background:Transparent url('button.png') no-repeat right -104px;
+}
+
+.button-selected .bLeft
+{
+	background:Transparent url('button.png') no-repeat 0 -156px;
+}
+
+.button-selected .bCenter
+{
+	background:Transparent url('button.png') repeat-x 0 -208px;
+}
+
+.button-selected .bRight
+{
+	background:Transparent url('button.png') no-repeat right -182px;
+}
+
+.button-selected:hover .bLeft
+{
+	background:Transparent url('button.png') no-repeat 0 -78px;
+}
+
+.button-selected:hover .bCenter
+{
+	background:Transparent url('button.png') repeat-x 0 -130px;
+}
+
+.button-selected:hover .bRight
+{
+	background:Transparent url('button.png') no-repeat right -104px;
+}
 
 
