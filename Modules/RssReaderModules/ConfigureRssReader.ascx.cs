@@ -49,7 +49,7 @@ namespace RssReaderModules
                 this,
                 "AddNewRSSItem",
                 node);
-            grd.DataSource = node["Items"];
+            grd.DataSource = node["Grid"];
             grd.Rebind();
         }
 
