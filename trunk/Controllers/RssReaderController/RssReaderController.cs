@@ -108,21 +108,14 @@ namespace RssReaderController
             i.Save();
             RssDatabase.Reset();
 
+            e.Params["Grid"]["Columns"]["URL"]["Caption"].Value = Language.Instance["URL", null, "URL"];
+            e.Params["Grid"]["Columns"]["URL"]["ControlType"].Value = "InPlaceEdit";
+
             int idxNo = 0;
-            foreach (Rss idx in RssDatabase.Database)
+            foreach (RssReaderRecords.RssItem idx in ActiveType<RssReaderRecords.RssItem>.Select())
             {
-                e.Params["Items"]["Item" + idxNo]["Caption"].Value = idx.Title;
-                e.Params["Items"]["Item" + idxNo]["Link"].Value = idx.WebLink;
-                e.Params["Items"]["Item" + idxNo]["ID"].Value = idx.Id;
-                int idxNoItem = 0;
-                foreach (RssItem idxItem in idx.Items)
-                {
-                    e.Params["Items"]["Item" + idxNo]["Items"]["Item" + idxNoItem]["Caption"].Value = idxItem.Header;
-                    e.Params["Items"]["Item" + idxNo]["Items"]["Item" + idxNoItem]["Body"].Value = idxItem.Body;
-                    e.Params["Items"]["Item" + idxNo]["Items"]["Item" + idxNoItem]["Date"].Value = idxItem.Date;
-                    e.Params["Items"]["Item" + idxNo]["Items"]["Item" + idxNoItem]["URL"].Value = idxItem.Url;
-                    idxNoItem += 1;
-                }
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["URL"].Value = idx.URL;
                 idxNo += 1;
             }
         }
