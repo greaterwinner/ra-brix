@@ -137,29 +137,23 @@ namespace LanguageRecords
             {
                 LanguageEntity retVal = Entities.Find(
                     delegate(LanguageEntity idx)
-                        {
-                            return idx.Key == key && UserLanguage == idx.Language;
-                        });
+                    {
+                        return idx.Key == key && idx.Language == UserLanguage;
+                    });
                 if (retVal != null)
                 {
                     return retVal.Value;
                 }
                 retVal = Entities.Find(
                     delegate(LanguageEntity idx)
-                        {
-                            return idx.Key == key && idx.Language == "en";
-                        });
+                    {
+                        return idx.Key == key && idx.Language == "en";
+                    });
                 if (retVal != null)
                 {
                     return retVal.Value;
                 }
-                LanguageEntity le = new LanguageEntity();
-                le.Key = key;
-                le.Value = key;
-                le.Language = "en";
-                Entities.Add(le);
-                Save();
-                return le.Value;
+                return key;
             }
         }
 
@@ -169,14 +163,10 @@ namespace LanguageRecords
             {
                 LanguageEntity retVal = Entities.Find(
                     delegate(LanguageEntity idx)
-                        {
-                            return idx.Key == key && lang == idx.Language;
-                        });
-                if (retVal != null)
-                {
-                    return retVal.Value;
-                }
-                return null;
+                    {
+                        return idx.Key == key && lang == idx.Language;
+                    });
+                return retVal == null ? null : retVal.Value;
             }
         }
 
@@ -185,7 +175,7 @@ namespace LanguageRecords
             LanguageEntity retVal = Entities.Find(
                 delegate(LanguageEntity idx)
                 {
-                    return idx.Key == key && UserLanguage == idx.Language;
+                    return idx.Key == key && idx.Language == "en";
                 });
             if (retVal != null)
             {
@@ -195,7 +185,7 @@ namespace LanguageRecords
             {
                 Key = key,
                 Value = defaultValue,
-                Language = UserLanguage
+                Language = "en"
             };
             Entities.Add(le);
             Save();
