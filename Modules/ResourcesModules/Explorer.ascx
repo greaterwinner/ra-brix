@@ -38,7 +38,7 @@
         <ext:Grid 
             runat="server" 
             CssClass="grid"
-            PageSize="8"
+            PageSize="4"
             OnAction="grd_Action"
             OnRowDeleted="grid_RowDeleted"
             id="grd" />
