@@ -53,3 +53,14 @@
         </tr>
     </table>
 </ra:Panel>
+<ra:Panel 
+    runat="server" 
+    style="display:none;"
+    id="wrp2">
+    <strong>
+        <%= Language.Instance["ThankYouForEmailWeWillComeBack", null, "Thank you for sending us email, we will come back to you as fast as possible."] %>
+    </strong>
+</ra:Panel>
+
+
+

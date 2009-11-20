@@ -16,6 +16,7 @@ using SettingsRecords;
 using ASP = System.Web.UI.WebControls;
 using System.Net;
 using LanguageRecords;
+using Ra.Effects;
 
 namespace CMSCommonPluginModules
 {
@@ -23,6 +24,7 @@ namespace CMSCommonPluginModules
     public class ContactUs : System.Web.UI.UserControl, IModule
     {
         protected global::Ra.Widgets.Panel wrp;
+        protected global::Ra.Widgets.Panel wrp2;
         protected global::Ra.Widgets.TextBox email;
         protected global::Ra.Widgets.TextBox header;
         protected global::Ra.Widgets.TextArea body;
@@ -77,6 +79,11 @@ Something went wrong while trying to send email, message from server was: {0}", 
             smtp.Credentials = new NetworkCredential(smtpServerUsername, smtpServerPassword);
             smtp.EnableSsl = smtpServerUseSsl == "True";
             smtp.Send(msg);
+
+            new EffectRollUp(wrp, 200)
+                .ChainThese(
+                    new EffectRollDown(wrp2, 200))
+                .Render();
         }
 
         public void InitialLoading(Node node)
