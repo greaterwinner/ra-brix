@@ -45,7 +45,5 @@ public static class VPPRegistering
         mi.Invoke(
             hostingEnvironmentInstance, 
             new object[] { providerInstance });
-    
-    
     }
 }

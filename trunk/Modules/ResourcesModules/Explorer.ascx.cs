@@ -18,6 +18,8 @@ using Ra.Extensions.Widgets;
 using Components;
 using Ra.Effects;
 using Ra.Widgets;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace ResourcesModules
 {
@@ -102,15 +104,20 @@ namespace ResourcesModules
             Node data = new Node();
             data["Grid"]["Columns"]["FileName"]["Caption"].Value =
                 Language.Instance["FileName", null, "File name"];
-            data["Grid"]["Columns"]["FileName"]["ControlType"].Value = SelectMode ? 
-                "LinkButton" : 
+            data["Grid"]["Columns"]["FileName"]["ControlType"].Value = SelectMode ?
+                "LinkButton" :
                 "Link";
+            data["Grid"]["Columns"]["FileDate"]["Caption"].Value =
+                Language.Instance["Date", null, "Date"];
+            data["Grid"]["Columns"]["FileDate"]["ControlType"].Value = "Label";
             int idxNo = 0;
             foreach (string idxFile in Directory.GetFiles(directory))
             {
                 string fileName = idxFile.Substring(idxFile.LastIndexOf("\\") + 1);
-                data["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idxFile;
+                string fileDate = File.GetCreationTime(idxFile).ToString("yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
+                data["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = fileName;
                 data["Grid"]["Rows"]["Row" + idxNo]["FileName"].Value = fileName;
+                data["Grid"]["Rows"]["Row" + idxNo]["FileDate"].Value = fileDate;
 
                 string baseDir = Server.MapPath("~/");
                 string fileHref = idxFile.Replace(baseDir, "");
@@ -118,6 +125,7 @@ namespace ResourcesModules
                 data["Grid"]["Rows"]["Row" + idxNo]["FileName"]["href"].Value = fileHref;
                 idxNo += 1;
             }
+            grd.SortColumn = "FileDate";
             grd.DataSource = data["Grid"];
             grd.Rebind();
         }

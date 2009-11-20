@@ -624,7 +624,7 @@ namespace Components
             }
         }
 
-        private string SortColumn
+        public string SortColumn
         {
             get { return ViewState["SortColumn"] as string; }
             set { ViewState["SortColumn"] = value; }
