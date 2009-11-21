@@ -22,11 +22,23 @@ namespace CMSController
     public class CMSController
     {
         [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
+        protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonCMS", "CMS");
             Language.Instance.SetDefaultValue("ButtonCMSViewPages", "View Pages");
             Language.Instance.SetDefaultValue("ButtonCMSCreatePage", "Create Page");
+
+            // Creating default page - if necessary...!
+            if (ActiveType<Page>.Count == 0)
+            {
+                Page p = new Page();
+                p.Header = "Home";
+                p.Body = string.Format(@"
+<p>Welcome to Ra-Brix. This is the default page which has been created for you...</p>
+");
+                p.URL = "home";
+                p.Save();
+            }
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -265,21 +277,6 @@ namespace CMSController
             }
         }
 
-        [ActiveEvent(Name = "ApplicationStartup")]
-        protected void RequestBegin(object sender, ActiveEventArgs e)
-        {
-            if (ActiveType<Page>.Count == 0)
-            {
-                Page p = new Page();
-                p.Header = "Home";
-                p.Body = string.Format(@"
-<p>Welcome to Ra-Brix. This is the default page which has been created for you...</p>
-");
-                p.URL = "home";
-                p.Save();
-            }
-        }
-
         [ActiveEvent(Name = "CMSGetBodyForURL")]
         protected void CMSGetBodyForURL(object sender, ActiveEventArgs e)
         {
@@ -299,14 +296,39 @@ namespace CMSController
 
             if (page != null)
             {
-                Node node = new Node();
-                node["TabCaption"].Value = page.Header;
-                node["ModuleSettings"]["Header"].Value = page.Header;
-                node["ModuleSettings"]["Content"].Value = page.Body;
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "CMSModules.NormalContent",
-                    "dynMid",
-                    node);
+                string pageUrl = page.URL == "home" ? "" : (page.URL + ".aspx");
+                string urlOfPage = "url:~/" + pageUrl;
+                Node access = new Node();
+                access["MenuValue"].Value = urlOfPage;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "CheckAccessToMenuItem",
+                    access);
+                if (access["DeniedAccess"].Value != null && access["DeniedAccess"].Get<bool>())
+                {
+                    // No access
+                    Node node = new Node();
+                    node["TabCaption"].Value = Language.Instance["NoAcces", null, "No Access...!"];
+                    node["ModuleSettings"]["Header"].Value = Language.Instance["NoAcces", null, "No Access...!"];
+                    node["ModuleSettings"]["Content"].Value = Language.Instance["NoAccesDetailed", null, @"
+You do not have access to this page, and hence it is not displayed...!"];
+                    ActiveEvents.Instance.RaiseLoadControl(
+                        "CMSModules.NormalContent",
+                        "dynMid",
+                        node);
+                }
+                else
+                {
+                    // Access
+                    Node node = new Node();
+                    node["TabCaption"].Value = page.Header;
+                    node["ModuleSettings"]["Header"].Value = page.Header;
+                    node["ModuleSettings"]["Content"].Value = page.Body;
+                    ActiveEvents.Instance.RaiseLoadControl(
+                        "CMSModules.NormalContent",
+                        "dynMid",
+                        node);
+                }
             }
         }
     }

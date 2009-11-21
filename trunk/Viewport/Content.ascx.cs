@@ -40,6 +40,7 @@ namespace Viewport
         protected void Page_Load(object sender, EventArgs e)
         {
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
+            informationPanel.DataBind();
         }
 
         protected string GetCssRootFolder()

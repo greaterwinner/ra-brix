@@ -13,7 +13,6 @@ using System.Configuration;
 using HelperGlobals;
 using System.Web.UI;
 using Ra.Brix.Loader;
-using System.IO;
 using SettingsRecords;
 using UserSettingsRecords;
 
@@ -33,8 +32,7 @@ namespace Ra.Brix.Portal
                     this, 
                     "InitialLoadingOfPage");
             }
-            this.LoadComplete += MainWebPage_LoadComplete;
-            Context.RewritePath(Path.GetFileName(Request.AppRelativeCurrentExecutionFilePath), true);
+            LoadComplete += MainWebPage_LoadComplete;
             baseElement.DataBind();
         }
 
