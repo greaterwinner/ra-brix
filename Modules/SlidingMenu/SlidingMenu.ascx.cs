@@ -9,6 +9,7 @@
  */
 
 using System;
+using System.Security;
 using System.Web.UI;
 using LanguageRecords;
 using Ra.Brix.Loader;
@@ -54,6 +55,10 @@ namespace SlidingMenuModules
         {
             string whatToFind = "url:~" + id + ".aspx";
             Node node = FindNode(_items, whatToFind);
+            if (node == null)
+            {
+                return;
+            }
             string idOfControl = "node" + node.DNA.Replace("-", "x");
             SlidingMenuItem item = Selector.FindControl<SlidingMenuItem>(root, idOfControl);
             SlidingMenuLevel level;
@@ -439,7 +444,8 @@ would have had to done in other similar applications.
             if (node["CustomBreadCrumb"].Value != null)
             {
                 _breadCrumbID = ((RaWebControl)node["CustomBreadCrumb"].Value).ID;
-            } Load +=
+            }
+            Load +=
                 delegate
                     {
                         string id = Request.Params["ContentID"];

@@ -66,6 +66,39 @@ namespace RolesController
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonAccessControl"].Value = "Menu-AccessControl";
         }
 
+        [ActiveEvent(Name = "CheckAccessToMenuItem")]
+        protected void CheckAccessToMenuItem(object sender, ActiveEventArgs e)
+        {
+            _accessEntities = new List<AccessEntity>(ActiveType<AccessEntity>.Select(Criteria.Eq("MenuValue", e.Params["MenuValue"].Value)));
+
+            User current = null;
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                current = ActiveType<User>.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            }
+
+            bool hasAccess;
+            if (current == null)
+            {
+                hasAccess = _accessEntities.Exists(
+                    delegate(AccessEntity idx)
+                        {
+                            return idx.RoleName == "Everyone";
+                        });
+            }
+            else
+            {
+                hasAccess = current.InRole("Administrator") || _accessEntities.Exists(
+                    delegate(AccessEntity idx)
+                        {
+                            return current.InRole(idx.RoleName);
+                        });
+            }
+
+            // Returning access back...
+            e.Params["DeniedAccess"].Value = !hasAccess;
+        }
+
         [ActiveEvent(Name = "FilterMenuItems")]
         protected void FilterMenuItems(object sender, ActiveEventArgs e)
         {

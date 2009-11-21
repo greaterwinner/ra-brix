@@ -28,17 +28,21 @@
 
     void Application_BeginRequest(object sender, EventArgs e)
     {
+    }
+
+    void Application_AuthorizeRequest(object sender, EventArgs e)
+    {
         if (!System.IO.File.Exists(Request.PhysicalPath) && Request.PhysicalPath.Contains(".aspx"))
         {
             string sRequestedURL = Request.AppRelativeCurrentExecutionFilePath
                 .Replace(".aspx", "")
                 .Replace("~", "");
-            string sTargetURL = "~/Default.aspx?ContentID=" + 
+            string sTargetURL = "~/Default.aspx?ContentID=" +
                 HttpUtility.UrlEncode(sRequestedURL);
-            Context.RewritePath(sTargetURL, false);
+            Context.RewritePath(sTargetURL);
         }
     }
-    
+
     void Application_EndRequest(object sender, EventArgs e)
     {
         //if (Request.Path.ToLowerInvariant().EndsWith("webresource.axd") &&
