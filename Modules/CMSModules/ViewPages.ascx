@@ -27,11 +27,11 @@
         <ra:InPlaceEdit 
             runat="server" 
             CssClass="edit"
-            style="position:absolute;top:10px;right:10px;z-index:5;"
+            style="position:absolute;top:8px;right:8px;z-index:5;"
             id="header" />
         <ra:Panel 
             runat="server" 
-            style="position:absolute;top:30px;right:10px;z-index:5;"
+            style="position:absolute;top:8px;left:8px;z-index:5;"
             id="url">
             Link: <a 
                 runat="server" 
