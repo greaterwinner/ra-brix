@@ -157,6 +157,8 @@ namespace CMSController
 
         private void AddPageToMenu(Page page, Node node)
         {
+            if(page.HideFromMenu)
+                return;
             string url = page.URL;
             if (url == "home")
             {
@@ -208,9 +210,11 @@ namespace CMSController
             string url = e.Params["URL"].Get<string>();
             string header = e.Params["Header"].Get<string>();
             string body = e.Params["Body"].Get<string>();
+            bool hideFromMenu = e.Params["HideFromMenu"].Get<bool>();
             Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", url));
             p.Header = header;
             p.Body = body;
+            p.HideFromMenu = hideFromMenu;
             p.Save();
 
             // Showing info message...
@@ -282,6 +286,7 @@ namespace CMSController
         {
             Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", e.Params["URL"].Get<string>()));
             e.Params["Body"].Value = p.Body;
+            e.Params["HideFromMenu"].Value = p.HideFromMenu;
         }
 
         [ActiveEvent(Name = "InitialLoadingOfPage")]
