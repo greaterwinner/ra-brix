@@ -15,6 +15,7 @@ using Ra.Brix.Types;
 using Ra.Extensions.Widgets;
 using Ra.Widgets;
 using Ra;
+using Ra.Selector;
 
 namespace CMSModules
 {
@@ -73,6 +74,10 @@ namespace CMSModules
                 "CMSGetBodyForURL",
                 node);
             editor.Text = node["Body"].Get<string>();
+
+            // HideFromMenu CheckBox...
+            CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu");
+            ch.Checked = node["HideFromMenu"].Get<bool>();
         }
 
         protected void editor_GetExtraToolbarControls(object sender, Ra.Extensions.Widgets.RichEdit.ExtraToolbarControlsEventArgs e)
@@ -108,6 +113,12 @@ namespace CMSModules
                 list.Items.Add(l);
             }
             e.Controls.Add(list);
+
+            // Then the "Show In Menu" CheckBox...
+            CheckBox ch = new CheckBox();
+            ch.ID = "hideFromMenu";
+            ch.Text = Language.Instance["HideFromMenu", null, "Hide from menu"];
+            e.Controls.Add(ch);
         }
 
         [ActiveEvent(Name = "MainViewportResized")]
@@ -180,6 +191,8 @@ namespace CMSModules
                 node["URL"].Value = tree.SelectedNodes[0].Xtra;
                 node["Header"].Value = headerTxt;
                 node["Body"].Value = bodyTxt;
+                CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu"); 
+                node["HideFromMenu"].Value = ch.Checked;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
                     "CMSSaveEditedPage",
