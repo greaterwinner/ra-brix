@@ -60,6 +60,11 @@ namespace Ra.Brix.Loader
                 {
                     InitializeEventHandlers(null, type);
                 });
+
+            // Fire the "Application Startup" event. This one will only trigger
+            // ONCE in comparison to the "InitialLoadingOfPage" event which will fire
+            // every time the page reloads...
+            ActiveEvents.Instance.RaiseActiveEvent(this, "ApplicationStartup");
         }
 
         // Helper method that loops through every type in AppDomain and 
@@ -129,10 +134,6 @@ namespace Ra.Brix.Loader
                 page.Unload += page_Unload;
                 InstantiateAllControllers();
 
-                // Fire the "Application Startup" event. This one will only trigger
-                // ONCE in comparison to the "InitialLoadingOfPage" event which will fire
-                // every time the page reloads...
-                ActiveEvents.Instance.RaiseActiveEvent(this, "ApplicationStartup");
             }
 
             if (!_loadedPlugins.ContainsKey(fullTypeName))
