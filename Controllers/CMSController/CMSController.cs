@@ -289,7 +289,7 @@ namespace CMSController
             e.Params["HideFromMenu"].Value = p.HideFromMenu;
         }
 
-        [ActiveEvent(Name = "InitialLoadingOfPage")]
+        [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
             string contentId = HttpContext.Current.Request.Params["ContentID"];

@@ -19,7 +19,7 @@ namespace LoginController
     [ActiveController]
     public class Login
     {
-        [ActiveEvent(Name="InitialLoadingOfPage")]
+        [ActiveEvent(Name="Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
             ActiveEvents.Instance.RaiseLoadControl(
