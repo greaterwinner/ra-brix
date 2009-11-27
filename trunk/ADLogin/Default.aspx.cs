@@ -23,7 +23,7 @@ namespace Ra.Brix.Portal
             {
                 Loader.ActiveEvents.Instance.RaiseActiveEvent(
                     this,
-                    "InitialLoadingOfPage");
+                    "Page_Init_InitialLoading");
             }
         }
 

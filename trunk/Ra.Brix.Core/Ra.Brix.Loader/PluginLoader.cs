@@ -62,7 +62,7 @@ namespace Ra.Brix.Loader
                 });
 
             // Fire the "Application Startup" event. This one will only trigger
-            // ONCE in comparison to the "InitialLoadingOfPage" event which will fire
+            // ONCE in comparison to the "Page_Init_InitialLoading" event which will fire
             // every time the page reloads...
             ActiveEvents.Instance.RaiseActiveEvent(this, "ApplicationStartup");
         }

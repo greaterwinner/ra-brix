@@ -119,7 +119,9 @@ namespace ChatController
                 NewMessage = false;
                 Node node = new Node();
                 node["Message"].Value = 
-                    Language.Instance["ChatYouGotNewChatsInfo", null, @"You've got new chats waiting in the chat room..."];
+                    Language.Instance["ChatYouGotNewChatsInfo", 
+                    null, 
+                    "You've got new chats waiting in the chat room..."];
                 node["Duration"].Value = 5000;
                 node["EventToFire"].Value = "OpenChatClient";
                 ActiveEvents.Instance.RaiseActiveEvent(

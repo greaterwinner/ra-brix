@@ -25,15 +25,22 @@ namespace Ra.Brix.Portal
             InitializeViewport();
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
-                "RequestBegin");
+                "Page_Init");
             if (!IsPostBack)
             {
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this, 
-                    "InitialLoadingOfPage");
+                    "Page_Init_InitialLoading");
             }
             LoadComplete += MainWebPage_LoadComplete;
             baseElement.DataBind();
+        }
+
+        void MainWebPage_LoadComplete(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "LoadComplete");
         }
 
         protected string GetBaseURL()
@@ -73,13 +80,6 @@ namespace Ra.Brix.Portal
         protected string GetRedirectUrl()
         {
             return Request.Url.ToString();
-        }
-
-        void MainWebPage_LoadComplete(object sender, EventArgs e)
-        {
-            ActiveEvents.Instance.RaiseActiveEvent(
-                this,
-                "LoadComplete");
         }
 
         private void InitializeViewport()
