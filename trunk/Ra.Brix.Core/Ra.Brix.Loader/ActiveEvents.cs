@@ -100,6 +100,7 @@ namespace Ra.Brix.Loader
             RaiseActiveEvent(sender, name, null);
         }
 
+        // TODO: Refactor. WAY too long...!
         /**
          * Raises an event. This will dispatch control to all the ActiveEvent that are marked with
          * the Name attribute matching the name parameter of this method call.
@@ -178,9 +179,10 @@ namespace Ra.Brix.Loader
         // TODO: Remove or make internal somehow...?
         public void RemoveListener(object context)
         {
-            foreach (string idx in _methods.Keys)
+            // Removing all event handler with the given context (object instance)
+            foreach (string idx in InstanceMethod.Keys)
             {
-                List<Tuple<MethodInfo, object>> idxCur = _methods[idx];
+                List<Tuple<MethodInfo, object>> idxCur = InstanceMethod[idx];
                 List<Tuple<MethodInfo, object>> toRemove = new List<Tuple<MethodInfo, object>>();
                 foreach (Tuple<MethodInfo, object> idxObj in idxCur)
                 {
@@ -191,6 +193,18 @@ namespace Ra.Brix.Loader
                 {
                     idxCur.Remove(idxObj);
                 }
+            }
+
+            // Remving all list of event handlers that no longer have any events...
+            List<string> toBeRemoved = new List<string>();
+            foreach(string idx in InstanceMethod.Keys)
+            {
+                if(InstanceMethod[idx].Count == 0)
+                    toBeRemoved.Add(idx);
+            }
+            foreach (string idx in toBeRemoved)
+            {
+                InstanceMethod.Remove(idx);
             }
         }
 
