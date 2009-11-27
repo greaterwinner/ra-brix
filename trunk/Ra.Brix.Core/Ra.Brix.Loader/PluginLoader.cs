@@ -128,12 +128,10 @@ namespace Ra.Brix.Loader
             ASP.Page page = (HttpContext.Current.Handler as ASP.Page);
 
             // Checking to see if we've got our UnLoad event handlers event here...
-            if (page != null && page.Items["__Ra.Brix.Loader.PluginLoader.hasAddedUnloadEvent"] == null)
+            if (page != null && page.Items["__Ra.Brix.Loader.PluginLoader.hasInstantiatedControllers"] == null)
             {
-                page.Items["__Ra.Brix.Loader.PluginLoader.hasAddedUnloadEvent"] = true;
-                page.Unload += page_Unload;
+                page.Items["__Ra.Brix.Loader.PluginLoader.hasInstantiatedControllers"] = true;
                 InstantiateAllControllers();
-
             }
 
             if (!_loadedPlugins.ContainsKey(fullTypeName))
@@ -163,11 +161,6 @@ namespace Ra.Brix.Loader
             return null;
         }
 
-        private void page_Unload(object sender, EventArgs e)
-        {
-            ActiveEvents.Instance.ClearAllInstanceEventHandlers();
-        }
-
         private void InstantiateAllControllers()
         {
             foreach (Type idxType in _controllerTypes)
@@ -177,11 +170,11 @@ namespace Ra.Brix.Loader
             }
         }
 
-        private static void InitializeEventHandlers(object retVal, Type pluginType)
+        private static void InitializeEventHandlers(object objectInstance, Type pluginType)
         {
             // If the context passed is null, then what we're trying to retrieve
             // are the stat event handlers...
-            BindingFlags flags = retVal == null ?
+            BindingFlags flags = objectInstance == null ?
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static :
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
             foreach (MethodInfo idx in pluginType.GetMethods(flags))
@@ -194,7 +187,7 @@ namespace Ra.Brix.Loader
                     continue;
                 foreach (ActiveEventAttribute idxAttr in attr)
                 {
-                    ActiveEvents.Instance.AddListener(retVal, idx, idxAttr.Name);
+                    ActiveEvents.Instance.AddListener(objectInstance, idx, idxAttr.Name);
                 }
             }
         }
