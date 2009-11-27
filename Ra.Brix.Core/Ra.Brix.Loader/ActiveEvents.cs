@@ -12,6 +12,8 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using Ra.Brix.Types;
+using System.Web.UI;
+using System.Web;
 
 namespace Ra.Brix.Loader
 {
@@ -108,7 +110,7 @@ namespace Ra.Brix.Loader
             Node pars)
         {
             ActiveEventArgs e = new ActiveEventArgs(name, pars);
-            if (_methods.ContainsKey(name))
+            if (_methods.ContainsKey(name) || InstanceMethod.ContainsKey(name))
             {
                 // We must run this in two operations since events clear controls out
                 // and hence make "dead references" to Event Handlers and such...
@@ -117,15 +119,51 @@ namespace Ra.Brix.Loader
                 // between calling the next one, we must verify that it still exists within
                 // the collection...
                 List<Tuple<MethodInfo, object>> tmp = new List<Tuple<MethodInfo, object>>();
-                foreach (Tuple<MethodInfo, object> idx in _methods[name])
+
+                // Adding static method (if any)
+                if (_methods.ContainsKey(name))
                 {
-                    tmp.Add(idx);
+                    foreach (Tuple<MethodInfo, object> idx in _methods[name])
+                    {
+                        tmp.Add(idx);
+                    }
                 }
+
+                // Adding instance method (if any)
+                if (InstanceMethod.ContainsKey(name))
+                {
+                    foreach (Tuple<MethodInfo, object> idx in InstanceMethod[name])
+                    {
+                        tmp.Add(idx);
+                    }
+                }
+
+                // Looping through all methods...
                 foreach (Tuple<MethodInfo, object> idx in tmp)
                 {
                     // Since events might load and clear controls we need to check if the event handler
                     // still exists after *every* event handler we dispatch control to...
-                    foreach (Tuple<MethodInfo, object> idx2 in _methods[name])
+                    List<Tuple<MethodInfo, object>> recheck = new List<Tuple<MethodInfo, object>>();
+
+                    // Adding static method (if any)
+                    if (_methods.ContainsKey(name))
+                    {
+                        foreach (Tuple<MethodInfo, object> idx2 in _methods[name])
+                        {
+                            recheck.Add(idx);
+                        }
+                    }
+
+                    // Adding instance method (if any)
+                    if (InstanceMethod.ContainsKey(name))
+                    {
+                        foreach (Tuple<MethodInfo, object> idx2 in InstanceMethod[name])
+                        {
+                            recheck.Add(idx);
+                        }
+                    }
+
+                    foreach (Tuple<MethodInfo, object> idx2 in recheck)
                     {
                         if (idx.Equals(idx2))
                         {
@@ -156,31 +194,42 @@ namespace Ra.Brix.Loader
             }
         }
 
+        private Dictionary<string, List<Tuple<MethodInfo, object>>> InstanceMethod
+        {
+            get
+            {
+                Page page = (Page)HttpContext.Current.Handler;
+                if (!page.Items.Contains("__Ra.Brix.Loader.ActiveEvents._requestEventHandlers"))
+                {
+                    page.Items["__Ra.Brix.Loader.ActiveEvents._requestEventHandlers"] =
+                        new Dictionary<string, List<Tuple<MethodInfo, object>>>();
+                }
+                return (Dictionary<string, List<Tuple<MethodInfo, object>>>)
+                    page.Items["__Ra.Brix.Loader.ActiveEvents._requestEventHandlers"];
+            }
+        }
+
         internal void AddListener(object context, MethodInfo method, string name)
         {
             if (name == null)
             {
                 throw new ArgumentException("Cannot have an event handler listening to 'null' event");
             }
-            if (!_methods.ContainsKey(name))
-                _methods[name] = new List<Tuple<MethodInfo, object>>();
-            _methods[name].Add(new Tuple<MethodInfo, object>(method, context));
-        }
-
-        internal void ClearAllInstanceEventHandlers()
-        {
-            foreach (string idxKey in _methods.Keys)
+            if (context == null)
             {
-                List<Tuple<MethodInfo, object>> toBeRemoved = new List<Tuple<MethodInfo, object>>();
-                foreach (Tuple<MethodInfo, object> idxTuple in _methods[idxKey])
-                {
-                    if (idxTuple.Right != null)
-                        toBeRemoved.Add(idxTuple);
-                }
-                foreach (Tuple<MethodInfo, object> idxToBeRemoved in toBeRemoved)
-                {
-                    _methods[idxKey].Remove(idxToBeRemoved);
-                }
+                // Static event handler, will *NEVER* be cleared until application
+                // itself is restarted
+                if (!_methods.ContainsKey(name))
+                    _methods[name] = new List<Tuple<MethodInfo, object>>();
+                _methods[name].Add(new Tuple<MethodInfo, object>(method, context));
+            }
+            else
+            {
+                // Request "instance" event handler, will be tossed away when
+                // request is over
+                if (!InstanceMethod.ContainsKey(name))
+                    InstanceMethod[name] = new List<Tuple<MethodInfo, object>>();
+                InstanceMethod[name].Add(new Tuple<MethodInfo, object>(method, context));
             }
         }
     }
