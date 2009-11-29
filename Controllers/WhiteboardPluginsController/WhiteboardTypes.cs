@@ -90,9 +90,9 @@ namespace WhiteboardPluginsController
             picker.Visible = false;
             if (!string.IsNullOrEmpty(curValue))
             {
-                picker.Value = DateTime.ParseExact(curValue, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+                picker.Value = DateTime.ParseExact(curValue, "yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
                 btn.Text =
-                    DateTime.ParseExact(curValue, "dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture)
+                    DateTime.ParseExact(curValue, "yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture)
                         .ToString("ddd d.MMM yy HH:mm", CultureInfo.InvariantCulture);
             }
             else
@@ -120,7 +120,7 @@ namespace WhiteboardPluginsController
                                         });
                                 btn.Text =
                                     pick.Value.ToString("ddd d.MMM yy HH:mm", CultureInfo.InvariantCulture);
-                                cell.Value = pick.Value.ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+                                cell.Value = pick.Value.ToString("yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
                                 cell.Save();
                                 UpdateGridValue(e.Params["DataSource"].Value as Node, xtra[0], xtra[1], cell.Value);
                             }

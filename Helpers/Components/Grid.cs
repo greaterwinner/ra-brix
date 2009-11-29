@@ -368,7 +368,7 @@ namespace Components
                         if (left[0].Name == "ID" && left[0].Value is int)
                             return ((int)left[0].Value).CompareTo((int)right[0].Value);
                         if (left[0].Value == null)
-                            return -1;
+                            return right[0].Value == null ? 0 : - 1;
                         if (right[0].Value == null)
                             return 1;
                         return left[0].Value.ToString().CompareTo(right[0].Value.ToString());
@@ -376,12 +376,16 @@ namespace Components
                     bool isBackwards = SortColumn[0] == '-';
                     string sortCol = SortColumn.Replace("-", "");
                     if (left[sortCol].Value == null)
-                        return isBackwards ? 1 : -1;
+                        return right[sortCol].Value == null ? 0 : (isBackwards ? 1 : -1);
                     if (right[sortCol].Value == null)
                         return isBackwards ? -1 : 1;
 
                     object leftObj = left[sortCol].Value;
                     object rightObj = right[sortCol].Value;
+                    if (leftObj == null)
+                        return rightObj == null ? 0 : (isBackwards ? -1 : 1);
+                    if (rightObj == null)
+                        return isBackwards ? 1 : -1;
                     if (!isBackwards)
                         return ((IComparable)leftObj).CompareTo(rightObj);
                     return ((IComparable)rightObj).CompareTo(leftObj);

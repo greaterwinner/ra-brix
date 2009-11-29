@@ -24,8 +24,8 @@ namespace LanguageController
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonLang", "Language");
-            Language.Instance.SetDefaultValue("ButtonEditLanguage", "Edit");
-            Language.Instance.SetDefaultValue("ButtonSelectLanguage", "Switch");
+            Language.Instance.SetDefaultValue("ButtonEditLanguage", "Edit Language");
+            Language.Instance.SetDefaultValue("ButtonSelectLanguage", "Switch Language");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]

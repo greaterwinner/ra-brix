@@ -29,9 +29,9 @@ namespace ChangeSkinController
         protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonSkins", "Skins");
-            Language.Instance.SetDefaultValue("ButtonChangeSkin", "Change");
-            Language.Instance.SetDefaultValue("ButtonDefaultSkin", "Set Default");
-            Language.Instance.SetDefaultValue("ButtonUploadNewSkin", "Upload New");
+            Language.Instance.SetDefaultValue("ButtonChangeSkin", "Change Skin");
+            Language.Instance.SetDefaultValue("ButtonDefaultSkin", "Set Default Skin");
+            Language.Instance.SetDefaultValue("ButtonUploadNewSkin", "Upload New Skin");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
