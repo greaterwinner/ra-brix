@@ -78,7 +78,8 @@ on the 23rd of December, 11:45PM in 1986 you'd write this into the Filter textbo
 Or to find out anyone who is born in the February 2008 you'd write; 'DateOfBirth:2008.02' 
 and nothing more.
 ";
-            e.Params["Tip"]["TipOfInitialLoading"].Value = Language.Instance["TipOfInitialLoading", null, tmp];
+            e.Params["Tip"]["TipOfWhiteBoardFilterByDateColumns"].Value = 
+                Language.Instance["TipOfWhiteBoardFilterByDateColumns", null, tmp];
         }
 
         private static void CreateDate(ActiveEventArgs e)
