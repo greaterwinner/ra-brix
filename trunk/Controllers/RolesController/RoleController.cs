@@ -46,13 +46,10 @@ namespace RolesController
                 Role noRole = new Role {Name = "Everyone"};
                 noRole.Save();
             }
-        }
 
-        [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
-        {
-            Language.Instance.SetDefaultValue("ButtonViewAllRoles", "View All");
-            Language.Instance.SetDefaultValue("ButtonCreateRole", "Create");
+            // Settings default language values for module...
+            Language.Instance.SetDefaultValue("ButtonViewAllRoles", "View All Roles");
+            Language.Instance.SetDefaultValue("ButtonCreateRole", "Create Role");
             Language.Instance.SetDefaultValue("ButtonAccessControl", "Access Control");
         }
 

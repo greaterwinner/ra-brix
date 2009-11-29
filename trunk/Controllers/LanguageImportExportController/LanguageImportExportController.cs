@@ -24,8 +24,8 @@ namespace LanguageImportExportController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
         {
-            Language.Instance.SetDefaultValue("ButtonLangExport", "Export");
-            Language.Instance.SetDefaultValue("ButtonLangImport", "Import");
+            Language.Instance.SetDefaultValue("ButtonLangExport", "Export Language");
+            Language.Instance.SetDefaultValue("ButtonLangImport", "Import Language");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
