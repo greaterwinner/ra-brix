@@ -63,6 +63,24 @@ namespace WhiteboardPluginsController
             }
         }
 
+        [ActiveEvent(Name = "GetTipOfToday")]
+        protected static void GetTipOfToday(object sender, ActiveEventArgs e)
+        {
+            const string tmp = @"
+You can filter by a Date column in your Lists by writing in an ISO certified 
+date pattern which is supposed to be constructed with the given pattern; yyyy.MM.dd HH:mm .
+yyyy means 4 digits year value, MM means months with two digits, dd is days (two digits)
+HH is hours in military display (e.g. 23 == 11PM) and mm is two digits minuts. 
+
+So if you have a column named 'DateOfBirth' which you want to find out everyone who's born 
+on the 23rd of December, 11:45PM in 1986 you'd write this into the Filter textbox; 
+'DateOfBirth:1986.12.23 23:45'.
+Or to find out anyone who is born in the February 2008 you'd write; 'DateOfBirth:2008.02' 
+and nothing more.
+";
+            e.Params["Tip"]["TipOfInitialLoading"].Value = Language.Instance["TipOfInitialLoading", null, tmp];
+        }
+
         private static void CreateDate(ActiveEventArgs e)
         {
             string curValue = e.Params["Value"].Get<string>();
