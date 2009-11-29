@@ -29,8 +29,6 @@ namespace CMSModules
         protected global::Ra.Widgets.Panel editWrp;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor hyperlink;
         protected global::Ra.Extensions.Widgets.RichEdit editor;
-        protected global::Ra.Extensions.Widgets.ExtButton submit;
-        protected global::Ra.Extensions.Widgets.ExtButton delete;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,8 +36,6 @@ namespace CMSModules
             {
                 BuildTree();
             }
-            submit.DataBind();
-            delete.DataBind();
         }
 
         protected void menu_SelectedNodeChanged(object sender, EventArgs e)
@@ -82,6 +78,7 @@ namespace CMSModules
 
         protected void editor_GetExtraToolbarControls(object sender, Ra.Extensions.Widgets.RichEdit.ExtraToolbarControlsEventArgs e)
         {
+            // Inject Plugin select list...
             Node node = new Node();
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
@@ -119,6 +116,22 @@ namespace CMSModules
             ch.ID = "hideFromMenu";
             ch.Text = Language.Instance["HideFromMenu", null, "Hide from menu"];
             e.Controls.Add(ch);
+
+            // Delete button
+            LinkButton delBtn = new LinkButton();
+            delBtn.ID = "delete";
+            delBtn.CssClass = "editorBtn delete";
+            delBtn.Click += delete_Click;
+            delBtn.Text = "&nbsp;";
+            e.Controls.Add(delBtn);
+
+            // Save button
+            LinkButton submit = new LinkButton();
+            submit.ID = "submit";
+            submit.CssClass = "editorBtn save";
+            submit.Click += submit_Click;
+            submit.Text = "&nbsp;";
+            e.Controls.Add(submit);
         }
 
         [ActiveEvent(Name = "MainViewportResized")]
@@ -176,7 +189,7 @@ namespace CMSModules
                 node["URL"].Value = tree.SelectedNodes[0].Xtra;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
-                    "CMSDeletePage",
+                    "CMSRequestDeletePage",
                     node);
             }
         }

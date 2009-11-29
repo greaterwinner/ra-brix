@@ -45,17 +45,5 @@
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
             OnGetExtraToolbarControls="editor_GetExtraToolbarControls"
             runat="server" />
-        <ra:ExtButton 
-            runat="server" 
-            id="delete" 
-            OnClick="delete_Click"
-            style="position:absolute;bottom:0;right:0;margin-right:50px;margin-bottom:-4px;"
-            Text='<%#Language.Instance["Delete", null, "Delete"] %>' />
-        <ra:ExtButton 
-            runat="server" 
-            id="submit" 
-            OnClick="submit_Click"
-            style="position:absolute;bottom:0;right:0;margin-right:-8px;margin-bottom:-4px;"
-            Text='<%#Language.Instance["Save", null, "Save"] %>' />
     </ra:Panel>
 </div>
