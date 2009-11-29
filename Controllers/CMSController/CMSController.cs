@@ -27,6 +27,9 @@ namespace CMSController
             Language.Instance.SetDefaultValue("ButtonCMS", "CMS");
             Language.Instance.SetDefaultValue("ButtonCMSViewPages", "View Pages");
             Language.Instance.SetDefaultValue("ButtonCMSCreatePage", "Create Page");
+            Language.Instance.SetDefaultValue(
+                "CMSPageDeleted",
+                "CMS Page was deleted. Application had to be refreshed");
 
             // Creating default page - if necessary...!
             if (ActiveType<Page>.Count == 0)
@@ -177,6 +180,25 @@ namespace CMSController
             }
         }
 
+        [ActiveEvent(Name = "CMSRequestDeletePage")]
+        protected void CMSRequestDeletePage(object sender, ActiveEventArgs e)
+        {
+            Node init = new Node();
+            init["TabCaption"].Value = Language.Instance["AreYouSure", null, "Are you sure?"];
+            init["Width"].Value = 350;
+            init["Height"].Value = 130;
+            init["ModuleSettings"]["Text"].Value = 
+                Language.Instance["ReallyDeleteCMSPage", null, 
+                @"Do you really want to delete the selected page?"];
+            init["ModuleSettings"]["EventToRaiseOnOK"].Value = "CMSDeletePage";
+            init["ModuleSettings"]["Params"]["Name"].Value = "URL";
+            init["ModuleSettings"]["Params"]["Value"].Value = e.Params["URL"].Get<string>();
+            ActiveEvents.Instance.RaiseLoadControl(
+                "CommonModules.MessageBox",
+                "dynPopup",
+                init);
+        }
+
         [ActiveEvent(Name = "CMSDeletePage")]
         protected void CMSDeletePage(object sender, ActiveEventArgs e)
         {
@@ -185,7 +207,9 @@ namespace CMSController
             {
                 Node nodeMessage = new Node();
                 nodeMessage["Message"].Value = Language.Instance[
-                    "CannotDeleteHomePage", null, "You cannot delete the main landing page"];
+                    "CannotDeleteHomePage", 
+                    null, 
+                    "You cannot delete the main landing page"];
                 nodeMessage["Duration"].Value = 2000;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
@@ -196,10 +220,8 @@ namespace CMSController
             {
                 Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", url));
                 p.Delete();
-#pragma warning disable 168
-                // Making sure we get the language right...
-                string tmpBugger = Language.Instance["CMSPageDeleted", null, "CMS Page was deleted. Application had to be refreshed"];
-#pragma warning restore 168
+
+                // Refreshing page, with informational notification...
                 AjaxManager.Instance.Redirect("~/?message=CMSPageDeleted");
             }
         }

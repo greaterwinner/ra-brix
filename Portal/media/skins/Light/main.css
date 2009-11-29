@@ -988,7 +988,6 @@ span.button
 	background-color: #CCD1FF;
 	padding:25px 2px 2px 2px;
 	width: 100%;
-	height: 62px;
 }
 
 .editor .editorMain
@@ -1118,6 +1117,16 @@ span.button
 .hyperlink
 {
 	background-position: -63px -20px;
+}
+
+.delete
+{
+	background-position: -84px -40px;
+}
+
+.save
+{
+	background-position: -63px -40px;
 }
 
 .bottomBar
