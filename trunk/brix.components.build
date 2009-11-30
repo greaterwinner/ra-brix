@@ -781,7 +781,706 @@
     
     
     <!-- Modules...!! -->
-    
+
+
+    <!-- ChangeSkinModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ChangeSkinModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/ChangeSkinModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="ChangeSkinModules">
+        <include name="Modules/ChangeSkinModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/ChangeSkinModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSCommonPluginModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSCommonPluginModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/CMSCommonPluginModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="CMSCommonPluginModules">
+        <include name="Modules/CMSCommonPluginModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/CMSCommonPluginModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/CMSModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="CMSModules">
+        <include name="Modules/CMSModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/CMSModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- CommonModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CommonModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/CommonModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="CommonModules">
+        <include name="Modules/CommonModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/CommonModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- FavouritesModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/FavouritesModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/Favourites/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="FavouritesModules">
+        <include name="Modules/Favourites/**/*.ascx" if="${debug}" />
+        <include name="Modules/Favourites/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- HelpModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/HelpModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/Help/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="HelpModules">
+        <include name="Modules/Help/**/*.ascx" if="${debug}" />
+        <include name="Modules/Help/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- HistoryModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/HistoryModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/History/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="HistoryModules">
+        <include name="Modules/History/**/*.ascx" if="${debug}" />
+        <include name="Modules/History/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageEditModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageEditModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/LanguageEdit/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="LanguageEditModules">
+        <include name="Modules/LanguageEdit/**/*.ascx" if="${debug}" />
+        <include name="Modules/LanguageEdit/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageImportExportModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageImportExportModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/LanguageEdit/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="LanguageImportExportModules">
+        <include name="Modules/LanguageImportExportModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/LanguageImportExportModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageSelectorModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageSelectorModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/LanguageSelector/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="LanguageSelectorModules">
+        <include name="Modules/LanguageSelector/**/*.ascx" if="${debug}" />
+        <include name="Modules/LanguageSelector/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- LoginOpenIDModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LoginOpenIDModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/LoginOpenID/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="LoginOpenIDModules">
+        <include name="Modules/LoginOpenID/**/*.ascx" if="${debug}" />
+        <include name="Modules/LoginOpenID/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- ResourcesModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ResourcesModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/ResourcesModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="LoginOpenIDModules">
+        <include name="Modules/ResourcesModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/ResourcesModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- RolesModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/RolesModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/Roles/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="RolesModules">
+        <include name="Modules/Roles/**/*.ascx" if="${debug}" />
+        <include name="Modules/Roles/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- RssReaderModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/RssReaderModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/RssReaderModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="RssReaderModules">
+        <include name="Modules/RssReaderModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/RssReaderModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- SettingsModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/SettingsModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/Settings/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="SettingsModules">
+        <include name="Modules/Settings/**/*.ascx" if="${debug}" />
+        <include name="Modules/Settings/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- SlidingMenuModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/SlidingMenuModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/SlidingMenu/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="SlidingMenuModules">
+        <include name="Modules/SlidingMenu/**/*.ascx" if="${debug}" />
+        <include name="Modules/SlidingMenu/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- TipOfTodayModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/TipOfTodayModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/TipOfTodayModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="TipOfTodayModules">
+        <include name="Modules/TipOfTodayModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/TipOfTodayModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- TreeMenuModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/TreeMenuModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/TreeMenuModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="TreeMenuModules">
+        <include name="Modules/TreeMenuModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/TreeMenuModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- UsersModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/UsersModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/Users/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="UsersModules">
+        <include name="Modules/Users/**/*.ascx" if="${debug}" />
+        <include name="Modules/Users/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- WhiteboardModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/WhiteboardModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/WhiteboardModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="UsersModules">
+        <include name="Modules/WhiteboardModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/WhiteboardModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
 
   </target>
 </project>

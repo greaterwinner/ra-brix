@@ -2,22 +2,21 @@
 <configuration>
   <appSettings>
     <!-- Portal plugin, our "viewport driver"... -->
-    <add key="PortalViewDriver" value="Viewport.Main" />
+    <add key="PortalViewDriver" value="Viewport.Content" />
 
-    <!-- MSSQL 
+    <!-- MSSQL -->
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
     <add key="LegoConnectionString" value="Data Source=thomas-laptop\MSSQL;Initial Catalog=Lego;User ID=sa;Password=8pr4ms" />
-    -->
 
     <!-- MySQL connection string (doesn't work) 
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
     <add key="LegoConnectionString" value="SERVER=localhost;DATABASE=Lego;UID=root;PASSWORD=8pr4ms" />
     -->
 
-    <!-- XML connection string -->
+    <!-- XML connection string 
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
     <add key="LegoConnectionString" value="~/data.xml" />
-
+    -->
 
     <add key="IntranetURL" value="http://ringerike-sykehus.no" />
     <add key="IntranetHeader" value="Ringerike Hospital" />
@@ -33,6 +32,11 @@
     <add key="NumberOfChatsToShow" value="5" />
     <add key="MinutesToShowChats" value="5" />
 
+    <add key="NameOfPortal" value="Imatis Portal" />
+
+    <add key="UseNotificationSounds" value="True" />
+
+    <add key="FullScreenWhiteboards" value="False" />
 
   </appSettings>
 

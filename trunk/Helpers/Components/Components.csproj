@@ -56,10 +56,6 @@
     <Compile Include="Grid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAreaEdit.cs" />
-    <Compile Include="Tracer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Tracer.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
