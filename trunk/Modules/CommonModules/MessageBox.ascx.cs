@@ -19,11 +19,12 @@ namespace CommonModules
     {
         protected global::Ra.Widgets.Label txt;
         protected global::Ra.Extensions.Widgets.ExtButton submit;
+        protected global::Ra.Extensions.Widgets.ExtButton cancel;
 
         protected void submit_Click(object sender, EventArgs e)
         {
             Node node = new Node();
-            if(!string.IsNullOrEmpty(EventParamName))
+            if (!string.IsNullOrEmpty(EventParamName))
             {
                 node[EventParamName].Value = EventParamValue;
             }
@@ -31,6 +32,11 @@ namespace CommonModules
                 this,
                 EventName,
                 node);
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
+        protected void cancel_Click(object sender, EventArgs e)
+        {
             ActiveEvents.Instance.RaiseClearControls("dynPopup");
         }
 
@@ -55,6 +61,8 @@ namespace CommonModules
         public void InitialLoading(Node node)
         {
             submit.DataBind();
+            cancel.DataBind();
+            cancel.Focus();
             Load +=
                 delegate
                     {
@@ -62,7 +70,6 @@ namespace CommonModules
                         EventName = node["EventToRaiseOnOK"].Get<string>();
                         EventParamName = node["Params"]["Name"].Get<string>();
                         EventParamValue = node["Params"]["Value"].Get<string>();
-                        txt.Focus();
                     };
         }
 

@@ -196,6 +196,11 @@ namespace CMSModules
 
         protected void submit_Click(object sender, EventArgs e)
         {
+            SaveSelectedPage();
+        }
+
+        private void SaveSelectedPage()
+        {
             if (tree.SelectedNodes.Length > 0)
             {
                 string headerTxt = header.Text;
@@ -236,6 +241,14 @@ namespace CMSModules
             foreach (Node idx in Data)
             {
                 AddTreeNode(idx, root);
+            }
+        }
+
+        protected void editor_CtrlKeys(object sender, RichEdit.CtrlKeysEventArgs e)
+        {
+            if(e.Key == 's')
+            {
+                SaveSelectedPage();
             }
         }
 
