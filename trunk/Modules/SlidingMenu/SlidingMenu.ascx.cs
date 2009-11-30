@@ -9,7 +9,6 @@
  */
 
 using System;
-using System.Security;
 using System.Web.UI;
 using LanguageRecords;
 using Ra.Brix.Loader;
@@ -71,6 +70,9 @@ namespace SlidingMenuModules
                 level = item.Parent as SlidingMenuLevel;
             }
             menu.ExpandTo(level);
+            menu.Style[Styles.opacity] = "0.0";
+            new EffectFadeIn(menu, 500)
+                .Render();
         }
 
         private static Node FindNode(Node node, string whatToFind)
