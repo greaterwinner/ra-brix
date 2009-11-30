@@ -345,9 +345,9 @@ http://ra-ajax.org
  * them just like Yahoo under the BSD license terms... :)
  */
 
-.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; }
+.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; overflow:auto; }
 .tree input { margin-right:8px; }
-.tree .item { cursor:pointer; line-height:14px; }
+.tree .item { cursor:pointer; line-height:14px; white-space:nowrap; }
 .tree .item:hover { background-color:#ddf; }
 .tree .item:hover ul { background-color:#fff; }
 .tree .selected { background-color:#bbf; }
