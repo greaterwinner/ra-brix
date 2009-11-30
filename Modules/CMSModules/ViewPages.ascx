@@ -33,7 +33,7 @@
             runat="server" 
             style="position:absolute;top:8px;left:8px;z-index:5;"
             id="url">
-            Link: <a 
+            <%=Language.Instance["Preview", null, "Preview"] %> <a 
                 runat="server" 
                 target="_blank"
                 id="hyperlink" />

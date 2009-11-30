@@ -134,20 +134,6 @@ namespace CMSModules
             e.Controls.Add(submit);
         }
 
-        [ActiveEvent(Name = "MainViewportResized")]
-        protected void MainViewportResized(object sender, ActiveEventArgs e)
-        {
-            AjaxManager.Instance.WriterAtBack.Write(
-                string.Format(@"
-(function() {{
-  var T = Ra.Control.$({0});
-  setTimeout(function() {{
-    T.modifyHeight();
-  }}, 2000);
-}})();
-", "'" + editor.ClientID + "'"));
-        }
-
         protected void editor_GetImageDialog(object sender, EventArgs e)
         {
             ActiveEvents.Instance.RaiseActiveEvent(
