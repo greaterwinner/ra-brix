@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<project 
+    name="brix.components" 
+    default="all" 
+    xmlns="http://nant.sf.net/release/0.86-beta1/nant.xsd">
+
+  <nant buildfile="brix.core.build" />
+
+  <loadtasks assembly="References/Ra.Build.Tasks.dll" />
+  <load-properties properties-file="build.properties" />
+
+  <!-- Targets -->
+  <target name="all" depends="compile.components" />
+
+  <target name="compile.components" description="Compile Ra-Brix ComponentPackages">
+
+
+    <!-- Helper Globals-->
+
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/Commons.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Helpers/Commons/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+
+    <!-- Components -->
+
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/Components.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Helpers/Components/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+      </references>
+    </csc>
+
+
+
+    
+    
+    
+    <!-- Types ... -->
+
+    <!-- Settings -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/SettingsRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/Settings/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- UserSettings -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/UserSettingsRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/UserSettings/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/CMSRecords/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- FavouritesRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/FavouritesRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/Favourites/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- HistoryRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/HistoryRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/History/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/Language/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- RssReaderRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/RssReaderRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/RssReaderRecords/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- UserRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/UserRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/User/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- WhiteBoardRecords -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/WhiteBoardRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/WhiteBoardRecords/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- FavouritesController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/FavouritesController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/Favourites/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- HistoryController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/HistoryController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/History/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/HistoryRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- InitializeController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/InitializeController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/Initializer/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/Language/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- RolesController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/RolesController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/RolesController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/RolesController.dll" />
+        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- UserController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/UserController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/UserController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- SettingsController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/SettingsController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/SettingsController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- WhiteBoardController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/WhiteBoardController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/WhiteBoardController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- TipOfTodayController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/TipOfTodayController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/TipOfTodayController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- WhiteboardPluginsController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/WhiteboardPluginsController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/WhiteboardPluginsController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- RssReaderController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/RssReaderController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/RssReaderController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/RssReaderRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- UserSettingsController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/UserSettingsController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/UserSettingsController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/RssReaderRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/CMSController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/CMSRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+      </references>
+    </csc>
+
+    <!-- ResourcesController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ResourcesController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/ResourcesController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- LanguageImportExportController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/LanguageImportExportController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/LanguageImportExportController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- ChangeSkinController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ChangeSkinController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/ChangeSkinController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${references.dir}/ICSharpCode.SharpZipLib.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+      </references>
+    </csc>
+
+    <!-- HelpController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ChangeSkinController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/HelpController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSCommonPlugins -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSCommonPlugins.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/CMSCommonPlugins/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+    
+    
+    <!-- Modules...!! -->
+    
+
+  </target>
+</project>
