@@ -50,12 +50,21 @@
   			commandline="-v ${application.pool.dir} -p ${output.dir}/${application.pool.dir} -u -f ${output.dir}/${samples.precompiled.dir} -c -nologo"
 			  if="${file::exists(framework.dir + '/aspnet_compiler.exe')}" />
 
-    <copy   
-      flatten="true" 
-      overwrite="true" 
+    <copy
+      flatten="true"
+      overwrite="true"
       todir="${output.dir}/${application.pool.dir}/bin">
       <fileset basedir="${output.dir}/${library.dir}">
         <include name="**/*.dll" />
+      </fileset>
+    </copy>
+
+    <copy
+      flatten="true"
+      overwrite="true"
+      todir="${output.dir}">
+      <fileset basedir=".">
+        <include name="start-webdev.bat" />
       </fileset>
     </copy>
   </target>
