@@ -18,7 +18,7 @@ using UserSettingsRecords;
 
 namespace Ra.Brix.Portal
 {
-    public partial class MainWebPage : System.Web.UI.Page
+    public partial class MainWebPage : Page
     {
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -64,14 +64,14 @@ namespace Ra.Brix.Portal
 
         protected string GetCssRootFolder()
         {
-            string portalDefault = Settings.Instance.Get<string>(
+            string portalDefault = Settings.Instance.Get(
                 "CssRootFolder",
                 "Light");
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
                 return portalDefault;
             }
-            return UserSettings.Instance.Get<string>(
+            return UserSettings.Instance.Get(
                 "CssRootFolder", 
                 Users.LoggedInUserName, 
                 portalDefault);

@@ -8,27 +8,3 @@ is the copyright of Thomas Hansen - thomas@ra-ajax.org. Ra-Brix
 is maintained by Ra-Software which is a "Software Factory" - which
 means we can create software for you. This means web applications.
 
-If you are interested in hearing about our consulting offerings, then
-please send an email to thomas@ra-ajax.org explaining your case. We
-can do both small and large consulting jobs.
-
-Examples of what we can do include;
- * Coaching
- * Code Reviews
- * Development of entire systems and applications
- * Teaching
- * Being your out sourced development department.
-
-We can mostly do everything even remotely associated with system 
-development. However we focus purely on .Net/Mono, Web, Ajax and
-Architecture.
-
-We operate physically in Sacramento US, Oslo/Telemark Norway and 
-Alexandria in Egypt. However we can also do virtual consulting 
-through means such as Skype, email and such. All non-Norwegian 
-customers will be billed through PayPal.
-
-
-Thomas Hansen CEO of Ra-Software AS - thomas@ra-ajax.org
-
-

@@ -225,6 +225,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModules", "Modules\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllRaAjaxControlsModules", "Modules\AllRaAjaxControlsModules\AllRaAjaxControlsModules.csproj", "{A89452D1-6B1E-408B-8B6C-B8C3467C8328}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E16544EB-0996-42DE-83B5-B29617C38495}"
+	ProjectSection(SolutionItems) = preProject
+		brix.appPool.build = brix.appPool.build
+		brix.components.build = brix.components.build
+		brix.core.build = brix.core.build
+		build.bat = build.bat
+		build.properties = build.properties
+		license-AGPL.txt = license-AGPL.txt
+		license.txt = license.txt
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET

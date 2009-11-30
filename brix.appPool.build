@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<project 
+    name="brix.appPool" 
+    default="all" 
+    xmlns="http://nant.sf.net/release/0.86-beta1/nant.xsd">
+
+  <nant buildfile="brix.components.build" />
+
+  <loadtasks assembly="References/Ra.Build.Tasks.dll" />
+  <load-properties properties-file="build.properties" />
+
+  <!-- Targets -->
+  <target name="all" depends="init,compile.appPool" />
+
+  <target name="init" description="Necessary Initializations">
+    <mkdir dir="${output.dir}/${application.pool.dir}" />
+  </target>
+
+  <target name="compile.appPool" description="Compile Ra-Brix Application Pool - WebSite">
+    <copy overwrite="true" todir="${output.dir}/${application.pool.dir}">
+      <fileset basedir="${portal.dir}">
+        <include name="**/*.cs" />
+        <include name="**/*.aspx" />
+        <include name="**/*.asax" />
+        <include name="media/**/*.*" />
+      </fileset>
+    </copy>
+    <copy
+      file="${portal.dir}/Web.Config.template"
+      tofile="${output.dir}/${application.pool.dir}/Web.Config"
+      overwrite="true" />
+
+    <mkdir dir="${output.dir}/${application.pool.dir}/Resources" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/Resources/Images" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/Resources/Videos" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/TemporaryFiles" />
+
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin" />
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin">
+      <fileset>
+        <include name="${references.dir}/**/*.dll" />
+        <include name="${output.dir}/${library.dir}/**/*.dll" />
+      </fileset>
+    </copy>
+
+    <echo message="Precompiling Website '${output.dir}/${application.pool.dir}' to '${output.dir}/${samples.precompiled.dir}'." />
+    <exec 
+        program="${framework.dir}/aspnet_compiler.exe"
+  			commandline="-v ${application.pool.dir} -p ${output.dir}/${application.pool.dir} -u -f ${output.dir}/${samples.precompiled.dir} -c -nologo"
+			  if="${file::exists(framework.dir + '/aspnet_compiler.exe')}" />
+
+    <copy   
+      flatten="true" 
+      overwrite="true" 
+      todir="${output.dir}/${application.pool.dir}/bin">
+      <fileset basedir="${output.dir}/${library.dir}">
+        <include name="**/*.dll" />
+      </fileset>
+    </copy>
+  </target>
+</project>
