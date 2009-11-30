@@ -43,6 +43,8 @@
             CssClass="editor"
             OnGetImageDialog="editor_GetImageDialog"
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
+            CtrlKeys="s,g"
+            OnCtrlKey="editor_CtrlKeys"
             OnGetExtraToolbarControls="editor_GetExtraToolbarControls"
             runat="server" />
     </ra:Panel>
