@@ -2,7 +2,9 @@
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="Viewport.Main" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <ra:ResizeHandler 
     runat="server" 
@@ -21,7 +23,7 @@
 <ra:Timer 
     runat="server" 
     id="timer" 
-    Duration="30000"
+    Duration="600000"
     OnTick="timer_Tick" />
 
 <div style="background-color: #6DD0FF;width:100%;height:100%;overflow:auto;">
