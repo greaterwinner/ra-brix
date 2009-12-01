@@ -71,6 +71,8 @@
       <fileset basedir=".">
         <include name="start-webdev.bat" />
         <include name="ReadMe.txt" />
+        <include name="license.txt" />
+        <include name="license-AGPL.txt" />
       </fileset>
     </copy>
 

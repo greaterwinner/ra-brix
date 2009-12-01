@@ -74,6 +74,7 @@ namespace CMSController
 </p>
 ");
                 p.URL = "home";
+                p.HideFromMenu = true;
                 p.Save();
                 ActiveEvents.Instance.RaiseActiveEvent(
                     typeof(CMSController),

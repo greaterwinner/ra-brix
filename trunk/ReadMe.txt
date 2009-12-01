@@ -19,3 +19,12 @@ in Visual Studio and click F5 if you downloaded the source version.
 Ra-Brix is licensed under the Affero GPL license and is the copyright of Thomas Hansen
 
 Thomas Hansen can be contacted at thomas@ra-ajax.org
+
+
+
+Credits;
+Thomas Hansen
+Kariem Ali
+Rick Gibson
+Kenneth Aasgrav
+
