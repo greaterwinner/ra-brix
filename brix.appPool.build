@@ -31,11 +31,6 @@
       tofile="${output.dir}/${application.pool.dir}/Web.Config"
       overwrite="true" />
 
-    <mkdir dir="${output.dir}/${application.pool.dir}/Resources" />
-    <mkdir dir="${output.dir}/${application.pool.dir}/Resources/Images" />
-    <mkdir dir="${output.dir}/${application.pool.dir}/Resources/Videos" />
-    <mkdir dir="${output.dir}/${application.pool.dir}/TemporaryFiles" />
-
     <mkdir dir="${output.dir}/${application.pool.dir}/bin" />
     <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin">
       <fileset>
@@ -59,10 +54,20 @@
       </fileset>
     </copy>
 
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Images" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Videos" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Music" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Documents" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Documents/Word" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Documents/PDF" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/Resources/Documents/Other" />
+    <mkdir dir="${output.dir}/${samples.precompiled.dir}/TemporaryFiles" />
+
     <copy
       flatten="true"
       overwrite="true"
-      todir="${output.dir}">
+      todir="${output.dir}/${samples.precompiled.dir}">
       <fileset basedir=".">
         <include name="start-webdev.bat" />
       </fileset>
