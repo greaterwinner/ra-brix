@@ -93,6 +93,10 @@
         <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}/**/*.cs" />
         <exclude name="${brix.core.name}/${brix.data.adapters.name}${brix.data.mssql.name}/obj/**/*.*" />
       </sources>
+      <resources failonempty="true" prefix="Ra.Brix.Data.Adapters.MSSQL">
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}/**/*.sql" if="${debug}" />
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mssql.name}/**/*.sql" unless="${debug}" />
+      </resources>
       <references>
         <include name="${framework.dir}/System.dll" />
         <include name="${framework.dir}/System.Xml.dll" />
@@ -114,6 +118,10 @@
         <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/**/*.cs" />
         <exclude name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/obj/**/*.*" />
       </sources>
+      <resources failonempty="true" prefix="Ra.Brix.Data.Adapters.MySQL">
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/**/*.sql" if="${debug}" />
+        <include name="${brix.core.name}/${brix.data.adapters.name}/${brix.data.mysql.name}/**/*.sql" unless="${debug}" />
+      </resources>
       <references>
         <include name="${framework.dir}/System.dll" />
         <include name="${framework.dir}/System.Xml.dll" />
