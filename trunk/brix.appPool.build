@@ -70,6 +70,7 @@
       todir="${output.dir}/${samples.precompiled.dir}">
       <fileset basedir=".">
         <include name="start-webdev.bat" />
+        <include name="ReadMe.txt" />
       </fileset>
     </copy>
 
