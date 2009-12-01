@@ -10,7 +10,7 @@
       value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
     <add
       key="LegoConnectionString"
-      value="Data Source=.\MSSQL;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
+      value="Data Source=.\MSSQL;Initial Catalog=rabrix;User ID=sa;Password=xxxxxxxx" />
 
     <!-- MySQL connection string (doesn't work) 
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
