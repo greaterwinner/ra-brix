@@ -5,8 +5,12 @@
     <add key="PortalViewDriver" value="Viewport.Content" />
 
     <!-- MSSQL -->
-    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
-    <add key="LegoConnectionString" value="Data Source=thomas-laptop\MSSQL;Initial Catalog=Lego;User ID=sa;Password=8pr4ms" />
+    <add
+      key="LegoDatabaseAdapter"
+      value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
+    <add
+      key="LegoConnectionString"
+      value="Data Source=.\MSSQL;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
 
     <!-- MySQL connection string (doesn't work) 
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
@@ -18,25 +22,7 @@
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
 
-    <add key="IntranetURL" value="http://ringerike-sykehus.no" />
-    <add key="IntranetHeader" value="Ringerike Hospital" />
-
-    <add key="CandyStoreURL" value="http://imatis.no" />
-    <add key="CandyStoreHeader" value="News from Imatis" />
-
-    <add key="SupportURL" value="http://google.com" />
-    <add key="SupportHeader" value="Support" />
-
-    <add key="PowerUser" value="polterguy.blogspot.com" />
-
-    <add key="NumberOfChatsToShow" value="5" />
-    <add key="MinutesToShowChats" value="5" />
-
-    <add key="NameOfPortal" value="Imatis Portal" />
-
     <add key="UseNotificationSounds" value="True" />
-
-    <add key="FullScreenWhiteboards" value="False" />
 
   </appSettings>
 

@@ -63,6 +63,15 @@ namespace RolesController
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonAccessControl"].Value = "Menu-AccessControl";
         }
 
+        [ActiveEvent(Name = "DefaultCMSContentCreated")]
+        protected static void DefaultCMSContentCreated(object sender, ActiveEventArgs e)
+        {
+            AccessEntity a = new AccessEntity();
+            a.MenuValue = "url:~/";
+            a.RoleName = "Everyone";
+            a.Save();
+        }
+
         [ActiveEvent(Name = "CheckAccessToMenuItem")]
         protected void CheckAccessToMenuItem(object sender, ActiveEventArgs e)
         {

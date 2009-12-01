@@ -104,7 +104,7 @@
         Copyright 2009 - <a href="mailto:thomas@ra-ajax.org">Thomas Hansen</a>. 
         <br />
         All text is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC Share-Alike</a>. 
-        Ra-Brix is Affero GPL licensed.
+        <a href="http://ra-brix.org">Ra-Brix</a> is Affero GPL licensed.
     </p>
 </div>
 
