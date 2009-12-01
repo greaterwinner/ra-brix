@@ -37,10 +37,47 @@ namespace CMSController
                 Page p = new Page();
                 p.Header = "Home";
                 p.Body = string.Format(@"
-<p>Welcome to Ra-Brix. This is the default page which has been created for you...</p>
+<p>
+    Welcome to Ra-Brix. This is the default page which has been created for you.
+</p>
+<p>
+    The first time you login a user will be created for you with the given OpenID identity
+    and the first user to login will become an Administrator and Power User automatically.
+</p>
+<p>
+    If you don't know what OpenID is then you can create an OpenID (and get a good explanation about
+    it) at <a href=""http://myopenid.com"" target=""_blank"">MyOpenID.com</a>...
+</p>
+<p>
+    So basically to recap...
+</p>
+<ul>
+<li>Use your existing OpenID to login in the top-right corner. Create an OpenID at e.e. <a href=""http://myopenid.com"" target=""_blank"">MyOpenID.com</a> if you don't have an existing</li>
+<li>When you come back after logging in that user will be the default Administrator and Power User</li>
+<li>Enjoy :)</li>
+</ul>
+<p>
+    Tutorials, more downloads, updates and videos about how to use Ra-Brix can be 
+    found at <a href=""http://ra-brix.org"">the Ra-Brix website</a>.
+</p>
+<p>
+    If you want to use Ra-Brix for a 'website' then the current Viewport is probably preferable. If you
+    however plan on making more of an 'application' instead, then you should probably use the 'Viewport.Main'
+    Viewport. This can be easily edited in the web.config of your portal by exchangig the line;
+    <pre style=""background-color:Yellow;margin:5px;padding:5px;"">
+        &lt;add key=""PortalViewDriver"" value=""Viewport.Content"" /&gt;
+    </pre>
+    with;
+    <pre style=""background-color:Yellow;margin:5px;padding:5px;"">
+        &lt;add key=""PortalViewDriver"" value=""Viewport.Main"" /&gt;
+    </pre>
+</p>
 ");
                 p.URL = "home";
                 p.Save();
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    typeof(CMSController),
+                    "DefaultCMSContentCreated");
             }
         }
 

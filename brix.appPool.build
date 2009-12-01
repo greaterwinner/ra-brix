@@ -72,5 +72,16 @@
         <include name="start-webdev.bat" />
       </fileset>
     </copy>
+
+
+
+    <!-- Zipping up the binary release... -->
+    <zip zipfile="${output.dir}/${samples.precompiled.dir}.zip" includeemptydirs="true">
+      <fileset basedir="${output.dir}/${samples.precompiled.dir}" prefix="${library.dir}">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
   </target>
+
 </project>

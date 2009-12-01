@@ -167,6 +167,11 @@ This is a global setting though and will make those changes for all users of the
             {
                 // Need to create our user
                 user = new User {Username = username};
+                if(ActiveType<User>.Count == 0)
+                {
+                    user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", "Administrator")));
+                    Settings.Instance["PowerUser"] = user.Username;
+                }
                 user.Save();
             }
             else
@@ -184,17 +189,6 @@ please contact administrator of portal to fix this."]);
                         "ShowInformationMessage",
                         blockedNode);
                     return;
-                }
-            }
-
-            // Checking to see if user is registered power-user, and if so add
-            // him to the Administrator role...
-            if (user.Username == Settings.Instance["PowerUser"])
-            {
-                if (!user.InRole("Administrator"))
-                {
-                    user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", "Administrator")));
-                    user.Save();
                 }
             }
 
