@@ -9,10 +9,7 @@
  */
 
 using System;
-using NUnit.Core;
 using NUnit.Framework;
-using Ra.Brix.Data;
-using System.Collections.Generic;
 using Ra.Brix.Types;
 
 namespace Ra.Brix.Tests.Types
