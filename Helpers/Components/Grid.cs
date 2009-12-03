@@ -25,9 +25,15 @@ using Ra.Brix.Loader;
 
 namespace Components
 {
+    /**
+     * A DataGrid for displaying tabular data with complex logic.
+     */
     [ToolboxData("<{0}:Grid runat=\"server\"></{0}:Grid>")]
     public class Grid : Panel
     {
+        /**
+         * EventArgs sent to CellEdited event.
+         */
         public class GridEditEventArgs : EventArgs
         {
             private readonly string _id;
@@ -60,6 +66,9 @@ namespace Components
             public bool AcceptChange { get; set; }
         }
 
+        /**
+         * EventArgs sent to RowDeleted event.
+         */
         public class GridActionEventArgs : EventArgs
         {
             private readonly string _id;
@@ -90,13 +99,26 @@ namespace Components
         private LinkButton _previous;
         private LinkButton _next;
         private Label _count;
+        private bool _gridWasDatabinded;
 
+        /**
+         * Event sent after a Cell has been edited
+         */
         public event EventHandler<GridEditEventArgs> CellEdited;
 
+        /**
+         * Event sent after a row has been deleted
+         */
         public event EventHandler<GridActionEventArgs> RowDeleted;
 
+        /**
+         * Event sent after a link button o somethig similar has been clicked in a row
+         */
         public event EventHandler<GridActionEventArgs> Action;
 
+        /**
+         * The DataSource for the Grid, needs to follow a schema that the grid expects.
+         */
         public Node DataSource
         {
             get { return ViewState["DataSource"] as Node; }
@@ -152,6 +174,9 @@ namespace Components
             }
         }
 
+        /**
+         * If true (default) then a TextBox for filtering items will be visible
+         */
         [DefaultValue(true)]
         public bool EnableFilter
         {
@@ -159,6 +184,10 @@ namespace Components
             set { ViewState["EnableFilter"] = value; }
         }
 
+        /**
+         * If true (default) the current row will be deleted when the deletion icon is clicked
+         * in the grid. Notice that obviously the grid must allow deletion for this to have any meaning.
+         */
         [DefaultValue(true)]
         public bool AutoDeleteRowOnDeletion
         {
@@ -166,6 +195,10 @@ namespace Components
             set { ViewState["AutoDeleteRowOnDeletion"] = value; }
         }
 
+        /**
+         * If true (default) then the grid will display headers for columns 
+         * with the given caption from the DataSource.
+         */
         [DefaultValue(true)]
         public bool EnableHeaders
         {
@@ -173,6 +206,9 @@ namespace Components
             set { ViewState["EnableHeaders"] = value; }
         }
 
+        /**
+         * If true (default) then items (rows) in the Grid can be deleted.
+         */
         [DefaultValue(true)]
         public bool EnableDeletion
         {
@@ -180,6 +216,10 @@ namespace Components
             set { ViewState["EnableDeletion"] = value; }
         }
 
+        /**
+         * The number of items to show in the grid before user needs to start paging back and forth.
+         * Default value is 10.
+         */
         [DefaultValue(10)]
         public int PageSize
         {
@@ -187,6 +227,9 @@ namespace Components
             set { ViewState["PageSize"] = value; }
         }
 
+        /**
+         * The current active page viewed, default is 0.
+         */
         [DefaultValue(0)]
         public int CurrentPage
         {
@@ -200,6 +243,19 @@ namespace Components
             set { ViewState["OldFilter"] = value; }
         }
 
+        /**
+         * Which column items are sorted according to.
+         */
+        public string SortColumn
+        {
+            get { return ViewState["SortColumn"] as string; }
+            set { ViewState["SortColumn"] = value; }
+        }
+
+        /**
+         * Shorthand for being able to show the last page, useful when adding new rows
+         * and you want to display the newly added row.
+         */
         public void PageToEnd()
         {
             CurrentPage = (DataSource["Rows"].Count - 1) / PageSize;
@@ -331,7 +387,6 @@ namespace Components
             Controls.Add(_lstWrappers);
         }
 
-        private bool _gridWasDatabinded;
         private void DataBindGrid()
         {
             // Clearing any previously databindings...
@@ -636,12 +691,6 @@ namespace Components
                 if (idxNo == (PageSize * CurrentPage) + PageSize)
                     break;
             }
-        }
-
-        public string SortColumn
-        {
-            get { return ViewState["SortColumn"] as string; }
-            set { ViewState["SortColumn"] = value; }
         }
 
         private void CreateHeaders(Control table)
