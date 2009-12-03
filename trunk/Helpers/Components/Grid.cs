@@ -160,6 +160,13 @@ namespace Components
         }
 
         [DefaultValue(true)]
+        public bool AutoDeleteRowOnDeletion
+        {
+            get { return ViewState["AutoDeleteRowOnDeletion"] == null ? true : (bool)ViewState["AutoDeleteRowOnDeletion"]; }
+            set { ViewState["AutoDeleteRowOnDeletion"] = value; }
+        }
+
+        [DefaultValue(true)]
         public bool EnableHeaders
         {
             get { return ViewState["EnableHeaders"] == null ? true : (bool)ViewState["EnableHeaders"]; }
@@ -604,17 +611,20 @@ namespace Components
                                 if (bt != null)
                                 {
                                     RowDeleted(this, new GridActionEventArgs(bt.Xtra, null));
-                                    foreach (Node idx in DataSource["Rows"])
+                                    if (AutoDeleteRowOnDeletion)
                                     {
-                                        if (idx["ID"].Value.ToString() == bt.Xtra)
+                                        foreach (Node idx in DataSource["Rows"])
                                         {
-                                            DataSource["Rows"].Remove(idx);
-                                            break;
+                                            if (idx["ID"].Value.ToString() == bt.Xtra)
+                                            {
+                                                DataSource["Rows"].Remove(idx);
+                                                DataBindGrid();
+                                                _lstWrappers.ReRender();
+                                                break;
+                                            }
                                         }
                                     }
                                 }
-                                DataBindGrid();
-                                _lstWrappers.ReRender();
                             };
 
                         delete.Controls.Add(lb);
