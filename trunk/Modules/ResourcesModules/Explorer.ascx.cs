@@ -19,7 +19,6 @@ using Components;
 using Ra.Effects;
 using Ra.Widgets;
 using System.Globalization;
-using System.Collections.Generic;
 
 namespace ResourcesModules
 {
@@ -113,14 +112,14 @@ namespace ResourcesModules
             int idxNo = 0;
             foreach (string idxFile in Directory.GetFiles(directory))
             {
+                string baseDir = Server.MapPath("~/");
                 string fileName = idxFile.Substring(idxFile.LastIndexOf("\\") + 1);
+                string fileHref = idxFile.Replace(baseDir, "");
                 string fileDate = File.GetCreationTime(idxFile).ToString("yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
-                data["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = fileName;
+                data["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = fileHref;
                 data["Grid"]["Rows"]["Row" + idxNo]["FileName"].Value = fileName;
                 data["Grid"]["Rows"]["Row" + idxNo]["FileDate"].Value = fileDate;
 
-                string baseDir = Server.MapPath("~/");
-                string fileHref = idxFile.Replace(baseDir, "");
                 fileHref = fileHref.Replace("\\", "/");
                 data["Grid"]["Rows"]["Row" + idxNo]["FileName"]["href"].Value = fileHref;
                 idxNo += 1;
