@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 namespace Ra.Brix.Types
 {
@@ -40,7 +41,7 @@ namespace Ra.Brix.Types
         // DNA code size when formatted to string
         private readonly int _dnaSize;
 
-        private readonly string _name;
+        private string _name;
         private object _value;
 
         /**
@@ -63,6 +64,106 @@ namespace Ra.Brix.Types
         public Node(string name, object value)
             : this(name, value, null)
         { }
+
+        public static Node FromJSONString(string json)
+        {
+            List<string> tokens = ExtractTokens(json);
+            if (tokens.Count == 0)
+                throw new ArgumentException("JSON string was empty");
+            if (tokens[0] != "{")
+                throw new ArgumentException("JSON string wasn't an object, missing opening token at character 0");
+            int idxToken = 1;
+            Node retVal = new Node();
+            while (tokens[idxToken] != "}")
+            {
+                ParseToken(tokens, ref idxToken, retVal);
+            }
+            return retVal;
+        }
+
+        private static void ParseToken(IList<string> tokens, ref int idxToken, Node node)
+        {
+            if (tokens[idxToken] == "{")
+            {
+                // Opening new object...
+                Node next = new Node();
+                node._children.Add(next);
+                idxToken += 1;
+                while (tokens[idxToken] != "}")
+                {
+                    ParseToken(tokens, ref idxToken, next);
+                }
+            }
+            else if (tokens[idxToken] == ":")
+            {
+                switch(tokens[idxToken - 1])
+                {
+                    case "\"Name\"":
+                        node.Name = tokens[idxToken + 1].Replace("\\\"", "\"").Trim('"');
+                        break;
+                    case "\"Value\"":
+                        node.Value = tokens[idxToken + 1].Replace("\\\"", "\"").Trim('"');
+                        break;
+                    case "\"Children\"":
+                        idxToken += 1;
+                        while (tokens[idxToken] != "]")
+                        {
+                            ParseToken(tokens, ref idxToken, node);
+                        }
+                        break;
+                }
+            }
+            idxToken += 1;
+            return;
+        }
+
+        private static List<string> ExtractTokens(string json)
+        {
+            List<string> tokens = new List<string>();
+            for (int idx = 0; idx < json.Length; idx++)
+            {
+                switch (json[idx])
+                {
+                    case '{':
+                    case '}':
+                    case ':':
+                    case ',':
+                    case '[':
+                    case ']':
+                        tokens.Add(new string(json[idx], 1));
+                        break;
+                    case '"':
+                        {
+                            string str = "\"";
+                            idx += 1;
+                            while (true)
+                            {
+                                if (json[idx] == '"' && str.Substring(str.Length - 1, 1) != "\\")
+                                {
+                                    break;
+                                }
+                                str += json[idx];
+                                idx += 1;
+                            }
+                            str += "\"";
+                            tokens.Add(str);
+                        } break;
+                    case ' ':
+                    case '\t':
+                    case '\r':
+                    case '\n':
+                        break;
+                    default:
+                        throw new ArgumentException(
+                            string.Format(
+                                "Illegal token found in JSON string at character {0}, token was {1}, string was; \"{2}\"",
+                                idx,
+                                json[idx],
+                                json.Substring(Math.Max(0, idx - 5))));
+                }
+            }
+            return tokens;
+        }
 
         /**
          * Creates a new node with the given name and the given value. In addition
@@ -97,7 +198,11 @@ namespace Ra.Brix.Types
         /**
          * Returns the name of the node
          */
-        public string Name { get { return _name; } }
+        public string Name
+        {
+            get { return _name; }
+            private set { _name = value; }
+        }
 
         /**
          * Returns the value of the object
@@ -367,6 +472,52 @@ namespace Ra.Brix.Types
             if (_children != null)
                 retVal += ":" + _children.Count;
             return retVal;
+        }
+
+        public string ToJSONString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("{");
+            bool hasChild = false;
+            if(!string.IsNullOrEmpty(Name))
+            {
+                builder.AppendFormat(@"""Name"":""{0}""", Name);
+                hasChild = true;
+            }
+            if(Value != null)
+            {
+                if (hasChild)
+                    builder.Append(",");
+                string value = "";
+                switch(Value.GetType().FullName)
+                {
+                    case "System.String":
+                        value = Value.ToString().Replace("\"", "\\\"");
+                        break;
+                    default:
+                        value = Value.ToString();
+                        break;
+                }
+                builder.AppendFormat(@"""Value"":""{0}""", value);
+                hasChild = true;
+            }
+            if(_children.Count > 0)
+            {
+                if (hasChild)
+                    builder.Append(",");
+                builder.Append(@"""Children"":[");
+                bool first = true;
+                foreach(Node idx in _children)
+                {
+                    if (!first)
+                        builder.Append(",");
+                    first = false;
+                    builder.Append(idx.ToJSONString());
+                }
+                builder.Append("]");
+            }
+            builder.Append("}");
+            return builder.ToString();
         }
     }
 }

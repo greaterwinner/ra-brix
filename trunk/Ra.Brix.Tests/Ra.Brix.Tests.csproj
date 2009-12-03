@@ -79,6 +79,8 @@
     <Compile Include="Data\SelectByCriteriaTest.cs" />
     <Compile Include="Data\SelectByIDTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\NodeDeSerialization.cs" />
+    <Compile Include="Types\NodeSerialization.cs" />
     <Compile Include="Types\NodeTest.cs" />
     <Compile Include="Types\PeriodCollectionTests.cs" />
     <Compile Include="Types\PeriodTests.cs" />
