@@ -1,0 +1,20 @@
+
+  ******************************************************************
+
+                        ChangeLog for Ra-Brix
+
+  ******************************************************************
+
+  ------------------------------------------------------------------
+
+                          Version 0.4.0
+
+  ------------------------------------------------------------------
+
+* Added more read files with the download such as license.txt etc
+
+* Added support for serializing back and forth between JSON for the
+  Ra.Brix.Types.Node structure.
+
+
+
