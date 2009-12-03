@@ -14,6 +14,7 @@ using Ra.Brix.Loader;
 using SettingsRecords;
 using WhiteBoardRecords;
 using Ra.Brix.Types;
+using System.Collections.Generic;
 
 namespace WhiteBoardController
 {
@@ -35,22 +36,28 @@ namespace WhiteBoardController
         {
             e.Params["ButtonAppl"]["ButtonWhiteboards"].Value = "Menu-Whiteboards";
             e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonCreateWhiteboard"].Value = "Menu-CreateWhiteboard";
-            e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewAllWhiteboards"].Value = "Menu-ViewAllWhiteboards";
-            e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"].Value = "Menu-EditWhiteboard";
-            e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"].Value = "Menu-ViewWhiteboard";
-            foreach (Whiteboard idx in ActiveType<Whiteboard>.Select())
-            {
-                // First the edit parts...
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
-                    [Language.Instance["Edit", null, "Edit"] + " " + idx.Name].Value = "Menu-EditSpecificWhiteboard";
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
-                    [Language.Instance["Edit", null, "Edit"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
 
-                // Then the "view" parts
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
-                    [Language.Instance["View", null, "View"] + " " + idx.Name].Value = "Menu-ViewSpecificWhiteboard";
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
-                    [Language.Instance["View", null, "View"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
+            List<Whiteboard> whiteboards = new List<Whiteboard>(ActiveType<Whiteboard>.Select());
+            if (whiteboards.Count > 0)
+            {
+                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewAllWhiteboards"].Value =
+                    "Menu-ViewAllWhiteboards";
+                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"].Value = "Menu-EditWhiteboard";
+                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"].Value = "Menu-ViewWhiteboard";
+                foreach (Whiteboard idx in whiteboards)
+                {
+                    // First the edit parts...
+                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
+                        [Language.Instance["Edit", null, "Edit"] + " " + idx.Name].Value = "Menu-EditSpecificWhiteboard";
+                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
+                        [Language.Instance["Edit", null, "Edit"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
+
+                    // Then the "view" parts
+                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
+                        [Language.Instance["View", null, "View"] + " " + idx.Name].Value = "Menu-ViewSpecificWhiteboard";
+                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
+                        [Language.Instance["View", null, "View"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
+                }
             }
         }
 
@@ -66,19 +73,24 @@ namespace WhiteBoardController
         {
             Node init = new Node();
             init["TabCaption"].Value = Language.Instance["WhiteboardAllCaption", null, "All Whiteboards"];
-            init["ModuleSettings"]["Grid"]["Columns"]["Name"]["Caption"].Value = Language.Instance["Whiteboard Name"];
-            init["ModuleSettings"]["Grid"]["Columns"]["Name"]["ControlType"].Value = "LinkButton";
+            init["ModuleSettings"]["Grid"]["Columns"]["View"]["Caption"].Value =
+                Language.Instance["ViewWhiteboard", null, "View Whiteboard"];
+            init["ModuleSettings"]["Grid"]["Columns"]["View"]["ControlType"].Value = "LinkButton";
+            init["ModuleSettings"]["Grid"]["Columns"]["Edit"]["Caption"].Value =
+                Language.Instance["EditWhiteboard", null, "Edit Whiteboard"];
+            init["ModuleSettings"]["Grid"]["Columns"]["Edit"]["ControlType"].Value = "LinkButton";
 
             int idxNo = 0;
             foreach (Whiteboard idx in ActiveType<Whiteboard>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
-                init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["Name"].Value = Language.Instance[idx.Name];
+                init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["View"].Value = Language.Instance[idx.Name];
+                init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["Edit"].Value = Language.Instance[idx.Name];
                 idxNo += 1;
             }
             ActiveEvents.Instance.RaiseLoadControl(
                 "WhiteboardModules.ViewAllWhiteboards",
-                "dynPopup2",
+                "dynMid",
                 init);
         }
 
@@ -87,6 +99,13 @@ namespace WhiteBoardController
         {
             int whiteboardId = int.Parse(e.Params["ID"].Get<string>());
             ViewWhiteboard(whiteboardId);
+        }
+
+        [ActiveEvent(Name = "WhiteboardSelectedForEditing")]
+        protected void WhiteboardSelectedForEditing(object sender, ActiveEventArgs e)
+        {
+            int whiteboardId = int.Parse(e.Params["ID"].Get<string>());
+            EditWhiteboard(whiteboardId);
         }
 
         [ActiveEvent(Name = "Menu-CreateWhiteboard")]
