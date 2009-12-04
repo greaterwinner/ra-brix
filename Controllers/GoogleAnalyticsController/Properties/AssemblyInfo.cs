@@ -1,17 +1,26 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿/*
+ * Ra-Brix - A Modular-based Framework for building 
+ * Web Applications Copyright 2009 - Thomas Hansen 
+ * thomas@ra-ajax.org. Unless permission is 
+ * explicitly given this code is licensed under the 
+ * GNU Affero GPL version 3 which can be found in the 
+ * license.txt file on disc.
+ * 
+ */
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("StatisticsController")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Ra-Brix Controllers for embedding Google Analytics")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Ra-Software Inc.")]
 [assembly: AssemblyProduct("StatisticsController")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © Thomas Hansen 2009")]
+[assembly: AssemblyTrademark("Ra-Brix")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
