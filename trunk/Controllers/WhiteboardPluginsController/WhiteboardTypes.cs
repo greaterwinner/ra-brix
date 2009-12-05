@@ -35,6 +35,7 @@ namespace WhiteboardPluginsController
             e.Params["Types"]["User"].Value = true;
             e.Params["Types"]["Strike"].Value = true;
             e.Params["Types"]["Date"].Value = true;
+            e.Params["Types"]["ViewDetails"].Value = true;
         }
 
         [ActiveEvent(Name = "GetGridColumnType")]
@@ -61,6 +62,10 @@ namespace WhiteboardPluginsController
             {
                 CreateDate(e);
             }
+            else if (controlType == "ViewDetails")
+            {
+                CreateViewDetails(e);
+            }
         }
 
         [ActiveEvent(Name = "GetTipOfToday")]
@@ -82,6 +87,49 @@ and nothing more.
                 Language.Instance["TipOfWhiteBoardFilterByDateColumns", null, tmp];
         }
 
+        private void CreateViewDetails(ActiveEventArgs e)
+        {
+            LinkButton btn = new LinkButton();
+            btn.Text = Language.Instance["View details", null, "View details"];
+            btn.Click +=
+                delegate(object sender, EventArgs e2)
+                {
+                    LinkButton bt = (LinkButton)sender;
+                    string[] xtra = bt.Xtra.Split('|');
+                    int rowId = int.Parse(xtra[0]);
+                    Node node = new Node();
+                    node["RowID"].Value = rowId;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "ShowWhiteBoardColumnDetailsView",
+                        node);
+                };
+            e.Params["Control"].Value = btn;
+        }
+
+        [ActiveEvent(Name = "ShowWhiteBoardColumnDetailsView")]
+        protected void ShowWhiteBoardColumnDetailsView(object sender, ActiveEventArgs e)
+        {
+            Whiteboard.Row board = ActiveType<Whiteboard.Row>.SelectByID(e.Params["RowID"].Get<int>());
+            Node node = new Node();
+            int idxNo = 0;
+            foreach(Whiteboard.Cell idx in board.Cells)
+            {
+                if (idx.Column.Type != "ViewDetails")
+                {
+                    node["ModuleSettings"]["Cells"]["Cell" + idxNo]["Caption"].Value = idx.Column.Caption;
+                    node["ModuleSettings"]["Cells"]["Cell" + idxNo]["Value"].Value = idx.Value;
+                    node["ModuleSettings"]["Cells"]["Cell" + idxNo]["Type"].Value = idx.Column.Type;
+                    node["ModuleSettings"]["Cells"]["Cell" + idxNo]["Position"].Value = idx.Column.Position;
+                    idxNo += 1;
+                }
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "WhiteboardModules.ViewWhiteboardDetails",
+                "dynMaxi",
+                node);
+        }
+
         private static void CreateDate(ActiveEventArgs e)
         {
             string curValue = e.Params["Value"].Get<string>();
@@ -93,7 +141,8 @@ and nothing more.
             btn.Click +=
                 delegate(object sender, EventArgs e2)
                     {
-                        DateTimePicker pick = Selector.SelectFirst<DateTimePicker>(((Control) sender).Parent);
+                        DateTimePicker pick = 
+                            Selector.SelectFirst<DateTimePicker>(((Control) sender).Parent);
                         new EffectFadeIn(pick, 200)
                             .Render();
                     };
