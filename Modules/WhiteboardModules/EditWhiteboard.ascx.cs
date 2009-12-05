@@ -89,6 +89,8 @@ namespace WhiteboardModules
             gridNode["Columns"]["Type"]["ControlType"].Value = "InPlaceEdit";
             gridNode["Columns"]["Position"]["Caption"].Value = Language.Instance["WhiteboardPositionCaption", null, "Position"];
             gridNode["Columns"]["Position"]["ControlType"].Value = "InPlaceEdit";
+            gridNode["Columns"]["ShowInSummary"]["Caption"].Value = Language.Instance["ShowInSummary", null, "Show in summary"];
+            gridNode["Columns"]["ShowInSummary"]["ControlType"].Value = "InPlaceEdit";
             int idxNo = 0;
             foreach (Node idx in node["Whiteboard"]["Columns"])
             {
@@ -96,6 +98,7 @@ namespace WhiteboardModules
                 gridNode["Rows"]["Row" + idxNo]["Name"].Value = idx["Caption"].Get<string>();
                 gridNode["Rows"]["Row" + idxNo]["Type"].Value = idx["Type"].Get<string>();
                 gridNode["Rows"]["Row" + idxNo]["Position"].Value = idx["Position"].Get<string>();
+                gridNode["Rows"]["Row" + idxNo]["ShowInSummary"].Value = idx["ShowInSummary"].Value.ToString();
                 idxNo += 1;
             }
             grd.DataSource = gridNode;

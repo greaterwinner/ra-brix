@@ -23,6 +23,3 @@
         id="grd" />
 
 </ra:Panel>
-
-
-
