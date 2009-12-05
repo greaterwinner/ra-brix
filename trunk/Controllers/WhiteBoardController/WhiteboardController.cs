@@ -22,7 +22,7 @@ namespace WhiteBoardController
     public class WhiteboardController
     {
         [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
+        protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonWhiteboards", "Lists");
             Language.Instance.SetDefaultValue("ButtonCreateWhiteboard", "Create New");
@@ -215,6 +215,10 @@ but currently installed plugins allows;
                     {
                         col.Position = int.Parse(value);
                     } break;
+                case "ShowInSummary":
+                    {
+                        col.ShowInSummary = value.ToLowerInvariant() == "true";
+                    } break;
                 case "Type":
                     {
                         Node colTypes = new Node();
@@ -325,6 +329,7 @@ You must type in an integer value, nothing was saved..."];
                 init["ModuleSettings"]["Whiteboard"]["Columns"]["Columns" + idxNo]["Caption"].Value = idx.Caption;
                 init["ModuleSettings"]["Whiteboard"]["Columns"]["Columns" + idxNo]["Type"].Value = idx.Type;
                 init["ModuleSettings"]["Whiteboard"]["Columns"]["Columns" + idxNo]["Position"].Value = idx.Position.ToString();
+                init["ModuleSettings"]["Whiteboard"]["Columns"]["Columns" + idxNo]["ShowInSummary"].Value = idx.ShowInSummary;
                 idxNo += 1;
             }
 
@@ -357,8 +362,11 @@ You must type in an integer value, nothing was saved..."];
             // Creating our Columns
             foreach (Whiteboard.Column idx in board.Columns)
             {
-                init["ModuleSettings"]["Whiteboard"]["Columns"][idx.Caption]["Caption"].Value = idx.Caption;
-                init["ModuleSettings"]["Whiteboard"]["Columns"][idx.Caption]["ControlType"].Value = idx.Type;
+                if (idx.ShowInSummary)
+                {
+                    init["ModuleSettings"]["Whiteboard"]["Columns"][idx.Caption]["Caption"].Value = idx.Caption;
+                    init["ModuleSettings"]["Whiteboard"]["Columns"][idx.Caption]["ControlType"].Value = idx.Type;
+                }
             }
 
             int idxNo = 0;
@@ -372,7 +380,10 @@ You must type in an integer value, nothing was saved..."];
                     });
                 foreach (Whiteboard.Cell idxCell in idxRow.Cells)
                 {
-                    init["ModuleSettings"]["Whiteboard"]["Rows"]["Row" + idxNo][idxCell.Column.Caption].Value = idxCell.Value;
+                    if (idxCell.Column.ShowInSummary)
+                    {
+                        init["ModuleSettings"]["Whiteboard"]["Rows"]["Row" + idxNo][idxCell.Column.Caption].Value = idxCell.Value;
+                    }
                 }
                 idxNo += 1;
             }
@@ -408,8 +419,11 @@ You must type in an integer value, nothing was saved..."];
             // Creating our Columns
             foreach (Whiteboard.Column idx in w.Columns)
             {
-                e.Params["Whiteboard"]["Columns"][idx.Caption]["Caption"].Value = idx.Caption;
-                e.Params["Whiteboard"]["Columns"][idx.Caption]["ControlType"].Value = idx.Type;
+                if (idx.ShowInSummary)
+                {
+                    e.Params["Whiteboard"]["Columns"][idx.Caption]["Caption"].Value = idx.Caption;
+                    e.Params["Whiteboard"]["Columns"][idx.Caption]["ControlType"].Value = idx.Type;
+                }
             }
 
             int idxNo = 0;
@@ -423,7 +437,10 @@ You must type in an integer value, nothing was saved..."];
                     });
                 foreach (Whiteboard.Cell idxCell in idxRow.Cells)
                 {
-                    e.Params["Whiteboard"]["Rows"]["Row" + idxNo][idxCell.Column.Caption].Value = idxCell.Value;
+                    if (idxCell.Column.ShowInSummary)
+                    {
+                        e.Params["Whiteboard"]["Rows"]["Row" + idxNo][idxCell.Column.Caption].Value = idxCell.Value;
+                    }
                 }
                 idxNo += 1;
             }
@@ -465,6 +482,7 @@ You must type in an integer value, nothing was saved..."];
                 init["Whiteboard"]["Columns"]["Columns" + idxNo]["Caption"].Value = idx.Caption;
                 init["Whiteboard"]["Columns"]["Columns" + idxNo]["Type"].Value = idx.Type;
                 init["Whiteboard"]["Columns"]["Columns" + idxNo]["Position"].Value = idx.Position.ToString();
+                init["Whiteboard"]["Columns"]["Columns" + idxNo]["ShowInSummary"].Value = idx.ShowInSummary;
                 idxNo += 1;
             }
             ActiveEvents.Instance.RaiseActiveEvent(

@@ -19,6 +19,11 @@ namespace WhiteBoardRecords
         [ActiveType]
         public class Column : ActiveType<Column>
         {
+            public Column()
+            {
+                ShowInSummary = true;
+            }
+
             [ActiveField]
             public string Caption { get; set; }
 
@@ -27,6 +32,9 @@ namespace WhiteBoardRecords
 
             [ActiveField]
             public int Position { get; set; }
+
+            [ActiveField]
+            public bool ShowInSummary { get; set; }
         }
 
         [ActiveType]
