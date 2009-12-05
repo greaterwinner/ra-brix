@@ -38,7 +38,7 @@
         <ra:LinkButton
             runat="server"
             id="close"
-            style="position:absolute;right:20px;bottom:20px;"
+            style="position:absolute;right:45px;bottom:20px;"
             OnClick="close_Click"
             Text='<%# Language.Instance["Close", null, "Close"] %>' />
         

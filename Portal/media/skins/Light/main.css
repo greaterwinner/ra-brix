@@ -1348,6 +1348,31 @@ span.buttonFlat
 	clear:both;
 }
 
+.bordered-panel
+{
+	padding:5px;
+	margin:15px;
+	border:dashed 1px #ddd;
+	position:relative;
+}
+
+.label-caption
+{
+	position:absolute;
+	top:5px;
+	left:5px;
+	font-weight:bold;
+}
+
+.label-value
+{
+	margin-top:13px;
+	padding:10px;
+	display:block;
+	color:#666;
+}
+
+
 
 
 

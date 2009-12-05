@@ -53,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewWhiteboardDetails.ascx.cs">
+      <DependentUpon>ViewWhiteboardDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewWhiteboard.ascx.cs">
       <DependentUpon>ViewWhiteboard.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -116,6 +120,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewWhiteboard.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewWhiteboardDetails.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
