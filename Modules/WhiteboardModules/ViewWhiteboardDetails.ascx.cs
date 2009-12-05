@@ -19,6 +19,7 @@ namespace WhiteboardModules
     public class ViewWhiteboardDetails : System.Web.UI.UserControl, IModule
     {
         protected global::Ra.Widgets.Panel wrpPnl;
+        protected global::Ra.Widgets.Label headerLbl;
         private Node _cells;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -66,6 +67,7 @@ namespace WhiteboardModules
         public void InitialLoading(Node node)
         {
             _cells = node;
+            headerLbl.Text = node["Header"].Get<string>();
         }
 
         public string GetCaption()
