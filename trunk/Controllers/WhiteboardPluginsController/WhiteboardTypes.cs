@@ -9,8 +9,11 @@
  */
 
 using System;
+using System.Web;
 using System.Web.UI;
 using LanguageRecords;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 using Ra.Brix.Data;
 using Ra.Brix.Loader;
 using UserRecords;
@@ -21,6 +24,9 @@ using Ra.Effects;
 using Ra.Extensions.Widgets;
 using System.Globalization;
 using Ra.Selector;
+using Styles=Ra.Widgets.Styles;
+using PdfSharp.Pdf;
+using Ra;
 
 namespace WhiteboardPluginsController
 {
@@ -36,6 +42,7 @@ namespace WhiteboardPluginsController
             e.Params["Types"]["Strike"].Value = true;
             e.Params["Types"]["Date"].Value = true;
             e.Params["Types"]["ViewDetails"].Value = true;
+            e.Params["Types"]["ToPDF"].Value = true;
         }
 
         [ActiveEvent(Name = "GetGridColumnType")]
@@ -66,6 +73,10 @@ namespace WhiteboardPluginsController
             {
                 CreateViewDetails(e);
             }
+            else if (controlType == "ToPDF")
+            {
+                CreateToPDF(e);
+            }
         }
 
         [ActiveEvent(Name = "GetTipOfToday")]
@@ -87,10 +98,72 @@ and nothing more.
                 Language.Instance["TipOfWhiteBoardFilterByDateColumns", null, tmp];
         }
 
+        private void CreateToPDF(ActiveEventArgs e)
+        {
+            LinkButton btn = new LinkButton();
+            btn.Text = Language.Instance["Save as PDF", null, "Save PDF..."];
+            btn.Click +=
+                delegate(object sender, EventArgs e2)
+                {
+                    LinkButton bt = (LinkButton)sender;
+                    string[] xtra = bt.Xtra.Split('|');
+                    int rowId = int.Parse(xtra[0]);
+                    CreateAndRedirectToPDF(rowId);
+                };
+            e.Params["Control"].Value = btn;
+        }
+
+        private void CreateAndRedirectToPDF(int rowId)
+        {
+            Document document = new Document();
+
+            // Creating header
+            Section section = document.AddSection();
+            Paragraph paragraph = section.AddParagraph();
+            paragraph.Format.Font.Color = Color.FromCmyk(100, 30, 20, 50);
+            paragraph.AddFormattedText(
+                Language.Instance["WhiteboardRowDetails", null, "Whiteboard Row Details"], 
+                TextFormat.Bold);
+
+            Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
+
+            foreach(Whiteboard.Cell idx in row.Cells)
+            {
+                RenderCellToPdf(section, idx);
+            }
+
+            // Rendering document back to client
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true, PdfFontEmbedding.Always);
+            pdfRenderer.Document = document;
+            pdfRenderer.RenderDocument();
+            string filename = HttpContext.Current.Server.MapPath("~/TemporaryFiles/mumbo-jumbo.pdf");
+            pdfRenderer.PdfDocument.Save(filename);
+            AjaxManager.Instance.WriterAtBack.Write("window.open('TemporaryFiles/mumbo-jumbo.pdf');");
+        }
+
+        private void RenderCellToPdf(Section section, Whiteboard.Cell cell)
+        {
+            // Header
+            Paragraph paragraph = section.AddParagraph();
+            paragraph.Format.SpaceBefore = new Unit(10, UnitType.Point);
+            paragraph.Format.LeftIndent = new Unit(10, UnitType.Point);
+            paragraph.Format.Font.Color = Color.FromCmyk(100, 30, 20, 50);
+            paragraph.AddFormattedText(
+                cell.Column.Caption,
+                TextFormat.Bold);
+            
+            // Value
+            string value = cell.Value ?? "";
+            paragraph = section.AddParagraph();
+            paragraph.Format.LeftIndent = new Unit(20, UnitType.Point);
+            paragraph.Format.Font.Color = Color.FromCmyk(100, 120, 120, 120);
+            paragraph.AddFormattedText(value);
+        }
+
         private void CreateViewDetails(ActiveEventArgs e)
         {
             LinkButton btn = new LinkButton();
-            btn.Text = Language.Instance["View details", null, "View details"];
+            btn.Text = Language.Instance["ViewDetails", null, "View..."];
             btn.Click +=
                 delegate(object sender, EventArgs e2)
                 {
@@ -112,8 +185,10 @@ and nothing more.
         {
             Whiteboard.Row board = ActiveType<Whiteboard.Row>.SelectByID(e.Params["RowID"].Get<int>());
             Node node = new Node();
+            node["ModuleSettings"]["Header"].Value = 
+                Language.Instance["WhiteboardRowDetails", null, "Whiteboard Row Details"];
             int idxNo = 0;
-            foreach(Whiteboard.Cell idx in board.Cells)
+            foreach (Whiteboard.Cell idx in board.Cells)
             {
                 if (idx.Column.Type != "ViewDetails")
                 {
