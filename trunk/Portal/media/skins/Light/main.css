@@ -1114,6 +1114,11 @@ span.button
 	background-position: -126px 0;
 }
 
+.resources
+{
+	background-position: -108px -40px;
+}
+
 .hyperlink
 {
 	background-position: -63px -20px;
@@ -1371,6 +1376,32 @@ span.buttonFlat
 	display:block;
 	color:#666;
 }
+
+.resourceDownload
+{
+	display:inline-block;
+	width:48px;
+	height:48px;
+	background:Transparent url('resource-icons.png') no-repeat 0 0;
+}
+
+.specificResource-mp3
+{
+	background-position:-48px 0;
+}
+
+.specificResource-doc,
+.specificResource-docx
+{
+	background-position:-96px 0;
+}
+
+.specificResource-pdf
+{
+	background-position:-144px 0;
+}
+
+
 
 
 

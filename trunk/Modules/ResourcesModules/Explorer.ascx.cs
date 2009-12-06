@@ -142,7 +142,7 @@ namespace ResourcesModules
             node["File"].Value = fileName;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
-                "FileExplorerFileChosen",
+                EventToRaise,
                 node);
         }
 
@@ -158,12 +158,19 @@ namespace ResourcesModules
             set { ViewState["SelectMode"] = value; }
         }
 
+        private string EventToRaise
+        {
+            get { return ViewState["EventToRaise"] as string; }
+            set { ViewState["EventToRaise"] = value; }
+        }
+
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
                 {
                     SelectMode = node["Mode"].Value != null ? true : false;
+                    EventToRaise = node["EventToRaise"].Get<string>();
                 };
         }
 
