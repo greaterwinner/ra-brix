@@ -524,6 +524,41 @@
       </references>
     </csc>
 
+    <!-- WhiteboardPDFController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/WhiteboardPDFController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/WhiteboardPDFController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${references.dir}/MigraDoc.DocumentObjectModel.dll" />
+        <include name="${references.dir}/MigraDoc.Rendering.dll" />
+        <include name="${references.dir}/MigraDoc.RtfRendering.dll" />
+        <include name="${references.dir}/PdfSharp.Charting.dll" />
+        <include name="${references.dir}/PdfSharp.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
     <!-- TipOfTodayController -->
     <csc
         target="library"

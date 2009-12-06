@@ -8,6 +8,7 @@
  * 
  */
 
+using LanguageRecords;
 using Ra.Brix.Loader;
 
 namespace CMSCommonPlugins
@@ -18,7 +19,7 @@ namespace CMSCommonPlugins
         [ActiveEvent(Name = "CMSGetPluginTypes")]
         protected void CMSGetPluginTypes(object sender, ActiveEventArgs e)
         {
-            e.Params["ContactUs"]["Name"].Value = "Contact Us";
+            e.Params["ContactUs"]["Name"].Value = Language.Instance["ContactUs", null, "Contact us"];
             e.Params["ContactUs"]["Value"].Value = "CMSCommonPluginModules.ContactUs";
         }
     }
