@@ -11,19 +11,20 @@
     style="padding:15px;">
     <table class="createLink">
         <tr>
-            <td>
+            <td style="white-space:nowrap;">
                 <%=Language.Instance["LocalLink", null, "Local link: "] %>
             </td>
             <td>
                 <ra:SelectList 
                     runat="server" 
                     OnSelectedIndexChanged="internalPages_SelectedIndexChanged"
+                    style="width:170px;"
                     id="internalPages">
                 </ra:SelectList>
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="white-space:nowrap;">
                 <%=Language.Instance["URLToLink", null, "URL to link: "] %>
             </td>
             <td>
