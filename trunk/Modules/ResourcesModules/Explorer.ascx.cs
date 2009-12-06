@@ -132,7 +132,7 @@ namespace ResourcesModules
         protected void grid_RowDeleted(object sender, Grid.GridActionEventArgs e)
         {
             string fileName = e.ID;
-            File.Delete(fileName);
+            File.Delete(Server.MapPath("~/" + fileName));
         }
 
         protected void grd_Action(object sender, Grid.GridActionEventArgs e)

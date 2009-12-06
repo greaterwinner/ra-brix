@@ -110,6 +110,25 @@ namespace Ra.Brix.Data
         {
             return new ExistsInEquals(id);
         }
+
+        /**
+         * Static constructor to create a criteria of type ExistsInEquals.
+         */
+        public static Criteria HasChild(int id)
+        {
+            return new HasChildId(id);
+        }
+    }
+
+    /**
+     * A criteria that makes sure your object is the parent of the object with
+     * the given id
+     */
+    public class HasChildId : Criteria
+    {
+        public HasChildId(int id)
+            : base(null, id)
+        { }
     }
 
     /**
