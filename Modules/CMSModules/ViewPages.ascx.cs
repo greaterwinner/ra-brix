@@ -140,6 +140,13 @@ namespace CMSModules
                 "CMSGetImageDialog");
         }
 
+        protected void editor_GetResourceDialog(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "CMSGetResourceDialog");
+        }
+
         protected void editor_GetHyperLinkDialog(object sender, EventArgs e)
         {
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -157,12 +164,23 @@ namespace CMSModules
             editor.PasteHTML(html);
         }
 
-        [ActiveEvent(Name = "FileChosenByFileDialog")]
-        protected void FileChosenByFileDialog(object sender, ActiveEventArgs e)
+        [ActiveEvent(Name = "ImageFileChosenByFileDialog")]
+        protected void ImageFileChosenByFileDialog(object sender, ActiveEventArgs e)
         {
             string fileName = e.Params["File"].Get<string>();
             string html = string.Format(
                 @"<img src=""{0}"" alt=""unknown"" />", fileName);
+            editor.PasteHTML(html);
+        }
+
+        [ActiveEvent(Name = "ResourceFileChosenByFileDialog")]
+        protected void ResourceFileChosenByFileDialog(object sender, ActiveEventArgs e)
+        {
+            string fileName = e.Params["File"].Get<string>();
+            string cssClass = "resourceDownload specificResource-" + 
+                fileName.Substring(fileName.LastIndexOf('.') + 1).ToLowerInvariant();
+            string html = string.Format(
+                @"<a target=""_blank"" href=""{0}"" class=""{1}"" />", fileName, cssClass);
             editor.PasteHTML(html);
         }
 

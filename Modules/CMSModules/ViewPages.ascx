@@ -42,6 +42,7 @@
             ID="editor" 
             CssClass="editor"
             OnGetImageDialog="editor_GetImageDialog"
+            OnGetResourceDialog="editor_GetResourceDialog"
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
             CtrlKeys="s,g"
             OnCtrlKey="editor_CtrlKeys"

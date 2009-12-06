@@ -141,18 +141,19 @@ namespace CMSController
         protected void CMSGetImageDialog(object sender, ActiveEventArgs e)
         {
             Node node = new Node();
-            node["TabCaption"].Value = 
+            node["TabCaption"].Value =
                 Language.Instance["SelectImage", null, "Select Image"];
             node["Width"].Value = 800;
             node["Height"].Value = 310;
             node["ModuleSettings"]["Mode"].Value = "Select";
+            node["ModuleSettings"]["EventToRaise"].Value = "FileExplorerImageFileChosen";
             ActiveEvents.Instance.RaiseLoadControl(
                 "ResourcesModules.Explorer",
                 "dynPopup",
                 node);
         }
 
-        [ActiveEvent(Name = "FileExplorerFileChosen")]
+        [ActiveEvent(Name = "FileExplorerImageFileChosen")]
         protected void FileExplorerFileChosen(object sender, ActiveEventArgs e)
         {
             string fileName = e.Params["File"].Get<string>();
@@ -162,7 +163,38 @@ namespace CMSController
             node["File"].Value = fileName;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
-                "FileChosenByFileDialog",
+                "ImageFileChosenByFileDialog",
+                node);
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
+        [ActiveEvent(Name = "CMSGetResourceDialog")]
+        protected void CMSGetResourceDialog(object sender, ActiveEventArgs e)
+        {
+            Node node = new Node();
+            node["TabCaption"].Value =
+                Language.Instance["SelectImage", null, "Select Image"];
+            node["Width"].Value = 800;
+            node["Height"].Value = 310;
+            node["ModuleSettings"]["Mode"].Value = "Select";
+            node["ModuleSettings"]["EventToRaise"].Value = "FileExplorerResourceFileChosen";
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ResourcesModules.Explorer",
+                "dynPopup",
+                node);
+        }
+
+        [ActiveEvent(Name = "FileExplorerResourceFileChosen")]
+        protected void FileExplorerResourceFileChosen(object sender, ActiveEventArgs e)
+        {
+            string fileName = e.Params["File"].Get<string>();
+            fileName = fileName.Replace(HttpContext.Current.Server.MapPath("~/"), "");
+            fileName = fileName.Replace("\\", "/");
+            Node node = new Node();
+            node["File"].Value = fileName;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ResourceFileChosenByFileDialog",
                 node);
             ActiveEvents.Instance.RaiseClearControls("dynPopup");
         }
