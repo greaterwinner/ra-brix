@@ -74,6 +74,10 @@ namespace Ra.Brix.Data
                         {
                             where += " and Parent=" + idx.Value;
                         }
+                        else if (idx is HasChildId)
+                        {
+                            where += " and exists(select * from Documents d2 where d2.Parent=d.ID)";
+                        }
                         else if (idx is ExistsInEquals)
                         {
                             string parentType = "";

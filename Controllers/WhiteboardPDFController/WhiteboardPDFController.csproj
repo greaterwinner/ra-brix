@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AA7387BE-2021-47BC-ACF7-68BF0C1F8B42}</ProjectGuid>
+    <ProjectGuid>{32FFEFC3-9EF8-411B-8F55-1686B553F0D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WhiteboardPluginsController</RootNamespace>
-    <AssemblyName>WhiteboardPluginsController</AssemblyName>
+    <RootNamespace>WhiteboardPDFController</RootNamespace>
+    <AssemblyName>WhiteboardPDFController</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,21 +31,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.2.2961.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.2.2961.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.3.1684.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Portal\Bin\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Builder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Builder.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Selector.dll</HintPath>
+      <HintPath>..\..\Portal\bin\Ra.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WhiteboardPDFController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WhiteboardTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
@@ -73,9 +73,9 @@
       <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
       <Name>LanguageRecords</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Types\User\UserRecords.csproj">
-      <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
-      <Name>UserRecords</Name>
+    <ProjectReference Include="..\..\Types\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Types\WhiteBoardRecords\WhiteBoardRecords.csproj">
       <Project>{A3F4F9D4-AD60-46A1-85D1-AA396AF92065}</Project>

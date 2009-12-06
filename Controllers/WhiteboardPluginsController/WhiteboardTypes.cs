@@ -9,11 +9,8 @@
  */
 
 using System;
-using System.Web;
 using System.Web.UI;
 using LanguageRecords;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.Rendering;
 using Ra.Brix.Data;
 using Ra.Brix.Loader;
 using UserRecords;
@@ -24,9 +21,6 @@ using Ra.Effects;
 using Ra.Extensions.Widgets;
 using System.Globalization;
 using Ra.Selector;
-using Styles=Ra.Widgets.Styles;
-using PdfSharp.Pdf;
-using Ra;
 
 namespace WhiteboardPluginsController
 {
@@ -42,7 +36,6 @@ namespace WhiteboardPluginsController
             e.Params["Types"]["Strike"].Value = true;
             e.Params["Types"]["Date"].Value = true;
             e.Params["Types"]["ViewDetails"].Value = true;
-            e.Params["Types"]["ToPDF"].Value = true;
         }
 
         [ActiveEvent(Name = "GetGridColumnType")]
@@ -73,10 +66,6 @@ namespace WhiteboardPluginsController
             {
                 CreateViewDetails(e);
             }
-            else if (controlType == "ToPDF")
-            {
-                CreateToPDF(e);
-            }
         }
 
         [ActiveEvent(Name = "GetTipOfToday")]
@@ -94,70 +83,36 @@ on the 23rd of December, 11:45PM in 1986 you'd write this into the Filter textbo
 Or to find out anyone who is born in the February 2008 you'd write; 'DateOfBirth:2008.02' 
 and nothing more.
 ";
-            e.Params["Tip"]["TipOfWhiteBoardFilterByDateColumns"].Value = 
+            e.Params["Tip"]["TipOfWhiteBoardFilterByDateColumns"].Value =
                 Language.Instance["TipOfWhiteBoardFilterByDateColumns", null, tmp];
         }
 
-        private void CreateToPDF(ActiveEventArgs e)
+        [ActiveEvent(Name = "GetTipOfToday")]
+        protected static void GetTipOfToday2(object sender, ActiveEventArgs e)
         {
-            LinkButton btn = new LinkButton();
-            btn.Text = Language.Instance["Save as PDF", null, "Save PDF..."];
-            btn.Click +=
-                delegate(object sender, EventArgs e2)
-                {
-                    LinkButton bt = (LinkButton)sender;
-                    string[] xtra = bt.Xtra.Split('|');
-                    int rowId = int.Parse(xtra[0]);
-                    CreateAndRedirectToPDF(rowId);
-                };
-            e.Params["Control"].Value = btn;
+            const string tmp = @"
+Did you know that you can choose to not show any one column from your whiteboard in
+the summary [list view] of your Whiteboard?
+
+Just make sure that the ""Show in summary"" column when editing your Whiteboard is
+set to ""False"". This will make sure that column is NOT visible in the Grid view 
+of your Whiteboard, but your column will still be available programatically and in 
+most other ways.
+";
+            e.Params["Tip"]["TipOfWhiteBoardDontShowInSummary"].Value =
+                Language.Instance["TipOfWhiteBoardDontShowInSummary", null, tmp];
         }
 
-        private void CreateAndRedirectToPDF(int rowId)
+        [ActiveEvent(Name = "GetTipOfToday")]
+        protected static void GetTipOfToday3(object sender, ActiveEventArgs e)
         {
-            Document document = new Document();
-
-            // Creating header
-            Section section = document.AddSection();
-            Paragraph paragraph = section.AddParagraph();
-            paragraph.Format.Font.Color = Color.FromCmyk(100, 30, 20, 50);
-            paragraph.AddFormattedText(
-                Language.Instance["WhiteboardRowDetails", null, "Whiteboard Row Details"], 
-                TextFormat.Bold);
-
-            Whiteboard.Row row = ActiveType<Whiteboard.Row>.SelectByID(rowId);
-
-            foreach(Whiteboard.Cell idx in row.Cells)
-            {
-                RenderCellToPdf(section, idx);
-            }
-
-            // Rendering document back to client
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true, PdfFontEmbedding.Always);
-            pdfRenderer.Document = document;
-            pdfRenderer.RenderDocument();
-            string filename = HttpContext.Current.Server.MapPath("~/TemporaryFiles/mumbo-jumbo.pdf");
-            pdfRenderer.PdfDocument.Save(filename);
-            AjaxManager.Instance.WriterAtBack.Write("window.open('TemporaryFiles/mumbo-jumbo.pdf');");
-        }
-
-        private void RenderCellToPdf(Section section, Whiteboard.Cell cell)
-        {
-            // Header
-            Paragraph paragraph = section.AddParagraph();
-            paragraph.Format.SpaceBefore = new Unit(10, UnitType.Point);
-            paragraph.Format.LeftIndent = new Unit(10, UnitType.Point);
-            paragraph.Format.Font.Color = Color.FromCmyk(100, 30, 20, 50);
-            paragraph.AddFormattedText(
-                cell.Column.Caption,
-                TextFormat.Bold);
-            
-            // Value
-            string value = cell.Value ?? "";
-            paragraph = section.AddParagraph();
-            paragraph.Format.LeftIndent = new Unit(20, UnitType.Point);
-            paragraph.Format.Font.Color = Color.FromCmyk(100, 120, 120, 120);
-            paragraph.AddFormattedText(value);
+            const string tmp = @"
+Did you know that you can add a column to your Whiteboard which is of type 
+""ViewDetails"" and you're going to get the option of seeing one record in full screen
+with all fields [also the ones that's not supposed to show in the ""SummaryView""]
+";
+            e.Params["Tip"]["TipOfWhiteBoardViewDetails"].Value =
+                Language.Instance["TipOfWhiteBoardViewDetails", null, tmp];
         }
 
         private void CreateViewDetails(ActiveEventArgs e)
