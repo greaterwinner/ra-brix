@@ -2,7 +2,9 @@
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="ResourcesModules.Explorer" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <div style="width:98%;height:94%;padding:1%;">
     <div style="width:30%;height:100%;float:left;">
@@ -19,6 +21,14 @@
 
         </ra:Tree>
     </div>
+    <ra:Panel 
+        runat="server" 
+        id="infoPanel"
+        CssClass="resourceExplorerFiles">
+        <strong>
+            <%=Language.Instance["SelectFolerFromLeft", null, "Select a folder from the left"] %>
+        </strong>
+    </ra:Panel>
     <ra:Panel
         runat="server"
         id="grdWrapper"
