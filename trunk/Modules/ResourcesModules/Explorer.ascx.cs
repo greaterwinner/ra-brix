@@ -28,6 +28,7 @@ namespace ResourcesModules
         protected global::Ra.Extensions.Widgets.Tree tree;
         protected global::Ra.Extensions.Widgets.TreeNodes root;
         protected global::Ra.Widgets.Panel grdWrapper;
+        protected global::Ra.Widgets.Panel infoPanel;
         protected global::Components.Grid grd;
         protected global::System.Web.UI.WebControls.Button btnSaveFile;
         protected global::System.Web.UI.WebControls.FileUpload fileUpload;
@@ -98,7 +99,16 @@ namespace ResourcesModules
             CurrentDirectory = directory;
             grdWrapper.Visible = true;
             grdWrapper.Style[Styles.display] = "none";
-            new EffectFadeIn(grdWrapper, 200).Render();
+            if (infoPanel.Style[Styles.display] != "none")
+            {
+                new EffectFadeOut(infoPanel, 400)
+                    .ChainThese(
+                        new EffectFadeIn(grdWrapper, 400)).Render();
+            }
+            else
+            {
+                new EffectFadeIn(grdWrapper, 400).Render();
+            }
 
             Node data = new Node();
             data["Grid"]["Columns"]["FileName"]["Caption"].Value =
