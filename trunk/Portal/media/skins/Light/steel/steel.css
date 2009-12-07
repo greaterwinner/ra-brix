@@ -238,6 +238,11 @@ http://ra-ajax.org
 	height:16px;
 }
 
+.sliding-menu .sliding-level .sliding-item .sliding-leaf:hover
+{
+	background:url('tree-sprites.png') no-repeat -224px -1px;
+}
+
 /* WebPart specific CSS */
 
 .webpart { border:solid 1px #666; max-height:100%; overflow:hidden; }
