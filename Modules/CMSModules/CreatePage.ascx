@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="CMSModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="CMSModules.CreatePage" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <ra:Panel 
     runat="server" 

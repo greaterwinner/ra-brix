@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="CMSModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="CMSModules.NormalContent" %>

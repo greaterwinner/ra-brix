@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="CMSModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="CMSModules.ViewPages" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <div style="width:98%;height:94%;padding-left:1%;padding-right:1%;padding-top:1%;">
     <div style="width:20%;height:100%;float:left;">
