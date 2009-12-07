@@ -206,6 +206,27 @@ namespace Ra.Brix.Loader
             // if not loads them up
             List<Assembly> initialAssemblies = new List<Assembly>(AppDomain.CurrentDomain.GetAssemblies());
             DirectoryInfo di = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin"));
+            LoadDLLsFromDirectory(di, initialAssemblies);
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+        }
+
+        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs e)
+        {
+            string name = e.Name;
+            if(name.Contains(","))
+            {
+                name = name.Substring(0, name.IndexOf(","));
+            }
+            foreach(Assembly idx in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if(idx.CodeBase.Substring(idx.CodeBase.LastIndexOf("/") + 1).Replace(".dll", "").Replace(".DLL", "") == name)
+                    return idx;
+            }
+            return null;
+        }
+
+        private static void LoadDLLsFromDirectory(DirectoryInfo di, List<Assembly> initialAssemblies)
+        {
             foreach (FileInfo idxFile in di.GetFiles("*.dll"))
             {
                 try
@@ -217,13 +238,12 @@ namespace Ra.Brix.Loader
                                 return idx.ManifestModule.Name.ToLower() == info.Name.ToLower();
                             }))
                         continue;
-                    Assembly a = Assembly.ReflectionOnlyLoad(
-                        idxFile.Name.Replace(".dll", "").Replace(".DLL", ""));
+                    Assembly a = Assembly.ReflectionOnlyLoadFrom(idxFile.FullName);
                     if (!initialAssemblies.Exists(
-                         delegate(Assembly idx)
-                         {
-                             return idx.FullName == a.FullName;
-                         }))
+                             delegate(Assembly idx)
+                                 {
+                                     return idx.FullName == a.FullName;
+                                 }))
                         Assembly.LoadFrom(idxFile.FullName);
                 }
                 catch (Exception)
@@ -232,6 +252,10 @@ namespace Ra.Brix.Loader
                     // Especially true for C++ compiled assemblies...
                     // Sample here is the MySQL DLL...
                 }
+            }
+            foreach (DirectoryInfo idxChild in di.GetDirectories())
+            {
+                LoadDLLsFromDirectory(idxChild, initialAssemblies);
             }
         }
     }

@@ -66,19 +66,19 @@ namespace Ra.Brix.Loader
                 }
             }
 
-            // We do NOT combine the path if it's an absolute path...
-            if (assemblyName.IndexOf(":") == -1)
-                assemblyName = Path.Combine(HttpRuntime.BinDirectory, assemblyName);
+            //// We do NOT combine the path if it's an absolute path...
+            //if (assemblyName.IndexOf(":") == -1)
+            //    assemblyName = Path.Combine(HttpRuntime.BinDirectory, assemblyName);
 
-            // If assembly is not loaded we must explicitly load it...
-            Assembly assembly = Assembly.LoadFile(assemblyName);
-            if (assembly != null)
-            {
-                Stream retVal = assembly.GetManifestResourceStream(resourceName);
-                if (retVal == null)
-                    throw new ArgumentException("Could not find the Virtual File; '" + _path + "'");
-                return retVal;
-            }
+            //// If assembly is not loaded we must explicitly load it...
+            //Assembly assembly = Assembly.LoadFile(assemblyName);
+            //if (assembly != null)
+            //{
+            //    Stream retVal = assembly.GetManifestResourceStream(resourceName);
+            //    if (retVal == null)
+            //        throw new ArgumentException("Could not find the Virtual File; '" + _path + "'");
+            //    return retVal;
+            //}
             throw new ArgumentException(
                 "Could not find the assmelby pointed to by the Virtual File; '" + _path + "'");
         }
