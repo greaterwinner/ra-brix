@@ -15,6 +15,7 @@ using Ra.Brix.Types;
 using Ra.Extensions.Widgets;
 using Ra.Widgets;
 using Ra.Selector;
+using Ra.Effects;
 
 namespace CMSModules
 {
@@ -26,6 +27,7 @@ namespace CMSModules
         protected global::Ra.Extensions.Widgets.InPlaceEdit header;
         protected global::Ra.Widgets.Panel url;
         protected global::Ra.Widgets.Panel editWrp;
+        protected global::Ra.Widgets.Panel infoWrp;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor hyperlink;
         protected global::Ra.Extensions.Widgets.RichEdit editor;
 
@@ -45,7 +47,17 @@ namespace CMSModules
             {
                 // Making the editing wrapper visible...
                 editWrp.Visible = true;
-                editWrp.Style[Styles.display] = "";
+                editWrp.Style[Styles.display] = "none";
+                if(infoWrp.Style[Styles.display] != "none")
+                {
+                    new EffectFadeOut(infoWrp, 400)
+                        .ChainThese(
+                            new EffectFadeIn(editWrp, 400)).Render();
+                }
+                else
+                {
+                    new EffectFadeIn(editWrp, 400).Render();
+                }
             }
             // Header
             header.Text = sel.Text;

@@ -21,6 +21,14 @@
     </div>
     <ra:Panel 
         runat="server"
+        id="infoWrp"
+        CssClass="resourceExplorerFiles">
+        <strong>
+            <%=Language.Instance["", null, "Select a page from the left to edit it"] %>
+        </strong>
+    </ra:Panel>
+    <ra:Panel 
+        runat="server"
         id="editWrp"
         Visible="false"
         CssClass="CMSEditPage">
