@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using Ra.Brix.Types;
 using Ra;
 using Ra.Widgets;
+using System.Globalization;
 
 namespace LoginOpenIDModules
 {
@@ -66,6 +67,12 @@ namespace LoginOpenIDModules
                     }
                     string url = HttpContext.Current.Request.Url.ToString();
                     url = url.Substring(0, url.IndexOf("?"));
+                    if (url.EndsWith("default.aspx", true, CultureInfo.InvariantCulture))
+                    {
+                        url = url.Replace("default.aspx", "");
+                        url = url.Replace("Default.aspx", "");
+                        url = url.Replace("DEFAULT.ASPX", "");
+                    }
                     Response.Redirect(url, true);
                 }
                 else
@@ -131,12 +138,23 @@ namespace LoginOpenIDModules
             if (!openIdServer.Contains("http"))
                 openIdServer = "http://" + openIdServer;
 
+            string currentURL = HttpContext.Current.Request.Url.ToString();
+            if (currentURL.EndsWith("default.aspx", true, CultureInfo.InvariantCulture))
+            {
+                currentURL = currentURL.Replace("default.aspx", "");
+                currentURL = currentURL.Replace("Default.aspx", "");
+                currentURL = currentURL.Replace("DEFAULT.ASPX", "");
+            }
+
             StringBuilder getRequest = new StringBuilder();
             getRequest.Append(openIdServer);
             getRequest.Append("?openid.mode=checkid_setup");
-            getRequest.Append("&openid.identity=" + Server.UrlEncode(url));
-            getRequest.Append("&openid.return_to=" + Server.UrlEncode(HttpContext.Current.Request.Url.ToString()));
-            getRequest.Append("&openid.trust_root=" + Server.UrlEncode(HttpContext.Current.Request.Url.ToString()));
+            getRequest.Append("&openid.identity=" + 
+                Server.UrlEncode(url));
+            getRequest.Append("&openid.return_to=" + 
+                Server.UrlEncode(currentURL));
+            getRequest.Append("&openid.trust_root=" + 
+                Server.UrlEncode(currentURL));
 
             AjaxManager.Instance.Redirect(getRequest.ToString());
         }
