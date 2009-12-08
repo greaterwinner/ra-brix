@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Portal\bin\Ra.dll</HintPath>
     </Reference>
+    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Portal\bin\Ra.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Ra.Selector.dll</HintPath>
@@ -45,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewDetailsOfFile.ascx.cs">
+      <DependentUpon>ViewDetailsOfFile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewAppDetails.ascx.cs">
       <DependentUpon>ViewAppDetails.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -84,6 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewAppDetails.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewDetailsOfFile.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

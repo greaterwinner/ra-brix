@@ -417,6 +417,11 @@ a.disabled
 	margin-left: 3%;
 }
 
+.smaller
+{
+	font-size:10px;
+}
+
 .grid .gridWrapper
 {
 	width: 100%;
@@ -1460,7 +1465,7 @@ span.buttonFlat
 
 .extraInformation
 {
-	margin-top:20px;
+	margin-top:35px;
 	font-style:italic;
 }
 
@@ -1480,6 +1485,16 @@ span.buttonFlat
 	color:Green;
 }
 
+.tree .Modules .icon
+{
+	background-position: -240px 0px;
+}
+
+.tree .Controllers .icon,
+.tree .Types .icon
+{
+	background-position: -256px 0px;
+}
 
 
 

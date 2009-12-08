@@ -46,6 +46,13 @@
                             <div>
                                 <%#((long)Eval("[\"Size\"].Value")).ToString("### ### ###", System.Globalization.CultureInfo.InvariantCulture)%> bytes...
                             </div>
+                            <div>
+                                <ra:ExtButton   
+                                    runat="server" 
+                                    OnClick="ViewDetailsOfFile"
+                                    Xtra='<%#Eval("[\"FullPath\"].Value") %>'
+                                    Text='<%#LanguageRecords.Language.Instance["VideDetails", null, "View Details..."] %>' />
+                            </div>
                         </div>
                     </div>
                     <ra:BehaviorUnveiler 

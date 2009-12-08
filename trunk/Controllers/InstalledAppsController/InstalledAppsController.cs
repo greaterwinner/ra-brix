@@ -59,6 +59,36 @@ namespace InstalledAppsController
                 node);
         }
 
+        [ActiveEvent(Name = "ViewDetailsOfApplicationFile")]
+        protected void ViewDetailsOfApplicationFile(object sender, ActiveEventArgs e)
+        {
+            string fileFullPath = e.Params["FileFullPath"].Get<string>();
+            if (fileFullPath.IndexOf(".dll") != -1)
+            {
+                ReflectionHelper helper = new ReflectionHelper(fileFullPath);
+                Node node = helper.CreateNodeStructure();
+                Node input = new Node();
+                input["ModuleSettings"].Add(node[0]);
+                input["ModuleSettings"]["FileFullPath"].Value = fileFullPath;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "InstalledAppsModules.ViewDetailsOfFile",
+                    "dynMin",
+                    input);
+            }
+            else
+            {
+                Node node = new Node();
+                node["Message"].Value =
+                    Language.Instance["CannotViewNonDll", null, @"
+You cannot view the details of a non-DLL file..."];
+                node["Duration"].Value = 5000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    node);
+            }
+        }
+
         [ActiveEvent(Name = "Menu-ViewInstalledApps")]
         protected void ViewInstalledApps(object sender, ActiveEventArgs e)
         {

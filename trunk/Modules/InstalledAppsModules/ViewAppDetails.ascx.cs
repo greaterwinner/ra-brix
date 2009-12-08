@@ -13,6 +13,7 @@ using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using System;
 using System.Globalization;
+using Ra.Extensions.Widgets;
 using Ra.Widgets;
 using Ra.Effects;
 using Ra.Selector;
@@ -27,6 +28,18 @@ namespace InstalledAppsModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl summaryKb;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl numberOfFiles;
         protected global::System.Web.UI.WebControls.Repeater rep;
+
+        protected void ViewDetailsOfFile(object sender, EventArgs e)
+        {
+            ExtButton btn = (ExtButton) sender;
+
+            Node node = new Node();
+            node["FileFullPath"].Value = btn.Xtra;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this, 
+                "ViewDetailsOfApplicationFile", 
+                node);
+        }
 
         protected string GetCssClassForFile(object fileNameObj)
         {
