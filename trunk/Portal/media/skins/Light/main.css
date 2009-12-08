@@ -1401,6 +1401,73 @@ span.buttonFlat
 	background-position:-144px 0;
 }
 
+.fileGrid
+{
+	margin:15px;
+}
+
+.fileGridItemWrp
+{
+	margin:10px;
+	float:left;
+}
+
+.fileGridItem
+{
+	font-size:10px;
+	width:130px;
+	height:110px;
+	overflow:hidden;
+	position:relative;
+	border:dashed 1px White;
+}
+
+.fileGridItem:hover
+{
+	border:dashed 1px #ccc;
+}
+
+.fileGridItemContent
+{
+	margin:15px 5px 5px 5px;
+}
+
+.fileGridTitle
+{
+	text-align:center;
+	width:130px;
+	margin-left:2px;
+}
+
+.file-class
+{
+	width:48px;
+	height:48px;
+	margin-left:39px;
+	background:Transparent url('Images/icons.png') no-repeat 0 0;
+	cursor:pointer;
+}
+
+.file-class-dll
+{
+	background:Transparent url('Images/icons.png') no-repeat -48px 0;
+}
+
+.file-class-pdb
+{
+	background:Transparent url('Images/icons.png') no-repeat -96px 0;
+}
+
+.extraInformation
+{
+	margin-top:20px;
+	font-style:italic;
+}
+
+.extraInformation div
+{
+	margin-top:10px;
+}
 
 
 

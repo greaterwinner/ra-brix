@@ -13,6 +13,7 @@ using LanguageRecords;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using System.IO;
+using System;
 
 namespace InstalledAppsController
 {
@@ -31,6 +32,30 @@ namespace InstalledAppsController
         {
             e.Params["ButtonAdmin"]["ButtonInstalledApps"].Value = "Menu-InstalledApps";
             e.Params["ButtonAdmin"]["ButtonInstalledApps"]["ButtonViewInstalledApps"].Value = "Menu-ViewInstalledApps";
+        }
+
+        [ActiveEvent(Name = "InstalledApps-ViewDetailsOfApp")]
+        protected void ViewDetailsOfApp(object sender, ActiveEventArgs e)
+        {
+            Node node = new Node();
+            string appName = e.Params["AppName"].Get<string>();
+            DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin/" + appName));
+            DateTime created = dir.CreationTime;
+            int idxNo = 0;
+            foreach (FileInfo idxFile in dir.GetFiles())
+            {
+                node["ModuleSettings"]["Files"]["File" + idxNo].Value = idxFile.Name;
+                node["ModuleSettings"]["Files"]["File" + idxNo]["FullPath"].Value = idxFile.FullName;
+                node["ModuleSettings"]["Files"]["File" + idxNo]["Created"].Value = idxFile.CreationTime;
+                idxNo += 1;
+            }
+
+            node["ModuleSettings"]["AppName"].Value = appName;
+            node["ModuleSettings"]["Installed"].Value = created;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "InstalledAppsModules.ViewAppDetails",
+                "dynMid",
+                node);
         }
 
         [ActiveEvent(Name = "Menu-ViewInstalledApps")]

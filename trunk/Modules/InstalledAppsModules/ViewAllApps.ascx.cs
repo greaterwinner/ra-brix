@@ -10,6 +10,7 @@
 
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
+using Components;
 
 namespace InstalledAppsModules
 {
@@ -18,13 +19,23 @@ namespace InstalledAppsModules
     {
         protected global::Components.Grid grd;
 
+        protected void grd_Action(object sender, Grid.GridActionEventArgs e)
+        {
+            Node node = new Node();
+            node["AppName"].Value = e.ID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "InstalledApps-ViewDetailsOfApp",
+                node);
+        }
+
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
-                    {
-                        grd.DataSource = node["Grid"];
-                    };
+                {
+                    grd.DataSource = node["Grid"];
+                };
         }
 
         public string GetCaption()
