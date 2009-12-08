@@ -9,5 +9,6 @@
 <ext:Grid 
     runat="server" 
     CssClass="grid"
-    PageSize="10"
+    PageSize="8"
+    OnAction="grd_Action"
     id="grd" />
