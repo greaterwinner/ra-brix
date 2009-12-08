@@ -46,7 +46,8 @@ namespace InstalledAppsController
             {
                 node["ModuleSettings"]["Files"]["File" + idxNo].Value = idxFile.Name;
                 node["ModuleSettings"]["Files"]["File" + idxNo]["FullPath"].Value = idxFile.FullName;
-                node["ModuleSettings"]["Files"]["File" + idxNo]["Created"].Value = idxFile.CreationTime;
+                node["ModuleSettings"]["Files"]["File" + idxNo]["Created"].Value = idxFile.LastWriteTime;
+                node["ModuleSettings"]["Files"]["File" + idxNo]["Size"].Value = idxFile.Length;
                 idxNo += 1;
             }
 

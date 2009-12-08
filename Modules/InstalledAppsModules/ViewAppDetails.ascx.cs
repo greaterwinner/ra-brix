@@ -24,6 +24,8 @@ namespace InstalledAppsModules
     {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl date;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl summaryKb;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl numberOfFiles;
         protected global::System.Web.UI.WebControls.Repeater rep;
 
         protected string GetCssClassForFile(object fileNameObj)
@@ -80,6 +82,20 @@ namespace InstalledAppsModules
             }
         }
 
+        private DateTime AppInstallDate
+        {
+            get { return (DateTime)ViewState["AppInstallDate"]; }
+            set { ViewState["AppInstallDate"] = value; }
+        }
+
+        protected string GetClassForFileDate(object dateObj)
+        {
+            DateTime date = (DateTime) dateObj;
+            if (date.Date != AppInstallDate.Date)
+                return "file-changed";
+            return "file-not-changed";
+        }
+
         public void InitialLoading(Node node)
         {
             DateTime dateInstalled = node["Installed"].Get<DateTime>();
@@ -91,7 +107,24 @@ namespace InstalledAppsModules
                 (DateTime.Now - dateInstalled).TotalDays.ToString("0", CultureInfo.InvariantCulture) + 
                 Language.Instance["Days", null, " day(s)"];
             rep.DataSource = node["Files"];
-            rep.DataBind();
+            Load +=
+                delegate
+                    {
+                        AppInstallDate = dateInstalled;
+                        rep.DataBind();
+                    };
+
+            long totalSize = 0;
+            int idxNoFiles = 0;
+            foreach(Node idx in node["Files"])
+            {
+                idxNoFiles += 1;
+                totalSize += idx["Size"].Get<long>();
+            }
+            summaryKb.InnerHtml = Language.Instance["TotalAppSize", null, "Total Application size: "] +
+                                  totalSize.ToString("### ### ###", CultureInfo.InvariantCulture) + 
+                                  " bytes";
+            numberOfFiles.InnerHtml = idxNoFiles.ToString();
         }
 
         public string GetCaption()
