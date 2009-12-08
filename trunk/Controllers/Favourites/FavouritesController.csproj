@@ -12,6 +12,7 @@
     <AssemblyName>FavouritesController</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,4 +79,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Favourites"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Favourites"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

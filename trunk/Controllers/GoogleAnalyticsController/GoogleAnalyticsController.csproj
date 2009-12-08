@@ -12,6 +12,7 @@
     <AssemblyName>GoogleAnalyticsController</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,4 +75,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\GoogleAnalytics"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\GoogleAnalytics"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

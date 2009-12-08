@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="RssReaderModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="RssReaderModules.ViewRSSItems" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <div style="padding:5px;">
     <h2><%=Language.Instance["RSSNewsFromTheWorld", null, "News from the world..."]%></h2>
