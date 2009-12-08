@@ -10,7 +10,10 @@
     <h1 runat="server" id="header" />
     <p style="font-style:italic;color:#999;" runat="server" id="date" />
     <strong>
-        <%=LanguageRecords.Language.Instance["FilesInApplication", null, "Files in application"] %>
+        <%=LanguageRecords.Language.Instance["FilesInApplication", null, "Files in application; "] %>
+        <span 
+            runat="server" 
+            id="numberOfFiles" />
     </strong>
     <asp:Repeater runat="server" ID="rep">
         <HeaderTemplate>
@@ -37,8 +40,11 @@
                             <div>
                                 <%#Eval("[\"FullPath\"].Value") %>
                             </div>
-                            <div>
+                            <div class='<%# GetClassForFileDate(Eval("[\"Created\"].Value")) %>'>
                                 <%#((DateTime)Eval("[\"Created\"].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%>
+                            </div>
+                            <div>
+                                <%#((long)Eval("[\"Size\"].Value")).ToString("### ### ###", System.Globalization.CultureInfo.InvariantCulture)%> bytes...
                             </div>
                         </div>
                     </div>
@@ -49,4 +55,8 @@
             </div>
         </ItemTemplate>
     </asp:Repeater>
+    <br style="clear:both;" />
+    <strong 
+        runat="server" 
+        id="summaryKb" />
 </div>

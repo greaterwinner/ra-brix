@@ -1469,6 +1469,17 @@ span.buttonFlat
 	margin-top:10px;
 }
 
+.file-changed
+{
+	color:Red;
+	font-weight:bold;
+}
+
+.file-not-changed
+{
+	color:Green;
+}
+
 
 
 
