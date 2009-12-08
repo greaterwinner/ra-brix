@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="RolesModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="RolesModules.ViewAllRoles" %>

@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="LanguageEditModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="LanguageEditModules.EditLanguage" %>

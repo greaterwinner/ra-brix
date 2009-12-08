@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="UsersModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="UsersModules.Users" %>

@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="LanguageImportExportModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="LanguageImportExportModules.ImportLanguage" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <asp:FileUpload 
      runat="server"

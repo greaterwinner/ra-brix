@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="CalendarModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="CalendarModules.ViewCalendar" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <div style="padding:5px;height:100%;position:relative;">
     <ra:Panel 

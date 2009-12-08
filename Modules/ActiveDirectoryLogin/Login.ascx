@@ -1,8 +1,13 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="ActiveDirectoryLoginModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="ActiveDirectoryLoginModules.Login" %>
-<%@ Import Namespace="LanguageRecords"%>
+
+<%@ Import 
+    Namespace="LanguageRecords"%>
 
 <ra:Panel 
     runat="server" 

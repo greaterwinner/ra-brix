@@ -12,6 +12,7 @@
     <AssemblyName>CandyStoreModules</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,4 +93,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\CandyStore"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\CandyStore"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

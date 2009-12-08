@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="CommonModules" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="CommonModules.MessageBox" %>

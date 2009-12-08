@@ -54,33 +54,23 @@ namespace Ra.Brix.Loader
             string resourceName = parts[3];
 
             // Checking to see if assmebly is already loaded...
-            foreach (Assembly idx in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly idx in PluginLoader.PluginAssemblies)
             {
                 if (idx.CodeBase.Substring(idx.CodeBase.LastIndexOf("/") + 1).ToLower() ==
                     assemblyName.ToLower())
                 {
                     Stream retVal = idx.GetManifestResourceStream(resourceName);
                     if (retVal == null)
-                        throw new ArgumentException("Could not find the Virtual File; '" + _path + "'");
+                        throw new ArgumentException(
+                            "Could not find the Virtual File; '" + 
+                            _path + 
+                            "'. Resource didn't exist within Assembly: " + 
+                            assemblyName);
                     return retVal;
                 }
             }
-
-            //// We do NOT combine the path if it's an absolute path...
-            //if (assemblyName.IndexOf(":") == -1)
-            //    assemblyName = Path.Combine(HttpRuntime.BinDirectory, assemblyName);
-
-            //// If assembly is not loaded we must explicitly load it...
-            //Assembly assembly = Assembly.LoadFile(assemblyName);
-            //if (assembly != null)
-            //{
-            //    Stream retVal = assembly.GetManifestResourceStream(resourceName);
-            //    if (retVal == null)
-            //        throw new ArgumentException("Could not find the Virtual File; '" + _path + "'");
-            //    return retVal;
-            //}
             throw new ArgumentException(
-                "Could not find the assmelby pointed to by the Virtual File; '" + _path + "'");
+                "Could not find the assembly pointed to by the Virtual File; '" + _path + "'");
         }
     }
 }

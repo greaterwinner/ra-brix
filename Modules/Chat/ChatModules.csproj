@@ -12,6 +12,7 @@
     <AssemblyName>ChatModules</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChatChannel.ascx">
+      <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -117,4 +119,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Chat"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Chat"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
