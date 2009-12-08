@@ -16,5 +16,7 @@
 * Added support for serializing back and forth between JSON for the
   Ra.Brix.Types.Node structure.
 
-
+* Support for folders inside the bin folder of the Application Pool
+  which can contain Component Packages that'll plug into the 
+  portal.
 

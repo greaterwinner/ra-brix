@@ -85,7 +85,7 @@
             <ra:Dynamic 
                 runat="server" 
                 CssClass="dynamic-content dynamic-content-no-overflow"
-                style="width:160px;height:280px;"
+                style="width:160px;height:320px;"
                 OnReload="dynamic_LoadControls"
                 ID="dynLeft" />
         </ra:Window>
