@@ -28,6 +28,7 @@ namespace InstalledAppsModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl summaryKb;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl numberOfFiles;
         protected global::System.Web.UI.WebControls.Repeater rep;
+        protected global::Ra.Extensions.Widgets.ExtButton uninstall;
 
         protected void ViewDetailsOfFile(object sender, EventArgs e)
         {
@@ -109,6 +110,16 @@ namespace InstalledAppsModules
             return "file-not-changed";
         }
 
+        protected void uninstall_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["AppName"].Value = header.InnerHtml;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this, 
+                "RequestUnInstallOfApplication", 
+                node);
+        }
+
         public void InitialLoading(Node node)
         {
             DateTime dateInstalled = node["Installed"].Get<DateTime>();
@@ -138,6 +149,7 @@ namespace InstalledAppsModules
                                   totalSize.ToString("### ### ###", CultureInfo.InvariantCulture) + 
                                   " bytes";
             numberOfFiles.InnerHtml = idxNoFiles.ToString();
+            uninstall.DataBind();
         }
 
         public string GetCaption()

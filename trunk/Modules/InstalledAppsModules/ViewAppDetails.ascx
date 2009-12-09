@@ -66,4 +66,10 @@
     <strong 
         runat="server" 
         id="summaryKb" />
+    <br />
+    <ra:ExtButton 
+        runat="server" 
+        id="uninstall" 
+        OnClick="uninstall_Click"
+        Text='<%#LanguageRecords.Language.Instance["Uninstall", null, "Uninstall..."] %>' />
 </div>
