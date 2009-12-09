@@ -10,6 +10,7 @@
 
 using System.Web;
 using LanguageRecords;
+using Ra;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using System.IO;
@@ -87,6 +88,38 @@ You cannot view the details of a non-DLL file..."];
                     "ShowInformationMessage",
                     node);
             }
+        }
+
+        [ActiveEvent(Name = "RequestUnInstallOfApplication")]
+        protected void RequestUnInstallOfApplication(object sender, ActiveEventArgs e)
+        {
+            string appName = e.Params["AppName"].Get<string>();
+            Node init = new Node();
+            init["TabCaption"].Value = Language.Instance["AreYouSure", null, "Are you sure?"];
+            init["Width"].Value = 350;
+            init["Height"].Value = 130;
+            init["ModuleSettings"]["Text"].Value =
+                Language.Instance["ReallUnInstallApplication", null,
+                @"Do you really want to uninstall this application? This action can not be undone..."];
+            init["ModuleSettings"]["EventToRaiseOnOK"].Value = "ApplicationUnInstallationConfimed";
+            init["ModuleSettings"]["Params"]["Name"].Value = "AppName";
+            init["ModuleSettings"]["Params"]["Value"].Value = appName;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "CommonModules.MessageBox",
+                "dynPopup",
+                init);
+        }
+
+        [ActiveEvent(Name = "ApplicationUnInstallationConfimed")]
+        protected void ApplicationUnInstallationConfimed(object sender, ActiveEventArgs e)
+        {
+            string appName = e.Params["AppName"].Get<string>();
+            DirectoryInfo info = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin/" + appName));
+            info.Delete(true);
+            Language.Instance.SetDefaultValue("ApplicationWasUnInstalledRedirecting", @"
+Application was un-installed, and hence we had to refresh the browser 
+and you need to login again...");
+            AjaxManager.Instance.Redirect("~/?message=ApplicationWasUnInstalledRedirecting");
         }
 
         [ActiveEvent(Name = "Menu-ViewInstalledApps")]
