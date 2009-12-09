@@ -55,11 +55,6 @@ namespace Viewport
             zoomImage.DataBind();
             close.DataBind();
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
-            if (!IsPostBack)
-            {
-                // Setting header of portal...
-                //Page.Header.Title = Settings.Instance["NameOfPortal"];
-            }
         }
 
         protected string GetCssRootFolder()

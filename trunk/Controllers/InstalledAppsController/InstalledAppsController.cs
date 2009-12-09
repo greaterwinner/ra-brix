@@ -9,6 +9,7 @@
  */
 
 using System.Web;
+using ICSharpCode.SharpZipLib.Zip;
 using LanguageRecords;
 using Ra;
 using Ra.Brix.Loader;
@@ -24,8 +25,9 @@ namespace InstalledAppsController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
-            Language.Instance.SetDefaultValue("ButtonInstalledApps", "Installed Apps");
-            Language.Instance.SetDefaultValue("ButtonViewInstalledApps", "Edit Apps");
+            Language.Instance.SetDefaultValue("ButtonInstalledApps", "Manage Apps");
+            Language.Instance.SetDefaultValue("ButtonViewInstalledApps", "View Apps");
+            Language.Instance.SetDefaultValue("ButtonInstallNewApp", "Install App");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -33,6 +35,50 @@ namespace InstalledAppsController
         {
             e.Params["ButtonAdmin"]["ButtonInstalledApps"].Value = "Menu-InstalledApps";
             e.Params["ButtonAdmin"]["ButtonInstalledApps"]["ButtonViewInstalledApps"].Value = "Menu-ViewInstalledApps";
+            e.Params["ButtonAdmin"]["ButtonInstalledApps"]["ButtonInstallNewApp"].Value = "Menu-InstallNewApp";
+        }
+
+        [ActiveEvent(Name = "ApplicationUploadedForInstallation")]
+        protected void ApplicationUploadedForInstallation(object sender, ActiveEventArgs e)
+        {
+            byte[] content = e.Params["FileBytes"].Get<byte[]>();
+            string name = e.Params["FileName"].Get<string>();
+            string folderName = name.Replace(".zip", "").Replace(".ZIP", "");
+            string binFolder = HttpContext.Current.Server.MapPath("~/bin");
+            Directory.CreateDirectory(binFolder + "/" + folderName);
+            using (MemoryStream memStream = new MemoryStream(content))
+            {
+                memStream.Position = 0;
+                using (ZipInputStream zipInput = new ZipInputStream(memStream))
+                {
+                    ZipEntry current = zipInput.GetNextEntry();
+                    while (current != null)
+                    {
+                        using (FileStream output = new FileStream(
+                            binFolder + "/" + current.Name,
+                            FileMode.Create,
+                            FileAccess.Write))
+                        {
+                            byte[] buffer = new byte[current.Size];
+                            zipInput.Read(buffer, 0, buffer.Length);
+                            output.Write(buffer, 0, buffer.Length);
+                        }
+                        current = zipInput.GetNextEntry();
+                    }
+                }
+            }
+            Language.Instance.SetDefaultValue("ApplicationWasInstalledRedirecting", @"
+A new application was installed, and hence we had to refresh the browser 
+and you might need to login again...");
+            AjaxManager.Instance.Redirect("~/?message=ApplicationWasInstalledRedirecting");
+        }
+
+        [ActiveEvent(Name = "Menu-InstallNewApp")]
+        protected void InstallNewApp(object sender, ActiveEventArgs e)
+        {
+            ActiveEvents.Instance.RaiseLoadControl(
+                "CMSModules.InstallNewApp", 
+                "dynPopup");
         }
 
         [ActiveEvent(Name = "InstalledApps-ViewDetailsOfApp")]
