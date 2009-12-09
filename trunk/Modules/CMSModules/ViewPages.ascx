@@ -29,7 +29,7 @@
         id="infoWrp"
         CssClass="resourceExplorerFiles">
         <strong>
-            <%=Language.Instance["", null, "Select a page from the left to edit it"] %>
+            <%=Language.Instance["SelectPageToEdit", null, "Select a page from the left to edit it"] %>
         </strong>
     </ra:Panel>
     <ra:Panel 
