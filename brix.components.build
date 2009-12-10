@@ -17,7 +17,6 @@
 
 
     <!-- Helper Globals-->
-
     <csc
         target="library"
         optimize="${not debug}"
@@ -42,7 +41,6 @@
     
     
     <!-- Components -->
-
     <csc
         target="library"
         optimize="${not debug}"
@@ -121,12 +119,13 @@
     </csc>
 
     <!-- CMSRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/CMS" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/CMSRecords.dll"
+        output="${output.dir}/${library.dir}/CMS/CMSRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/CMSRecords/**/*.cs" />
@@ -143,12 +142,13 @@
     </csc>
 
     <!-- FavouritesRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/Favourites" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/FavouritesRecords.dll"
+        output="${output.dir}/${library.dir}/Favourites/FavouritesRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/Favourites/**/*.cs" />
@@ -165,12 +165,13 @@
     </csc>
 
     <!-- HistoryRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/History" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/HistoryRecords.dll"
+        output="${output.dir}/${library.dir}/History/HistoryRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/History/**/*.cs" />
@@ -209,12 +210,13 @@
     </csc>
 
     <!-- RssReaderRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/RssReader" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/RssReaderRecords.dll"
+        output="${output.dir}/${library.dir}/RssReader/RssReaderRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/RssReaderRecords/**/*.cs" />
@@ -231,12 +233,13 @@
     </csc>
 
     <!-- UserRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/Users" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/UserRecords.dll"
+        output="${output.dir}/${library.dir}/Users/UserRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/User/**/*.cs" />
@@ -253,12 +256,13 @@
     </csc>
 
     <!-- WhiteBoardRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/WhiteBoards" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoardRecords.dll"
+        output="${output.dir}/${library.dir}/WhiteBoards/WhiteBoardRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/WhiteBoardRecords/**/*.cs" />
@@ -274,13 +278,20 @@
       </references>
     </csc>
 
+
+
+    <!-- Controller -->
+
+
+
+
     <!-- FavouritesController -->
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/FavouritesController.dll"
+        output="${output.dir}/${library.dir}/Favourites/FavouritesController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/Favourites/**/*.cs" />
@@ -295,18 +306,19 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
-        <include name="${output.dir}/${library.dir}/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Favourites/FavouritesRecords.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- GoogleAnalyticsController -->
+    <mkdir dir="${output.dir}/${library.dir}/GoogleAnalytics" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/GoogleAnalyticsController.dll"
+        output="${output.dir}/${library.dir}/GoogleAnalytics/GoogleAnalyticsController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/GoogleAnalyticsController/**/*.cs" />
@@ -332,7 +344,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/HistoryController.dll"
+        output="${output.dir}/${library.dir}/History/HistoryController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/History/**/*.cs" />
@@ -347,20 +359,21 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/HistoryRecords.dll" />
+        <include name="${output.dir}/${library.dir}/History/HistoryRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
-        <include name="${output.dir}/${library.dir}/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Favourites/FavouritesRecords.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- InitializeController -->
+    <mkdir dir="${output.dir}/${library.dir}/Initializer" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/InitializeController.dll"
+        output="${output.dir}/${library.dir}/Initializer/InitializeController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/Initializer/**/*.cs" />
@@ -379,19 +392,20 @@
         <include name="${references.dir}/Ra.Selector.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- LanguageController -->
+    <mkdir dir="${output.dir}/${library.dir}/Language" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LanguageController.dll"
+        output="${output.dir}/${library.dir}/Language/LanguageController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/Language/**/*.cs" />
@@ -417,12 +431,13 @@
     </csc>
 
     <!-- RolesController -->
+    <mkdir dir="${output.dir}/${library.dir}/Roles" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/RolesController.dll"
+        output="${output.dir}/${library.dir}/Roles/RolesController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/RolesController/**/*.cs" />
@@ -437,8 +452,8 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/RolesController.dll" />
-        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Roles/RolesController.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
@@ -450,7 +465,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/UserController.dll"
+        output="${output.dir}/${library.dir}/Users/UserController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/UserController/**/*.cs" />
@@ -465,19 +480,20 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- SettingsController -->
+    <mkdir dir="${output.dir}/${library.dir}/Settings" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/SettingsController.dll"
+        output="${output.dir}/${library.dir}/Settings/SettingsController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/SettingsController/**/*.cs" />
@@ -503,7 +519,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoardController.dll"
+        output="${output.dir}/${library.dir}/WhiteBoards/WhiteBoardController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteBoardController/**/*.cs" />
@@ -518,19 +534,20 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- WhiteboardPDFController -->
+    <mkdir dir="${output.dir}/${library.dir}/WhiteBoardsPDF" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteboardPDFController.dll"
+        output="${output.dir}/${library.dir}/WhiteBoardsPDF/WhiteboardPDFController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteboardPDFController/**/*.cs" />
@@ -553,19 +570,20 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- TipOfTodayController -->
+    <mkdir dir="${output.dir}/${library.dir}/TipOfToday" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/TipOfTodayController.dll"
+        output="${output.dir}/${library.dir}/TipOfToday/TipOfTodayController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/TipOfTodayController/**/*.cs" />
@@ -581,19 +599,20 @@
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- WhiteboardPluginsController -->
+    <mkdir dir="${output.dir}/${library.dir}/WhiteBoardPlugins" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteboardPluginsController.dll"
+        output="${output.dir}/${library.dir}/WhiteBoardPlugins/WhiteboardPluginsController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteboardPluginsController/**/*.cs" />
@@ -608,9 +627,9 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettings/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
         <include name="${references.dir}/Ra.dll" />
         <include name="${references.dir}/Ra.Extensions.dll" />
         <include name="${references.dir}/Ra.Selector.dll" />
@@ -625,7 +644,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/RssReaderController.dll"
+        output="${output.dir}/${library.dir}/RssReader/RssReaderController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/RssReaderController/**/*.cs" />
@@ -640,19 +659,20 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/RssReaderRecords.dll" />
+        <include name="${output.dir}/${library.dir}/RssReader/RssReaderRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- UserSettingsController -->
+    <mkdir dir="${output.dir}/${library.dir}/UserSettings" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/UserSettingsController.dll"
+        output="${output.dir}/${library.dir}/UserSettings/UserSettingsController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/UserSettingsController/**/*.cs" />
@@ -667,7 +687,7 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/RssReaderRecords.dll" />
+        <include name="${output.dir}/${library.dir}/RssReader/RssReaderRecords.dll" />
         <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
@@ -680,7 +700,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/CMSController.dll"
+        output="${output.dir}/${library.dir}/CMS/CMSController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/CMSController/**/*.cs" />
@@ -695,7 +715,7 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/CMSRecords.dll" />
+        <include name="${output.dir}/${library.dir}/CMS/CMSRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
         <include name="${references.dir}/Ra.dll" />
@@ -705,12 +725,13 @@
     </csc>
 
     <!-- ResourcesController -->
+    <mkdir dir="${output.dir}/${library.dir}/Resources" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/ResourcesController.dll"
+        output="${output.dir}/${library.dir}/Resources/ResourcesController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/ResourcesController/**/*.cs" />
@@ -731,12 +752,13 @@
     </csc>
 
     <!-- LanguageImportExportController -->
+    <mkdir dir="${output.dir}/${library.dir}/LanguageImportExport" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LanguageImportExportController.dll"
+        output="${output.dir}/${library.dir}/LanguageImportExport/LanguageImportExportController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/LanguageImportExportController/**/*.cs" />
@@ -757,12 +779,13 @@
     </csc>
 
     <!-- ChangeSkinController -->
+    <mkdir dir="${output.dir}/${library.dir}/ChangeSkin" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/ChangeSkinController.dll"
+        output="${output.dir}/${library.dir}/ChangeSkin/ChangeSkinController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/ChangeSkinController/**/*.cs" />
@@ -788,12 +811,13 @@
     </csc>
 
     <!-- HelpController -->
+    <mkdir dir="${output.dir}/${library.dir}/Help" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/ChangeSkinController.dll"
+        output="${output.dir}/${library.dir}/Help/HelpController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/HelpController/**/*.cs" />
@@ -814,13 +838,41 @@
       </references>
     </csc>
 
-    <!-- CMSCommonPlugins -->
+    <!-- InstalledAppsController -->
+    <mkdir dir="${output.dir}/${library.dir}/ManageApplications" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/CMSCommonPlugins.dll"
+        output="${output.dir}/${library.dir}/ManageApplications/InstalledAppsController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/InstalledAppsController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/ICSharpCode.SharpZipLib.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- CMSCommonPlugins -->
+    <mkdir dir="${output.dir}/${library.dir}/CMSCommonPlugins" />
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/CMSCommonPlugins/CMSCommonPlugins.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/CMSCommonPlugins/**/*.cs" />
@@ -851,7 +903,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/ChangeSkinModules.dll"
+        output="${output.dir}/${library.dir}/ChangeSkin/ChangeSkinModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/ChangeSkinModules/**/*.cs" />
@@ -885,7 +937,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/CMSCommonPluginModules.dll"
+        output="${output.dir}/${library.dir}/CMSCommonPlugins/CMSCommonPluginModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/CMSCommonPluginModules/**/*.cs" />
@@ -919,7 +971,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/CMSModules.dll"
+        output="${output.dir}/${library.dir}/CMS/CMSModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/CMSModules/**/*.cs" />
@@ -987,7 +1039,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/FavouritesModules.dll"
+        output="${output.dir}/${library.dir}/Favourites/FavouritesModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/Favourites/**/*.cs" />
@@ -1022,7 +1074,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/HelpModules.dll"
+        output="${output.dir}/${library.dir}/Help/HelpModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/Help/**/*.cs" />
@@ -1057,7 +1109,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/HistoryModules.dll"
+        output="${output.dir}/${library.dir}/History/HistoryModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/History/**/*.cs" />
@@ -1092,7 +1144,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LanguageEditModules.dll"
+        output="${output.dir}/${library.dir}/Language/LanguageEditModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/LanguageEdit/**/*.cs" />
@@ -1127,7 +1179,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LanguageImportExportModules.dll"
+        output="${output.dir}/${library.dir}/LanguageImportExport/LanguageImportExportModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/LanguageImportExportModules/**/*.cs" />
@@ -1162,7 +1214,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LanguageSelectorModules.dll"
+        output="${output.dir}/${library.dir}/Language/LanguageSelectorModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/LanguageSelector/**/*.cs" />
@@ -1192,12 +1244,13 @@
     </csc>
 
     <!-- LoginOpenIDModules -->
+    <mkdir dir="${output.dir}/${library.dir}/LoginOpenID" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/LoginOpenIDModules.dll"
+        output="${output.dir}/${library.dir}/LoginOpenID/LoginOpenIDModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/LoginOpenID/**/*.cs" />
@@ -1232,7 +1285,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/ResourcesModules.dll"
+        output="${output.dir}/${library.dir}/Resources/ResourcesModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/ResourcesModules/**/*.cs" />
@@ -1267,7 +1320,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/RolesModules.dll"
+        output="${output.dir}/${library.dir}/Roles/RolesModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/Roles/**/*.cs" />
@@ -1302,7 +1355,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/RssReaderModules.dll"
+        output="${output.dir}/${library.dir}/RssReader/RssReaderModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/RssReaderModules/**/*.cs" />
@@ -1337,7 +1390,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/SettingsModules.dll"
+        output="${output.dir}/${library.dir}/Settings/SettingsModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/Settings/**/*.cs" />
@@ -1367,12 +1420,13 @@
     </csc>
 
     <!-- SlidingMenuModules -->
+    <mkdir dir="${output.dir}/${library.dir}/SlidingMenu" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/SlidingMenuModules.dll"
+        output="${output.dir}/${library.dir}/SlidingMenu/SlidingMenuModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/SlidingMenu/**/*.cs" />
@@ -1407,7 +1461,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/TipOfTodayModules.dll"
+        output="${output.dir}/${library.dir}/TipOfToday/TipOfTodayModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/TipOfTodayModules/**/*.cs" />
@@ -1438,12 +1492,13 @@
     </csc>
 
     <!-- TreeMenuModules -->
+    <mkdir dir="${output.dir}/${library.dir}/TreeMenu" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/TreeMenuModules.dll"
+        output="${output.dir}/${library.dir}/TreeMenu/TreeMenuModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/TreeMenuModules/**/*.cs" />
@@ -1479,7 +1534,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/UsersModules.dll"
+        output="${output.dir}/${library.dir}/Users/UsersModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/Users/**/*.cs" />
@@ -1499,7 +1554,7 @@
         <include name="${references.dir}/Ra.Selector.dll" />
         <include name="${references.dir}/Ra.Builder.dll" />
         <include name="${output.dir}/${library.dir}/Components.dll" />
-        <include name="${output.dir}/${library.dir}/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
         <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
@@ -1515,7 +1570,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteboardModules.dll"
+        output="${output.dir}/${library.dir}/WhiteBoards/WhiteboardModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/WhiteboardModules/**/*.cs" />
@@ -1544,16 +1599,55 @@
       </references>
     </csc>
 
-
-
-    <!-- Viewport -->
-
+    <!-- InstalledAppsModules -->
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/Viewport.dll"
+        output="${output.dir}/${library.dir}/ManageApplications/InstalledAppsModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/InstalledAppsModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="InstalledAppsModules">
+        <include name="Modules/InstalledAppsModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/InstalledAppsModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+
+
+
+
+
+
+    <!-- Default Viewport -->
+    <mkdir dir="${output.dir}/${library.dir}/DefaultViewports" />
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/DefaultViewports/Viewport.dll"
         debug="${debug}">
       <sources>
         <include name="Viewport/**/*.cs" />

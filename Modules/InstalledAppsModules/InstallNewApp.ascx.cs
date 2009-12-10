@@ -12,7 +12,7 @@ using System;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 
-namespace CMSModules
+namespace InstalledAppsModules
 {
     [ActiveModule]
     public class InstallNewApp : System.Web.UI.UserControl, IModule

@@ -1,4 +1,7 @@
-﻿<%@ Control 
+﻿<%@ Assembly 
+    Name="Viewport" %>
+
+<%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
     Inherits="Viewport.Main" %>

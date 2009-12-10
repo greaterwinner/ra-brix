@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InstallNewApp.ascx.cs">
+      <DependentUpon>InstallNewApp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewDetailsOfFile.ascx.cs">
       <DependentUpon>ViewDetailsOfFile.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -97,6 +101,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewDetailsOfFile.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InstallNewApp.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

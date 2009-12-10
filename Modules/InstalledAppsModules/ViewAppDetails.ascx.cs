@@ -90,7 +90,7 @@ namespace InstalledAppsModules
                             }), 500, 110, 130)
                         .Render();
                 }
-                new EffectSize(pnl, 500, 240, 260)
+                new EffectSize(pnl, 500, 280, 260)
                     .Render();
                 ExpandedFile = pnl.Xtra;
             }

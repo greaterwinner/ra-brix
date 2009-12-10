@@ -34,8 +34,85 @@
     <mkdir dir="${output.dir}/${application.pool.dir}/bin" />
     <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin">
       <fileset>
-        <include name="${references.dir}/**/*.dll" />
-        <include name="${output.dir}/${library.dir}/**/*.dll" />
+        <include name="${references.dir}/*.dll" />
+        <include name="${output.dir}/${library.dir}/*.dll" />
+      </fileset>
+    </copy>
+
+    <copy
+      file="${portal.dir}/Web.Config.template"
+      tofile="${output.dir}/${application.pool.dir}/Web.Config"
+      overwrite="true" />
+
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/DefaultViewports" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/Initializer" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/CMS" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/SlidingMenu" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/LoginOpenID" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/CMSCommonPlugins" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/Users" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/Roles" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/ManageApplications" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/Resources" />
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/DefaultViewports">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/DefaultViewports/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/Initializer">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/Initializer/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/CMS">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/CMS/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/SlidingMenu">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/SlidingMenu/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/LoginOpenID">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/LoginOpenID/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/CMSCommonPlugins">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/CMSCommonPlugins/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/Users">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/Users/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/Roles">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/Roles/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/ManageApplications">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/ManageApplications/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/Resources">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/Resources/*.*" />
       </fileset>
     </copy>
 

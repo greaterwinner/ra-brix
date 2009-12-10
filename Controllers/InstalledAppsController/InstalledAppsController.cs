@@ -77,7 +77,7 @@ and you might need to login again...");
         protected void InstallNewApp(object sender, ActiveEventArgs e)
         {
             ActiveEvents.Instance.RaiseLoadControl(
-                "CMSModules.InstallNewApp", 
+                "InstalledAppsModules.InstallNewApp", 
                 "dynPopup");
         }
 
