@@ -88,7 +88,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Skins"
-copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Skins"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\ChangeSkin"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\ChangeSkin"</PostBuildEvent>
   </PropertyGroup>
 </Project>

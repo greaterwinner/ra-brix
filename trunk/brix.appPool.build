@@ -35,6 +35,7 @@
     <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin">
       <fileset>
         <include name="${references.dir}/*.dll" />
+        <exclude name="${references.dir}/Ra.Build.Tasks.dll" />
         <include name="${output.dir}/${library.dir}/*.dll" />
       </fileset>
     </copy>
@@ -157,7 +158,121 @@
 
     <!-- Zipping up the binary release... -->
     <zip zipfile="${output.dir}/${samples.precompiled.dir}.zip" includeemptydirs="true">
-      <fileset basedir="${output.dir}/${samples.precompiled.dir}" prefix="${library.dir}">
+      <fileset basedir="${output.dir}/${samples.precompiled.dir}">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+
+
+
+
+
+
+
+    <!-- Zipping up the component packages... -->
+
+    <!-- ChangeSkin -->
+    <zip zipfile="${output.dir}/ChangeSkin.zip">
+      <fileset basedir="${output.dir}/${library.dir}/ChangeSkin">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- Favourites -->
+    <zip zipfile="${output.dir}/Favourites.zip">
+      <fileset basedir="${output.dir}/${library.dir}/Favourites">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- GoogleAnalytics -->
+    <zip zipfile="${output.dir}/GoogleAnalytics.zip">
+      <fileset basedir="${output.dir}/${library.dir}/GoogleAnalytics">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- Help -->
+    <zip zipfile="${output.dir}/Help.zip">
+      <fileset basedir="${output.dir}/${library.dir}/Help">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- History -->
+    <zip zipfile="${output.dir}/History.zip">
+      <fileset basedir="${output.dir}/${library.dir}/History">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- Language -->
+    <zip zipfile="${output.dir}/Language.zip">
+      <fileset basedir="${output.dir}/${library.dir}/Language">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- LanguageImportExport -->
+    <zip zipfile="${output.dir}/LanguageImportExport.zip">
+      <fileset basedir="${output.dir}/${library.dir}/LanguageImportExport">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- RssReader -->
+    <zip zipfile="${output.dir}/RssReader.zip">
+      <fileset basedir="${output.dir}/${library.dir}/RssReader">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- Settings -->
+    <zip zipfile="${output.dir}/Settings.zip">
+      <fileset basedir="${output.dir}/${library.dir}/Settings">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- TipOfToday -->
+    <zip zipfile="${output.dir}/TipOfToday.zip">
+      <fileset basedir="${output.dir}/${library.dir}/TipOfToday">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- TreeMenu -->
+    <zip zipfile="${output.dir}/TreeMenu.zip">
+      <fileset basedir="${output.dir}/${library.dir}/TreeMenu">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- UserSettings -->
+    <zip zipfile="${output.dir}/UserSettings.zip">
+      <fileset basedir="${output.dir}/${library.dir}/UserSettings">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- WhiteBoardPlugins -->
+    <zip zipfile="${output.dir}/WhiteBoardPlugins.zip">
+      <fileset basedir="${output.dir}/${library.dir}/WhiteBoardPlugins">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- WhiteBoards -->
+    <zip zipfile="${output.dir}/WhiteBoards.zip">
+      <fileset basedir="${output.dir}/${library.dir}/WhiteBoards">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
+    <!-- WhiteBoardsPDF -->
+    <zip zipfile="${output.dir}/WhiteBoardsPDF.zip">
+      <fileset basedir="${output.dir}/${library.dir}/WhiteBoardsPDF">
         <include name="**/*" />
       </fileset>
     </zip>

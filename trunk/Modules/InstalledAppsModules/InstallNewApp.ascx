@@ -1,5 +1,5 @@
 ﻿<%@ Assembly 
-    Name="CMSModules" %>
+    Name="InstalledAppsModules" %>
 
 <%@ Control 
     Language="C#" 

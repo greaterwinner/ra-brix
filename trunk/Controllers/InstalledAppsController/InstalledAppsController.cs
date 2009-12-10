@@ -55,7 +55,7 @@ namespace InstalledAppsController
                     while (current != null)
                     {
                         using (FileStream output = new FileStream(
-                            binFolder + "/" + current.Name,
+                            binFolder + "/" + folderName + "/" + current.Name,
                             FileMode.Create,
                             FileAccess.Write))
                         {
