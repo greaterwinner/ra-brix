@@ -54,10 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InstallNewApp.ascx.cs">
-      <DependentUpon>InstallNewApp.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CreateHyperLink.ascx.cs">
       <DependentUpon>CreateHyperLink.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -115,11 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CreateHyperLink.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="InstallNewApp.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

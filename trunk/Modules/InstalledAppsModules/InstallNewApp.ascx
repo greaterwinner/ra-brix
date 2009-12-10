@@ -4,7 +4,7 @@
 <%@ Control 
     Language="C#" 
     AutoEventWireup="true" 
-    Inherits="CMSModules.InstallNewApp" %>
+    Inherits="InstalledAppsModules.InstallNewApp" %>
 
 <ra:Panel 
     runat="server" 
