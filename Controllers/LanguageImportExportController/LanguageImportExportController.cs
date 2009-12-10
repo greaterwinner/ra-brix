@@ -22,15 +22,17 @@ namespace LanguageImportExportController
     public class LanguageImportExportController
     {
         [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
+        protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonLangExport", "Export Language");
             Language.Instance.SetDefaultValue("ButtonLangImport", "Import Language");
+            Language.Instance.SetDefaultValue("ButtonLang", "Language");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
+            e.Params["ButtonAdmin"]["ButtonLang"].Value = "Menu-LanguageGroup";
             e.Params["ButtonAdmin"]["ButtonLang"]["ButtonLangExport"].Value = "Menu-ExportLanguage";
             e.Params["ButtonAdmin"]["ButtonLang"]["ButtonLangImport"].Value = "Menu-ImportLanguage";
         }
