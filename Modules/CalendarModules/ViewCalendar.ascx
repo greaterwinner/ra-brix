@@ -70,18 +70,27 @@
                 id="unveilAct" />
         </ra:Panel>
     </ra:Panel>
-    <ra:TextBox 
+    <ra:Panel 
         runat="server" 
-        OnKeyUp="filter_KeyUp"
-        Tooltip="Filter activities here"
-        AccessKey="F"
-        style="opacity:0.3;"
-        CssClass="filterTextBox activityFilter"
-        id="filter">
-        <ra:BehaviorUnveiler 
+        DefaultWidget="btnFilter"
+        id="pnlFilterWrp">
+        <ra:TextBox 
             runat="server" 
-            id="filterUnveiler" />
-    </ra:TextBox>
+            Tooltip="Filter activities here"
+            AccessKey="F"
+            style="opacity:0.3;"
+            CssClass="filterTextBox activityFilter"
+            id="filter">
+            <ra:BehaviorUnveiler 
+                runat="server" 
+                id="filterUnveiler" />
+        </ra:TextBox>
+        <ra:Button 
+            runat="server" 
+            id="btnFilter" 
+            OnClick="filter_KeyUp"
+            style="position:absolute;left:1px;margin-left:-200px;" />
+    </ra:Panel>
     <ra:LinkButton 
         runat="server" 
         id="previous" 
