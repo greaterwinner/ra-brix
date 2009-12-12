@@ -83,7 +83,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Language"
-copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Language"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\LanguageImportExport"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\LanguageImportExport"</PostBuildEvent>
   </PropertyGroup>
 </Project>

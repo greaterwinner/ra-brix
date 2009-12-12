@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Services;
-using System.Web.UI.MobileControls;
 using System.IO;
+using CandyStoreEntities;
 
-[WebService(Namespace = "http://tempuri.org/")]
+[WebService(Namespace = "http://ra-brix.org/CandyStoreWebService")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-public class Service : System.Web.Services.WebService
+public class Service : WebService
 {
-    public Service () {
-
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
-    }
-
     [WebMethod]
     public CandyEntity[] GetAllModules() 
     {
@@ -23,11 +15,18 @@ public class Service : System.Web.Services.WebService
         {
             string candyFileName = idx.Substring(idx.LastIndexOf('\\') + 1);
             CandyEntity entity = new CandyEntity();
+            entity.Updated = File.GetLastWriteTime(idx);
             entity.CandyName = candyFileName;
-            entity.CandyImageUrl =
-                this.Context.Request.Url.ToString().Replace("CandyStore.asmx", "") + 
-                "Candies/" +
-                candyFileName.Replace(".zip", ".png");
+            entity.CandyImageUrl = candyFileName.Replace(".zip", ".png");
+            string descriptionFileName = Server.MapPath("~/Candies/") + 
+                candyFileName.Replace(".zip", ".txt");
+            if (File.Exists(descriptionFileName))
+            {
+                using (TextReader stream = File.OpenText(descriptionFileName))
+                {
+                    entity.Description = stream.ReadToEnd();
+                }
+            }
             retVal.Add(entity);
         }
         return retVal.ToArray();

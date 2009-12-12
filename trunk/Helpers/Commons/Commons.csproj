@@ -31,14 +31,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Portal\bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Portal\bin\Ra.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppInstaller.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

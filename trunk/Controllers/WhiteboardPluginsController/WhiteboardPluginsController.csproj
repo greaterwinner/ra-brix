@@ -92,7 +92,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Whiteboards"
-copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Whiteboards"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\WhiteBoardPlugins"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\WhiteBoardPlugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
