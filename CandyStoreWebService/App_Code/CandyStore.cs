@@ -27,6 +27,10 @@ public class Service : WebService
                     entity.Description = stream.ReadToEnd();
                 }
             }
+            else
+            {
+                entity.Description = "This candy doesn't have any available description";
+            }
             retVal.Add(entity);
         }
         return retVal.ToArray();
