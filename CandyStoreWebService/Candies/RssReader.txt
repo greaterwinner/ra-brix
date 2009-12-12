@@ -1,0 +1,1 @@
+The RssReader module will make it possible to configure up a list of RSS sources which will be fetched so that your users can read them.

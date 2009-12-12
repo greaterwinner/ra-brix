@@ -1,0 +1,1 @@
+This module makes it possible for all users in the portal to create a list of bookmarks or favorites which they then easily can access by opening up the Favorites module and start open applications from there. Can be very useful if you have a lot of modules and/or pages in your portal and you expect users to login to your application.

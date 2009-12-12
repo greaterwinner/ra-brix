@@ -1,0 +1,1 @@
+The Help Module will retrieve help from all your existing modules in your portal - if your modules exposes such information.

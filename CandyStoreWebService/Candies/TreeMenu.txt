@@ -1,0 +1,1 @@
+This module is an alternative menu module to use which will use a TreeView to display links to pages and modules within your portal instead of the default menu which is the sliding menu. Notice that once installed you need to enable it by changing the "MenuType" setting and set it to "TreeMenu".

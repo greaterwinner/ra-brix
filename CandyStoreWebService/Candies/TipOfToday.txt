@@ -1,0 +1,1 @@
+This module will retrieve "today's tips" from all your existing modules, and display them randomly looping through them as a list ones logged in. Might be useful to enable, especially in the beginning when starting to use the portal.

@@ -1,0 +1,1 @@
+This module contains a lot of "extras" for your WhiteBoard module, like for instance the Date, Strike and Color column types. It really makes your WhiteBoards become alive and much more flexible. Obviously it's completely useless unless you've got the WhiteBoard module already installed.

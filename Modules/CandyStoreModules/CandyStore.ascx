@@ -69,7 +69,7 @@ those vendors."] %>
                     <ra:Label 
                         runat="server" 
                         Tag="div"
-                        style="display:none;text-align:justify;border:dashed 1px #999;overflow:auto;height:110px;width:90%;padding:5px;font-size:10px;"
+                        style="display:none;text-align:justify;border:dashed 1px #999;overflow:auto;height:100px;width:90%;padding:10px;font-size:10px;"
                         Text='<%# Eval("[\"Description\"].Value")%>' />
                 </div>
                 <ra:BehaviorUnveiler 

@@ -1,0 +1,1 @@
+The Language Module will make it possible for logged in users in your portal to switch their active language. And it will also make it possible to translate your portal to any of the supported languages. Relevant other modules might be the LanguageImportExport Module which will make it possible to import already existing languages, and also export already translated languages.

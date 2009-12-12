@@ -17,6 +17,7 @@ using Ra.Brix.Types;
 using Ra.Effects;
 using Ra.Selector;
 using System.Web.UI;
+using System.Collections.Generic;
 
 namespace CandyStoreModules
 {
@@ -145,18 +146,37 @@ minutes. You might also - dependent upon your portal installation - be forced to
         private Node FilterApplications()
         {
             Node retVal = new Node();
-            int idxNo = 0;
-            foreach (Node idxNode in Modules)
+            if (filter.Text.ToLowerInvariant() ==
+                Language.Instance["Newest", null, "Newest"].ToLowerInvariant())
             {
-                ++idxNo;
-                if (filter.Text.ToLowerInvariant() == 
-                    Language.Instance["Popular", null, "Popular"].ToLowerInvariant())
+                List<Node> nodes = new List<Node>(Modules);
+                nodes.Sort(
+                    delegate(Node left, Node right)
+                    {
+                        return left["Date"].Get<DateTime>().CompareTo(right["Date"].Get<DateTime>());
+                    });
+                int idxNo = 0;
+                foreach (Node idxNode in Modules)
                 {
-                    if (idxNo >= 10)
+                    if (++idxNo >= 10)
                         break;
                     retVal.Add(idxNode);
                 }
-                else
+            }
+            else if (filter.Text.ToLowerInvariant() ==
+                    Language.Instance["Popular", null, "Popular"].ToLowerInvariant())
+            {
+                int idxNo = 0;
+                foreach (Node idxNode in Modules)
+                {
+                    if (++idxNo >= 10)
+                        break;
+                    retVal.Add(idxNode);
+                }
+            }
+            else
+            {
+                foreach (Node idxNode in Modules)
                 {
                     bool hasValue = false;
                     if (string.IsNullOrEmpty(filter.Text))
