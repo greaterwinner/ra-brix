@@ -47,10 +47,30 @@ those vendors."] %>
                 CssClass='<%#"candy " + GetCssClassAccordingToIsInstalled(Eval("[\"Installed\"].Value")) %>'
                 ToolTip='<%#GetToolTip(Eval("[\"Installed\"].Value")) %>'
                 style="opacity:0.3;">
-                <strong style="margin-bottom:10px;display:block;"><%#Eval("[\"CandyName\"].Value").ToString().Replace(".zip", "") %></strong>
-                <img src='<%#Eval("[\"CandyUrl\"].Value") %>' alt='<%#Eval("[\"CandyName\"].Value") %>' />
+                <ra:ExtButton 
+                    runat="server" 
+                    Text='<%#LanguageRecords.Language.Instance["Install", null, "Install"] %>'
+                    style="position:absolute;top:15px;left:220px;"
+                    OnClick="ClickToInstallModule" />
+                <strong 
+                    style="margin-bottom:10px;display:block;position:absolute;top:5px;left:5px;">
+                    <%#Eval("[\"CandyName\"].Value").ToString().Replace(".zip", "") %>
+                </strong>
+                <img 
+                    src='<%#Eval("[\"CandyUrl\"].Value") %>' 
+                    style="position:absolute;top:40px;left:55px;"
+                    alt='<%#Eval("[\"CandyName\"].Value") %>' />
                 <div style="position:absolute;top:140px;">
-                    <p><%# ((DateTime)Eval("[\"Date\"].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%></p>
+                    <p 
+                        style="font-style:italic;position:absolute;left:5px;font-size:10px;">
+                        <%# ((DateTime)Eval("[\"Date\"].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%>
+                    </p>
+                    <p>&nbsp;</p>
+                    <ra:Label 
+                        runat="server" 
+                        Tag="div"
+                        style="display:none;text-align:justify;border:dashed 1px #999;overflow:auto;height:110px;width:90%;padding:5px;font-size:10px;"
+                        Text='<%# Eval("[\"Description\"].Value")%>' />
                 </div>
                 <ra:BehaviorUnveiler 
                     runat="server" />

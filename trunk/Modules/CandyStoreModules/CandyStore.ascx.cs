@@ -36,9 +36,11 @@ namespace CandyStoreModules
         protected void SelectModule(object sender, EventArgs e)
         {
             Panel pnl = (Panel) sender;
-            if(pnl.Style[Styles.height] == "400px")
+            if(pnl.Style[Styles.height] == "270px")
             {
-                new EffectSize(pnl, 500, 110, 150)
+                new EffectFadeOut(Selector.SelectFirst<Label>(pnl), 200)
+                    .ChainThese(
+                        new EffectSize(pnl, 500, 110, 150))
                     .Render();
                 OldMaximized = "";
             }
@@ -46,25 +48,38 @@ namespace CandyStoreModules
             {
                 if (!string.IsNullOrEmpty(OldMaximized))
                 {
-                    new EffectSize(Selector.SelectFirst<Panel>(
-                        this, 
+                    Panel pnlOld = Selector.SelectFirst<Panel>(
+                        this,
                         delegate(Control idx)
                             {
                                 RaWebControl ctrl = idx as RaWebControl;
-                                if(ctrl == null)
+                                if (ctrl == null)
                                     return false;
                                 return ctrl.Xtra == OldMaximized;
-                            }), 500, 110, 150)
-                        .ChainThese(new EffectSize(pnl, 500, 400, 400))
+                            });
+                    new EffectFadeOut(Selector.SelectFirst<Label>(pnlOld), 200)
+                        .ChainThese(
+                            new EffectSize(pnlOld, 500, 110, 150)
+                                .ChainThese(
+                                    new EffectSize(pnl, 500, 270, 300),
+                                    new EffectFadeIn(Selector.SelectFirst<Label>(pnl), 500)))
                         .Render();
                 }
                 else
                 {
-                    new EffectSize(pnl, 500, 400, 400)
+                    new EffectSize(pnl, 500, 270, 300)
+                        .ChainThese(
+                            new EffectFadeIn(Selector.SelectFirst<Label>(pnl), 500))
                         .Render();
                 }
                 OldMaximized = pnl.Xtra;
             }
+        }
+
+        protected void ClickToInstallModule(object sender, EventArgs e)
+        {
+            Panel pnl = (Panel)((Control)sender).Parent;
+            InstallModule(pnl);
         }
 
         private void InstallModule(Panel pnl)
