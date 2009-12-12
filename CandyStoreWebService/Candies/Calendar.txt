@@ -1,0 +1,1 @@
+The Calendar Module will help you keep track of calendar activities and your time. It is possible to create activities, tie them into specific dates and add text and header to them.
