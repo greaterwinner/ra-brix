@@ -277,6 +277,13 @@
       </fileset>
     </zip>
 
+    <!-- Calendar -->
+    <zip zipfile="${output.dir}/Calendar.zip">
+      <fileset basedir="${output.dir}/${library.dir}/Calendar">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+
   </target>
 
 </project>
