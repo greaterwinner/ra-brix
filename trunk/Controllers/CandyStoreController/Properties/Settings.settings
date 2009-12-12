@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CandyStoreController_CandyStore_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:8081/CandyStoreWebService/CandyStore.asmx</Value>
+      <Value Profile="(Default)">http://localhost:8089/CandyStoreWebService/CandyStore.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

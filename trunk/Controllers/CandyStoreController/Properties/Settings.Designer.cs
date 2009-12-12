@@ -26,7 +26,7 @@ namespace CandyStoreController.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8081/CandyStoreWebService/CandyStore.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8089/CandyStoreWebService/CandyStore.asmx")]
         public string CandyStoreController_CandyStore_Service {
             get {
                 return ((string)(this["CandyStoreController_CandyStore_Service"]));

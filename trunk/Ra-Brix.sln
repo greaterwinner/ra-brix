@@ -134,7 +134,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CandyStoreWebService", "Can
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "8081"
+		VWDPort = "8089"
 		VWDDynamicPort = "false"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
