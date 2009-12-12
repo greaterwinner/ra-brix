@@ -9,25 +9,37 @@
  */
 
 using System;
-
-public class CandyEntity
+namespace CandyStoreEntities
 {
-    private string _candyName;
-    private string _candyImageUrl;
-
-    public string CandyName
+    public class CandyEntity
     {
-        get { return _candyName; }
-        set { _candyName = value; }
-    }
+        private string _candyName;
+        private string _candyImageUrl;
+        private string _description;
+        private DateTime _date;
 
-    public string CandyImageUrl
-    {
-        get { return _candyImageUrl; }
-        set { _candyImageUrl = value; }
-    }
+        public string CandyName
+        {
+            get { return _candyName; }
+            set { _candyName = value; }
+        }
 
-    public CandyEntity()
-    {
+        public string CandyImageUrl
+        {
+            get { return _candyImageUrl; }
+            set { _candyImageUrl = value; }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        public DateTime Updated
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
     }
 }

@@ -8,30 +8,49 @@
  * 
  */
 
+using HelperGlobals;
 using LanguageRecords;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
-using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
-using System.Web;
-using Ra;
 using CandyStoreController.CandyStore;
+using SettingsRecords;
+using System.Reflection;
+using System.IO;
+using System.Web;
+using System.Collections.Generic;
 
 namespace CandyStoreController
 {
     [ActiveController]
     public class CandyStoreController
     {
+        private Service GetCandyStoreWebService()
+        {
+            Service svc = new Service();
+            string webSvc = GetWebSvcURL();
+            svc.Url = webSvc;
+            return svc;
+        }
+
+        private string GetWebSvcURL()
+        {
+            string webSvc = Settings.Instance["CandyStoreDefaultURL"];
+            if (string.IsNullOrEmpty(webSvc))
+                webSvc = "http://localhost:8081/CandyStoreWebService/CandyStore.asmx";
+            return webSvc;
+        }
+
         [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
+        protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonCandyStore", "Candy Store");
+            Language.Instance.SetDefaultValue("ButtonInstalledApps", "Manage Apps");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonAppl"]["ButtonCandyStore"].Value = "Menu-OpenCandyStore";
+            e.Params["ButtonAdmin"]["ButtonInstalledApps"]["ButtonCandyStore"].Value = "Menu-OpenCandyStore";
         }
 
         [ActiveEvent(Name = "Menu-OpenCandyStore")]
@@ -39,14 +58,29 @@ namespace CandyStoreController
         {
             Node node = new Node();
             node["TabCaption"].Value = Language.Instance["CandyStoreHeader", null, "Candy Store"];
-            using (Service svc = new Service())
+            using (Service svc = GetCandyStoreWebService())
             {
+                string webSvc = GetWebSvcURL().Replace("CandyStore.asmx", "");
                 int idxNo = 0;
                 foreach (CandyEntity idx in svc.GetAllModules())
                 {
                     node["ModuleSettings"]["Modules"]["Module" + idxNo]["ID"].Value = idx.CandyName;
                     node["ModuleSettings"]["Modules"]["Module" + idxNo]["CandyName"].Value = idx.CandyName;
-                    node["ModuleSettings"]["Modules"]["Module" + idxNo]["CandyUrl"].Value = idx.CandyImageUrl;
+                    node["ModuleSettings"]["Modules"]["Module" + idxNo]["CandyUrl"].Value = 
+                        webSvc.Trim('/') + "/Candies/" + idx.CandyImageUrl;
+                    node["ModuleSettings"]["Modules"]["Module" + idxNo]["Description"].Value = "" + idx.Description;
+                    node["ModuleSettings"]["Modules"]["Module" + idxNo]["Date"].Value = idx.Updated;
+                    CandyEntity tmpIdx = idx;
+                    if (new List<DirectoryInfo>(new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin")).GetDirectories()).Exists(
+                        delegate(DirectoryInfo idx2)
+                        {
+                            if(idx2.Name.ToLowerInvariant() == tmpIdx.CandyName.Replace(".zip", "").ToLowerInvariant())
+                                return true;
+                            return false;
+                        }))
+                        node["ModuleSettings"]["Modules"]["Module" + idxNo]["Installed"].Value = true;
+                    else
+                        node["ModuleSettings"]["Modules"]["Module" + idxNo]["Installed"].Value = false;
                     idxNo += 1;
                 }
             }
@@ -60,32 +94,11 @@ namespace CandyStoreController
         protected void CandyStoreModuleSelectedForInstall(object sender, ActiveEventArgs e)
         {
             string fileName = e.Params["FileName"].Get<string>();
-            using (Service svc = new Service())
+            using (Service svc = GetCandyStoreWebService())
             {
                 byte[] fileContent = svc.GetSpecificModule(fileName);
-                using (MemoryStream memStream = new MemoryStream(fileContent))
-                {
-                    memStream.Position = 0;
-                    using (ZipInputStream zipInput = new ZipInputStream(memStream))
-                    {
-                        ZipEntry current = zipInput.GetNextEntry();
-                        while (current != null)
-                        {
-                            using (FileStream output = new FileStream(
-                                HttpContext.Current.Server.MapPath("~/bin/") + current.Name,
-                                FileMode.Create,
-                                FileAccess.Write))
-                            {
-                                byte[] buffer = new byte[current.Size];
-                                zipInput.Read(buffer, 0, buffer.Length);
-                                output.Write(buffer, 0, buffer.Length);
-                                current = zipInput.GetNextEntry();
-                            }
-                        }
-                    }
-                }
+                AppInstaller.InstallApplication(fileName, fileContent);
             }
-            AjaxManager.Instance.Redirect("~/?message=PluginInstalled");
         }
     }
 }

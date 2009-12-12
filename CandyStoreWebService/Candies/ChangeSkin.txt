@@ -1,0 +1,2 @@
+This module makes it possible to change the skin of your portal. It will display a screenshot, if one exists, of all the available skins in your portal, and make it possible to change skin. Both globally an on a user level. If you change the skin globally, then the skin will be the default skin if not overridet on a per user level. If you change it on a user level, then the skin will be associated with the user and used as the default skin for that user only. This module also supports uploading new skins and making them available to be chosen.
+
