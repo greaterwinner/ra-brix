@@ -257,21 +257,21 @@
     </zip>
 
     <!-- WhiteBoardPlugins -->
-    <zip zipfile="${output.dir}/WhiteBoardPlugins.zip">
+    <zip zipfile="${output.dir}/ListPlugins.zip">
       <fileset basedir="${output.dir}/${library.dir}/WhiteBoardPlugins">
         <include name="**/*" />
       </fileset>
     </zip>
 
     <!-- WhiteBoards -->
-    <zip zipfile="${output.dir}/WhiteBoards.zip">
+    <zip zipfile="${output.dir}/Lists.zip">
       <fileset basedir="${output.dir}/${library.dir}/WhiteBoards">
         <include name="**/*" />
       </fileset>
     </zip>
 
     <!-- WhiteBoardsPDF -->
-    <zip zipfile="${output.dir}/WhiteBoardsPDF.zip">
+    <zip zipfile="${output.dir}/ListPDF.zip">
       <fileset basedir="${output.dir}/${library.dir}/WhiteBoardsPDF">
         <include name="**/*" />
       </fileset>
