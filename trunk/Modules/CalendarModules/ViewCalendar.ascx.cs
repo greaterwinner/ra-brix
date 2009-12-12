@@ -48,8 +48,18 @@ namespace CalendarModules
 
         private DateTime FirstDate
         {
-            get { return ViewState["FirstDate"] == null ? DateTime.Now.Date : (DateTime)ViewState["FirstDate"]; }
+            get { return ViewState["FirstDate"] == null ? GetDefaultDate() : (DateTime)ViewState["FirstDate"]; }
             set { ViewState["FirstDate"] = value; }
+        }
+
+        private DateTime GetDefaultDate()
+        {
+            DateTime retVal = DateTime.Now.Date;
+            while(retVal.DayOfWeek != DayOfWeek.Monday)
+            {
+                retVal = retVal.AddDays(-1);
+            }
+            return retVal;
         }
 
         private void BuildActivities()
@@ -269,7 +279,7 @@ namespace CalendarModules
                 .Render();
             Activity a = ActiveType<Activity>.SelectByID(int.Parse(id));
             txtHeader.Text = a.Header;
-            txtBody.Text = a.Body;
+            txtBody.Text = string.IsNullOrEmpty(a.Body) ? "[null]" : a.Body;
             lblStart.Text = a.Start.ToString("d MMM - HH:mm");
             lblEnd.Text = a.End.ToString("d MMM - HH:mm");
             dateStart.Value = a.Start;
@@ -336,6 +346,19 @@ namespace CalendarModules
                     new EffectSize(pnlShowActivity, 500, 0, 0)
                         .JoinThese(new EffectFadeOut()))
                 .Render();
+            string idOfPreviousLabel = CurrentActivityLabel.Substring(0, CurrentActivityLabel.IndexOf("x") + 1);
+            foreach (Label oldLb in Selector.Select<Label>(this,
+                delegate(Control idxCtrl)
+                {
+                    return idxCtrl.ID.IndexOf(idOfPreviousLabel) == 0;
+                }))
+            {
+                oldLb.Style[Styles.zIndex] = (int.Parse(oldLb.Style[Styles.zIndex]) - 10).ToString();
+                oldLb.Style[Styles.opacity] = "0.7";
+                oldLb.CssClass = oldLb.CssClass.Replace("activitySelected", "activity");
+                oldLb.Style[Styles.width] = "";
+            }
+            CurrentActivityLabel = "";
         }
 
         protected void dateStart_DateClicked(object sender, EventArgs e)
@@ -387,7 +410,7 @@ namespace CalendarModules
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
             Activity a = ActiveType<Activity>.SelectByID(id);
-            a.Body = txtBody.Text;
+            a.Body = string.IsNullOrEmpty(txtBody.Text) ? "" : txtBody.Text;
             a.Save();
             actWrp.Controls.Clear();
             BuildActivities();
@@ -420,7 +443,7 @@ namespace CalendarModules
                 Label header = new Label
                 {
                     ID = "header" + idxDate.ToString("dd.MM.yy"),
-                    Text = idxDate.ToString("dddd d.MMM"),
+                    Text = idxDate.ToString("ddd d.MMM"),
                     CssClass = "header"
                 };
                 if (idxDate.DayOfWeek == DayOfWeek.Saturday || idxDate.DayOfWeek == DayOfWeek.Sunday)
@@ -488,7 +511,7 @@ namespace CalendarModules
 
         protected void previous_Click(object sender, EventArgs e)
         {
-            FirstDate = FirstDate.AddDays(-1);
+            FirstDate = FirstDate.AddDays(-7);
             actWrp.Controls.Clear();
             BuildActivities();
             actWrp.ReRender();
@@ -497,7 +520,7 @@ namespace CalendarModules
 
         protected void next_Click(object sender, EventArgs e)
         {
-            FirstDate = FirstDate.AddDays(1);
+            FirstDate = FirstDate.AddDays(7);
             actWrp.Controls.Clear();
             BuildActivities();
             actWrp.ReRender();
@@ -509,7 +532,10 @@ namespace CalendarModules
             actWrp.Controls.Clear();
             BuildActivities();
             actWrp.ReRender();
-            new EffectHighlight(actWrp, 400).Render();
+            new EffectHighlight(actWrp, 400)
+                .Render();
+            filter.Focus();
+            filter.Select();
         }
 
         [ActiveEvent(Name = "RefreshActivities")]

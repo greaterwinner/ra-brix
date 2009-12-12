@@ -28,7 +28,8 @@ namespace Components
         public string Text
         {
             get { return _text.Text; }
-            set { _text.Text = value; }
+            set { _text.Text = value;
+                _link.Text = value; }
         }
 
         [DefaultValue(-1)]
