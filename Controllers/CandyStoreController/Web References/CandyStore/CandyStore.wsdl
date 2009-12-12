@@ -107,10 +107,10 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
-      <soap:address location="http://localhost:8081/CandyStoreWebService/CandyStore.asmx" />
+      <soap:address location="http://localhost:8089/CandyStoreWebService/CandyStore.asmx" />
     </wsdl:port>
     <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
-      <soap12:address location="http://localhost:8081/CandyStoreWebService/CandyStore.asmx" />
+      <soap12:address location="http://localhost:8089/CandyStoreWebService/CandyStore.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

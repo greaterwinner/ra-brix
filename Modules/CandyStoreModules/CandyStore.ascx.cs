@@ -145,6 +145,7 @@ minutes. You might also - dependent upon your portal installation - be forced to
 
         private Node FilterApplications()
         {
+            OldMaximized = "";
             Node retVal = new Node();
             if (filter.Text.ToLowerInvariant() ==
                 Language.Instance["Newest", null, "Newest"].ToLowerInvariant())
