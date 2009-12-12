@@ -1,0 +1,1 @@
+This module makes it possible for you to export and import languages into the portal. Related modules are "Language".

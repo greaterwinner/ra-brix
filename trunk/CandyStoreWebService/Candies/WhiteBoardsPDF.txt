@@ -1,0 +1,1 @@
+This module makes it possible for you to integrate WhiteBoard records with PDF documents such that you can "export" WhiteBoard records to PDF documents and such. 

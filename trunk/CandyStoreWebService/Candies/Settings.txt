@@ -1,0 +1,1 @@
+The Settings Module is really crucial in that it's your only interface to changing any settings of your portal. It will give you a visual grid-like interface from where you can edit existing settings from.
