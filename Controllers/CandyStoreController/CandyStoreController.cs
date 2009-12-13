@@ -44,7 +44,7 @@ namespace CandyStoreController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
-            Language.Instance.SetDefaultValue("ButtonCandyStore", "Candy Store");
+            Language.Instance.SetDefaultValue("ButtonCandyStore", "Market Place");
             Language.Instance.SetDefaultValue("ButtonInstalledApps", "Manage Apps");
         }
 

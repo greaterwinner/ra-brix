@@ -657,7 +657,7 @@ div.edit input, div.edit textarea
 	margin: 10px;
 	padding: 15px;
 	float: left;
-	border: dashed 1px #999;
+	border: solid 1px #999;
 	cursor: pointer;
 	text-align: center;
 	position:relative;
@@ -1500,17 +1500,17 @@ span.buttonFlat
 
 .not-installed
 {
-	background-color:Green;
+	background-color#cfc;
 }
 
 .already-installed
 {
-	background-color:Gray;
+	background-color:#fdd;
 }
 
 .hasUpdate
 {
-    background-color:Red;
+    background-color:#dfd;
 }
 
 
