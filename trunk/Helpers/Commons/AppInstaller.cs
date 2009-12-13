@@ -23,7 +23,8 @@ namespace HelperGlobals
         {
             string folderName = zipFileName.Replace(".zip", "").Replace(".ZIP", "");
             string binFolder = HttpContext.Current.Server.MapPath("~/bin");
-            Directory.SetCreationTime(binFolder + "/" + folderName, DateTime.Now);
+            if (Directory.Exists(binFolder + "/" + folderName))
+                Directory.SetCreationTime(binFolder + "/" + folderName, DateTime.Now);
             Directory.CreateDirectory(binFolder + "/" + folderName);
             using (MemoryStream memStream = new MemoryStream(zipFileContent))
             {
