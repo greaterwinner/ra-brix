@@ -17,7 +17,7 @@
     <add key="LegoConnectionString" value="SERVER=localhost;DATABASE=Lego;UID=root;PASSWORD=8pr4ms" />
     -->
 
-    <!-- XML connection string 
+    <!-- XML connection string (doesn't work) 
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
