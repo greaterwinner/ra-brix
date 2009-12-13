@@ -306,13 +306,13 @@
     </csc>
 
     <!-- WhiteBoardRecords -->
-    <mkdir dir="${output.dir}/${library.dir}/WhiteBoards" />
+    <mkdir dir="${output.dir}/${library.dir}/Lists" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoards/WhiteBoardRecords.dll"
+        output="${output.dir}/${library.dir}/Lists/WhiteBoardRecords.dll"
         debug="${debug}">
       <sources>
         <include name="Types/WhiteBoardRecords/**/*.cs" />
@@ -439,6 +439,34 @@
         <include name="${output.dir}/${library.dir}/History/HistoryRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/Favourites/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- CandyStoreController -->
+    <mkdir dir="${output.dir}/${library.dir}/MarketPlace" />
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/MarketPlace/CandyStoreController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/CandyStoreController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Web.Services.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
@@ -596,7 +624,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoards/WhiteBoardController.dll"
+        output="${output.dir}/${library.dir}/Lists/WhiteBoardController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteBoardController/**/*.cs" />
@@ -611,20 +639,20 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Lists/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- WhiteboardPDFController -->
-    <mkdir dir="${output.dir}/${library.dir}/WhiteBoardsPDF" />
+    <mkdir dir="${output.dir}/${library.dir}/ListPDF" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoardsPDF/WhiteboardPDFController.dll"
+        output="${output.dir}/${library.dir}/ListPDF/WhiteboardPDFController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteboardPDFController/**/*.cs" />
@@ -647,7 +675,7 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Lists/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
@@ -676,20 +704,20 @@
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Lists/WhiteboardRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
 
     <!-- WhiteboardPluginsController -->
-    <mkdir dir="${output.dir}/${library.dir}/WhiteBoardPlugins" />
+    <mkdir dir="${output.dir}/${library.dir}/ListPlugins" />
     <csc
         target="library"
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoardPlugins/WhiteboardPluginsController.dll"
+        output="${output.dir}/${library.dir}/ListPlugins/WhiteboardPluginsController.dll"
         debug="${debug}">
       <sources>
         <include name="Controllers/WhiteboardPluginsController/**/*.cs" />
@@ -706,7 +734,7 @@
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/UserSettings/UserSettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
-        <include name="${output.dir}/${library.dir}/WhiteBoards/WhiteboardRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Lists/WhiteboardRecords.dll" />
         <include name="${references.dir}/Ra.dll" />
         <include name="${references.dir}/Ra.Extensions.dll" />
         <include name="${references.dir}/Ra.Selector.dll" />
@@ -989,6 +1017,40 @@
       <resources failonempty="true" prefix="ChangeSkinModules">
         <include name="Modules/ChangeSkinModules/**/*.ascx" if="${debug}" />
         <include name="Modules/ChangeSkinModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- CandyStoreModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/MarketPlace/CandyStoreModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/CandyStoreModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="CandyStoreModules">
+        <include name="Modules/CandyStoreModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/CandyStoreModules/**/*.ascx" unless="${debug}" />
       </resources>
       <references>
         <include name="${framework.dir}/System.dll" />
@@ -1685,7 +1747,7 @@
         optimize="${not debug}"
         noconfig="true"
         filealign="512"
-        output="${output.dir}/${library.dir}/WhiteBoards/WhiteboardModules.dll"
+        output="${output.dir}/${library.dir}/Lists/WhiteboardModules.dll"
         debug="${debug}">
       <sources>
         <include name="Modules/WhiteboardModules/**/*.cs" />
