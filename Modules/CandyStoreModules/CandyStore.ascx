@@ -62,7 +62,7 @@ those vendors."] %>
                     alt='<%#Eval("[\"CandyName\"].Value") %>' />
                 <div style="position:absolute;top:140px;">
                     <p 
-                        style="font-style:italic;position:absolute;left:5px;font-size:10px;">
+                        style="font-style:italic;position:absolute;left:5px;font-size:10px;white-space:nowrap;">
                         <%# ((DateTime)Eval("[\"Date\"].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%>
                     </p>
                     <p>&nbsp;</p>
