@@ -44,7 +44,7 @@ those vendors."] %>
                 runat="server" 
                 OnClick="SelectModule"
                 Xtra='<%#Eval("[\"CandyName\"].Value") %>'
-                CssClass='<%#"candy " + GetCssClassAccordingToIsInstalled(Eval("[\"Installed\"].Value")) %>'
+                CssClass='<%#"candy " + GetCssClassAccordingToIsInstalled(Eval("[\"Installed\"].Value"), Eval("[\"HasUpdate\"].Value")) %>'
                 ToolTip='<%#GetToolTip(Eval("[\"Installed\"].Value")) %>'
                 style="opacity:0.3;">
                 <ra:ExtButton 
