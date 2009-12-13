@@ -49,7 +49,8 @@ those vendors."] %>
                 style="opacity:0.3;">
                 <ra:ExtButton 
                     runat="server" 
-                    Text='<%#LanguageRecords.Language.Instance["Install", null, "Install"] %>'
+                    Visible='<%#GetVisibilityForButton(Eval("[\"Installed\"].Value"), Eval("[\"HasUpdate\"].Value")) %>'
+                    Text='<%#GetCaptionForButton(Eval("[\"Installed\"].Value")) %>'
                     style="position:absolute;top:15px;left:220px;"
                     OnClick="ClickToInstallModule" />
                 <strong 

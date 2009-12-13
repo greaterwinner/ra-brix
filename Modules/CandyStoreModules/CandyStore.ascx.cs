@@ -248,5 +248,22 @@ minutes. You might also - dependent upon your portal installation - be forced to
                        :
                            Language.Instance["ClickToInstallApplications", null, "Click to install application"];
         }
+
+        protected bool GetVisibilityForButton(object isInstalledObj, object hasUpdateObj)
+        {
+            bool isInstalled = (bool) isInstalledObj;
+            bool hasUpdate = (bool) hasUpdateObj;
+            return (!isInstalled) || hasUpdate;
+        }
+
+        protected string GetCaptionForButton(object isInstalledObj)
+        {
+            bool isInstalled = (bool) isInstalledObj;
+            return isInstalled
+                       ?
+                           Language.Instance["Update", null, "Update"]
+                       :
+                           Language.Instance["Install", null, "Install"];
+        }
     }
 }

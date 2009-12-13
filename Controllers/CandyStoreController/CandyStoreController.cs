@@ -78,7 +78,7 @@ namespace CandyStoreController
                         {
                             if (idx2.Name.ToLowerInvariant() == tmpIdx.CandyName.Replace(".zip", "").ToLowerInvariant())
                             {
-                                DateTime dateOfInstalledApp = idx2.LastWriteTime;
+                                DateTime dateOfInstalledApp = idx2.CreationTime;
                                 if (tmpIdx.Updated > dateOfInstalledApp)
                                 {
                                     node["ModuleSettings"]["Modules"]["Module" + no]["HasUpdate"].Value = true;
