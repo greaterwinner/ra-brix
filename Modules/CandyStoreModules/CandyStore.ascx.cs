@@ -87,14 +87,31 @@ namespace CandyStoreModules
         {
             if (pnl.CssClass.Contains("already-installed"))
             {
-                Node nodeMessage = new Node();
-                nodeMessage["Message"].Value = Language.Instance["", null, @"
-Application is already installed, if you want to update it you need to uninstall it first"];
-                nodeMessage["Duration"].Value = 2000;
-                ActiveEvents.Instance.RaiseActiveEvent(
-                    this,
-                    "ShowInformationMessage",
-                    nodeMessage);
+                if (pnl.CssClass.Contains("hasUpdate"))
+                {
+                    string fileName = pnl.Xtra;
+                    Node node = new Node();
+                    node["FileName"].Value = fileName;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "CandyStoreModuleSelectedForInstall",
+                        node);
+                }
+                else
+                {
+                    Node nodeMessage = new Node();
+                    nodeMessage["Message"].Value =
+                        Language.Instance[
+                            "", null,
+                            @"
+Application is already installed, if you want to update it you need to uninstall it first"
+                            ];
+                    nodeMessage["Duration"].Value = 2000;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "ShowInformationMessage",
+                        nodeMessage);
+                }
             }
             else
             {
@@ -214,10 +231,12 @@ minutes. You might also - dependent upon your portal installation - be forced to
             return "";
         }
 
-        protected string GetCssClassAccordingToIsInstalled(object isInstalledObj)
+        protected string GetCssClassAccordingToIsInstalled(object isInstalledObj, object hasUpdateObj)
         {
-            bool isInstalled = (bool) isInstalledObj;
-            return isInstalled ? "already-installed" : "not-installed";
+            bool isInstalled = (bool)isInstalledObj;
+            bool hasUpdate = (bool)hasUpdateObj;
+            string hasUpdateStr = hasUpdate ? "hasUpdate " : ""; 
+            return hasUpdateStr + (isInstalled ? "already-installed" : "not-installed");
         }
 
         protected string GetToolTip(object isInstalledObj)

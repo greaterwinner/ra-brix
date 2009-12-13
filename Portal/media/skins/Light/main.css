@@ -1508,6 +1508,9 @@ span.buttonFlat
 	background-color:Gray;
 }
 
-
+.hasUpdate
+{
+    background-color:Red;
+}
 
 

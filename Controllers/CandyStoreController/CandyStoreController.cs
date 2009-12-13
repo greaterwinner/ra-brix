@@ -18,6 +18,7 @@ using System.Reflection;
 using System.IO;
 using System.Web;
 using System.Collections.Generic;
+using System;
 
 namespace CandyStoreController
 {
@@ -71,16 +72,29 @@ namespace CandyStoreController
                     node["ModuleSettings"]["Modules"]["Module" + idxNo]["Description"].Value = "" + idx.Description;
                     node["ModuleSettings"]["Modules"]["Module" + idxNo]["Date"].Value = idx.Updated;
                     CandyEntity tmpIdx = idx;
+                    int no = idxNo;
                     if (new List<DirectoryInfo>(new DirectoryInfo(HttpContext.Current.Server.MapPath("~/bin")).GetDirectories()).Exists(
                         delegate(DirectoryInfo idx2)
                         {
-                            if(idx2.Name.ToLowerInvariant() == tmpIdx.CandyName.Replace(".zip", "").ToLowerInvariant())
+                            if (idx2.Name.ToLowerInvariant() == tmpIdx.CandyName.Replace(".zip", "").ToLowerInvariant())
+                            {
+                                DateTime dateOfInstalledApp = idx2.LastWriteTime;
+                                if (tmpIdx.Updated > dateOfInstalledApp)
+                                {
+                                    node["ModuleSettings"]["Modules"]["Module" + no]["HasUpdate"].Value = true;
+                                }
+                                else
+                                    node["ModuleSettings"]["Modules"]["Module" + no]["HasUpdate"].Value = false;
                                 return true;
+                            }
                             return false;
                         }))
                         node["ModuleSettings"]["Modules"]["Module" + idxNo]["Installed"].Value = true;
                     else
+                    {
                         node["ModuleSettings"]["Modules"]["Module" + idxNo]["Installed"].Value = false;
+                        node["ModuleSettings"]["Modules"]["Module" + idxNo]["HasUpdate"].Value = false;
+                    }
                     idxNo += 1;
                 }
             }

@@ -13,6 +13,7 @@ using System.Web;
 using ICSharpCode.SharpZipLib.Zip;
 using LanguageRecords;
 using Ra;
+using System;
 
 namespace HelperGlobals
 {
@@ -22,6 +23,7 @@ namespace HelperGlobals
         {
             string folderName = zipFileName.Replace(".zip", "").Replace(".ZIP", "");
             string binFolder = HttpContext.Current.Server.MapPath("~/bin");
+            Directory.SetCreationTime(binFolder + "/" + folderName, DateTime.Now);
             Directory.CreateDirectory(binFolder + "/" + folderName);
             using (MemoryStream memStream = new MemoryStream(zipFileContent))
             {
