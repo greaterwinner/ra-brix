@@ -19,6 +19,7 @@ using Ra.Widgets;
 using System.Collections.Generic;
 using Ra.Selector;
 using Ra.Brix.Data;
+using Ra.Extensions.Widgets;
 
 namespace CalendarModules
 {
@@ -458,6 +459,36 @@ namespace CalendarModules
                     Text = idxDate.ToString("ddd d.MMM"),
                     CssClass = "header"
                 };
+                if (dayNo == 0)
+                {
+                    header.Click +=
+                        delegate(object sender, EventArgs e)
+                        {
+                            Label lbl = (Label) sender;
+                            Calendar cal2 = Selector.SelectFirst<Calendar>(lbl.Parent);
+                            new EffectFadeIn(cal2, 500).Render();
+                        };
+                    header.Style[Styles.color] = "Blue";
+                    header.Style[Styles.cursor] = "pointer";
+                    Calendar cal = new Calendar();
+                    cal.ID = "setDt";
+                    cal.Value = FirstDate;
+                    cal.Style[Styles.display] = "none";
+                    cal.DateClicked +=
+                        delegate(object sender, EventArgs e)
+                            {
+                                Calendar cal3 = (Calendar) sender;
+                                FirstDate = cal3.Value.Date;
+                                actWrp.Controls.Clear();
+                                BuildActivities();
+                                actWrp.ReRender();
+                                new EffectHighlight(actWrp, 400).Render();
+                            };
+
+                    cal.Style[Styles.zIndex] = "800";
+                    cal.Style[Styles.position] = "absolute";
+                    day.Controls.Add(cal);
+                }
                 if (idxDate.DayOfWeek == DayOfWeek.Saturday || idxDate.DayOfWeek == DayOfWeek.Sunday)
                 {
                     header.CssClass += " weekEnd";
