@@ -64,14 +64,19 @@ namespace CalendarModules
 
         private void BuildActivities()
         {
+            BuildActivities(-1);
+        }
+
+        private void BuildActivities(int activeID)
+        {
             // Creating empty calendar
             CreateCalendar();
 
             // Poluating calendar with activities
-            PopulateCalendarWithActivities();
+            PopulateCalendarWithActivities(activeID);
         }
 
-        private void PopulateCalendarWithActivities()
+        private void PopulateCalendarWithActivities(int activeID)
         {
             // Retrieving activites from Database...
             _activities = FillActivities();
@@ -82,20 +87,20 @@ namespace CalendarModules
             DateTime endDate = start.AddDays(7);
             int dayNo = 0;
 
-            // Looping through all the days we want top display
+            // Looping through all the days we want to display
             while (idxDate < endDate)
             {
                 PeriodCollection col = new PeriodCollection();
                 foreach (Activity idxActivity in _activities)
                 {
-                    CreateOneActivityLabel(idxDate, dayNo, col, idxActivity);
+                    CreateOneActivityLabel(idxDate, dayNo, col, idxActivity, idxActivity.ID == activeID);
                 }
                 idxDate = idxDate.AddDays(1);
                 dayNo += 1;
             }
         }
 
-        private void CreateOneActivityLabel(DateTime idxDate, int dayNo, PeriodCollection col, Activity idxActivity)
+        private void CreateOneActivityLabel(DateTime idxDate, int dayNo, PeriodCollection col, Activity idxActivity, bool isActive)
         {
             Period curDayPeriod = new Period(idxDate, idxDate.AddHours(23).AddMinutes(59));
             Period curActivityPeriod = new Period(idxActivity.Start, idxActivity.End);
@@ -127,17 +132,24 @@ namespace CalendarModules
                 SetTextAndTooltipOfActivity(idxActivity, actLbl);
 
                 // Trapping Click event to "bring to front"...
-                actLbl.Click += delegate(object sender, EventArgs e)
-                {
-                    Label lb = sender as Label;
-                    List<Label> lbls = FindRelatedLabels(lb);
-                    if (lb != null)
-                        BringActivityToFront(lbls, lb.ID.Substring(0, lb.ID.IndexOf("x") + 1).Replace("act", "").Replace("x", ""));
-                };
+                actLbl.Click += acctLbl_Click;
 
                 actWrp.Controls.Add(actLbl);
+
+                if (isActive)
+                    BringActivityToFront(new List<Label>(new Label[] {actLbl}),
+                                         actLbl.ID.Substring(0, actLbl.ID.IndexOf("x") + 1).Replace("act", "").Replace(
+                                             "x", ""));
             }
             col.Add(curActivityPeriod);
+        }
+
+        protected void acctLbl_Click(object sender, EventArgs e)
+        {
+            Label lb = sender as Label;
+            List<Label> lbls = FindRelatedLabels(lb);
+            if (lb != null)
+                BringActivityToFront(lbls, lb.ID.Substring(0, lb.ID.IndexOf("x") + 1).Replace("act", "").Replace("x", ""));
         }
 
         private List<Label> FindRelatedLabels(Control lb)
@@ -504,7 +516,7 @@ namespace CalendarModules
 
             // Refreshing activities...
             actWrp.Controls.Clear();
-            BuildActivities();
+            BuildActivities(node["IDOfSaved"].Get<int>());
             actWrp.ReRender();
             new EffectHighlight(actWrp, 400).Render();
         }
