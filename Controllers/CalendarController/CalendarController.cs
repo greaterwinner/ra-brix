@@ -56,6 +56,7 @@ namespace CalendarController
             a.Header = "Name of activity";
             a.Body = "Body of activity";
             a.Save();
+            e.Params["IDOfSaved"].Value = a.ID;
         }
     }
 }
