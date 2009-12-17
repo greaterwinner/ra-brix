@@ -482,7 +482,8 @@ namespace CalendarModules
                                 actWrp.Controls.Clear();
                                 BuildActivities();
                                 actWrp.ReRender();
-                                new EffectHighlight(actWrp, 400).Render();
+                                new EffectHighlight(actWrp, 400)
+                                    .Render();
                             };
 
                     cal.Style[Styles.zIndex] = "800";
