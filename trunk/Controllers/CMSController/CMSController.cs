@@ -24,6 +24,7 @@ namespace CMSController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
+            Language.Instance.SetDefaultValue("ButtonAdmin", "Admin");
             Language.Instance.SetDefaultValue("ButtonCMS", "CMS");
             Language.Instance.SetDefaultValue("ButtonCMSViewPages", "View Pages");
             Language.Instance.SetDefaultValue("ButtonCMSCreatePage", "Create Page");
@@ -85,9 +86,9 @@ namespace CMSController
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonCMS"].Value = "Menu-CMS";
-            e.Params["ButtonCMS"]["ButtonCMSViewPages"].Value = "Menu-CMS-ViewPages";
-            e.Params["ButtonCMS"]["ButtonCMSCreatePage"].Value = "Menu-CMS-CreatePage";
+            e.Params["ButtonAdmin"]["ButtonCMS"].Value = "Menu-CMS";
+            e.Params["ButtonAdmin"]["ButtonCMS"]["ButtonCMSViewPages"].Value = "Menu-CMS-ViewPages";
+            e.Params["ButtonAdmin"]["ButtonCMS"]["ButtonCMSCreatePage"].Value = "Menu-CMS-CreatePage";
 
             // Pages...
             foreach (Page idx in ActiveType<Page>.Select(Criteria.NotLike("URL", "%/%")))

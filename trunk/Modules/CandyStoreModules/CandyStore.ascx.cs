@@ -151,7 +151,7 @@ minutes. You might also - dependent upon your portal installation - be forced to
             Load +=
                 delegate
                 {
-                    filter.Text = Language.Instance["Popular", null, "Popular"];
+                    filter.Text = Language.Instance["Updates", null, "Updates"];
                     Modules = node["Modules"];
                     rep.DataSource = FilterApplications();
                     rep.DataBind();
@@ -180,6 +180,17 @@ minutes. You might also - dependent upon your portal installation - be forced to
                         break;
                     retVal.Add(idxNode);
                 }
+            }
+            else if (filter.Text.ToLowerInvariant() ==
+                    Language.Instance["Updates", null, "Updates"].ToLowerInvariant())
+            {
+                List<Node> nodes = new List<Node>(Modules);
+                nodes.RemoveAll(
+                    delegate(Node idx)
+                        {
+                            return !(idx["Installed"].Get<bool>() && idx["HasUpdate"].Get<bool>());
+                        });
+                retVal.AddRange(nodes);
             }
             else if (filter.Text.ToLowerInvariant() ==
                     Language.Instance["Popular", null, "Popular"].ToLowerInvariant())
