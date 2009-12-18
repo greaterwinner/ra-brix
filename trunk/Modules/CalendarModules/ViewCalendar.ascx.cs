@@ -12,6 +12,7 @@ using System;
 using System.Web.UI;
 using CalendarRecords;
 using HelperGlobals;
+using LanguageRecords;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using Ra.Effects;
@@ -382,32 +383,75 @@ namespace CalendarModules
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
             Activity a = ActiveType<Activity>.SelectByID(id);
-            a.Start = dateStart.Value;
-            a.Save();
-            lblStart.Text = a.Start.ToString("d MMM");
-            new EffectFadeOut(dateStart, 500)
-                .Render();
-            actWrp.Controls.Clear();
-            BuildActivities();
-            actWrp.ReRender();
-            new EffectHighlight(actWrp, 400)
-                .Render();
+            try
+            {
+                a.Start = dateStart.Value;
+                a.Save();
+                lblStart.Text = a.Start.ToString("d MMM");
+                new EffectFadeOut(dateStart, 500)
+                    .Render();
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+            }
+            catch (Exception)
+            {
+                inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                lblStart.Text = a.Start.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+                lblEnd.Text = a.End.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+                dateStart.Value = a.Start;
+                dateEnd.Value = a.End;
+                new EffectFadeOut(dateStart, 500)
+                    .Render();
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+            }
         }
 
         protected void dateEnd_DateClicked(object sender, EventArgs e)
         {
             int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
             Activity a = ActiveType<Activity>.SelectByID(id);
-            a.End = dateEnd.Value;
-            a.Save();
-            lblEnd.Text = a.End.ToString("d MMM");
-            new EffectFadeOut(dateEnd, 500)
-                .Render();
-            actWrp.Controls.Clear();
-            BuildActivities();
-            actWrp.ReRender();
-            new EffectHighlight(actWrp, 400)
-                .Render();
+            try
+            {
+                a.End = dateEnd.Value;
+                a.Save();
+                lblEnd.Text = a.End.ToString("d MMM");
+                new EffectFadeOut(dateEnd, 500)
+                    .Render();
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+            }
+            catch (Exception)
+            {
+                inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                lblStart.Text = a.Start.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+                lblEnd.Text = a.End.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                dateStart.Value = a.Start;
+                dateEnd.Value = a.End;
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = Language.Instance["CannotSetEndDateLess", null, "You cannot select an end date that is before the start date!"];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
         }
 
         protected void txtHeader_TextChanged(object sender, EventArgs e)
