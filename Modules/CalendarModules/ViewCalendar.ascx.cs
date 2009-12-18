@@ -37,6 +37,11 @@ namespace CalendarModules
         protected global::Ra.Extensions.Widgets.Calendar dateEnd;
         protected global::Ra.Widgets.LinkButton lblStart;
         protected global::Ra.Widgets.LinkButton lblEnd;
+        protected global::Ra.Widgets.CheckBox repeat;
+        protected global::Ra.Widgets.Panel repeatPnl;
+        protected global::Ra.Widgets.RadioButton rdoWeek;
+        protected global::Ra.Widgets.RadioButton rdoMonth;
+        protected global::Ra.Widgets.RadioButton rdoYear;
         protected global::Ra.Extensions.Widgets.ExtButton deleteBtn;
         protected global::Ra.Extensions.Widgets.InPlaceEdit inplStart;
         protected global::Ra.Extensions.Widgets.InPlaceEdit inplEnd;
@@ -47,7 +52,7 @@ namespace CalendarModules
         protected void Page_Load(object sender, EventArgs e)
         {
             BuildActivities();
-            deleteBtn.DataBind();
+            pnlShowActivity.DataBind();
         }
 
         private DateTime FirstDate
@@ -64,6 +69,54 @@ namespace CalendarModules
                 retVal = retVal.AddDays(-1);
             }
             return retVal;
+        }
+
+        protected void rdoRepeat_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdatePeriod();
+        }
+
+        protected void repeat_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdatePeriod();
+        }
+
+        private void UpdatePeriod()
+        {
+            int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
+            Activity a = ActiveType<Activity>.SelectByID(id);
+            if (repeat.Checked)
+            {
+                if (rdoWeek.Checked)
+                {
+                    a.Repetition = Activity.RepetitionPattern.Weekly;
+                }
+                else if (rdoMonth.Checked)
+                {
+                    a.Repetition = Activity.RepetitionPattern.Monthly;
+                }
+                else if (rdoYear.Checked)
+                {
+                    a.Repetition = Activity.RepetitionPattern.Yearly;
+                }
+                else
+                {
+                    rdoWeek.Checked = true;
+                    a.Repetition = Activity.RepetitionPattern.Weekly;
+                }
+                a.Save();
+                repeatPnl.Style[Styles.display] = "none";
+                repeatPnl.Visible = true;
+                new EffectFadeIn(repeatPnl, 500)
+                    .Render();
+            }
+            else
+            {
+                a.Repetition = Activity.RepetitionPattern.None;
+                a.Save();
+                new EffectFadeOut(repeatPnl, 500)
+                    .Render();
+            }
         }
 
         private void BuildActivities()
@@ -302,6 +355,28 @@ namespace CalendarModules
             inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             dateStart.Value = a.Start;
             dateEnd.Value = a.End;
+            switch(a.Repetition)
+            {
+                case Activity.RepetitionPattern.None:
+                    repeat.Checked = false;
+                    repeatPnl.Visible = false;
+                    break;
+                case Activity.RepetitionPattern.Weekly:
+                    repeat.Checked = true;
+                    rdoWeek.Checked = true;
+                    repeatPnl.Visible = true;
+                    break;
+                case Activity.RepetitionPattern.Monthly:
+                    repeat.Checked = true;
+                    rdoMonth.Checked = true;
+                    repeatPnl.Visible = true;
+                    break;
+                case Activity.RepetitionPattern.Yearly:
+                    repeat.Checked = true;
+                    rdoYear.Checked = true;
+                    repeatPnl.Visible = true;
+                    break;
+            }
             CurrentActivityLabel = lbls[0].ID;
             foreach (Label lb in lbls)
             {

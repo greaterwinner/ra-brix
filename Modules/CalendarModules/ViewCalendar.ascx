@@ -69,6 +69,41 @@
                     OnDateClicked="dateEnd_DateClicked"
                     style="display:none;position:absolute;z-index:1000;"
                     id="dateEnd" />
+                <br />
+                <div style="padding:5px;">
+                    <ra:CheckBox 
+                        runat="server" 
+                        id="repeat" 
+                        OnCheckedChanged="repeat_CheckedChanged"
+                        Text='<%#Language.Instance["Repeat", null, "Repeat"] %>' />
+                    <ra:Panel 
+                        runat="server" 
+                        style="border:solid 1px #999;padding:5px;margin:5px;"
+                        Visible="false"
+                        id="repeatPnl">
+                        <ra:RadioButton 
+                            runat="server" 
+                            OnCheckedChanged="rdoRepeat_CheckedChanged"
+                            GroupName="repetition"
+                            Text='<%#Language.Instance["EveryWeek", null, "Every week"] %>'
+                            id="rdoWeek" />
+                        <br />
+                        <ra:RadioButton 
+                            runat="server" 
+                            OnCheckedChanged="rdoRepeat_CheckedChanged"
+                            GroupName="repetition"
+                            Text='<%#Language.Instance["EveryMonth", null, "Every month"] %>'
+                            id="rdoMonth" />
+                        <br />
+                        <ra:RadioButton 
+                            runat="server" 
+                            OnCheckedChanged="rdoRepeat_CheckedChanged"
+                            GroupName="repetition"
+                            Text='<%#Language.Instance["EveryYear", null, "Every year"] %>'
+                            id="rdoYear" />
+                        <br />
+                    </ra:Panel>
+                </div>
                 <ra:ExtButton 
                     runat="server" 
                     id="deleteBtn" 
