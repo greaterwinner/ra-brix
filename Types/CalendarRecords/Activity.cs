@@ -37,6 +37,7 @@ namespace CalendarRecords
             if (Start >= End)
             {
                 End = Start.AddMinutes(1);
+                base.Save(); 
                 throw new ArgumentException(
                     "Cannot have the start date be equal or higher than the end date of the activity");
             }
