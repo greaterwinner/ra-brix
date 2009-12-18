@@ -31,5 +31,16 @@ namespace CalendarRecords
 
         [ActiveField]
         public DateTime End { get; set; }
+
+        public override void Save()
+        {
+            if (Start >= End)
+            {
+                End = Start.AddMinutes(1);
+                throw new ArgumentException(
+                    "Cannot have the start date be equal or higher than the end date of the activity");
+            }
+            base.Save();
+        }
     }
 }
