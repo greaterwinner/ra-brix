@@ -32,11 +32,13 @@ namespace CalendarModules
         protected global::Ra.Widgets.Panel pnlShowActInner;
         protected global::Ra.Extensions.Widgets.InPlaceEdit txtHeader;
         protected global::Components.TextAreaEdit txtBody;
-        protected global::Ra.Extensions.Widgets.DateTimePicker dateStart;
-        protected global::Ra.Extensions.Widgets.DateTimePicker dateEnd;
+        protected global::Ra.Extensions.Widgets.Calendar dateStart;
+        protected global::Ra.Extensions.Widgets.Calendar dateEnd;
         protected global::Ra.Widgets.LinkButton lblStart;
         protected global::Ra.Widgets.LinkButton lblEnd;
         protected global::Ra.Extensions.Widgets.ExtButton deleteBtn;
+        protected global::Ra.Extensions.Widgets.InPlaceEdit inplStart;
+        protected global::Ra.Extensions.Widgets.InPlaceEdit inplEnd;
 
         private List<Activity> _activities;
         private static int _maxHeight;
@@ -293,8 +295,10 @@ namespace CalendarModules
             Activity a = ActiveType<Activity>.SelectByID(int.Parse(id));
             txtHeader.Text = a.Header;
             txtBody.Text = string.IsNullOrEmpty(a.Body) ? "[null]" : a.Body;
-            lblStart.Text = a.Start.ToString("d MMM - HH:mm");
-            lblEnd.Text = a.End.ToString("d MMM - HH:mm");
+            lblStart.Text = a.Start.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+            lblEnd.Text = a.End.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
+            inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             dateStart.Value = a.Start;
             dateEnd.Value = a.End;
             CurrentActivityLabel = lbls[0].ID;
@@ -380,7 +384,7 @@ namespace CalendarModules
             Activity a = ActiveType<Activity>.SelectByID(id);
             a.Start = dateStart.Value;
             a.Save();
-            lblStart.Text = a.Start.ToString("d MMM - HH:mm");
+            lblStart.Text = a.Start.ToString("d MMM");
             new EffectFadeOut(dateStart, 500)
                 .Render();
             actWrp.Controls.Clear();
@@ -396,7 +400,7 @@ namespace CalendarModules
             Activity a = ActiveType<Activity>.SelectByID(id);
             a.End = dateEnd.Value;
             a.Save();
-            lblEnd.Text = a.End.ToString("d MMM - HH:mm");
+            lblEnd.Text = a.End.ToString("d MMM");
             new EffectFadeOut(dateEnd, 500)
                 .Render();
             actWrp.Controls.Clear();
@@ -436,6 +440,74 @@ namespace CalendarModules
         {
             get { return ViewState["CurrentActivityLabel"] == null ? "" : ViewState["CurrentActivityLabel"].ToString(); }
             set { ViewState["CurrentActivityLabel"] = value; }
+        }
+
+        protected void inplStart_TextChanged(object sender, EventArgs e)
+        {
+            int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
+            Activity a = ActiveType<Activity>.SelectByID(id);
+            try
+            {
+                InPlaceEdit edit = (InPlaceEdit) sender;
+                string timeStr = edit.Text;
+                if(timeStr.Length > 2 && !timeStr.Contains(":"))
+                {
+                    if (timeStr.Length == 3)
+                        timeStr = timeStr.Substring(0, 1) + ":" + timeStr.Substring(1);
+                    else
+                        timeStr = timeStr.Substring(0, 2) + ":" + timeStr.Substring(2);
+                }
+                string[] entities = timeStr.Split(':');
+                int hour = int.Parse(entities[0]);
+                int minute = entities.Length > 1 ? int.Parse(entities[1]) : 0;
+                a.Start = dateStart.Value.Date.AddHours(hour).AddMinutes(minute);
+                a.Save();
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+                inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch (Exception)
+            {
+                inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        protected void inplEnd_TextChanged(object sender, EventArgs e)
+        {
+            int id = int.Parse(CurrentActivityLabel.Substring(3).Split('x')[0]);
+            Activity a = ActiveType<Activity>.SelectByID(id);
+            try
+            {
+                InPlaceEdit edit = (InPlaceEdit)sender;
+                string timeStr = edit.Text;
+                if (timeStr.Length > 2 && !timeStr.Contains(":"))
+                {
+                    if (timeStr.Length == 3)
+                        timeStr = timeStr.Substring(0, 1) + ":" + timeStr.Substring(1);
+                    else
+                        timeStr = timeStr.Substring(0, 2) + ":" + timeStr.Substring(2);
+                }
+                string[] entities = timeStr.Split(':');
+                int hour = int.Parse(entities[0]);
+                int minute = entities.Length > 1 ? int.Parse(entities[1]) : 0;
+                a.End = dateStart.Value.Date.AddHours(hour).AddMinutes(minute);
+                a.Save();
+                actWrp.Controls.Clear();
+                BuildActivities();
+                actWrp.ReRender();
+                new EffectHighlight(actWrp, 400)
+                    .Render();
+                inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch (Exception)
+            {
+                inplStart.Text = a.Start.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                inplEnd.Text = a.End.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         private void CreateCalendar()

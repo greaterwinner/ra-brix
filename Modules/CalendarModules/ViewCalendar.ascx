@@ -42,7 +42,13 @@
                     runat="server" 
                     OnClick="lblStart_Click"
                     id="lblStart" />
-                <ra:DateTimePicker 
+                <ra:InPlaceEdit 
+                    runat="server" 
+                    Tag="span"
+                    OnTextChanged="inplStart_TextChanged"
+                    style="color:Blue;cursor:pointer;"
+                    id="inplStart" />
+                <ra:Calendar 
                     runat="server" 
                     OnDateClicked="dateStart_DateClicked"
                     style="display:none;position:absolute;z-index:1000;"
@@ -52,7 +58,13 @@
                     runat="server" 
                     OnClick="lblEnd_Click"
                     id="lblEnd" />
-                <ra:DateTimePicker 
+                <ra:InPlaceEdit 
+                    runat="server" 
+                    Tag="span"
+                    OnTextChanged="inplEnd_TextChanged"
+                    style="color:Blue;cursor:pointer;"
+                    id="inplEnd" />
+                <ra:Calendar 
                     runat="server" 
                     OnDateClicked="dateEnd_DateClicked"
                     style="display:none;position:absolute;z-index:1000;"

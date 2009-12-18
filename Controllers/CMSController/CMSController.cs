@@ -38,6 +38,7 @@ namespace CMSController
                 Page p = new Page();
                 p.Header = "Home";
                 p.Body = string.Format(@"
+<img src=""media/skins/Light/Images/bazaar.jpg"" style=""float:right;margin-left:10px;"" alt=""Visit the Ra-Brix Bazaar"" />
 <p>
     Welcome to Ra-Brix. This is the default page which has been created for you.
 </p>
@@ -50,13 +51,10 @@ namespace CMSController
     it) at <a href=""http://myopenid.com"" target=""_blank"">MyOpenID.com</a>...
 </p>
 <p>
-    So basically to recap...
+    Then when you have logged in, you will want to visit our Bazaar where you can find a lot
+    of modules and components you can install in your portal. Some for free and others for
+    a fee.
 </p>
-<ul>
-<li>Use your existing OpenID to login in the top-right corner. Create an OpenID at e.e. <a href=""http://myopenid.com"" target=""_blank"">MyOpenID.com</a> if you don't have an existing</li>
-<li>When you come back after logging in that user will be the default Administrator and Power User</li>
-<li>Enjoy :)</li>
-</ul>
 <p>
     Tutorials, more downloads, updates and videos about how to use Ra-Brix can be 
     found at <a href=""http://ra-brix.org"">the Ra-Brix website</a>.
