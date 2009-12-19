@@ -84,10 +84,10 @@ namespace CalendarRecords
             else
             {
                 // Need to delete previous BundleID records...
-                foreach (Activity idx in Select(Criteria.Eq("BundleID", BundleID)))
+                foreach (Activity idx in Select(Criteria.Eq("BundleID", BundleID), Criteria.Mt("Start", Start.AddMinutes(-1))))
                 {
                     if (idx.ID != ID)
-                        idx.Delete();
+                        idx.DeleteImpl();
                 }
             }
             if (Repetition == RepetitionPattern.Weekly)
@@ -138,6 +138,20 @@ namespace CalendarRecords
                 throw new ArgumentException(
                     "Cannot have the start date be equal or higher than the end date of the activity");
             }
+        }
+
+        public override void Delete()
+        {
+            // Need to delete previous BundleID records...
+            foreach (Activity idx in Select(Criteria.Eq("BundleID", BundleID), Criteria.Mt("Start", Start.AddMinutes(-1))))
+            {
+                idx.DeleteImpl();
+            }
+        }
+
+        private void DeleteImpl()
+        {
+            base.Delete();
         }
 
         object ICloneable.Clone()

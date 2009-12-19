@@ -343,7 +343,7 @@ namespace CalendarModules
             pnlShowActivity.Style[Styles.top] = "25px";
             new EffectFadeIn(pnlShowActInner, 200)
                 .ChainThese(
-                    new EffectSize(pnlShowActivity, 500, 250, 400)
+                    new EffectSize(pnlShowActivity, 500, 300, 400)
                         .JoinThese(new EffectFadeIn()))
                 .Render();
             Activity a = ActiveType<Activity>.SelectByID(int.Parse(id));
@@ -462,7 +462,7 @@ namespace CalendarModules
             {
                 a.Start = dateStart.Value;
                 a.Save();
-                lblStart.Text = a.Start.ToString("d MMM");
+                lblStart.Text = a.Start.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
                 new EffectFadeOut(dateStart, 500)
                     .Render();
                 actWrp.Controls.Clear();
@@ -497,7 +497,7 @@ namespace CalendarModules
             {
                 a.End = dateEnd.Value;
                 a.Save();
-                lblEnd.Text = a.End.ToString("d MMM");
+                lblEnd.Text = a.End.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
                 new EffectFadeOut(dateEnd, 500)
                     .Render();
                 actWrp.Controls.Clear();
@@ -613,7 +613,7 @@ namespace CalendarModules
                 string[] entities = timeStr.Split(':');
                 int hour = int.Parse(entities[0]);
                 int minute = entities.Length > 1 ? int.Parse(entities[1]) : 0;
-                a.End = dateStart.Value.Date.AddHours(hour).AddMinutes(minute);
+                a.End = dateEnd.Value.Date.AddHours(hour).AddMinutes(minute);
                 a.Save();
                 actWrp.Controls.Clear();
                 BuildActivities();
@@ -647,7 +647,7 @@ namespace CalendarModules
                 Label header = new Label
                 {
                     ID = "header" + idxDate.ToString("dd.MM.yy"),
-                    Text = idxDate.ToString("ddd d.MMM"),
+                    Text = idxDate.ToString("ddd d.MMM", System.Globalization.CultureInfo.InvariantCulture),
                     CssClass = "header"
                 };
                 if (dayNo == 0)

@@ -13,7 +13,6 @@
     <ra:Panel 
         runat="server" 
         CssClass="ShowActivity"
-        style="opacity:0.5;"
         Visible="false"
         id="pnlShowActivity">
         <ra:Panel 
@@ -38,7 +37,7 @@
                     OnTextChanged="txtBody_TextChanged"
                     id="txtBody" />
                 <br />
-                <ra:LinkButton 
+                <%=Language.Instance["Start", null, "Start: "] %><ra:LinkButton 
                     runat="server" 
                     OnClick="lblStart_Click"
                     id="lblStart" />
@@ -54,7 +53,7 @@
                     style="display:none;position:absolute;z-index:1000;"
                     id="dateStart" />
                 <br />
-                <ra:LinkButton 
+                <%=Language.Instance["End", null, "End: "] %><ra:LinkButton 
                     runat="server" 
                     OnClick="lblEnd_Click"
                     id="lblEnd" />
@@ -111,11 +110,11 @@
                     style="position:absolute;bottom:5px;right:5px;"
                     Text='<%#Language.Instance["DeleteActivity", null, "Delete Activity"] %>' />
             </div>
-            <ra:BehaviorUnveiler
-                runat="server"
-                MinOpacity="0.5"
-                id="unveilAct" />
         </ra:Panel>
+        <ra:BehaviorUnveiler
+            runat="server"
+            MinOpacity="0.5"
+            id="unveilAct" />
     </ra:Panel>
     <ra:Panel 
         runat="server" 
