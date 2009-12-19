@@ -70,7 +70,7 @@
 
     <!-- bread crumb -->
     <div 
-        style="width:100%;overflow:hidden;margin-top:10px;" 
+        style="width:100%;overflow:hidden;margin-top:-10px;position:relative;z-index:100;" 
         id="something">
         <ra:Panel 
            runat="server" 
@@ -99,7 +99,7 @@
                 runat="server" 
                 CssClass="dynamic-content"
                 ID="dynMid"
-                style="min-height:300px;padding:5px;"
+                style="min-height:300px;margin-left:15px;"
                 OnReload="dynamic_LoadControls" />
         </div>
     </div>
