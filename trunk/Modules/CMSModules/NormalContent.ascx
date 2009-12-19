@@ -6,7 +6,7 @@
     AutoEventWireup="true" 
     Inherits="CMSModules.NormalContent" %>
 
-<div style="padding:5px;">
+<div>
     <h1 runat="server" id="header"></h1>
     <ra:Panel 
         runat="server" 
