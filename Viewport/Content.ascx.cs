@@ -187,6 +187,16 @@ namespace Viewport
             }
             dynamic.Controls.Add(ctrl);
         }
+
+        protected string GetMostWantedResponseUrl()
+        {
+            return Settings.Instance["MostWantedResponseUrl"];
+        }
+
+        protected string GetMostWantedResponseTooltip()
+        {
+            return Settings.Instance["MostWantedResponseTooltip"];
+        }
     }
 }
 

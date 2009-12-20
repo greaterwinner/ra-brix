@@ -22,7 +22,12 @@
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
 
+    <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
+
+    <add key="MostWantedResponseTooltip" value="Download Ra-Brix" />
+
     <add key="UseNotificationSounds" value="True" />
+
     <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
 
   </appSettings>
