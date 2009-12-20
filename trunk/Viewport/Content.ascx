@@ -54,12 +54,8 @@
         <ra:Panel 
             runat="server" 
             id="pnlLogo" 
-            style="opacity:0.3;"
             CssClass="logoRaBrix">
-            <a href="~/" runat="server" id="logo" class="logoImg">&nbsp;</a>
-            <ra:BehaviorUnveiler 
-                runat="server" 
-                id="logoUnveiler" />
+            <a href='<%=GetMostWantedResponseUrl() %>' title='<%=GetMostWantedResponseTooltip() %>' class="logoImg">&nbsp;</a>
         </ra:Panel>
         <ra:Dynamic 
             runat="server" 
