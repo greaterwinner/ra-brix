@@ -21,6 +21,12 @@ form
 	height:100%;
 }
 
+input[type=radio],
+input[type=checkbox]
+{
+    margin-right:5px;
+}
+
 table tr td
 {
 	border-collapse: collapse;

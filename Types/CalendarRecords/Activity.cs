@@ -34,6 +34,8 @@ namespace CalendarRecords
         {
             get
             {
+                if (string.IsNullOrEmpty(RepPatterImpl))
+                    return RepetitionPattern.None;
                 return (RepetitionPattern)Enum.Parse(typeof(RepetitionPattern), RepPatterImpl);
             }
             set
@@ -76,7 +78,7 @@ namespace CalendarRecords
                 End = Start.AddMinutes(1);
                 hasError = true;
             }
-            if (ID == 0)
+            if (ID == 0 || string.IsNullOrEmpty(BundleID))
             {
                 // Initial save, need to create a BundleID for repetition pattern...
                 BundleID = Guid.NewGuid().ToString();

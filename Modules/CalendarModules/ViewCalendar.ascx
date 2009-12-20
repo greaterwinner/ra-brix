@@ -18,9 +18,9 @@
         <ra:Panel 
             runat="server" 
             id="pnlShowActInner">
-            <ra:LinkButton 
+            <ra:ExtButton 
                 runat="server" 
-                Text="X"
+                Text='<%#Language.Instance["OK",null,"OK"] %>'
                 style="position:absolute;top:5px;right:5px;"
                 OnClick="closeAct_Click"
                 id="closeAct" />
