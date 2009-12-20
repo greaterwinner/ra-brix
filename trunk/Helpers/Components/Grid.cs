@@ -533,22 +533,68 @@ namespace Components
                                                     string cellName = ed.Xtra.Split('|')[1];
                                                     GridEditEventArgs eIn = new GridEditEventArgs(id, cellName, ed.Text);
                                                     CellEdited(this, eIn);
-                                                    if (!eIn.AcceptChange) 
+                                                    if (!eIn.AcceptChange)
                                                         return;
                                                     Node rowNode = DataSource["Rows"].Find(
                                                         delegate(Node idxNode)
+                                                        {
+                                                            if (idxNode.Name != "ID")
                                                             {
-                                                                if (idxNode.Name != "ID")
-                                                                {
-                                                                    return false;
-                                                                }
-                                                                return idxNode.Value.ToString() == id;
-                                                            }).Parent;
+                                                                return false;
+                                                            }
+                                                            return idxNode.Value.ToString() == id;
+                                                        }).Parent;
                                                     Node cellNode = rowNode.Find(
                                                         delegate(Node idxNode)
+                                                        {
+                                                            return idxNode.Name == cellName;
+                                                        });
+                                                    cellNode.Value = eIn.NewValue.ToString();
+                                                }
+                                            };
+                                    }
+                                    cell.Controls.Add(edit);
+                                } break;
+                            case "List":
+                                {
+                                    SelectList edit = new SelectList
+                                    {
+                                        ID = "ctrl" + idxNo + "x" + idxNoCell,
+                                        Xtra = idxRow["ID"].Value + "|" + idxCell.Name
+                                    };
+                                    foreach (Node idx in DataSource["Columns"][idxCell.Name]["ControlType"]["Values"])
+                                    {
+                                        ListItem l = new ListItem(idx.Get<string>(), idx.Get<string>());
+                                        edit.Items.Add(l);
+                                    }
+                                    if (CellEdited != null)
+                                    {
+                                        edit.SelectedIndexChanged +=
+                                            delegate(object sender, EventArgs e)
+                                            {
+                                                InPlaceEdit ed = sender as InPlaceEdit;
+                                                if (ed != null)
+                                                {
+                                                    string id = ed.Xtra.Split('|')[0];
+                                                    string cellName = ed.Xtra.Split('|')[1];
+                                                    GridEditEventArgs eIn = new GridEditEventArgs(id, cellName, ed.Text);
+                                                    CellEdited(this, eIn);
+                                                    if (!eIn.AcceptChange)
+                                                        return;
+                                                    Node rowNode = DataSource["Rows"].Find(
+                                                        delegate(Node idxNode)
+                                                        {
+                                                            if (idxNode.Name != "ID")
                                                             {
-                                                                return idxNode.Name == cellName;
-                                                            });
+                                                                return false;
+                                                            }
+                                                            return idxNode.Value.ToString() == id;
+                                                        }).Parent;
+                                                    Node cellNode = rowNode.Find(
+                                                        delegate(Node idxNode)
+                                                        {
+                                                            return idxNode.Name == cellName;
+                                                        });
                                                     cellNode.Value = eIn.NewValue.ToString();
                                                 }
                                             };

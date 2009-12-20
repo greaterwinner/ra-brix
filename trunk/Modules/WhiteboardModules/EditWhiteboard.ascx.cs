@@ -86,12 +86,25 @@ namespace WhiteboardModules
             gridNode["Columns"]["Name"]["Caption"].Value = Language.Instance["WhiteboardColumnCaption", null, "Column"];
             gridNode["Columns"]["Name"]["ControlType"].Value = "InPlaceEdit";
             gridNode["Columns"]["Type"]["Caption"].Value = Language.Instance["WhiteboardColumnTypeCaption", null, "ColumnType"];
-            gridNode["Columns"]["Type"]["ControlType"].Value = "InPlaceEdit";
+            gridNode["Columns"]["Type"]["ControlType"].Value = "List";
+
+            Node colTypes = new Node();
+            ActiveEvents.Instance.RaiseActiveEvent(
+                null,
+                "GetWhiteboardColumnTypes",
+                colTypes);
+            int idxNo = 0;
+            foreach (Node idx in colTypes["Types"])
+            {
+                gridNode["Columns"]["Type"]["ControlType"]["Values"]["Value" + idxNo].Value = idx.Name;
+                idxNo += 1;
+            }
+
             gridNode["Columns"]["Position"]["Caption"].Value = Language.Instance["WhiteboardPositionCaption", null, "Position"];
             gridNode["Columns"]["Position"]["ControlType"].Value = "InPlaceEdit";
             gridNode["Columns"]["ShowInSummary"]["Caption"].Value = Language.Instance["ShowInSummary", null, "Show in summary"];
             gridNode["Columns"]["ShowInSummary"]["ControlType"].Value = "InPlaceEdit";
-            int idxNo = 0;
+            idxNo = 0;
             foreach (Node idx in node["Whiteboard"]["Columns"])
             {
                 gridNode["Rows"]["Row" + idxNo]["ID"].Value = idx["ID"].Get<string>();
