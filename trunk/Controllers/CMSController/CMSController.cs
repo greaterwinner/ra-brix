@@ -302,10 +302,12 @@ namespace CMSController
             string header = e.Params["Header"].Get<string>();
             string body = e.Params["Body"].Get<string>();
             bool hideFromMenu = e.Params["HideFromMenu"].Get<bool>();
+            bool hideFromHeader = e.Params["HideFromHeader"].Get<bool>();
             Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", url));
             p.Header = header;
             p.Body = body;
             p.HideFromMenu = hideFromMenu;
+            p.HideFromHeader = hideFromHeader;
             p.Save();
 
             // Showing info message...
@@ -420,6 +422,8 @@ You do not have access to this page, and hence it is not displayed...!"];
                     node["TabCaption"].Value = page.Header;
                     node["ModuleSettings"]["Header"].Value = page.Header;
                     node["ModuleSettings"]["Content"].Value = page.Body;
+                    node["ModuleSettings"]["HideHeader"].Value = page.HideFromHeader;
+
                     ActiveEvents.Instance.RaiseLoadControl(
                         "CMSModules.NormalContent",
                         "dynMid",

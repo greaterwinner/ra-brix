@@ -34,6 +34,9 @@ namespace CMSRecords
         public bool HideFromMenu { get; set; }
 
         [ActiveField]
+        public bool HideFromHeader { get; set; }
+
+        [ActiveField]
         public LazyList<Page> Children { get; set; }
 
         public static Page FindPage(string contentId)

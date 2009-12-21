@@ -128,6 +128,12 @@ namespace CMSModules
             ch.Text = Language.Instance["HideFromMenu", null, "Hide from menu"];
             e.Controls.Add(ch);
 
+            // Then the "Show In Header" CheckBox...
+            CheckBox chH = new CheckBox();
+            chH.ID = "hideFromHeader";
+            chH.Text = Language.Instance["HideFromHeader", null, "Hide header"];
+            e.Controls.Add(chH);
+
             // Delete button
             LinkButton delBtn = new LinkButton();
             delBtn.ID = "delete";
@@ -226,6 +232,9 @@ namespace CMSModules
                 node["Body"].Value = bodyTxt;
                 CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu"); 
                 node["HideFromMenu"].Value = ch.Checked;
+
+                CheckBox chH = Selector.FindControl<CheckBox>(this, "hideFromHeader");
+                node["HideFromHeader"].Value = chH.Checked;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
                     "CMSSaveEditedPage",
