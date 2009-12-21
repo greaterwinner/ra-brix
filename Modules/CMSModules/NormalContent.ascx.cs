@@ -32,7 +32,14 @@ namespace CMSModules
         public void InitialLoading(Node node)
         {
             _first = true;
-            header.InnerHtml = node["Header"].Get<string>();
+            if (node["HideHeader"].Get<bool>())
+            {
+                header.Visible = false;
+            }
+            else
+            {
+                header.InnerHtml = node["Header"].Get<string>();
+            }
             Page.Title = node["Header"].Get<string>();
             Load +=
                 delegate
