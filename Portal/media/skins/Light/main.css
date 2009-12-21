@@ -193,10 +193,10 @@ a.disabled
 
 .openIDTextBoxWrapper
 {
-	position: absolute;
-	float: right;
-	top: 25px;
-	right: 95px;
+	position:absolute;
+	float:right;
+	top:35px;
+	right:155px;
 }
 
 .openIDTextBox
@@ -236,8 +236,8 @@ a.disabled
 {
 	background:Transparent url(login.png) no-repeat -85px 0;
 	height: 25px;
-	top: 25px;
-	right: 15px;
+	top: 35px;
+	right: 50px;
 	float: right;
 	position: absolute;
 	width: 85px;
@@ -251,12 +251,12 @@ a.disabled
 .loginLinkButton input[type="button"]
 {
 	background:Transparent url(login.png) no-repeat 0 0;
-	height: 25px;
-	top: 0;
-	right: -90px;
-	float: right;
-	position: absolute;
-	width: 85px;
+	height:25px;
+	top:10;
+	right:-95px;
+	float:right;
+	position:absolute;
+	width:85px;
 	cursor:pointer;
 }
 
@@ -950,7 +950,6 @@ span.button
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 6px;
-	font-family: Verdana;
 	display: block;
 	padding-left: 2px;
 	padding-right: 2px;
@@ -959,14 +958,12 @@ span.button
 .menuLink
 {
 	display: block;
-	color: Blue;
 	margin-right: 15px;
 }
 
 .button .menuLink:hover
 {
 	background-color: Transparent !important;
-	color: Orange;
 }
 
 .CMSTree
@@ -1225,7 +1222,6 @@ span.button
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
-	font-family: Verdana;
 }
 .buttonFlat .bLeft
 {
@@ -1285,7 +1281,6 @@ span.buttonFlat
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
-	font-family: Verdana;
 	display: block;
 	padding-left: 2px;
 	padding-right: 2px;
