@@ -75,7 +75,7 @@
      </div>
 
     <!-- Left window... -->
-    <div style="padding:0 15px 0 15px;">
+    <div style="padding:0 15px 0 15px;overflow:auto;">
         <ra:Window 
             runat="server" 
             style="float:left;"
@@ -90,20 +90,24 @@
         </ra:Window>
 
         <!-- Center window... -->
-        <div style="float:left;min-height:500px;width:804px;position:relative;">
-            <ra:Dynamic 
+        <div style="float:left;width:796px;position:relative;margin-left:8px;">
+            <ra:Window 
                 runat="server" 
-                CssClass="dynamic-content"
-                ID="dynMid"
-                style="min-height:300px;margin-left:15px;"
-                OnReload="dynamic_LoadControls" />
+                CssClass="light-window"
+                id="wndCenter">
+                <ra:Dynamic 
+                    runat="server" 
+                    CssClass="dynamic-content"
+                    ID="dynMid"
+                    style="min-height:320px;margin-left:15px;"
+                    OnReload="dynamic_LoadControls" />
+            </ra:Window>
         </div>
     </div>
     <p class="copyright">
-        Copyright 2009 - <a href="mailto:thomas@ra-ajax.org">Thomas Hansen</a>. 
+        Copyright 2009 - <a href="mailto:thomas@ra-ajax.org">Ra-Software, Inc.</a>
         <br />
-        All text is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC Share-Alike</a>. 
-        <a href="http://ra-brix.org">Ra-Brix</a> is Affero GPL licensed.
+        <a href="http://ra-brix.org">Ra-Brix</a> is <a href="http://www.gnu.org/licenses/gpl.html">Free and Open Source Software</a>.
     </p>
 </div>
 

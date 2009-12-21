@@ -38,7 +38,7 @@ namespace CMSController
                 Page p = new Page();
                 p.Header = "Home";
                 p.Body = string.Format(@"
-<img src=""media/skins/Light/Images/bazaar.png"" style=""float:right;margin-left:10px;"" alt=""Visit the Ra-Brix Bazaar"" />
+<img src=""media/skins/Light/Images/bazaar.png"" style=""float:right;margin-left:10px;margin-top:-40px;"" alt=""Visit the Ra-Brix Bazaar"" />
 <p>
     Welcome to Ra-Brix. This is the default page which has been created for you.
 </p>
@@ -58,18 +58,6 @@ namespace CMSController
 <p>
     Tutorials, more downloads, updates and videos about how to use Ra-Brix can be 
     found at <a href=""http://ra-brix.org"">the Ra-Brix website</a>.
-</p>
-<p>
-    If you want to use Ra-Brix for a 'website' then the current Viewport is probably preferable. If you
-    however plan on making more of an 'application' instead, then you should probably use the 'Viewport.Main'
-    Viewport. This can be easily edited in the web.config of your portal by exchangig the line;
-    <pre style=""background-color:Yellow;margin:5px;padding:5px;"">
-        &lt;add key=""PortalViewDriver"" value=""Viewport.Content"" /&gt;
-    </pre>
-    with;
-    <pre style=""background-color:Yellow;margin:5px;padding:5px;"">
-        &lt;add key=""PortalViewDriver"" value=""Viewport.Main"" /&gt;
-    </pre>
 </p>
 ");
                 p.URL = "home";
