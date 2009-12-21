@@ -136,12 +136,6 @@ http://ra-ajax.org
 	padding:6px 4px 5px 4px;
 }
 
-.bread-crumb .bread-item-left:hover
-{
-	text-decoration:underline;
-	color:#00a;
-}
-
 .bread-crumb .bread-item-first
 {
 	padding-left:16px;
@@ -150,11 +144,6 @@ http://ra-ajax.org
 	margin-top:5px;
 	background:url('bread-crumb.png') no-repeat 0 0;
 	position:relative;
-}
-
-.bread-crumb .bread-item-first:hover
-{
-	text-decoration:none;
 }
 
 .bread-crumb .bread-item-first .bread-item-center
@@ -178,21 +167,54 @@ http://ra-ajax.org
 	background:url('tree-sprites.png') no-repeat -176px 0;
 }
 
-.bread-crumb .bread-item-left .sliding-bread-home:hover
-{
-	text-decoration:none;
-}
-
 .bread-crumb .bread-item-last .bread-item-right
 {
 	background:url('bread-crumb.png') no-repeat right -100px;
 }
 
-.bread-crumb .bread-item-last:hover
+
+
+
+
+
+
+
+
+
+/* Hovering */
+.bread-crumb a.bread-item-left:hover
 {
-	text-decoration:none;
-	color:inherit;
+	background-position:left -250px;
 }
+
+.bread-crumb a.bread-item-left:hover + .bread-item-left
+{
+	background-position:left -200px;
+}
+
+.bread-crumb a.bread-item-first:hover
+{
+	background-position:left -125px;
+}
+
+.bread-crumb a.bread-item-left:hover .bread-item-center
+{
+	background-position:left -150px;
+}
+
+.bread-crumb a.bread-item-first:hover .bread-item-right
+{
+	background-position:right -175px;
+}
+
+
+
+
+
+
+
+
+
 
 .sliding-menu .sliding-level
 {
@@ -223,7 +245,6 @@ http://ra-ajax.org
 
 .sliding-menu .sliding-level .sliding-item .sliding-menu-btn:hover
 {
-	background-color:#eee;
 	cursor:pointer;
 }
 

@@ -188,6 +188,7 @@ a.disabled
 .bread-crumb-parent
 {
 	background-image: none !important;
+	margin-left:-1px;
 }
 
 .openIDTextBoxWrapper
