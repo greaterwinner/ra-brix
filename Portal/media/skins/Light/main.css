@@ -233,41 +233,35 @@ a.disabled
 
 .logoutLinkButton a
 {
-	background:Transparent url(login.png) no-repeat 0 -57px;
-	height: 57px;
-	top: 9px;
+	background:Transparent url(login.png) no-repeat -85px 0;
+	height: 25px;
+	top: 25px;
 	right: 15px;
 	float: right;
 	position: absolute;
-	width: 72px;
+	width: 85px;
 }
 
 .logoutLinkButton a:hover
 {
-	background:Transparent url(login.png) no-repeat 0 0;
-	height: 57px;
-	top: 9px;
-	right: 15px;
-	float: right;
-	position: absolute;
-	width: 72px;
+	background:Transparent url(login.png) no-repeat -85px -25px;
 }
 
 .loginLinkButton input[type="button"]
 {
-	background:Transparent url(login.png) no-repeat 0 -57px;
-	height: 57px;
-	top: -16px;
-	right: -80px;
+	background:Transparent url(login.png) no-repeat 0 0;
+	height: 25px;
+	top: 0;
+	right: -90px;
 	float: right;
 	position: absolute;
-	width: 72px;
+	width: 85px;
 	cursor:pointer;
 }
 
 .loginLinkButton input[type="button"]:hover
 {
-	background:Transparent url(login.png) no-repeat 0 0;
+	background:Transparent url(login.png) no-repeat 0 -25px;
 }
 
 .informationPanelInner
