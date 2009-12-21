@@ -10,21 +10,21 @@
 .light-window_nw
 {
 	background: transparent url(light-window.png) no-repeat 0 0;
-	padding-left:16px;
+	padding-left:40px;
 	position:relative;
 }
 
 .light-window_ne
 {
 	background: transparent url(light-window.png) no-repeat right 0;
-	padding-right:16px;
+	padding-right:40px;
 }
 
 .light-window_n
 {
 	background: transparent url(light-window-vert.png) repeat-x 0 0;
 	overflow:hidden;
-	height:17px;
+	height:40px;
 }
 
 .light-window_body
@@ -36,13 +36,13 @@
 .light-window_w
 {
 	background: transparent url(light-window-horz.png) repeat-y 0 0;
-	padding-left:16px;
+	padding-left:40px;
 }
 
 .light-window_e
 {
 	background: transparent url(light-window-horz.png) repeat-y right 0;
-	padding-right:16px;
+	padding-right:40px;
 }
 
 .light-window_title
@@ -54,7 +54,9 @@
 {
 	bottom: auto;
 	display: block;
-	background-color: #E6F4FF;
+	background-color: #86d4ff;
+	margin-left:-30px;
+	margin-right:-30px;
 }
 
 .no-background .light-window_content
@@ -64,21 +66,20 @@
 
 .light-window_sw
 {
-	background: transparent url(light-window.png) no-repeat 0 -5px;
-	padding-left:16px;
+	background: transparent url(light-window.png) no-repeat 0 -40px;
+	padding-left:40px;
 }
 
 .light-window_se
 {
-	background: transparent url(light-window.png) no-repeat right -5px;
-	padding-right:16px;
+	background: transparent url(light-window.png) no-repeat right -40px;
+	padding-right:40px;
 }
 
 .light-window_s
 {
-	background: transparent url(light-window-vert.png) repeat-x 0 -5px;
-	height:20px;
-
+	background: transparent url(light-window-vert.png) repeat-x 0 -40px;
+	height:40px;
 }
 
  
