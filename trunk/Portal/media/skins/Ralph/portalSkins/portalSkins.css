@@ -1,0 +1,203 @@
+﻿
+
+
+/* Window "light" */
+.light-window
+{
+	display:block;
+}
+
+.light-window_nw
+{
+/* background: transparent url(light-window.png) no-repeat 0 0; */
+	padding-left:40px;
+	position:relative;
+}
+
+.light-window_ne
+{
+	padding-right:40px;
+}
+
+.light-window_n
+{
+	overflow:hidden;
+	height:40px;
+}
+
+.light-window_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.light-window_w
+{
+	padding-left:40px;
+}
+
+.light-window_e
+{
+	padding-right:40px;
+}
+
+.light-window_title
+{
+	display:none;
+}
+
+.light-window_content
+{
+	bottom: auto;
+	display: block;
+	margin-left: -20px;
+	margin-right: -20px;
+	background-color: #FFFFFF;
+}
+
+.no-background .light-window_content
+{
+	background-image:none !important;
+}
+
+.light-window_sw
+{
+	padding-left:40px;
+}
+
+.light-window_se
+{
+ 	padding-right:40px;
+}
+
+.light-window_s
+{
+	height:40px;
+}
+
+ 
+ 
+
+
+/* TabControl "light" */
+.tab-light
+{
+}
+
+.tab-light .tab-header
+{
+	margin-bottom:-1px;
+}
+
+.tab-light .tab-header ul
+{
+}
+
+.tab-light .tab-header ul li
+{
+	display:inline;
+	padding-left:7px;
+}
+
+.tab-light .tab-header ul li.first
+{
+	margin-left: 3px;
+	padding-left:2px;
+}
+
+.tab-light .tab-header ul li a
+{
+	text-decoration:none;
+	color:#777;
+	padding:5px 0 5px 0;
+}
+
+.tab-light .tab-header ul li a:hover
+{
+	color:#00f;
+	background-color:Transparent;
+}
+
+.tab-light .tab-header ul li.tab-disabled a
+{
+	color:#faa;
+	cursor:default;
+}
+
+.tab-light .tab-header ul li.tab-disabled a:hover
+{
+	color:#f99;
+}
+
+.tab-light .tab-header ul li.active  a
+{
+	text-decoration: none;
+	color:#000000;
+	padding:5px 0 5px 0;
+}
+
+.tab-light .tab-header ul li span
+{
+	display:inline-block;
+	padding-top:5px;
+}
+
+.tab-light .tab-header ul li span.left 
+{
+	background:url('window-sprite-dark.png') no-repeat 0 0;
+	padding-left:10px;
+ 	border-bottom:solid 1px #76B4E0;
+ }
+
+.tab-light .tab-header ul li span.center
+{
+	background: url('window-sprite-dark.png') repeat-x 0 -52px;
+	border-bottom:solid 1px #76B4E0;
+}
+
+.tab-light .tab-header ul li span.right
+{
+	background:url('window-sprite-dark.png') no-repeat 0 -26px;
+	padding-right:6px;
+ 	border-bottom:solid 1px #76B4E0;
+}
+
+.tab-light .tab-header ul li.active a
+{
+	cursor:default;
+}
+
+.tab-light .tab-header ul li.active a:hover
+{
+	color:inherit;
+}
+
+.tab-light .tab-header ul li.active span.left
+{
+	border-bottom:solid 1px #E6F4FF;
+}
+
+.tab-light .tab-header ul li span.center
+{
+	margin-left: -8px;
+}
+
+.tab-light .tab-header ul li.active span.center
+{
+	border-bottom:solid 1px #E6F4FF;
+}
+
+.tab-light .tab-header ul li.active span.right
+{
+	background: url('window-sprite-dark.png') no-repeat 0 -26px;
+	border-bottom:solid 1px #E6F4FF;
+}
+
+.tab-light .content
+{
+	background-color: #E6F4FF;
+	border-top: solid 1px #76B4E0;
+	border-left: solid 1px #76B4E0;
+	border-right: solid 1px #76B4E0;
+	border-bottom: solid 1px #76B4E0;
+}
