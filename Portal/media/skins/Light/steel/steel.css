@@ -469,23 +469,23 @@ http://ra-ajax.org
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 3px;
-	font-family: Verdana;
+	font-family:Helvetica;
 }
 
 
 .button .bLeft
 {
 	background:Transparent url('button.png') no-repeat 0 0;
-	padding-left:10px;
+	padding-left:13px;
 	display:block;
 	*display:inline-block;
 }
 
 .button .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -52px;
+	background:Transparent url('button.png') repeat-x 0 -50px;
 	display:block;
-	height:21px;
+	height:20px;
 	padding-top:5px;
 	*display:inline-block;
 }
@@ -499,8 +499,8 @@ http://ra-ajax.org
 
 .button .bRight
 {
-	background:Transparent url('button.png') no-repeat right -26px;
-	padding-right:10px;
+	background:Transparent url('button.png') no-repeat right -25px;
+	padding-right:13px;
 	display:block;
 	*display:inline-block;
 }
@@ -509,47 +509,47 @@ http://ra-ajax.org
 
 .button:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -78px;
+	background:Transparent url('button.png') no-repeat 0 -75px;
 }
 
 .button:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -130px;
+	background:Transparent url('button.png') repeat-x 0 -125px;
 }
 
 .button:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -104px;
+	background:Transparent url('button.png') no-repeat right -100px;
 }
 
 .button-selected .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -156px;
+	background:Transparent url('button.png') no-repeat 0 -150px;
 }
 
 .button-selected .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -208px;
+	background:Transparent url('button.png') repeat-x 0 -200px;
 }
 
 .button-selected .bRight
 {
-	background:Transparent url('button.png') no-repeat right -182px;
+	background:Transparent url('button.png') no-repeat right -175px;
 }
 
 .button-selected:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -78px;
+	background:Transparent url('button.png') no-repeat 0 -75px;
 }
 
 .button-selected:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -130px;
+	background:Transparent url('button.png') repeat-x 0 -125px;
 }
 
 .button-selected:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -104px;
+	background:Transparent url('button.png') no-repeat right -100px;
 }
 
 
