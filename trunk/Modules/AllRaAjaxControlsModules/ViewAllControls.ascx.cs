@@ -16,6 +16,8 @@ namespace AllRaAjaxControlsModules
     [ActiveModule]
     public class ViewAllControls : System.Web.UI.UserControl
     {
-
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

@@ -377,36 +377,178 @@ http://ra-ajax.org
 .webpart .content { padding:0; overflow:hidden; }
 .webpart .content div { padding:5px; }
 
+
+
+
+
+
+
 /* Calendar specific CSS */
 
-.calendar				{ display:block; }
-.calendar_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
-.calendar_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
-.calendar_n				{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
-.calendar_title			{ font-size:0.8em; position:absolute; top:5px; color:#333; width:100%; }
-.calendar_close			{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
-.calendar_close:hover	{ background-color:transparent; background-position:-10px -16px; }
-.calendar_body			{ overflow:hidden; position:relative; }
-.calendar_w				{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
-.calendar_e				{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
-.calendar_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; font-size:0.7em; }
-.calendar_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
-.calendar_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
-.calendar_s				{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+.calendar
+{
+	display:block;
+}
 
-.calendar select				{ border:none; margin:0 5px 0 5px; background-color:Transparent; color:#00f; }
-.calendar table					{ border-collapse:collapse; margin:0; }
-.calendar table tr td			{ border:none; padding:0 !important; }
-.calendar table tr.weekdays td	{ color:#333; padding:2px; }
-.calendar table tr td.weekno	{ color:#333; }
-.calendar a						{ display:block; text-decoration:none; color:#00f; margin:1px; border:solid 1px Transparent; background-color:Transparent; }
-.calendar a:hover				{ border:solid 1px #99f; }
-.calendar a.offMonth			{ color:#99d; }
-.calendar a.selected			{ background-color:#eef; border:solid 1px #999; }
-.calendar .holidayOnVenus a		{ color:#0f0; }
-.calendar_content table			{ text-align:center; margin-left:auto; margin-right:auto; }
-.calendar .hour					{ display:inline; width:20px; margin-right:5px; }
-.calendar .minutes				{ display:inline; width:20px; }
+.calendar_nw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 0;
+	padding-left:40px;
+	position:relative;
+}
+
+.calendar_ne
+{
+	background: transparent url(window-sprite.png) no-repeat right 0;
+	padding-right:40px;
+}
+
+.calendar_n
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	overflow:hidden;
+	height:40px;
+}
+
+.calendar_title
+{
+	font-size:0.8em;
+	position:absolute;
+	top:4px;
+	color:#333;
+	margin-left:-15px;
+	width:100%;
+}
+
+.calendar_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.calendar_w
+{
+	background: transparent url(window-v-sprite.png) repeat-y 0 0;
+	padding-left:40px;
+}
+
+.calendar_e
+{
+	background: transparent url(window-v-sprite.png) repeat-y right 0;
+	padding-right:40px;
+}
+
+.calendar_content
+{
+	background-color:#cfecff;
+	font-size:0.7em;
+	margin-left:-20px;
+	margin-right:-20px;
+}
+
+.calendar_sw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 -55px;
+	padding-left:40px;
+}
+
+.calendar_se
+{
+	background: transparent url(window-sprite.png) no-repeat right -55px;
+	padding-right:40px;
+}
+
+.calendar_s
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 -55px;
+	height:25px;
+}
+
+.calendar select
+{
+	border:none;
+	margin:0 5px 0 5px;
+	background-color:Transparent;
+	color:#333;
+}
+
+.calendar table
+{
+	border-collapse:collapse;
+	margin:0;
+}
+
+.calendar table tr td
+{
+	border:none;
+	padding:0 !important;
+}
+
+.calendar table tr.weekdays td
+{
+	color:#333;
+	padding:2px;
+}
+
+.calendar table tr td.weekno
+{
+	color:#333;
+}
+
+.calendar a
+{
+	display:block;
+	text-decoration:none;
+	color:#333;
+	margin:1px;
+	border:solid 1px Transparent;
+	background-color:Transparent;
+}
+
+.calendar a:hover
+{
+	border:solid 1px #99f;
+}
+
+.calendar a.offMonth
+{
+	color:#99d;
+}
+
+.calendar a.selected
+{
+	background-color:#eef;
+	border:solid 1px #999;
+}
+
+.calendar_content table
+{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.calendar .hour
+{
+	display:inline;
+	width:20px;
+	margin-right:5px;
+}
+
+.calendar .minutes
+{
+	display:inline;
+	width:20px;
+}
+
+
+
+
+
+
+
+
+
 
 /* TabControl styles */
 

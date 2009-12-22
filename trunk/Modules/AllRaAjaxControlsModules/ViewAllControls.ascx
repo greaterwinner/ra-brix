@@ -7,113 +7,53 @@
     Inherits="AllRaAjaxControlsModules.ViewAllControls" %>
 
 
-<ra:window 
-    
+<ra:Window 
     runat="server" 
-    
     style="width:250px;" 
-    
+    id="window"
     Caption="Sample Window">
     <div style="height:100px;">
         hjhbggiuyghiuyg
     </div>
-</ra:window>
+</ra:Window>
 
-<p>
-    <br />
-</p>
+<br />
 
-<ra:tabcontrol 
-    
+<ra:TabControl 
+    id="tab"
     runat="server">
-    <ra:TabView runat="server" Caption="Tab 1">
+    <ra:TabView 
+        runat="server" 
+        id="tabView1"
+        Caption="Tab 1">
         ijuhiuhiuhiuh
     </ra:TabView>
-    <ra:TabView runat="server" Caption="Tab 2">
+    <ra:TabView 
+        runat="server" 
+        id="tabView2"
+        Caption="Tab 2">
         ijuhiuhiuhiuh
     </ra:TabView>
-    <ra:TabView runat="server" Caption="Tab 3">
+    <ra:TabView 
+        runat="server" 
+        id="TabView3"
+        Caption="Tab 3">
         ijuhiuhiuhiuh
     </ra:TabView>
-</ra:tabcontrol>
+</ra:TabControl>
 
-<p>
-    <br />
-</p>
+<br />
 
-<ra:calendar 
-    
+<ra:Calendar 
     runat="server" 
-    
+    id="cal"
     style="width:170px;" />
     
-<p>
-    <br />
-</p>
+<br />
     
-<ra:tree 
-    
+<ra:Accordion 
     runat="server" 
-    
-    style="width:250px;height:200px;overflow:auto;" 
-    
-    ID="tree">
-
-    <ra:TreeNodes 
-        runat="server" 
-        ID="root">
-
-        <ra:TreeNode runat="server" ID="file" Text="File">
-
-            <ra:TreeNodes runat="server" Caption="Some files" ID="files">
-                <ra:TreeNode runat="server" ID="open" Text="Open" />
-                <ra:TreeNode runat="server" ID="save" Text="Save" />
-                <ra:TreeNode runat="server" ID="saveAs" Text="Save as...">
-                    <ra:TreeNodes runat="server" ID="saveAsDocument">
-                        <ra:TreeNode runat="server" ID="pdf" Text="PDF" />
-                        <ra:TreeNode runat="server" ID="odf" Text="ODF">
-                            <ra:TreeNodes runat="server" ID="odfs">
-                                <ra:TreeNode 
-                                    runat="server" 
-                                    ID="odf1" 
-                                    Text="ODF1" />
-                                <ra:TreeNode 
-                                    runat="server" 
-                                    ID="odf2" 
-                                    Text="ODF2" />
-                            </ra:TreeNodes>
-                        </ra:TreeNode>
-                    </ra:TreeNodes>
-                </ra:TreeNode>
-            </ra:TreeNodes>
-        </ra:TreeNode>
-
-        <ra:TreeNode runat="server" ID="edit" Text="Edit">
-            <ra:TreeNodes runat="server" ID="edits">
-                <ra:TreeNode runat="server" ID="copy" Text="Copy" />
-                <ra:TreeNode runat="server" ID="paste" Text="Paste" />
-                <ra:TreeNode runat="server" ID="cut" Text="Cut" />
-            </ra:TreeNodes>
-        </ra:TreeNode>
-
-        <ra:TreeNode runat="server" ID="settings" Text="Settings" />
-
-    </ra:TreeNodes>
-
-</ra:tree>
-
-
-<p>
- 
-</p>
-
-
-<ra:accordion 
-    
-    runat="server" 
-     
     ID="acc">
-
     <ra:AccordionView 
         runat="server" 
         ID="acc1" 
@@ -139,10 +79,6 @@
         runat="server" 
         ID="acc3" 
         Caption="Third accordion">
-        <ra:Calendar 
-            runat="server" 
-            style="width:200px;"
-            ID="cal" />
         <p>
             Here's an example of embedding controls within 
             an AccordionView.
@@ -150,24 +86,27 @@
     </ra:AccordionView>
 
 </ra:accordion>
-<p>
- 
-</p>
+
+<br />
+
 <ra:InPlaceEdit 
     runat="server" 
     ID="edit1" 
     Text="Click this area and edit text" />
-<p>
- 
-</p>
+
+<br />
+
 <ra:DateTimePicker 
     runat="server" 
     style="width:200px;" 
     ID="cal2" />
-<p>
- 
-</p>
+
+<br />
+
 <ra:RichEdit
     ID="editor" 
     CssClass="editor"
+    Text="howdy"
     runat="server" />
+
+
