@@ -51,27 +51,105 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 
 
-/*
- * Copyright (c) 2006 Sébastien Gruhier (http://xilinus.com, http://itseb.com) 
- * MIT license - Skin for PWC Window. Used as basis for Window in Ra-Ajax
- * Modified by Thomas Hansen (thomas@ra-ajax.org) to meet the needs of Ra-Ajax
- */
-.window				{ display:block; }
-.window_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
-.window_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
-.window_n			{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
-.window_title		{ font-size:0.8em; position:absolute; top:5px; color:#333; -moz-user-select:none; -khtml-user-select: none; user-select: none; cursor:move; width:100%; }
-.window_close		{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
-.window_close:hover	{ background-color:transparent; background-position:-10px -16px; }
-.window_prev		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -32px; position:absolute; top:3px; right:35px; }
-.window_next		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -48px; position:absolute; top:3px; right:18px; }
-.window_body		{ overflow:hidden; position:relative; }
-.window_w			{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
-.window_e			{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
-.window_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; }
-.window_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
-.window_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
-.window_s			{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+.window
+{
+	display:block;
+}
+
+.window_nw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 0;
+	padding-left:40px;
+	position:relative;
+}
+
+.window_ne
+{
+	background: transparent url(window-sprite.png) no-repeat right 0;
+	padding-right:40px;
+}
+
+.window_n
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	overflow:hidden;
+	height:40px;
+}
+
+.window_title
+{
+	font-size:0.8em;
+	position:absolute;
+	top:4px;
+	color:#333;
+	margin-left:-15px;
+	-moz-user-select:none;
+	-khtml-user-select: none;
+	user-select: none;
+	cursor:move;
+	width:100%;
+}
+
+.window_close
+{
+	width:12px;
+	height:12px;
+	display:block;
+	background:transparent url(window-sprite-icons.png) no-repeat 0 0;
+	position:absolute;
+	top:4px;
+	right:23px;
+}
+
+.window_close:hover
+{
+	background-color:transparent;
+	background-position:0 -11px;
+}
+
+.window_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.window_w
+{
+	background: transparent url(window-v-sprite.png) repeat-y 0 0;
+	padding-left:40px;
+}
+
+.window_e
+{
+	background: transparent url(window-v-sprite.png) repeat-y right 0;
+	padding-right:40px;
+}
+
+.window_content
+{
+	background-color:#cfecff;
+	margin-left:-20px;
+	margin-right:-20px;
+	margin-bottom:-20px;
+}
+
+.window_sw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 -40px;
+	padding-left:40px;
+}
+
+.window_se
+{
+	background: transparent url(window-sprite.png) no-repeat right -40px;
+	padding-right:40px;
+}
+
+.window_s
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 -40px;
+	height:40px;
+}
 
 
 /*
