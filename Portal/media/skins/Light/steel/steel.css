@@ -104,7 +104,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 .window_close:hover
 {
 	background-color:transparent;
-	background-position:0 -11px;
+	background-position:0 -13px;
 }
 
 .window_body
@@ -923,17 +923,17 @@ http://ra-ajax.org
 
 .button-selected:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -75px;
+	background:Transparent url('button.png') no-repeat 0 -150px;
 }
 
 .button-selected:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -125px;
+	background:Transparent url('button.png') repeat-x 0 -200px;
 }
 
 .button-selected:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -100px;
+	background:Transparent url('button.png') no-repeat right -175px;
 }
 
 
