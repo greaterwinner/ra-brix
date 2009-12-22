@@ -26,6 +26,9 @@ namespace Viewport
     [ActiveModule]
     public class Content : UserControl
     {
+        protected global::Ra.Extensions.Widgets.Window popupWindow2;
+        protected global::Ra.Widgets.Dynamic dynPopup2;
+        protected global::Ra.Widgets.Image zoomImage;
         protected global::Ra.Widgets.Label informationLabel;
         protected global::Ra.Widgets.Panel informationPanel;
         protected global::Ra.Extensions.Widgets.ExtButton handleInformationEvt;
@@ -39,6 +42,7 @@ namespace Viewport
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            zoomImage.DataBind();
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
             informationPanel.DataBind();
         }
@@ -63,6 +67,46 @@ namespace Viewport
             dynPopup.ClearControls();
         }
 
+        protected void zoomImage_MouseOver(object sender, EventArgs e)
+        {
+            popupWindow2.CssClass = "window";
+            dynPopup2.Style[Styles.display] = "none";
+            int width = int.Parse(popupWindow2.Xtra.Split('x')[0]);
+            int height = int.Parse(popupWindow2.Xtra.Split('x')[1]);
+            dynPopup2.Style[Styles.zIndex] = "100";
+            zoomImage.Style[Styles.zIndex] = "99";
+            dynPopup2.Style[Styles.height] = "50px";
+            zoomImage.Style[Styles.position] = "absolute";
+            zoomImage.Style[Styles.top] = "0px";
+            zoomImage.Style[Styles.left] = "0px";
+            new EffectFadeIn(dynPopup2, 50)
+                .ChainThese(
+                    new EffectFadeOut(zoomImage, 200),
+                    new EffectSize(popupWindow2, 200, -1, width),
+                    new EffectSize(dynPopup2, 200, height, -1))
+                .Render();
+        }
+
+        protected void popupWindow2_MouseOut(object sender, EventArgs e)
+        {
+            popupWindow2.CssClass = "window hideCaption";
+            zoomImage.Style[Styles.display] = "none";
+            zoomImage.Style[Styles.position] = "";
+            dynPopup2.Style[Styles.zIndex] = "99";
+            zoomImage.Style[Styles.zIndex] = "100";
+            new EffectSize(popupWindow2, 200, -1, 90)
+                .ChainThese(
+                    new EffectSize(dynPopup2, 200, 50, -1),
+                    new EffectFadeOut(dynPopup2, 50),
+                    new EffectFadeIn(zoomImage, 50))
+                .Render();
+        }
+
+        protected void popupWindow2_Closed(object sender, EventArgs e)
+        {
+            dynPopup2.ClearControls();
+        }
+
         [ActiveEvent(Name = "RefreshMenu")]
         protected void RefreshMenu(object sender, ActiveEventArgs e)
         {
@@ -83,6 +127,26 @@ namespace Viewport
                         e.Params["Parameters"]["Width"].Get(350) + "px";
                     dynPopup.Style[Styles.height] =
                         e.Params["Parameters"]["Height"].Get(150) + "px";
+                    break;
+                case "dynPopup2":
+                    dyn = dynPopup2;
+                    popupWindow2.Visible = true;
+                    popupWindow2.CssClass = "window hideCaption";
+                    popupWindow2.Style[Styles.display] = "none";
+                    new EffectFadeIn(popupWindow2, 200)
+                        .Render();
+                    popupWindow2.Caption = e.Params["Parameters"]["TabCaption"].Get<string>();
+                    popupWindow2.Xtra =
+                        e.Params["Parameters"]["Width"].Get(350) +
+                        "x" +
+                        e.Params["Parameters"]["Height"].Get(250);
+                    popupWindow2.Style[Styles.width] = "90px";
+                    dynPopup2.Style[Styles.height] = "50px";
+                    dynPopup2.Style[Styles.display] = "none";
+                    zoomImage.Style[Styles.display] = "none";
+                    new EffectFadeIn(zoomImage, 200).Render();
+                    zoomImage.Style[Styles.height] = "50px";
+                    zoomImage.Style[Styles.position] = "";
                     break;
                 default:
                     dyn = Selector.FindControl<Dynamic>(this, e.Params["Position"].Value.ToString());

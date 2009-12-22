@@ -562,9 +562,13 @@ namespace Components
                                         ID = "ctrl" + idxNo + "x" + idxNoCell,
                                         Xtra = idxRow["ID"].Value + "|" + idxCell.Name
                                     };
+                                    string valueSelected = idxCell.Get<string>();
                                     foreach (Node idx in DataSource["Columns"][idxCell.Name]["ControlType"]["Values"])
                                     {
-                                        ListItem l = new ListItem(idx.Get<string>(), idx.Get<string>());
+                                        string idxValue = idx.Get<string>();
+                                        ListItem l = new ListItem(idxValue, idxValue);
+                                        if(idxValue == valueSelected)
+                                            l.Selected = true;
                                         edit.Items.Add(l);
                                     }
                                     if (CellEdited != null)
@@ -572,12 +576,12 @@ namespace Components
                                         edit.SelectedIndexChanged +=
                                             delegate(object sender, EventArgs e)
                                             {
-                                                InPlaceEdit ed = sender as InPlaceEdit;
+                                                SelectList ed = sender as SelectList;
                                                 if (ed != null)
                                                 {
                                                     string id = ed.Xtra.Split('|')[0];
                                                     string cellName = ed.Xtra.Split('|')[1];
-                                                    GridEditEventArgs eIn = new GridEditEventArgs(id, cellName, ed.Text);
+                                                    GridEditEventArgs eIn = new GridEditEventArgs(id, cellName, ed.SelectedItem.Value);
                                                     CellEdited(this, eIn);
                                                     if (!eIn.AcceptChange)
                                                         return;

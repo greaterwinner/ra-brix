@@ -27,6 +27,30 @@
 
 </ra:Window>
 
+<ra:Window 
+    runat="server" 
+    style="z-index:1000;position:absolute;right:50px;top:10px;overflow:hidden;"
+    Visible="false"
+    CssClass="window"
+    Caption="&nbsp;"
+    OnMouseOut="popupWindow2_MouseOut"
+    OnClosed="popupWindow2_Closed"
+    id="popupWindow2">
+    <div style="position:relative;">
+        <ra:Dynamic 
+            runat="server" 
+            CssClass="dynamic-content dynamic-content-no-overflow"
+            OnReload="dynamic_LoadControls"
+            id="dynPopup2" />
+        <ra:Image 
+            runat="server" 
+            OnMouseOver="zoomImage_MouseOver"
+            AlternateText="Zoom here"
+            ImageUrl='<%# "media/skins/" + GetCssRootFolder() + "/Images/zoom.png" %>'
+            id="zoomImage" />
+    </div>
+</ra:Window>
+
 <!-- Top panel... -->
 <ra:Panel 
     runat="server" 
