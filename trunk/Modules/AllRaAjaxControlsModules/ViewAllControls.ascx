@@ -26,19 +26,23 @@
         runat="server" 
         id="tabView1"
         Caption="Tab 1">
-        ijuhiuhiuhiuh
+        This is the first tab...
     </ra:TabView>
     <ra:TabView 
         runat="server" 
         id="tabView2"
+        Enabled="false" 
         Caption="Tab 2">
-        ijuhiuhiuhiuh
+        Another tab :)
     </ra:TabView>
     <ra:TabView 
         runat="server" 
         id="TabView3"
         Caption="Tab 3">
-        ijuhiuhiuhiuh
+        <ra:Calendar 
+            runat="server" 
+            id="cal3"
+            style="width:170px;" />
     </ra:TabView>
 </ra:TabControl>
 
