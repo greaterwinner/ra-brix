@@ -976,34 +976,50 @@ span.button
 }
 
 
+
+
+
+
+
+
+
+
+
 /* WYSIWYG Editor */
 .editor
 {
-	height: 100%;
 	position: relative;
+	overflow:hidden;
 }
 
 .editor .toolbar
 {
-	background-color: #CCD1FF;
 	padding:25px 2px 2px 2px;
 	width: 100%;
+	overflow:auto;
+}
+
+.editor .toolbar br
+{
+	clear:both;
 }
 
 .editor .editorMain
 {
-	width: 100%;
-	border: solid 2px #CCD1FF;
+	width:100%;
 	overflow: auto;
 	background-color: White;
-	min-height:250px;
+	height:250px;
+	padding:5px;
+	margin-top:5px;
 }
 
 .editor .strip
 {
 	height: 25px;
 	width: auto;
-	display: inline-block;
+	display: block;
+	float:left;
 	margin: 5px 0 0 5px;
 }
 
@@ -1036,11 +1052,15 @@ span.button
 	padding: 3px;
 }
 
+.editor .strip .stripContent select
+{
+}
+
 .editor .editorBtn
 {
 	display: inline-block;
 	width: 22px;
-	height: 21px;
+	height: 20px;
 	background-image: url( 'RichEdit/sprite-buttons.png' );
 	background-repeat: no-repeat;
 	background-color: Transparent;
@@ -1052,6 +1072,17 @@ span.button
 {
 	border: solid 1px #316ac5;
 	background-color: #c1d2ee;
+	opacity:0.5;
+}
+
+.editor .design
+{
+	background-position: -127px -40px;
+}
+
+.editor .html
+{
+	background-position: -148px -40px;
 }
 
 .editor .bold
@@ -1185,6 +1216,16 @@ span.button
 	padding: 0;
 	margin: 2px 2px 0 2px;
 }
+
+
+
+
+
+
+
+
+
+
 
 .resourceExplorerFiles
 {
