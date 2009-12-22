@@ -538,14 +538,14 @@ div.edit input, div.edit textarea
 
 .clicked .bCenter span
 {
-	background: url( 'steel/window-sprite.png' ) no-repeat -16px -81px;
-	padding-left: 15px;
+	background: url('steel/window-sprite-icons.png') no-repeat -12px 0;
+	padding-left: 12px;
 }
 
 .clicked-backwards .bCenter span
 {
-	background: url( 'steel/window-sprite.png' ) no-repeat -16px -65px;
-	padding-left: 15px;
+	background: url('steel/window-sprite-icons.png') no-repeat -12px -12px;
+	padding-left: 12px;
 }
 
 .deleteBtn
