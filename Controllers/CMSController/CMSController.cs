@@ -38,7 +38,9 @@ namespace CMSController
                 Page p = new Page();
                 p.Header = "Home";
                 p.Body = string.Format(@"
+<a href=""http://ra-brix.org"" title=""Visit the Ra-Brix website"">
 <img src=""media/skins/Light/Images/bazaar.png"" style=""float:right;margin-left:10px;margin-top:-40px;"" alt=""Visit the Ra-Brix Bazaar"" />
+</a>
 <p>
     Welcome to Ra-Brix. This is the default page which has been created for you.
 </p>
