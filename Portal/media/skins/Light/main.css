@@ -954,6 +954,7 @@ span.button
 {
 	display: block;
 	margin-right: 15px;
+	color:#33b;
 }
 
 .button .menuLink:hover
@@ -1009,8 +1010,7 @@ span.button
 	width:100%;
 	overflow: auto;
 	background-color: White;
-	height:250px;
-	padding:5px;
+	height:450px;
 	margin-top:5px;
 }
 
