@@ -51,16 +51,16 @@
     </div>
 </ra:Window>
 
-<!-- Top panel... -->
-<ra:Panel 
-    runat="server" 
-    CssClass="informationPanel"
-    id="informationPanel">
-    <audio 
-        src='<%# "media/skins/" + GetCssRootFolder() + "/Sounds/ping.wav" %>'
-        id="pingSound">
-    </audio>
-    <div class="informationPanelInner">
+<div id="paper">
+    <!-- Top panel... -->
+    <ra:Window 
+        runat="server" 
+        CssClass="light-window informationPanel"
+        id="informationPanel">
+        <audio 
+            src='<%# "media/skins/" + GetCssRootFolder() + "/Sounds/ping.wav" %>'
+            id="pingSound">
+        </audio>
         <ra:Label 
             runat="server" 
             CssClass="informationLabel"
@@ -70,10 +70,8 @@
             id="handleInformationEvt" 
             style="position:absolute;bottom:2px;right:2px;"
             OnClick="handleInformationEvt_Click" />
-    </div>
+    </ra:Window>
 
-</ra:Panel>
-<div id="paper">
     <div id="header">
         <ra:Panel 
             runat="server" 

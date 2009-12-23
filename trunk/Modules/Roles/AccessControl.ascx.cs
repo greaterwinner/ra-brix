@@ -49,6 +49,8 @@ different things.
 
 Then users can be members of roles which have access - or don't have access - to specific 
 features of the Portal.
+
+This is being done through the Roles/Access Control menu item in the portal.
 ";
             e.Params["Tip"]["TipOfAccessControl"].Value = Language.Instance["TipOfAccessControl", null, tmp];
         }

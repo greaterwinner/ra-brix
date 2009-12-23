@@ -30,7 +30,7 @@ namespace Viewport
         protected global::Ra.Widgets.Dynamic dynPopup2;
         protected global::Ra.Widgets.Image zoomImage;
         protected global::Ra.Widgets.Label informationLabel;
-        protected global::Ra.Widgets.Panel informationPanel;
+        protected global::Ra.Extensions.Widgets.Window informationPanel;
         protected global::Ra.Extensions.Widgets.ExtButton handleInformationEvt;
         protected global::Ra.Widgets.Panel customBreadParent;
         protected global::Ra.Extensions.Widgets.Window popupWindow;
