@@ -31,6 +31,7 @@
 {
 	overflow:hidden;
 	position:relative;
+	margin-top:-10px;
 }
 
 .light-window_w
