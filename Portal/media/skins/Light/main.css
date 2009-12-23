@@ -222,14 +222,12 @@ a.disabled
 .informationPanel
 {
 	position: absolute;
-	top: 8px;
+	top: 105px;
 	display: none;
 	font-weight: bold;
-	left: 250px;
-	width: 700px;
-	background-color: #E6F4FF;
-	border: 1px dashed #CCCCCC;
-	z-index: 2000;
+	left: 335px;
+	width: 400px;
+	z-index: 1000;
 }
 
 .logoutLinkButton a
@@ -263,11 +261,6 @@ a.disabled
 .loginLinkButton input[type="button"]:hover
 {
 	background:Transparent url(login.png) no-repeat 0 -25px;
-}
-
-.informationPanelInner
-{
-	padding: 20px;
 }
 
 .informationLabel
@@ -551,14 +544,14 @@ div.edit input, div.edit textarea
 .deleteBtn
 {
 	display: block;
-	background: url( 'Images/delete.png' ) no-repeat 0 0;
+	background:Transparent url('steel/tree-sprites.png') no-repeat -272px 0;
 	width: 16px;
 	height: 16px;
 }
 
 .deleteBtn:hover
 {
-	background: url( 'Images/delete-hover.png' ) no-repeat 0 0;
+	background:Transparent url('steel/tree-sprites.png') no-repeat -288px 0;
 }
 
 
@@ -1350,6 +1343,7 @@ span.buttonFlat
 	overflow:auto;
 	padding:0 16px 0 16px;
 	min-height:720px;
+	position:relative;
 }
 
 #header
