@@ -731,31 +731,147 @@ http://ra-ajax.org
 
 /* TreeView */
 
-/* The TreeView control uses images from YUI which are BSD licensed and we distribute
- * them just like Yahoo under the BSD license terms... :)
+/* The TreeView control uses some images from YUI which are BSD 
+ * licensed and we distribute them just like Yahoo under the BSD 
+ * license terms... :)
  */
 
-.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; overflow:auto; }
-.tree input { margin-right:8px; }
-.tree .item { cursor:pointer; line-height:14px; white-space:nowrap; }
-.tree .item:hover { background-color:#ddf; }
-.tree .item:hover ul { background-color:#fff; }
-.tree .selected { background-color:#bbf; }
-.tree .selected ul { background-color:#fafafa; }
-.tree .selected:hover { background-color:#d0d0f0; }
-.tree .spacer { padding-left:16px; *display:inline-block; *height:16px; }
-.tree .icon { background:url(tree-sprites.png) no-repeat; }
-.tree .expanded .icon { background-position: 0px 0px; }
-.tree .collapsed .icon { background-position: -16px 0px; }
-.tree .no-childs .icon { background-position: -16px 0px; }
-.tree .lines { background:Transparent url(tree-sprites.png) no-repeat -96px 0px; }
-.tree .linesElbow { background:Transparent url(tree-sprites.png) no-repeat -80px 0px; }
-.tree .expanded .leaf { background:Transparent url(tree-sprites.png) no-repeat -48px 0px; }
-.tree .expanded .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -128px 0px; }
-.tree .collapsed .leaf { background:Transparent url(tree-sprites.png) no-repeat -32px 0px; }
-.tree .collapsed .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -112px 0px; }
-.tree .no-childs .leaf { background:Transparent url(tree-sprites.png) no-repeat -64px 0px; }
-.tree .no-childs .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -80px 0px; }
+.tree
+{
+	padding:5px;
+	font-size:0.9em;
+	overflow:auto;
+}
+
+.tree .item
+{
+	cursor:pointer;
+	line-height:14px;
+	white-space:nowrap;
+}
+
+.tree .item a:hover
+{
+	background-color:Transparent;
+}
+
+.tree .tree-active
+{
+	background-color:#bfdcef;
+}
+
+.tree .tree-active ul
+{
+	background-color:#cfecff;
+}
+
+.tree .selected:hover,
+.tree .selected
+{
+	background-color:#afccdf;
+}
+
+.tree .selected ul
+{
+	background-color:#cfecff;
+}
+
+/*
+.tree .item:hover
+{
+	background-color:#afccdf;
+}
+
+.tree .item:hover ul
+{
+	background-color:#cfecff;
+}
+
+.tree .expanded:hover
+{
+	background-color:#cfecff;
+}
+
+.tree .selected
+{
+	background-color:#bfdcef;
+}
+
+.tree .selected ul
+{
+	background-color:#cfecff;
+}
+
+.tree .selected:hover
+{
+	background-color:#bfdcef;
+}
+*/
+
+.tree .spacer
+{
+	padding-left:16px;
+}
+
+.tree .icon
+{
+	background:url(tree-sprites.png) no-repeat;
+}
+
+.tree .expanded .icon
+{
+	background-position: 0px 0px;
+}
+
+.tree .collapsed .icon
+{
+	background-position: -16px 0px;
+}
+
+.tree .no-childs .icon
+{
+	background-position: -16px 0px;
+}
+
+.tree .lines
+{
+	background:Transparent url(tree-sprites.png) no-repeat -96px 0px;
+}
+
+.tree .linesElbow
+{
+	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+}
+
+.tree .expanded .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -48px 0px;
+}
+
+.tree .expanded .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -128px 0px;
+}
+
+.tree .collapsed .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -32px 0px;
+}
+
+.tree .collapsed .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -112px 0px;
+}
+
+.tree .no-childs .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -64px 0px;
+}
+
+.tree .no-childs .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+}
 
 
 

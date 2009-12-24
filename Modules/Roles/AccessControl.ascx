@@ -17,6 +17,7 @@
             SelectionMode="SingleSelection"
             OnSelectedNodeChanged="tree_SelectedNodeChanged"
             Expansion="SingleClickEntireRow"
+            ClientSideExpansion="true"
             style="margin:15px;"
             id="tree">
 
