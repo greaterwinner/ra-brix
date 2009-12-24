@@ -14,7 +14,7 @@
         <ra:Tree 
             runat="server" 
             CssClass="tree"
-            ClientSideExpansion="false"
+            UseRichAnimations="true"
             OnSelectedNodeChanged="tree_SelectedNodeChanged"
             ID="tree">
 

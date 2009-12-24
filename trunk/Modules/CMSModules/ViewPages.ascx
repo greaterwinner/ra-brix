@@ -9,27 +9,13 @@
 <%@ Import 
     Namespace="LanguageRecords"%>
 
-<div style="width:98%;height:94%;padding-left:1%;padding-right:1%;padding-top:1%;">
-    <div style="width:20%;height:100%;float:left;">
-        <ra:Tree 
-            runat="server" 
-            CssClass="tree"
-            UseRichAnimations="true"
-            OnSelectedNodeChanged="menu_SelectedNodeChanged"
-            ID="tree">
-
-            <ra:TreeNodes 
-                runat="server" 
-                ID="root" />
-
-        </ra:Tree>
-    </div>
+<div style="width:100%;height:100%;">
     <ra:Panel 
         runat="server"
         id="infoWrp"
-        CssClass="resourceExplorerFiles">
+        CssClass="CMSInfoLabel">
         <strong>
-            <%=Language.Instance["SelectPageToEdit", null, "Select a page from the left to edit it"] %>
+            <%=Language.Instance["SelectPageToEdit", null, "Select a page from the floating window to edit it"] %>
         </strong>
     </ra:Panel>
     <ra:Panel 

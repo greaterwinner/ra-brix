@@ -25,6 +25,7 @@ input[type=radio],
 input[type=checkbox]
 {
     margin-right:5px;
+    margin-left:5px;
 }
 
 table tr td
@@ -957,11 +958,9 @@ span.button
 
 .CMSEditPage
 {
-	float: left;
-	width: 76%;
+	width: 100%;
 	height: 100%;
 	padding: 0;
-	margin-left: 1%;
 	position: relative;
 }
 
@@ -999,7 +998,7 @@ span.button
 	width:100%;
 	overflow: auto;
 	background-color: White;
-	height:450px;
+	height:350px;
 	margin-top:5px;
 }
 
@@ -1225,6 +1224,13 @@ span.button
 	background-color: #fff;
 	border: 1px solid #CCD1FF;
 	height: 250px;
+}
+
+.CMSInfoLabel
+{
+	background-color:#fff;
+	border:1px solid #CCD1FF;
+	padding:15px;
 }
 
 .createLink tr td

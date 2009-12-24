@@ -22,70 +22,12 @@ namespace CMSModules
     [ActiveModule]
     public class ViewPages : System.Web.UI.UserControl, IModule
     {
-        protected global::Ra.Extensions.Widgets.Tree tree;
-        protected global::Ra.Extensions.Widgets.TreeNodes root;
         protected global::Ra.Extensions.Widgets.InPlaceEdit header;
         protected global::Ra.Widgets.Panel url;
         protected global::Ra.Widgets.Panel editWrp;
         protected global::Ra.Widgets.Panel infoWrp;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor hyperlink;
         protected global::Ra.Extensions.Widgets.RichEdit editor;
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!_skipLoad)
-            {
-                BuildTree();
-            }
-        }
-
-        protected void menu_SelectedNodeChanged(object sender, EventArgs e)
-        {
-            TreeNode sel = tree.SelectedNodes[0];
-
-            if (tree.SelectedNodes.Length > 0)
-            {
-                // Making the editing wrapper visible...
-                editWrp.Visible = true;
-                editWrp.Style[Styles.display] = "none";
-                if(infoWrp.Style[Styles.display] != "none")
-                {
-                    new EffectFadeOut(infoWrp, 400)
-                        .ChainThese(
-                            new EffectFadeIn(editWrp, 400)).Render();
-                }
-                else
-                {
-                    new EffectFadeIn(editWrp, 400).Render();
-                }
-            }
-            // Header
-            header.Text = sel.Text;
-
-            // Hyperlink and URL
-            hyperlink.Attributes.Remove("href");
-            string urlString = "~/";
-            if (sel.Xtra != "home")
-            {
-                urlString += sel.Xtra + ".aspx";
-            }
-            hyperlink.Attributes.Add("href", urlString);
-            hyperlink.InnerHtml = sel.Xtra;
-            url.ReRender();
-
-            // Body
-            Node node = new Node();
-            node["URL"].Value = sel.Xtra;
-            ActiveEvents.Instance.RaiseActiveEvent(
-                this,
-                "CMSGetBodyForURL",
-                node);
-            editor.Text = node["Body"].Get<string>();
-
-            // HideFromMenu CheckBox...
-            CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu");
-            ch.Checked = node["HideFromMenu"].Get<bool>();
-        }
 
         protected void editor_GetExtraToolbarControls(object sender, Ra.Extensions.Widgets.RichEdit.ExtraToolbarControlsEventArgs e)
         {
@@ -202,12 +144,18 @@ namespace CMSModules
             editor.PasteHTML(html);
         }
 
+        private string SelectedPageID
+        {
+            get { return ViewState["SelectedPageID"] as string; }
+            set { ViewState["SelectedPageID"] = value; }
+        }
+
         protected void delete_Click(object sender, EventArgs e)
         {
-            if (tree.SelectedNodes.Length > 0)
+            if (!string.IsNullOrEmpty(SelectedPageID))
             {
                 Node node = new Node();
-                node["URL"].Value = tree.SelectedNodes[0].Xtra;
+                node["URL"].Value = SelectedPageID;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
                     "CMSRequestDeletePage",
@@ -222,12 +170,12 @@ namespace CMSModules
 
         private void SaveSelectedPage()
         {
-            if (tree.SelectedNodes.Length > 0)
+            if (!string.IsNullOrEmpty(SelectedPageID))
             {
                 string headerTxt = header.Text;
                 string bodyTxt = editor.Text;
                 Node node = new Node();
-                node["URL"].Value = tree.SelectedNodes[0].Xtra;
+                node["URL"].Value = SelectedPageID;
                 node["Header"].Value = headerTxt;
                 node["Body"].Value = bodyTxt;
                 CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu"); 
@@ -242,30 +190,8 @@ namespace CMSModules
             }
         }
 
-        private Node Data
-        {
-            get { return ViewState["Data"] as Node; }
-            set { ViewState["Data"] = value; }
-        }
-
-        private bool _skipLoad;
         public void InitialLoading(Node node)
         {
-            _skipLoad = true;
-            Load +=
-                delegate
-                {
-                    Data = node["Pages"];
-                    BuildTree();
-                };
-        }
-
-        private void BuildTree()
-        {
-            foreach (Node idx in Data)
-            {
-                AddTreeNode(idx, root);
-            }
         }
 
         protected void editor_CtrlKeys(object sender, RichEdit.CtrlKeysEventArgs e)
@@ -276,30 +202,49 @@ namespace CMSModules
             }
         }
 
-        private static void AddTreeNode(Node node, TreeNodes level)
+        [ActiveEvent(Name = "CMSSetActiveEditingPage")]
+        protected void CMSSetActiveEditingPage(object sender, ActiveEventArgs e)
         {
-            foreach (Node idx in node)
+            // Making the editing wrapper visible...
+            SelectedPageID = e.Params["Xtra"].Get<string>();
+            editWrp.Visible = true;
+            editWrp.Style[Styles.display] = "none";
+            if (infoWrp.Style[Styles.display] != "none")
             {
-                if (idx.Name == "Page")
-                {
-                    TreeNode n = new TreeNode
-                    {
-                        ID = idx.DNA.Replace("-", ""),
-                        Text = idx["Name"].Get<string>(),
-                        Xtra = idx["URL"].Get<string>()
-                    };
-                    if (idx["Children", false] != null)
-                    {
-                        TreeNodes child = new TreeNodes {ID = "l" + n.ID};
-                        n.Controls.Add(child);
-                        foreach (Node idxInner in idx["Children"])
-                        {
-                            AddTreeNode(idxInner, child);
-                        }
-                    }
-                    level.Controls.Add(n);
-                }
+                new EffectFadeOut(infoWrp, 400)
+                    .ChainThese(
+                        new EffectFadeIn(editWrp, 400)).Render();
             }
+            else
+            {
+                new EffectFadeIn(editWrp, 400).Render();
+            }
+            // Header
+            header.Text = e.Params["Text"].Get<string>();
+
+            // Hyperlink and URL
+            hyperlink.Attributes.Remove("href");
+            string urlString = "~/";
+            if (SelectedPageID != "home")
+            {
+                urlString += SelectedPageID + ".aspx";
+            }
+            hyperlink.Attributes.Add("href", urlString);
+            hyperlink.InnerHtml = SelectedPageID;
+            url.ReRender();
+
+            // Body
+            Node node = new Node();
+            node["URL"].Value = SelectedPageID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "CMSGetBodyForURL",
+                node);
+            editor.Text = node["Body"].Get<string>();
+
+            // HideFromMenu CheckBox...
+            CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu");
+            ch.Checked = node["HideFromMenu"].Get<bool>();
         }
 
         public string GetCaption()
