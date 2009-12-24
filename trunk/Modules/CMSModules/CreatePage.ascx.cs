@@ -28,6 +28,11 @@ namespace CMSModules
             pnlWrp.DataBind();
         }
 
+        protected void cmsPageName_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         protected void submit_Click(object sender, EventArgs e)
         {
             Node node = new Node();

@@ -222,11 +222,11 @@ a.disabled
 
 .informationPanel
 {
-	position: absolute;
-	top: 105px;
+	position:fixed;
+	top: 75px;
 	display: none;
 	font-weight: bold;
-	left: 335px;
+	left: 415px;
 	width: 400px;
 	z-index: 1000;
 }
