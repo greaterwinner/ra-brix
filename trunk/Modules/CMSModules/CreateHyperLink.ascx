@@ -35,6 +35,7 @@
             <td>
                 <ra:TextBox 
                     runat="server" 
+                    OnEscPressed="urlText_EscPressed"
                     id="urlText" />
             </td>
         </tr>

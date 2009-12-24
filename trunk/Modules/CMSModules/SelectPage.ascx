@@ -9,15 +9,17 @@
 <%@ Import 
     Namespace="LanguageRecords"%>
 
-<ra:Tree 
-    runat="server" 
-    CssClass="tree"
-    UseRichAnimations="true"
-    OnSelectedNodeChanged="menu_SelectedNodeChanged"
-    ID="tree">
-
-    <ra:TreeNodes 
+<div style="height:100%;overflow:auto;">
+    <ra:Tree 
         runat="server" 
-        ID="root" />
+        CssClass="tree"
+        UseRichAnimations="true"
+        OnSelectedNodeChanged="menu_SelectedNodeChanged"
+        ID="tree">
 
-</ra:Tree>
+        <ra:TreeNodes 
+            runat="server" 
+            ID="root" />
+
+    </ra:Tree>
+</div>
