@@ -44,8 +44,10 @@
             id="dynPopup2" />
         <ra:Image 
             runat="server" 
-            OnMouseOver="zoomImage_MouseOver"
+            OnClick="zoomImage_MouseOver"
             AlternateText="Zoom here"
+            CssClass="zoomImage"
+            Text="&nbsp;"
             ImageUrl='<%# "media/skins/" + GetCssRootFolder() + "/Images/zoom.png" %>'
             id="zoomImage" />
     </div>
