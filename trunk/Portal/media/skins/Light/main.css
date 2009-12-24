@@ -250,7 +250,7 @@ a.disabled
 {
 	background:Transparent url(login.png) no-repeat 0 0;
 	height:25px;
-	top:10;
+	top:0px;
 	right:-95px;
 	float:right;
 	position:absolute;

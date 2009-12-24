@@ -178,6 +178,7 @@ namespace Viewport
         {
             informationLabel.Text = e.Params["Message"].Value.ToString();
             int duration = e.Params["Duration"].Get<int>();
+            informationPanel.Visible = true;
             informationPanel.Style[Styles.display] = "none";
             string evtToFire = e.Params["EventToFire"].Value as string;
             if (string.IsNullOrEmpty(evtToFire))
