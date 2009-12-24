@@ -19,6 +19,7 @@
         <br />
         <ra:TextBox 
             runat="server" 
+            OnEscPressed="roleTxt_EscPressed"
             id="roleTxt" />
         <br />
         <ra:ExtButton 

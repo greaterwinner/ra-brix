@@ -38,6 +38,11 @@ namespace ADGroups2RolesModules
                 node);
         }
 
+        protected void adGroupName_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         public void InitialLoading(Node node)
         {
             adGroupName.Text = Language.Instance["ADGroups2RolesNameText", null, "Name of AD group"];
