@@ -10,23 +10,26 @@
     Namespace="LanguageRecords"%>
 
 <div style="padding:15px;">
-    <h2>
+    <h1>
         <%= Language.Instance["PleaseChooseNewSkin", null, "Please choose new skin below"] %>
-    </h2>
+    </h1>
     <asp:Repeater runat="server" ID="rep">
         <ItemTemplate>
-            <ra:ImageButton 
+            <ra:Panel 
                 runat="server" 
-                ImageUrl='<%#"media/skins/" + Eval("Folder") + ".png" %>'
                 OnClick="ChangeSkinMethod"
-                style="float:left;padding:10px;opacity:0.3;"
                 Xtra='<%#Eval("Folder") %>'
-                AlternateText='<%#Eval("Folder") %>'>
-            
+                style="float:left;padding:10px;opacity:0.3;">
+                <h2>
+                    <%#Eval("Folder") %>
+                </h2>
+                <ra:ImageButton 
+                    runat="server" 
+                    ImageUrl='<%#"media/skins/" + Eval("Folder") + ".png" %>'
+                    AlternateText='<%#Eval("Folder") %>' />
                 <ra:BehaviorUnveiler 
                     runat="server" />
-            
-            </ra:ImageButton>
+            </ra:Panel>
         </ItemTemplate>
     </asp:Repeater>
 </div>

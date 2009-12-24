@@ -14,10 +14,8 @@
     <div style="width:50%;float:left;height:100%;overflow:auto;">
         <ra:Tree 
             runat="server" 
-            SelectionMode="SingleSelection"
             OnSelectedNodeChanged="tree_SelectedNodeChanged"
-            Expansion="SingleClickEntireRow"
-            ClientSideExpansion="true"
+            UseRichAnimations="true"
             style="margin:15px;"
             id="tree">
 

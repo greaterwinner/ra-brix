@@ -13,8 +13,8 @@
     <div style="width:20%;height:100%;float:left;">
         <ra:Tree 
             runat="server" 
-            ClientSideExpansion="false"
-            CssClass="tree CMSTree"
+            CssClass="tree"
+            UseRichAnimations="true"
             OnSelectedNodeChanged="menu_SelectedNodeChanged"
             ID="tree">
 
