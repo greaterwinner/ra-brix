@@ -66,7 +66,7 @@ namespace Ra.Brix.Portal
         {
             string portalDefault = Settings.Instance.Get(
                 "CssRootFolder",
-                "Light");
+                "Gold");
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
                 return portalDefault;
