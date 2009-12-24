@@ -968,10 +968,6 @@ span.button
 	color: Orange;
 }
 
-.CMSTree
-{
-}
-
 .CMSEditPage
 {
 	float: left;
@@ -1199,6 +1195,13 @@ span.button
 	width: 66%;
 	padding: 1%;
 	margin-left: 1%;
+	background-color: #fff;
+	border: 1px solid #CCD1FF;
+	height: 250px;
+}
+
+.CMSInfoLabel
+{
 	background-color: #fff;
 	border: 1px solid #CCD1FF;
 	height: 250px;

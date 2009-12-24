@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SelectPage.ascx.cs">
+      <DependentUpon>SelectPage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CreateHyperLink.ascx.cs">
       <DependentUpon>CreateHyperLink.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -111,6 +115,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CreateHyperLink.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SelectPage.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

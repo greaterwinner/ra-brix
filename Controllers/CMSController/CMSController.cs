@@ -350,6 +350,10 @@ namespace CMSController
                 "CMSModules.ViewPages",
                 "dynMid",
                 node);
+            ActiveEvents.Instance.RaiseLoadControl(
+                "CMSModules.SelectPage",
+                "dynPopup2",
+                node);
         }
 
         private void AddPageToNode(Node node, Page page)
