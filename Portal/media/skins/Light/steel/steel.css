@@ -776,38 +776,6 @@ http://ra-ajax.org
 	background-color:#cfecff;
 }
 
-/*
-.tree .item:hover
-{
-	background-color:#afccdf;
-}
-
-.tree .item:hover ul
-{
-	background-color:#cfecff;
-}
-
-.tree .expanded:hover
-{
-	background-color:#cfecff;
-}
-
-.tree .selected
-{
-	background-color:#bfdcef;
-}
-
-.tree .selected ul
-{
-	background-color:#cfecff;
-}
-
-.tree .selected:hover
-{
-	background-color:#bfdcef;
-}
-*/
-
 .tree .spacer
 {
 	padding-left:16px;

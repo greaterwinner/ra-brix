@@ -40,6 +40,11 @@ namespace RolesModules
                 node);
         }
 
+        protected void roleTxt_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         public void InitialLoading(Node init)
         {
             roleTxt.Text = Language.Instance["RolesRoleNameText", null, "Role name..."];

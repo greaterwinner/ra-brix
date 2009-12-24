@@ -20,6 +20,7 @@
             <td>
                 <ra:TextBox 
                     runat="server" 
+                    OnEscPressed="adGroupName_EscPressed"
                     id="adGroupName" />
             </td>
         </tr>
