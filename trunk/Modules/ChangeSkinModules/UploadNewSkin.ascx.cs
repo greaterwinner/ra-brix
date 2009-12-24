@@ -18,7 +18,7 @@ namespace ChangeSkinModules
     public class UploadNewSkin : System.Web.UI.UserControl, IModule
     {
         protected global::System.Web.UI.WebControls.FileUpload file;
-        protected global::System.Web.UI.WebControls.Button submit;
+        protected global::Components.ExtButtonPost submit;
 
         protected override void OnLoad(EventArgs e)
         {

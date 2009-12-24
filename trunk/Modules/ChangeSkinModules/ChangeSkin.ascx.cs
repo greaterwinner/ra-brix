@@ -34,7 +34,7 @@ namespace ChangeSkinModules
 
         protected void ChangeSkinMethod(object sender, EventArgs e)
         {
-            ImageButton btn = sender as ImageButton;
+            Panel btn = sender as Panel;
             Node node = new Node();
             node["RootFolder"].Value = btn.Xtra;
 
