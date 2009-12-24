@@ -89,17 +89,20 @@ namespace Viewport
 
         protected void popupWindow2_MouseOut(object sender, EventArgs e)
         {
-            popupWindow2.CssClass = "window hideCaption";
-            zoomImage.Style[Styles.display] = "none";
-            zoomImage.Style[Styles.position] = "";
-            dynPopup2.Style[Styles.zIndex] = "99";
-            zoomImage.Style[Styles.zIndex] = "100";
-            new EffectSize(popupWindow2, 200, -1, 90)
-                .ChainThese(
+            if (dynPopup2.Style["display"] != "none")
+            {
+                popupWindow2.CssClass = "window hideCaption";
+                zoomImage.Style[Styles.display] = "none";
+                zoomImage.Style[Styles.position] = "";
+                dynPopup2.Style[Styles.zIndex] = "99";
+                zoomImage.Style[Styles.zIndex] = "100";
+                new EffectSize(popupWindow2, 200, -1, 90)
+                    .ChainThese(
                     new EffectSize(dynPopup2, 200, 50, -1),
                     new EffectFadeOut(dynPopup2, 50),
                     new EffectFadeIn(zoomImage, 50))
-                .Render();
+                    .Render();
+            }
         }
 
         protected void popupWindow2_Closed(object sender, EventArgs e)
