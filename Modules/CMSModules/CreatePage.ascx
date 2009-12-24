@@ -20,6 +20,7 @@
             <td>
                 <ra:TextBox 
                     runat="server" 
+                    OnEscPressed="cmsPageName_EscPressed"
                     id="cmsPageName" />
             </td>
         </tr>
