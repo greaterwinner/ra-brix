@@ -33,6 +33,11 @@ namespace CMSModules
             urlText.Select();
         }
 
+        protected void urlText_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         protected void submit_Click(object sender, EventArgs e)
         {
             string url = urlText.Text;
