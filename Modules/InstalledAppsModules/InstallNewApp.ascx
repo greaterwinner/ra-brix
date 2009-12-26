@@ -16,7 +16,7 @@
         runat="server" 
         ID="uploader" />
     <br />
-    <asp:Button 
+    <ext:ExtButtonPost
         runat="server" 
         style="position:absolute;right:5px;bottom:15px;"
         OnClick="submit_Click"

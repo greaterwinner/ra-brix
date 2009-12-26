@@ -84,8 +84,14 @@ namespace ADGroup2RoleController
             init["ModuleSettings"]["Grid"]["Columns"]["GroupName"]["ControlType"].Value = "InPlaceEdit";
 
             init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["Caption"].Value = Language.Instance["ADGroups2RoleCaption", null, "Role Name"];
-            init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["ControlType"].Value = "InPlaceEdit";
+            init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["ControlType"].Value = "List";
             int idxNo = 0;
+            foreach (Role idx in ActiveType<Role>.Select())
+            {
+                init["ModuleSettings"]["Grid"]["Columns"]["RoleName"]["Values"]["Value" + idxNo].Value = idx.Name;
+                idxNo += 1;
+            }
+            idxNo = 0;
             foreach (AdGroup2Role idx in ActiveType<AdGroup2Role>.Select())
             {
                 init["ModuleSettings"]["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
