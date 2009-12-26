@@ -559,7 +559,7 @@ namespace Components
                                 {
                                     SelectList edit = new SelectList
                                     {
-                                        ID = "ctrl" + idxNo + "x" + idxNoCell,
+                                        ID = "ctrl" + idxNo + "x" + idxNoCell + idxRow["ID"].Value,
                                         Xtra = idxRow["ID"].Value + "|" + idxCell.Name
                                     };
                                     string valueSelected = idxCell.Get<string>();
@@ -682,6 +682,8 @@ namespace Components
                                         getColType["Row"].Value = row;
                                         getColType["Value"].Value = idxCell.Value;
                                         getColType["DataSource"].Value = DataSource;
+                                        getColType["ID"].Value = idxRow["ID"].Value;
+                                        getColType["CellName"].Value = idxCell.Name;
                                         ActiveEvents.Instance.RaiseActiveEvent(
                                             this,
                                             "GetGridColumnType",

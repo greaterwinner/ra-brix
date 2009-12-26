@@ -21,6 +21,7 @@ using Ra.Effects;
 using Ra.Extensions.Widgets;
 using System.Globalization;
 using Ra.Selector;
+using Calendar=Ra.Extensions.Widgets.Calendar;
 
 namespace WhiteboardPluginsController
 {
@@ -73,7 +74,7 @@ namespace WhiteboardPluginsController
         {
             const string tmp = @"
 You can filter by a Date column in your Lists by writing in an ISO certified 
-date pattern which is supposed to be constructed with the given pattern; yyyy.MM.dd HH:mm .
+date pattern which is supposed to be constructed with the given pattern; yyyy.MM.dd .
 yyyy means 4 digits year value, MM means months with two digits, dd is days (two digits)
 HH is hours in military display (e.g. 23 == 11PM) and mm is two digits minuts. 
 
@@ -166,41 +167,54 @@ with all fields [also the ones that's not supposed to show in the ""SummaryView"
 
             Panel pnl = new Panel();
 
-            // Creating LinkButton to open DateTimePicker
+            // Creating LinkButton to open Calendar
             LinkButton btn = new LinkButton();
             btn.Click +=
                 delegate(object sender, EventArgs e2)
                     {
-                        DateTimePicker pick = 
-                            Selector.SelectFirst<DateTimePicker>(((Control) sender).Parent);
-                        new EffectFadeIn(pick, 200)
-                            .Render();
+                        Calendar pick =
+                            Selector.SelectFirst<Calendar>(((Control)sender).Parent);
+                        if (pick.Xtra != "Visible")
+                        {
+                            pick.Xtra = "Visible";
+                            new EffectFadeIn(pick, 200)
+                                .Render();
+                        }
+                        else
+                        {
+                            pick.Xtra = "";
+                            new EffectFadeOut(pick, 200)
+                                .Render();
+                        }
                     };
+            btn.ID = "btn" + e.Params["ID"].Value + e.Params["CellName"].Value;
             pnl.Controls.Add(btn);
 
-            // Creating DateTimePicker
-            DateTimePicker picker = new DateTimePicker();
+            // Creating Calendar
+            Calendar picker = new Calendar();
+            picker.ID = "cal" + e.Params["ID"].Value + e.Params["CellName"].Value;
             picker.Style[Styles.display] = "none";
             picker.StartsOn = DayOfWeek.Sunday;
             picker.Style[Styles.width] = "200px";
             picker.Style[Styles.position] = "absolute";
-            pnl.Controls.Add(picker);
             picker.Visible = false;
+            pnl.Controls.Add(picker);
             if (!string.IsNullOrEmpty(curValue))
             {
-                picker.Value = DateTime.ParseExact(curValue, "yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
+                picker.Value = DateTime.ParseExact(curValue, "yyyy.MM.dd", CultureInfo.InvariantCulture);
                 btn.Text =
-                    DateTime.ParseExact(curValue, "yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture)
-                        .ToString("ddd d.MMM yy HH:mm", CultureInfo.InvariantCulture);
+                    DateTime.ParseExact(curValue, "yyyy.MM.dd", CultureInfo.InvariantCulture)
+                        .ToString("ddd d.MMM yy", CultureInfo.InvariantCulture);
             }
             else
             {
-                btn.Text = DateTime.Now.ToString("ddd d.MMM yy HH:mm", CultureInfo.InvariantCulture);
+                btn.Text = DateTime.Now.ToString("ddd d.MMM yy", CultureInfo.InvariantCulture);
             }
             picker.DateClicked +=
                 delegate(object sender, EventArgs e2)
                     {
-                        DateTimePicker pick = sender as DateTimePicker;
+                        Calendar pick = sender as Calendar;
+                        pick.Xtra = "";
                         new EffectFadeOut(pick, 200)
                             .Render();
                         if (pick != null)
@@ -217,8 +231,8 @@ with all fields [also the ones that's not supposed to show in the ""SummaryView"
                                             return idx.Column.Caption == xtra[1];
                                         });
                                 btn.Text =
-                                    pick.Value.ToString("ddd d.MMM yy HH:mm", CultureInfo.InvariantCulture);
-                                cell.Value = pick.Value.ToString("yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
+                                    pick.Value.ToString("ddd d.MMM yy", CultureInfo.InvariantCulture);
+                                cell.Value = pick.Value.ToString("yyyy.MM.dd", CultureInfo.InvariantCulture);
                                 cell.Save();
                                 UpdateGridValue(e.Params["DataSource"].Value as Node, xtra[0], xtra[1], cell.Value);
                             }

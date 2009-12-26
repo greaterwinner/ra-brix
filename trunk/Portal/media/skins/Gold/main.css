@@ -423,6 +423,7 @@ a.disabled
 .grid .gridWrapper
 {
 	width: 100%;
+	margin-bottom:180px;
 }
 
 .grid .gridWrapper .table
