@@ -31,10 +31,15 @@ namespace WhiteboardModules
                 node);
         }
 
+        protected void name_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         public void InitialLoading(Node node)
         {
             wrp.DataBind();
-            name.Text = Language.Instance["WhiteboardNameText", null, "Name of Whiteboard"];
+            name.Text = Language.Instance["ListName", null, "Name of List"];
             name.Select();
             name.Focus();
         }

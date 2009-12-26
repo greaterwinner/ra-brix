@@ -12,10 +12,14 @@
 <div style="padding:35px 0px 0px 0px;position:relative;margin-bottom:25px;">
     <ra:LinkButton
         runat="server"
-        style="position:absolute;top:5px;right:5px;"
+        style="position:absolute;top:5px;right:5px;opacity:0.3;"
         CssClass="favouriteButton"
         OnClick="addColumn_Click"
-        id="addColumn" />
+        id="addColumn">
+        <ra:BehaviorUnveiler
+            runat="server" 
+            id="obsc" />
+    </ra:LinkButton>
     <ra:InPlaceEdit 
         runat="server" 
         style="font-size:118%;float:left;width:20%;margin-left:27px;margin-top:-15px;"

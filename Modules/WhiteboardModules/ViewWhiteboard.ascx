@@ -13,10 +13,14 @@
 
     <ra:LinkButton
         runat="server"
-        style="position:absolute;top:5px;right:5px;"
+        style="position:absolute;right:5px;opacity:0.3;"
         CssClass="favouriteButton"
         OnClick="addRow_Click"
-        id="addRow" />
+        id="addRow">
+        <ra:BehaviorUnveiler
+            runat="server" 
+            id="obsc" />
+    </ra:LinkButton>
     <ext:Grid
         runat="server"
         CssClass="grid"
