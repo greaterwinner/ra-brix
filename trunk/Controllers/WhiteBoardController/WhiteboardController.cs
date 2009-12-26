@@ -112,7 +112,7 @@ namespace WhiteBoardController
         protected void CreateWhiteboard(object sender, ActiveEventArgs e)
         {
             Node init = new Node();
-            init["TabCaption"].Value = Language.Instance["WhiteboardCaption", null, "Create New Whiteboard"];
+            init["TabCaption"].Value = Language.Instance["ListCaption", null, "Create new List"];
             init["Width"].Value = 350;
             init["Height"].Value = 150;
             ActiveEvents.Instance.RaiseLoadControl(

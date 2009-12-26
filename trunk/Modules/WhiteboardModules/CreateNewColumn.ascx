@@ -17,10 +17,11 @@
         DefaultWidget="submit">
         <table>
             <tr>
-                <td><%#Language.Instance["WhiteboardCreateLabel", null, "NameOfWhiteboard"] %></td>
+                <td><%#Language.Instance["ListCreateColumnLabel", null, "Name of column"] %></td>
                 <td>
                     <ra:TextBox 
                         runat="server" 
+                        OnEscPressed="name_EscPressed"
                         id="name" />
                 </td>
             </tr>

@@ -31,6 +31,11 @@ namespace WhiteboardModules
                 node);
         }
 
+        protected void name_EscPressed(object sender, EventArgs e)
+        {
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
+        }
+
         private string WhiteboardID
         {
             get { return (string)ViewState["WhiteboardID"]; }

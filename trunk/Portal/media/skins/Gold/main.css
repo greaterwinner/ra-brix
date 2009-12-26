@@ -511,10 +511,14 @@ div.edit input, div.edit textarea
 	width: 90%;
 }
 
+.controlWrappers
+{
+	width:200px;
+}
+
 .filter
 {
 	width: 80px !important;
-	margin: 15px 15px 5px 15px;
 	background: White url(filter-icon.png) no-repeat 0 0;
 	border: solid 1px #99e;
 	padding-left: 15px;
