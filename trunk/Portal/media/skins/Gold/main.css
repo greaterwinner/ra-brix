@@ -181,7 +181,6 @@ a
 
 a:hover
 {
-	background-color: #eee;
 }
 
 a.disabled
@@ -409,10 +408,13 @@ a.disabled
 
 
 
+
+
+
+
 .grid
 {
-	width: 94%;
-	margin-left: 3%;
+	margin:0 15px 0 15px;
 }
 
 .smaller
@@ -423,18 +425,19 @@ a.disabled
 .grid .gridWrapper
 {
 	width: 100%;
-	margin-bottom:180px;
 }
 
 .grid .gridWrapper .table
 {
 	width: 100%;
 	margin-top: 15px;
+	margin-bottom: 160px;
 }
 
 .grid .gridWrapper .table tr td
 {
-	padding: 5px 0px 5px 0px;
+	padding:5px 0px 5px 0px;
+	vertical-align:top;
 }
 
 .grid .gridWrapper .table tr td a
@@ -442,20 +445,34 @@ a.disabled
 	display: block;
 }
 
-.grid .gridWrapper .table tr.even
+.grid .gridWrapper .table tr td a:hover
 {
-	border: thin solid #aaaaCC;
-	background-color: #c9E0FF;
-}
-.grid .gridWrapper .table tr.odd
-{
-	background-color: #E6F4FF;
-	border: thin solid #aaaaCC;
+	text-decoration:underline;
 }
 
-.grid .gridWrapper .table tr.even td, .grid .gridWrapper .table tr.odd td
+.grid .gridWrapper .table tr.even
 {
-	padding: 0.5em;
+}
+
+.grid .gridWrapper .table tr.odd
+{
+}
+
+.grid .gridWrapper .table tr.odd > td
+{
+	background-color:#c6e4f5;
+	padding:5px 0px 5px 0px;
+}
+
+.grid .gridWrapper .table tr.even:hover > td,
+.grid .gridWrapper .table tr.odd:hover > td
+{
+	background-color:#eed51b;
+}
+
+.grid .gridWrapper .table tr.even td, 
+.grid .gridWrapper .table tr.odd td
+{
 }
 
 .grid .gridWrapper .table .headerButton
@@ -472,9 +489,10 @@ div.edit
 	background: Transparent url( 'editable.png' ) no-repeat 0 0;
 }
 
-div.edit:hover
+div.edit:hover,
+div.edit:hover a
 {
-	background-color: #FFFFFF;
+	background-color:Transparent;
 }
 
 div.edit span
