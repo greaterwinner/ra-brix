@@ -124,7 +124,7 @@
                     runat="server" 
                     CssClass="dynamic-content"
                     ID="dynMid"
-                    style="min-height:320px;margin-left:15px;"
+                    style="min-height:320px;"
                     OnReload="dynamic_LoadControls" />
             </ra:Window>
         </div>

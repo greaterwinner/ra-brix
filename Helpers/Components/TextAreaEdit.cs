@@ -21,7 +21,7 @@ namespace Components
     public class TextAreaEdit : Panel
     {
         private readonly TextArea _text = new TextArea();
-        private readonly Label _link = new Label();
+        private readonly LinkButton _link = new LinkButton();
 
         public event EventHandler TextChanged;
 
@@ -94,6 +94,7 @@ namespace Components
         {
             _text.Style[Styles.display] = "none";
             _link.Style[Styles.display] = "";
+            new EffectFocusAndSelect(_link).Render();
         }
 
         private void TextUpdated(object sender, EventArgs e)
