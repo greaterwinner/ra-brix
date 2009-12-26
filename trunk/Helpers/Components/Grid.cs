@@ -417,7 +417,7 @@ namespace Components
             _lstWrappers.ReRender();
         }
 
-        private void CreateRows(Control table)
+        private void CreateRows(RaWebControl table)
         {
             Node node = new Node();
             List<Node> tmp = new List<Node>(RowsFiltered);
@@ -563,7 +563,7 @@ namespace Components
                                         Xtra = idxRow["ID"].Value + "|" + idxCell.Name
                                     };
                                     string valueSelected = idxCell.Get<string>();
-                                    foreach (Node idx in DataSource["Columns"][idxCell.Name]["ControlType"]["Values"])
+                                    foreach (Node idx in DataSource["Columns"][idxCell.Name]["Values"])
                                     {
                                         string idxValue = idx.Get<string>();
                                         ListItem l = new ListItem(idxValue, idxValue);
@@ -691,6 +691,13 @@ namespace Components
                                         RaWebControl ctrl = getColType["Control"].Get<RaWebControl>();
                                         ctrl.ID = idxRow["ID"].Value + "x" + idxCell.Name.GetHashCode().ToString().Replace("|", "");
                                         ctrl.Xtra = string.Format("{0}|{1}", idxRow["ID"].Value, idxCell.Name);
+                                        if (getColType["ExtraCssClass"].Value != null)
+                                        {
+                                            if(!table.CssClass.Contains(getColType["ExtraCssClass"].Get<string>()))
+                                            {
+                                                table.CssClass += " " + getColType["ExtraCssClass"].Get<string>();
+                                            }
+                                        }
                                         cell.Controls.Add(ctrl);
                                     }
                                 } break;

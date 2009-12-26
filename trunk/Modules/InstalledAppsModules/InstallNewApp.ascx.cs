@@ -17,7 +17,7 @@ namespace InstalledAppsModules
     [ActiveModule]
     public class InstallNewApp : System.Web.UI.UserControl, IModule
     {
-        protected global::System.Web.UI.WebControls.Button submit;
+        protected global::Components.ExtButtonPost submit;
         protected global::System.Web.UI.WebControls.FileUpload uploader;
 
         protected void Page_Load(object sender, EventArgs e)

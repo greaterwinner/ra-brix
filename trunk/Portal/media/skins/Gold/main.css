@@ -399,6 +399,7 @@ a.disabled
 	display: block;
 	width: 29px;
 	height: 30px;
+	z-index:100;
 }
 
 .favouriteButton:hover
@@ -431,6 +432,10 @@ a.disabled
 {
 	width: 100%;
 	margin-top: 15px;
+}
+
+.grid .gridWrapper .xtraMargin
+{
 	margin-bottom: 160px;
 }
 
@@ -467,7 +472,7 @@ a.disabled
 .grid .gridWrapper .table tr.even:hover > td,
 .grid .gridWrapper .table tr.odd:hover > td
 {
-	background-color:#eed51b;
+	background-color:#c0deed;
 }
 
 .grid .gridWrapper .table tr.even td, 

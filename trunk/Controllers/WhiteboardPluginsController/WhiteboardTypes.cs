@@ -166,6 +166,7 @@ with all fields [also the ones that's not supposed to show in the ""SummaryView"
             string curValue = e.Params["Value"].Get<string>();
 
             Panel pnl = new Panel();
+            e.Params["ExtraCssClass"].Value = "xtraMargin";
 
             // Creating LinkButton to open Calendar
             LinkButton btn = new LinkButton();

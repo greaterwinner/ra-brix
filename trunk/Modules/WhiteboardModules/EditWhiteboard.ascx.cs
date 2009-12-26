@@ -96,7 +96,7 @@ namespace WhiteboardModules
             int idxNo = 0;
             foreach (Node idx in colTypes["Types"])
             {
-                gridNode["Columns"]["Type"]["ControlType"]["Values"]["Value" + idxNo].Value = idx.Name;
+                gridNode["Columns"]["Type"]["Values"]["Value" + idxNo].Value = idx.Name;
                 idxNo += 1;
             }
 
