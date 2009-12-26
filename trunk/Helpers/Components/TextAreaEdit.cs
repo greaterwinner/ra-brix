@@ -94,6 +94,7 @@ namespace Components
         {
             _text.Style[Styles.display] = "none";
             _link.Style[Styles.display] = "";
+            _text.Text = _link.Text;
             new EffectFocusAndSelect(_link).Render();
         }
 
