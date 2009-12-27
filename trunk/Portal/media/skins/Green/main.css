@@ -25,6 +25,7 @@ input[type=radio],
 input[type=checkbox]
 {
     margin-right:5px;
+    margin-left:5px;
 }
 
 table tr td
@@ -93,6 +94,14 @@ a.noHoverLink:hover
 {
 	height: 100%;
 	overflow: auto;
+}
+
+.zoomImage
+{
+	display:block;
+	width:50px;
+	height:50px;
+	cursor:pointer;
 }
 
 .dynamic-content-no-overflow
@@ -172,7 +181,6 @@ a
 
 a:hover
 {
-	background-color: #eee;
 }
 
 a.disabled
@@ -188,14 +196,15 @@ a.disabled
 .bread-crumb-parent
 {
 	background-image: none !important;
+	margin-left:-1px;
 }
 
 .openIDTextBoxWrapper
 {
-	position: absolute;
-	float: right;
-	top: 25px;
-	right: 95px;
+	position:absolute;
+	float:right;
+	top:35px;
+	right:155px;
 }
 
 .openIDTextBox
@@ -220,23 +229,21 @@ a.disabled
 
 .informationPanel
 {
-	position: absolute;
-	top: 8px;
+	position:fixed;
+	top: 75px;
 	display: none;
 	font-weight: bold;
-	left: 250px;
-	width: 700px;
-	background-color: #E6F4FF;
-	border: 1px dashed #CCCCCC;
-	z-index: 2000;
+	left: 415px;
+	width: 400px;
+	z-index: 1000;
 }
 
 .logoutLinkButton a
 {
 	background:Transparent url(login.png) no-repeat -85px 0;
 	height: 25px;
-	top: 25px;
-	right: 15px;
+	top: 35px;
+	right: 50px;
 	float: right;
 	position: absolute;
 	width: 85px;
@@ -250,23 +257,18 @@ a.disabled
 .loginLinkButton input[type="button"]
 {
 	background:Transparent url(login.png) no-repeat 0 0;
-	height: 25px;
-	top: 0;
-	right: -90px;
-	float: right;
-	position: absolute;
-	width: 85px;
+	height:25px;
+	top:0px;
+	right:-95px;
+	float:right;
+	position:absolute;
+	width:85px;
 	cursor:pointer;
 }
 
 .loginLinkButton input[type="button"]:hover
 {
 	background:Transparent url(login.png) no-repeat 0 -25px;
-}
-
-.informationPanelInner
-{
-	padding: 20px;
 }
 
 .informationLabel
@@ -324,11 +326,6 @@ a.disabled
 {
 	background: url( 'Images/light_bulb.png' ) no-repeat 0 0;
 	padding-left: 18px;
-}
-
-.window_content
-{
-	background-color: #E6F4FF;
 }
 
 .treeLinkButton
@@ -402,6 +399,7 @@ a.disabled
 	display: block;
 	width: 29px;
 	height: 30px;
+	z-index:100;
 }
 
 .favouriteButton:hover
@@ -411,10 +409,13 @@ a.disabled
 
 
 
+
+
+
+
 .grid
 {
-	width: 94%;
-	margin-left: 3%;
+	margin:0 15px 0 15px;
 }
 
 .smaller
@@ -433,9 +434,15 @@ a.disabled
 	margin-top: 15px;
 }
 
+.grid .gridWrapper .xtraMargin
+{
+	margin-bottom: 160px;
+}
+
 .grid .gridWrapper .table tr td
 {
-	padding: 5px 0px 5px 0px;
+	padding:5px 0px 5px 0px;
+	vertical-align:top;
 }
 
 .grid .gridWrapper .table tr td a
@@ -443,20 +450,34 @@ a.disabled
 	display: block;
 }
 
-.grid .gridWrapper .table tr.even
+.grid .gridWrapper .table tr td a:hover
 {
-	border: thin solid #aaaaCC;
-	background-color: #c9E0FF;
-}
-.grid .gridWrapper .table tr.odd
-{
-	background-color: #E6F4FF;
-	border: thin solid #aaaaCC;
+	text-decoration:underline;
 }
 
-.grid .gridWrapper .table tr.even td, .grid .gridWrapper .table tr.odd td
+.grid .gridWrapper .table tr.even
 {
-	padding: 0.5em;
+}
+
+.grid .gridWrapper .table tr.odd
+{
+}
+
+.grid .gridWrapper .table tr.odd > td
+{
+	background-color:#c6e4f5;
+	padding:5px 0px 5px 0px;
+}
+
+.grid .gridWrapper .table tr.even:hover > td,
+.grid .gridWrapper .table tr.odd:hover > td
+{
+	background-color:#c0deed;
+}
+
+.grid .gridWrapper .table tr.even td, 
+.grid .gridWrapper .table tr.odd td
+{
 }
 
 .grid .gridWrapper .table .headerButton
@@ -473,9 +494,10 @@ div.edit
 	background: Transparent url( 'editable.png' ) no-repeat 0 0;
 }
 
-div.edit:hover
+div.edit:hover,
+div.edit:hover a
 {
-	background-color: #FFFFFF;
+	background-color:Transparent;
 }
 
 div.edit span
@@ -489,10 +511,14 @@ div.edit input, div.edit textarea
 	width: 90%;
 }
 
+.controlWrappers
+{
+	width:200px;
+}
+
 .filter
 {
 	width: 80px !important;
-	margin: 15px 15px 5px 15px;
 	background: White url(filter-icon.png) no-repeat 0 0;
 	border: solid 1px #99e;
 	padding-left: 15px;
@@ -542,27 +568,27 @@ div.edit input, div.edit textarea
 
 .clicked .bCenter span
 {
-	background: url( 'steel/window-sprite.png' ) no-repeat -16px -81px;
-	padding-left: 15px;
+	background: url('steel/window-sprite-icons.png') no-repeat -12px 0;
+	padding-left: 12px;
 }
 
 .clicked-backwards .bCenter span
 {
-	background: url( 'steel/window-sprite.png' ) no-repeat -16px -65px;
-	padding-left: 15px;
+	background: url('steel/window-sprite-icons.png') no-repeat -12px -12px;
+	padding-left: 12px;
 }
 
 .deleteBtn
 {
 	display: block;
-	background: url( 'Images/delete.png' ) no-repeat 0 0;
+	background:Transparent url('steel/tree-sprites.png') no-repeat -272px 0;
 	width: 16px;
 	height: 16px;
 }
 
 .deleteBtn:hover
 {
-	background: url( 'Images/delete-hover.png' ) no-repeat 0 0;
+	background:Transparent url('steel/tree-sprites.png') no-repeat -288px 0;
 }
 
 
@@ -949,7 +975,6 @@ span.button
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 6px;
-	font-family: Verdana;
 	display: block;
 	padding-left: 2px;
 	padding-right: 2px;
@@ -958,55 +983,67 @@ span.button
 .menuLink
 {
 	display: block;
-	color: Blue;
 	margin-right: 15px;
+	color:#33b;
 }
 
 .button .menuLink:hover
 {
 	background-color: Transparent !important;
-	color: Orange;
 }
 
 .CMSEditPage
 {
-	float: left;
-	width: 76%;
+	width: 100%;
 	height: 100%;
 	padding: 0;
-	margin-left: 1%;
 	position: relative;
 }
+
+
+
+
+
+
+
+
+
 
 
 /* WYSIWYG Editor */
 .editor
 {
-	height: 100%;
 	position: relative;
+	overflow:hidden;
 }
 
 .editor .toolbar
 {
-	background-color: #CCD1FF;
 	padding:25px 2px 2px 2px;
 	width: 100%;
+	overflow:auto;
+}
+
+.editor .toolbar br
+{
+	clear:both;
 }
 
 .editor .editorMain
 {
-	width: 100%;
-	border: solid 2px #CCD1FF;
+	width:100%;
 	overflow: auto;
 	background-color: White;
-	min-height:250px;
+	height:350px;
+	margin-top:5px;
 }
 
 .editor .strip
 {
 	height: 25px;
 	width: auto;
-	display: inline-block;
+	display: block;
+	float:left;
 	margin: 5px 0 0 5px;
 }
 
@@ -1039,11 +1076,15 @@ span.button
 	padding: 3px;
 }
 
+.editor .strip .stripContent select
+{
+}
+
 .editor .editorBtn
 {
 	display: inline-block;
 	width: 22px;
-	height: 21px;
+	height: 20px;
 	background-image: url( 'RichEdit/sprite-buttons.png' );
 	background-repeat: no-repeat;
 	background-color: Transparent;
@@ -1055,6 +1096,17 @@ span.button
 {
 	border: solid 1px #316ac5;
 	background-color: #c1d2ee;
+	opacity:0.5;
+}
+
+.editor .design
+{
+	background-position: -127px -40px;
+}
+
+.editor .html
+{
+	background-position: -148px -40px;
 }
 
 .editor .bold
@@ -1189,6 +1241,16 @@ span.button
 	margin: 2px 2px 0 2px;
 }
 
+
+
+
+
+
+
+
+
+
+
 .resourceExplorerFiles
 {
 	float: left;
@@ -1202,9 +1264,9 @@ span.button
 
 .CMSInfoLabel
 {
-	background-color: #fff;
-	border: 1px solid #CCD1FF;
-	height: 250px;
+	background-color:#fff;
+	border:1px solid #CCD1FF;
+	padding:15px;
 }
 
 .createLink tr td
@@ -1227,7 +1289,6 @@ span.button
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
-	font-family: Verdana;
 }
 .buttonFlat .bLeft
 {
@@ -1287,7 +1348,6 @@ span.buttonFlat
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
-	font-family: Verdana;
 	display: block;
 	padding-left: 2px;
 	padding-right: 2px;
@@ -1321,6 +1381,7 @@ span.buttonFlat
 	overflow:auto;
 	padding:0 16px 0 16px;
 	min-height:720px;
+	position:relative;
 }
 
 #header
@@ -1336,8 +1397,8 @@ span.buttonFlat
 	position:absolute;
 	top:25px;
 	left:25px;
-	width:170px;
-	height:170px;
+	width:250px;
+	height:250px;
 }
 
 .logoImg
