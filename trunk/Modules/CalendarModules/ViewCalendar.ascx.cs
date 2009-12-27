@@ -29,7 +29,7 @@ namespace CalendarModules
     {
         protected global::Ra.Widgets.Panel actWrp;
         protected global::Ra.Widgets.TextBox filter;
-        protected global::Ra.Widgets.Panel pnlShowActivity;
+        protected global::Ra.Extensions.Widgets.Window pnlShowActivity;
         protected global::Ra.Widgets.Panel pnlShowActInner;
         protected global::Ra.Extensions.Widgets.InPlaceEdit txtHeader;
         protected global::Components.TextAreaEdit txtBody;
@@ -327,24 +327,16 @@ namespace CalendarModules
                 if (lbls[0].ID == CurrentActivityLabel)
                 {
                     CurrentActivityLabel = null;
-                    new EffectFadeOut(pnlShowActInner, 200)
-                        .ChainThese(
-                            new EffectSize(pnlShowActivity, 500, 0, 0)
-                                .JoinThese(new EffectFadeOut()))
+                    new EffectRollUp(pnlShowActivity, 500)
+                        .JoinThese(new EffectFadeOut())
                         .Render();
                     return; // Short circuting to make it possible to "de-select" all labels...
                 }
             }
             pnlShowActivity.Visible = true;
             pnlShowActivity.Style[Styles.display] = "none";
-            pnlShowActivity.Style[Styles.width] = "0px";
-            pnlShowActivity.Style[Styles.height] = "0px";
-            pnlShowActivity.Style[Styles.left] = "25px";
-            pnlShowActivity.Style[Styles.top] = "25px";
-            new EffectFadeIn(pnlShowActInner, 200)
-                .ChainThese(
-                    new EffectSize(pnlShowActivity, 500, 300, 400)
-                        .JoinThese(new EffectFadeIn()))
+            new EffectRollDown(pnlShowActivity, 500)
+                .JoinThese(new EffectFadeIn())
                 .Render();
             Activity a = ActiveType<Activity>.SelectByID(int.Parse(id));
             txtHeader.Text = a.Header;
@@ -425,19 +417,15 @@ namespace CalendarModules
             actWrp.ReRender();
             new EffectHighlight(actWrp, 400)
                 .Render();
-            new EffectFadeOut(pnlShowActInner, 200)
-                .ChainThese(
-                    new EffectSize(pnlShowActivity, 500, 0, 0)
-                        .JoinThese(new EffectFadeOut()))
+            new EffectRollUp(pnlShowActivity, 500)
+                .JoinThese(new EffectFadeOut())
                 .Render();
         }
 
         protected void closeAct_Click(object sender, EventArgs e)
         {
-            new EffectFadeOut(pnlShowActInner, 200)
-                .ChainThese(
-                    new EffectSize(pnlShowActivity, 500, 0, 0)
-                        .JoinThese(new EffectFadeOut()))
+            new EffectRollUp(pnlShowActivity, 500)
+                .JoinThese(new EffectFadeOut())
                 .Render();
             string idOfPreviousLabel = CurrentActivityLabel.Substring(0, CurrentActivityLabel.IndexOf("x") + 1);
             foreach (Label oldLb in Selector.Select<Label>(this,

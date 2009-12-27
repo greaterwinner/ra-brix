@@ -10,21 +10,16 @@
     Namespace="LanguageRecords"%>
 
 <div style="padding:5px;height:100%;position:relative;">
-    <ra:Panel 
+    <ra:Window 
         runat="server" 
-        CssClass="ShowActivity"
+        CssClass="light-window ShowActivity"
         Visible="false"
+        style="left:25px;top:25px;width:400px;"
         id="pnlShowActivity">
         <ra:Panel 
             runat="server" 
             id="pnlShowActInner">
-            <ra:ExtButton 
-                runat="server" 
-                Text='<%#Language.Instance["OK",null,"OK"] %>'
-                style="position:absolute;top:5px;right:5px;"
-                OnClick="closeAct_Click"
-                id="closeAct" />
-            <div style="padding:25px;">
+            <div>
                 <ra:InPlaceEdit 
                     runat="server" 
                     CssClass="edit"
@@ -103,19 +98,25 @@
                         <br />
                     </ra:Panel>
                 </div>
-                <ra:ExtButton 
-                    runat="server" 
-                    id="deleteBtn" 
-                    OnClick="deleteBtn_Click"
-                    style="position:absolute;bottom:5px;right:5px;"
-                    Text='<%#Language.Instance["DeleteActivity", null, "Delete Activity"] %>' />
+                <div style="position:absolute;bottom:15px;right:15px;">
+                    <ra:ExtButton 
+                        runat="server" 
+                        id="deleteBtn" 
+                        OnClick="deleteBtn_Click"
+                        Text='<%#Language.Instance["Delete", null, "Delete"] %>' />
+                    <ra:ExtButton 
+                        runat="server" 
+                        Text='<%#Language.Instance["OK",null,"OK"] %>'
+                        OnClick="closeAct_Click"
+                        id="closeAct" />
+                </div>
             </div>
         </ra:Panel>
         <ra:BehaviorUnveiler
             runat="server"
             MinOpacity="0.5"
             id="unveilAct" />
-    </ra:Panel>
+    </ra:Window>
     <ra:Panel 
         runat="server" 
         DefaultWidget="btnFilter"
