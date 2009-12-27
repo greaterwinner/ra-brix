@@ -93,12 +93,6 @@ namespace UserController
             }
         }
 
-        [ActiveEvent(Name = "CloseCreateUserForm")]
-        protected void CloseCreateUserForm(object sender, ActiveEventArgs e)
-        {
-            ActiveEvents.Instance.RaiseClearControls("dynPopup");
-        }
-
         [ActiveEvent(Name = "CreateNewUser")]
         protected void CreateNewUser(object sender, ActiveEventArgs e)
         {
@@ -261,9 +255,9 @@ any roles might be overridden by the Active Directory groups if user is an Activ
             init["TabCaption"].Value = Language.Instance["UserViewAllCaption", null, "All Users"];
             init["ModuleSettings"]["Grid"]["Columns"]["Username"]["Caption"].Value = Language.Instance["Username"];
             init["ModuleSettings"]["Grid"]["Columns"]["Username"]["ControlType"].Value = "LinkButton";
-            init["ModuleSettings"]["Grid"]["Columns"]["LastLoggedIn"]["Caption"].Value = Language.Instance["LastLoggedIn"];
+            init["ModuleSettings"]["Grid"]["Columns"]["LastLoggedIn"]["Caption"].Value = Language.Instance["LastLoggedIn", null, "Last Activity"];
             init["ModuleSettings"]["Grid"]["Columns"]["LastLoggedIn"]["ControlType"].Value = "Label";
-            init["ModuleSettings"]["Grid"]["Columns"]["RolesString"]["Caption"].Value = Language.Instance["RolesString"];
+            init["ModuleSettings"]["Grid"]["Columns"]["RolesString"]["Caption"].Value = Language.Instance["RolesString", null, "Belongs to"];
             init["ModuleSettings"]["Grid"]["Columns"]["RolesString"]["ControlType"].Value = "Label";
             int idxNo = 0;
             foreach (User idx in ActiveType<User>.Select())

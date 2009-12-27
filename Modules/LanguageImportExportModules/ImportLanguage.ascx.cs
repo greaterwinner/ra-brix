@@ -20,7 +20,7 @@ namespace LanguageImportExportModules
     [ActiveModule]
     public class ImportLanguage : System.Web.UI.UserControl, IModule
     {
-        protected global::System.Web.UI.WebControls.Button btn;
+        protected global::Components.ExtButtonPost btn;
         protected global::System.Web.UI.WebControls.FileUpload upload;
 
         protected void Page_Load(object sender, EventArgs e)

@@ -68,6 +68,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Components\Components.csproj">
+      <Project>{C38BEB2B-CBC6-4280-9D02-1AE52B0DB47B}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
       <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
       <Name>Ra.Brix.Data</Name>

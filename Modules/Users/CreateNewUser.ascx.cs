@@ -42,10 +42,7 @@ namespace UsersModules
 
         protected void usernameTxt_EscPressed(object sender, EventArgs e)
         {
-            ActiveEvents.Instance.RaiseActiveEvent(
-                this,
-                "CloseCreateUserForm",
-                null);
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
         }
 
         public void InitialLoading(Node node)
@@ -57,7 +54,7 @@ namespace UsersModules
                         .ChainThese(new EffectFocusAndSelect(usernameTxt))
                         .Render();
                 };
-            usernameTxt.Text = Language.Instance["UsersTypeUserNameText", null, "Type in username of user"];
+            usernameTxt.Text = Language.Instance["UsersTypeUserNameText", null, "Type in username"];
         }
 
         public string GetCaption()

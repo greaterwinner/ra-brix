@@ -19,7 +19,7 @@
         <br />
         <ra:TextBox 
             runat="server" 
-            EscPressed="usernameTxt_EscPressed"
+            OnEscPressed="usernameTxt_EscPressed"
             id="usernameTxt" />
         <br />
         <ra:ExtButton 
