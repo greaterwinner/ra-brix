@@ -851,9 +851,7 @@ tr.strike td
 .ShowActivity
 {
 	position: absolute;
-	background-color: #eee;
 	z-index: 1000;
-	border: solid 1px Black;
 }
 
 
