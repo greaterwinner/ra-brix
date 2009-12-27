@@ -15,7 +15,7 @@
     DefaultWidget="btnSubmit"
     style="position:relative;width:100%;height:100%;">
     <div style="padding:15px;">
-        <asp:Button 
+        <ext:ExtButtonPost 
             runat="server" 
             id="btnSubmit" 
             style="position:absolute;right:15px;bottom:10px;"

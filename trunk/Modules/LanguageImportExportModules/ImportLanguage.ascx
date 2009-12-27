@@ -13,9 +13,10 @@
      runat="server"
      id="upload" />
 
-<asp:Button 
+<ext:ExtButtonPost
      runat="server"
      id="btn"
-     Text='<%# Language.Instance["LanguageImportButton", null, "Import Language"] %>'
+     style="position:absolute;right:15px;bottom:10px;"
+     Text='<%# Language.Instance["LanguageImportButton", null, "Import"] %>'
      OnClick="btn_Click"/>
  

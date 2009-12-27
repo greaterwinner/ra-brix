@@ -54,10 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateNewUsers.ascx.cs">
-      <DependentUpon>CreateNewUsers.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="CreateNewUser.ascx.cs">
       <DependentUpon>CreateNewUser.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,11 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CreateNewUser.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CreateNewUsers.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
