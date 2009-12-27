@@ -650,6 +650,11 @@ namespace CalendarModules
                     Text = idxDate.ToString("ddd d.MMM", System.Globalization.CultureInfo.InvariantCulture),
                     CssClass = "header"
                 };
+                if (idxDate.DayOfWeek == DayOfWeek.Saturday || idxDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    header.CssClass += " weekEnd";
+                }
+                day.Controls.Add(header);
                 if (dayNo == 0)
                 {
                     header.Click +=
@@ -657,7 +662,20 @@ namespace CalendarModules
                         {
                             Label lbl = (Label) sender;
                             Calendar cal2 = Selector.SelectFirst<Calendar>(lbl.Parent);
-                            new EffectFadeIn(cal2, 500).Render();
+                            if (cal2.Xtra == "")
+                            {
+                                new EffectFadeIn(cal2, 500)
+                                    .JoinThese(new EffectRollDown())
+                                    .Render();
+                                cal2.Xtra = "Visible";
+                            }
+                            else
+                            {
+                                new EffectFadeOut(cal2, 500)
+                                    .JoinThese(new EffectRollUp())
+                                    .Render();
+                                cal2.Xtra = "";
+                            }
                         };
                     header.Style[Styles.color] = "Blue";
                     header.Style[Styles.cursor] = "pointer";
@@ -681,11 +699,6 @@ namespace CalendarModules
                     cal.Style[Styles.position] = "absolute";
                     day.Controls.Add(cal);
                 }
-                if (idxDate.DayOfWeek == DayOfWeek.Saturday || idxDate.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    header.CssClass += " weekEnd";
-                }
-                day.Controls.Add(header);
 
                 // Creating hours of day
                 for (int idxHour = 0; idxHour < 24; idxHour++)

@@ -120,51 +120,55 @@
         runat="server" 
         DefaultWidget="btnFilter"
         id="pnlFilterWrp">
-        <ra:TextBox 
-            runat="server" 
-            Tooltip="Filter activities here"
-            AccessKey="F"
-            style="opacity:0.3;"
-            CssClass="filterTextBox activityFilter"
-            id="filter">
-            <ra:BehaviorUnveiler 
+        <div>
+            <ra:TextBox 
                 runat="server" 
-                id="filterUnveiler" />
-        </ra:TextBox>
-        <ra:Button 
-            runat="server" 
-            id="btnFilter" 
-            OnClick="filter_KeyUp"
-            style="position:absolute;left:1px;margin-left:-200px;" />
+                Tooltip="Filter activities here"
+                AccessKey="F"
+                style="opacity:0.3;"
+                CssClass="filterTextBox activityFilter"
+                id="filter">
+                <ra:BehaviorUnveiler 
+                    runat="server" 
+                    id="filterUnveiler" />
+            </ra:TextBox>
+            <ra:Button 
+                runat="server" 
+                id="btnFilter" 
+                OnClick="filter_KeyUp"
+                style="position:absolute;left:1px;margin-left:-200px;" />
+        </div>
+        <div class="grid">
+            <ra:LinkButton 
+                runat="server" 
+                id="previous" 
+                AccessKey="P"
+                style="opacity:0.3;"
+                OnClick="previous_Click"
+                CssClass="previous"
+                Text="&lt;&lt;">
+                <ra:BehaviorUnveiler 
+                    runat="server" 
+                    id="unveil1" />
+            </ra:LinkButton>
+            <ra:LinkButton 
+                runat="server" 
+                id="next" 
+                AccessKey="N"
+                style="opacity:0.3;"
+                OnClick="next_Click"
+                CssClass="next"
+                Text="&gt;&gt;">
+                <ra:BehaviorUnveiler 
+                    runat="server" 
+                    id="unveil2" />
+            </ra:LinkButton>
+        </div>
     </ra:Panel>
-    <ra:LinkButton 
-        runat="server" 
-        id="previous" 
-        AccessKey="P"
-        style="opacity:0.3;"
-        OnClick="previous_Click"
-        CssClass="previous-activities"
-        Text="&nbsp;">
-        <ra:BehaviorUnveiler 
-            runat="server" 
-            id="unveil1" />
-    </ra:LinkButton>
     <ra:Panel 
         runat="server" 
         id="actWrp" 
         CssClass="days" />
-    <ra:LinkButton 
-        runat="server" 
-        id="next" 
-        AccessKey="N"
-        style="opacity:0.3;"
-        OnClick="next_Click"
-        CssClass="next-activities"
-        Text="&nbsp;">
-        <ra:BehaviorUnveiler 
-            runat="server" 
-            id="unveil2" />
-    </ra:LinkButton>
 </div>
 
 
