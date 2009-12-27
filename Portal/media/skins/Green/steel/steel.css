@@ -10,7 +10,7 @@ html{color:#000;background:#FFF;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
 	margin: 0;
 	padding: 0;
-	font-family: Verdana;
+	font-family:Helvetica;
 }
 table{border-collapse:collapse;border-spacing:0;}
 fieldset,img{border:0;}
@@ -51,27 +51,105 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 
 
-/*
- * Copyright (c) 2006 Sébastien Gruhier (http://xilinus.com, http://itseb.com) 
- * MIT license - Skin for PWC Window. Used as basis for Window in Ra-Ajax
- * Modified by Thomas Hansen (thomas@ra-ajax.org) to meet the needs of Ra-Ajax
- */
-.window				{ display:block; }
-.window_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
-.window_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
-.window_n			{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
-.window_title		{ font-size:0.8em; position:absolute; top:5px; color:#333; -moz-user-select:none; -khtml-user-select: none; user-select: none; cursor:move; width:100%; }
-.window_close		{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
-.window_close:hover	{ background-color:transparent; background-position:-10px -16px; }
-.window_prev		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -32px; position:absolute; top:3px; right:35px; }
-.window_next		{ width:23px; height:16px; background:transparent url(window-sprite.png) no-repeat -10px -48px; position:absolute; top:3px; right:18px; }
-.window_body		{ overflow:hidden; position:relative; }
-.window_w			{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
-.window_e			{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
-.window_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; }
-.window_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
-.window_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
-.window_s			{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+.window
+{
+	display:block;
+}
+
+.window_nw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 0;
+	padding-left:40px;
+	position:relative;
+}
+
+.window_ne
+{
+	background: transparent url(window-sprite.png) no-repeat right 0;
+	padding-right:40px;
+}
+
+.window_n
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	overflow:hidden;
+	height:40px;
+}
+
+.window_title
+{
+	font-size:0.8em;
+	position:absolute;
+	top:4px;
+	color:#333;
+	margin-left:-15px;
+	-moz-user-select:none;
+	-khtml-user-select: none;
+	user-select: none;
+	cursor:move;
+	width:100%;
+}
+
+.window_close
+{
+	width:12px;
+	height:12px;
+	display:block;
+	background:transparent url(window-sprite-icons.png) no-repeat 0 0;
+	position:absolute;
+	top:4px;
+	right:23px;
+}
+
+.window_close:hover
+{
+	background-color:transparent;
+	background-position:0 -13px;
+}
+
+.window_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.window_w
+{
+	background: transparent url(window-v-sprite.png) repeat-y 0 0;
+	padding-left:40px;
+}
+
+.window_e
+{
+	background: transparent url(window-v-sprite.png) repeat-y right 0;
+	padding-right:40px;
+}
+
+.window_content
+{
+	background-color:#cfecff;
+	margin-left:-20px;
+	margin-right:-20px;
+	margin-bottom:-20px;
+}
+
+.window_sw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 -40px;
+	padding-left:40px;
+}
+
+.window_se
+{
+	background: transparent url(window-sprite.png) no-repeat right -40px;
+	padding-right:40px;
+}
+
+.window_s
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 -40px;
+	height:40px;
+}
 
 
 /*
@@ -136,12 +214,6 @@ http://ra-ajax.org
 	padding:6px 4px 5px 4px;
 }
 
-.bread-crumb .bread-item-left:hover
-{
-	text-decoration:underline;
-	color:#00a;
-}
-
 .bread-crumb .bread-item-first
 {
 	padding-left:16px;
@@ -150,11 +222,6 @@ http://ra-ajax.org
 	margin-top:5px;
 	background:url('bread-crumb.png') no-repeat 0 0;
 	position:relative;
-}
-
-.bread-crumb .bread-item-first:hover
-{
-	text-decoration:none;
 }
 
 .bread-crumb .bread-item-first .bread-item-center
@@ -175,12 +242,6 @@ http://ra-ajax.org
 
 .bread-crumb a.bread-item-first:hover .sliding-bread-home
 {
-	background:url('tree-sprites.png') no-repeat -176px 0;
-}
-
-.bread-crumb .bread-item-left .sliding-bread-home:hover
-{
-	text-decoration:none;
 }
 
 .bread-crumb .bread-item-last .bread-item-right
@@ -188,11 +249,49 @@ http://ra-ajax.org
 	background:url('bread-crumb.png') no-repeat right -100px;
 }
 
-.bread-crumb .bread-item-last:hover
+
+
+
+
+
+
+
+
+
+/* Hovering */
+.bread-crumb a.bread-item-left:hover
 {
-	text-decoration:none;
-	color:inherit;
+	background-position:left -250px;
 }
+
+.bread-crumb a.bread-item-left:hover + .bread-item-left
+{
+	background-position:left -200px;
+}
+
+.bread-crumb a.bread-item-first:hover
+{
+	background-position:left -125px;
+}
+
+.bread-crumb a.bread-item-left:hover .bread-item-center
+{
+	background-position:left -150px;
+}
+
+.bread-crumb a.bread-item-first:hover .bread-item-right
+{
+	background-position:right -175px;
+}
+
+
+
+
+
+
+
+
+
 
 .sliding-menu .sliding-level
 {
@@ -223,7 +322,6 @@ http://ra-ajax.org
 
 .sliding-menu .sliding-level .sliding-item .sliding-menu-btn:hover
 {
-	background-color:#eee;
 	cursor:pointer;
 }
 
@@ -279,59 +377,346 @@ http://ra-ajax.org
 .webpart .content { padding:0; overflow:hidden; }
 .webpart .content div { padding:5px; }
 
+
+
+
+
+
+
 /* Calendar specific CSS */
 
-.calendar				{ display:block; }
-.calendar_nw			{ background: transparent url(window-sprite.png) no-repeat 0 0; padding-left:10px; position:relative; }
-.calendar_ne			{ background: transparent url(window-sprite.png) no-repeat right 0; padding-right:10px; }
-.calendar_n				{ background: transparent url(window-h-sprite.png) repeat-x 0 0; overflow:hidden; height:25px; }
-.calendar_title			{ font-size:0.8em; position:absolute; top:5px; color:#333; width:100%; }
-.calendar_close			{ width:23px; height:16px; line-height:16px; background:transparent url(window-sprite.png) no-repeat -10px 0; position:absolute; top:0px; right:0px; }
-.calendar_close:hover	{ background-color:transparent; background-position:-10px -16px; }
-.calendar_body			{ overflow:hidden; position:relative; }
-.calendar_w				{ background: transparent url(window-v-sprite.png) repeat-y 0 0; padding-left:7px; }
-.calendar_e				{ background: transparent url(window-v-sprite.png) repeat-y right 0; padding-right:7px; }
-.calendar_content		{ background-color:#fefefe; border-style:solid; border-width:1px; border-left-color:#999; border-top-color:#999; border-right-color:#aaa; border-bottom-color:#aaa; font-size:0.7em; }
-.calendar_sw			{ background: transparent url(window-sprite.png) no-repeat 0 -25px; padding-left:5px; }
-.calendar_se			{ background: transparent url(window-sprite.png) no-repeat right -25px; padding-right:5px; }
-.calendar_s				{ background: transparent url(window-h-sprite.png) repeat-x 0 -25px; height:7px; }
+.calendar
+{
+	display:block;
+}
 
-.calendar select				{ border:none; margin:0 5px 0 5px; background-color:Transparent; color:#00f; }
-.calendar table					{ border-collapse:collapse; margin:0; }
-.calendar table tr td			{ border:none; padding:0 !important; }
-.calendar table tr.weekdays td	{ color:#333; padding:2px; }
-.calendar table tr td.weekno	{ color:#333; }
-.calendar a						{ display:block; text-decoration:none; color:#00f; margin:1px; border:solid 1px Transparent; background-color:Transparent; }
-.calendar a:hover				{ border:solid 1px #99f; }
-.calendar a.offMonth			{ color:#99d; }
-.calendar a.selected			{ background-color:#eef; border:solid 1px #999; }
-.calendar .holidayOnVenus a		{ color:#0f0; }
-.calendar_content table			{ text-align:center; margin-left:auto; margin-right:auto; }
-.calendar .hour					{ display:inline; width:20px; margin-right:5px; }
-.calendar .minutes				{ display:inline; width:20px; }
+.calendar_nw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 0;
+	padding-left:40px;
+	position:relative;
+}
+
+.calendar_ne
+{
+	background: transparent url(window-sprite.png) no-repeat right 0;
+	padding-right:40px;
+}
+
+.calendar_n
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	overflow:hidden;
+	height:40px;
+}
+
+.calendar_title
+{
+	font-size:0.8em;
+	position:absolute;
+	top:4px;
+	color:#333;
+	margin-left:-15px;
+	width:100%;
+}
+
+.calendar_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.calendar_w
+{
+	background: transparent url(window-v-sprite.png) repeat-y 0 0;
+	padding-left:40px;
+}
+
+.calendar_e
+{
+	background: transparent url(window-v-sprite.png) repeat-y right 0;
+	padding-right:40px;
+}
+
+.calendar_content
+{
+	background-color:#cfecff;
+	font-size:0.7em;
+	margin-left:-20px;
+	margin-right:-20px;
+}
+
+.calendar_sw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 -55px;
+	padding-left:40px;
+}
+
+.calendar_se
+{
+	background: transparent url(window-sprite.png) no-repeat right -55px;
+	padding-right:40px;
+}
+
+.calendar_s
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 -55px;
+	height:25px;
+}
+
+.calendar select
+{
+	border:none;
+	margin:0 5px 0 5px;
+	background-color:Transparent;
+	color:#333;
+}
+
+.calendar table
+{
+	border-collapse:collapse;
+	margin:0;
+}
+
+.calendar table tr td
+{
+	border:none;
+	padding:0 !important;
+}
+
+.calendar table tr.weekdays td
+{
+	color:#333;
+	padding:2px;
+}
+
+.calendar table tr td.weekno
+{
+	color:#333;
+}
+
+.calendar a
+{
+	display:block;
+	text-decoration:none;
+	color:#333;
+	margin:1px;
+	border:solid 1px Transparent;
+	background-color:Transparent;
+}
+
+.calendar a:hover
+{
+	border:solid 1px #99f;
+}
+
+.calendar a.offMonth
+{
+	color:#99d;
+}
+
+.calendar a.selected
+{
+	background-color:#eef;
+	border:solid 1px #999;
+}
+
+.calendar_content table
+{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.calendar .hour
+{
+	display:inline;
+	width:20px;
+	margin-right:5px;
+}
+
+.calendar .minutes
+{
+	display:inline;
+	width:20px;
+}
+
+
+
+
+
+
+
+
+
 
 /* TabControl styles */
+.tab
+{
+}
 
-.tab { width:95%; }
-.tab .tab-header { margin-bottom:-1px; }
-.tab .tab-header ul { }
-.tab .tab-header ul li { display:inline; padding-right:2px; }
-.tab .tab-header ul li.first { margin-left:3px; }
-.tab .tab-header ul li a { text-decoration:none; color:#777; padding:5px; }
-.tab .tab-header ul li a:hover { color:#00f; background-color:Transparent; }
-.tab .tab-header ul li.tab-disabled a { color:#faa; cursor:default; }
-.tab .tab-header ul li.tab-disabled a:hover { color:#f99; }
-.tab .tab-header ul li.active  a { text-decoration:none; color:#000; padding:5px; }
-.tab .tab-header ul li span { display:inline-block; *height:18px; padding-top:5px; }
-.tab .tab-header ul li span.left { background:url('tab-sprite.png') no-repeat; width:10px; border-bottom:solid 1px #d0d0d0; }
-.tab .tab-header ul li span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #d0d0d0; }
-.tab .tab-header ul li span.right { background:url('tab-sprite.png') no-repeat -10px 0; width:10px; border-bottom:solid 1px #d0d0d0; }
-.tab .tab-header ul li.active a { cursor:default; }
-.tab .tab-header ul li.active a:hover { color:inherit; }
-.tab .tab-header ul li.active span.left { background:url('tab-sprite.png') no-repeat; border-bottom:solid 1px #fff; }
-.tab .tab-header ul li.active span.center { background:url('tab-h-sprite.png') repeat-x; border-bottom:solid 1px #fff; }
-.tab .tab-header ul li.active span.right { background:url('tab-sprite.png') no-repeat -10px 0; border-bottom:solid 1px #fff; }
-.tab .content { padding:5px; background-color:#fdfdfd; border:solid 1px #d0d0d0; }
+.tab .tab-header
+{
+	margin-bottom:-1px;
+}
+
+.tab .tab-header ul
+{ }
+
+.tab .tab-header ul li
+{
+	display:inline;
+	padding-right:2px;
+}
+
+.tab .tab-header ul li.first
+{
+	margin-left:3px;
+}
+
+.tab .tab-header ul li a
+{
+	text-decoration:none;
+	padding:5px;
+}
+
+.tab .tab-header ul li a:hover
+{ }
+
+.tab .tab-header ul li.tab-disabled a
+{
+	color:#aaa;
+	cursor:default;
+}
+
+.tab .tab-header ul li.active  a
+{
+	text-decoration:none;
+	color:#000;
+	padding:5px;
+}
+
+.tab .tab-header ul li span
+{
+	display:inline-block;
+	padding-top:5px;
+}
+
+
+
+
+.tab .tab-header ul li span.left
+{
+	background:url('tab-sprite.png') no-repeat 0 0;
+	width:9px;
+	border-bottom:solid 1px #c9ac07;
+}
+
+.tab .tab-header ul li span.center
+{
+	background:url('tab-sprite.png') repeat-x 0 -50px;
+	border-bottom:solid 1px #c9ac07;
+}
+
+.tab .tab-header ul li span.right
+{
+	background:url('tab-sprite.png') no-repeat 0 -25px;
+	width:9px;
+	border-bottom:solid 1px #c9ac07;
+}
+
+
+
+
+.tab .tab-header ul li:hover span.left
+{
+	background:url('tab-sprite.png') no-repeat 0 -75px;
+}
+
+.tab .tab-header ul li:hover span.center
+{
+	background:url('tab-sprite.png') repeat-x 0 -125px;
+}
+
+.tab .tab-header ul li:hover span.right
+{
+	background:url('tab-sprite.png') no-repeat 0 -100px;
+}
+
+
+
+
+.tab .tab-header ul li.tab-disabled:hover span.left
+{
+	background:url('tab-sprite.png') no-repeat 0 0;
+}
+
+.tab .tab-header ul li.tab-disabled:hover span.center
+{
+	background:url('tab-sprite.png') repeat-x 0 -50px;
+}
+
+.tab .tab-header ul li.tab-disabled:hover span.right
+{
+	background:url('tab-sprite.png') no-repeat 0 -25px;
+}
+
+
+
+
+.tab .tab-header ul li.active span.left
+{
+	background:url('tab-sprite.png') no-repeat 0 -150px;
+	border-bottom:solid 1px #cfecff;
+}
+
+.tab .tab-header ul li.active span.center
+{
+	background:url('tab-sprite.png') repeat-x 0 -200px;
+	border-bottom:solid 1px #cfecff;
+}
+
+.tab .tab-header ul li.active span.right
+{
+	background:url('tab-sprite.png') no-repeat 0 -175px;
+	border-bottom:solid 1px #cfecff;
+}
+
+
+
+
+.tab .tab-header ul li.active a
+{
+	cursor:default;
+}
+
+.tab .tab-header ul li a:hover
+{
+	color:inherit;
+	background-color:Transparent;
+}
+
+.tab .tab-header ul li.tab-disabled a
+{
+	color:#999;
+}
+
+.tab .tab-header ul li.tab-disabled a:hover
+{
+	color:#999;
+}
+
+.tab .content
+{
+	padding:5px;
+	background-color:#cfecff;
+	border:solid 1px #c9ac07;
+}
+
+
+
+
+
 
 
 /* Accordion */
@@ -346,31 +731,115 @@ http://ra-ajax.org
 
 /* TreeView */
 
-/* The TreeView control uses images from YUI which are BSD licensed and we distribute
- * them just like Yahoo under the BSD license terms... :)
+/* The TreeView control uses some images from YUI which are BSD 
+ * licensed and we distribute them just like Yahoo under the BSD 
+ * license terms... :)
  */
 
-.tree { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; font-size:0.9em; overflow:auto; }
-.tree input { margin-right:8px; }
-.tree .item { cursor:pointer; line-height:14px; white-space:nowrap; }
-.tree .item:hover { background-color:#ddf; }
-.tree .item:hover ul { background-color:#fff; }
-.tree .selected { background-color:#bbf; }
-.tree .selected ul { background-color:#fafafa; }
-.tree .selected:hover { background-color:#d0d0f0; }
-.tree .spacer { padding-left:16px; *display:inline-block; *height:16px; }
-.tree .icon { background:url(tree-sprites.png) no-repeat; }
-.tree .expanded .icon { background-position: 0px 0px; }
-.tree .collapsed .icon { background-position: -16px 0px; }
-.tree .no-childs .icon { background-position: -16px 0px; }
-.tree .lines { background:Transparent url(tree-sprites.png) no-repeat -96px 0px; }
-.tree .linesElbow { background:Transparent url(tree-sprites.png) no-repeat -80px 0px; }
-.tree .expanded .leaf { background:Transparent url(tree-sprites.png) no-repeat -48px 0px; }
-.tree .expanded .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -128px 0px; }
-.tree .collapsed .leaf { background:Transparent url(tree-sprites.png) no-repeat -32px 0px; }
-.tree .collapsed .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -112px 0px; }
-.tree .no-childs .leaf { background:Transparent url(tree-sprites.png) no-repeat -64px 0px; }
-.tree .no-childs .no-leaf { background:Transparent url(tree-sprites.png) no-repeat -80px 0px; }
+.tree
+{
+	padding:5px;
+	font-size:0.9em;
+	overflow:auto;
+}
+
+.tree .item
+{
+	cursor:pointer;
+	line-height:14px;
+	white-space:nowrap;
+}
+
+.tree .item a:hover
+{
+	background-color:Transparent;
+}
+
+.tree .tree-active
+{
+	background-color:#bfdcef;
+}
+
+.tree .tree-active ul
+{
+	background-color:#cfecff;
+}
+
+.tree .selected:hover,
+.tree .selected
+{
+	background-color:#afccdf;
+}
+
+.tree .selected ul
+{
+	background-color:#cfecff;
+}
+
+.tree .spacer
+{
+	padding-left:16px;
+}
+
+.tree .icon
+{
+	background:url(tree-sprites.png) no-repeat;
+}
+
+.tree .expanded .icon
+{
+	background-position: 0px 0px;
+}
+
+.tree .collapsed .icon
+{
+	background-position: -16px 0px;
+}
+
+.tree .no-childs .icon
+{
+	background-position: -16px 0px;
+}
+
+.tree .lines
+{
+	background:Transparent url(tree-sprites.png) no-repeat -96px 0px;
+}
+
+.tree .linesElbow
+{
+	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+}
+
+.tree .expanded .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -48px 0px;
+}
+
+.tree .expanded .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -128px 0px;
+}
+
+.tree .collapsed .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -32px 0px;
+}
+
+.tree .collapsed .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -112px 0px;
+}
+
+.tree .no-childs .leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -64px 0px;
+}
+
+.tree .no-childs .no-leaf
+{
+	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+}
 
 
 
@@ -469,7 +938,6 @@ http://ra-ajax.org
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 3px;
-	font-family:Helvetica;
 }
 
 
@@ -539,17 +1007,17 @@ http://ra-ajax.org
 
 .button-selected:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -75px;
+	background:Transparent url('button.png') no-repeat 0 -150px;
 }
 
 .button-selected:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -125px;
+	background:Transparent url('button.png') repeat-x 0 -200px;
 }
 
 .button-selected:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -100px;
+	background:Transparent url('button.png') no-repeat right -175px;
 }
 
 
