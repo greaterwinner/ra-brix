@@ -7,14 +7,14 @@
     Inherits="LoginOpenIDModules.Logout" %>
 
 <div class="logoutLinkButton">
-    <ra:LinkButton 
+    <ra:ExtButton 
         runat="server" 
         id="logout" 
         OnClick="logout_Click"
         style="opacity:0.3;"
-        Text='&nbsp;'>
+        Text='<%#LanguageRecords.Language.Instance["Logout", null, "Logout"] %>'>
         <ra:BehaviorUnveiler 
             runat="server" 
             id="unveilerLogin" />
-    </ra:LinkButton>
+    </ra:ExtButton>
 </div>

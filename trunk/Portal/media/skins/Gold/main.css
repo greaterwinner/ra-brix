@@ -204,7 +204,7 @@ a.disabled
 	position:absolute;
 	float:right;
 	top:35px;
-	right:155px;
+	right:45px;
 }
 
 .openIDTextBox
@@ -238,37 +238,11 @@ a.disabled
 	z-index: 1000;
 }
 
-.logoutLinkButton a
+.logoutLinkButton
 {
-	background:Transparent url(login.png) no-repeat -85px 0;
-	height: 25px;
 	top: 35px;
 	right: 50px;
-	float: right;
 	position: absolute;
-	width: 85px;
-}
-
-.logoutLinkButton a:hover
-{
-	background:Transparent url(login.png) no-repeat -85px -25px;
-}
-
-.loginLinkButton input[type="button"]
-{
-	background:Transparent url(login.png) no-repeat 0 0;
-	height:25px;
-	top:0px;
-	right:-95px;
-	float:right;
-	position:absolute;
-	width:85px;
-	cursor:pointer;
-}
-
-.loginLinkButton input[type="button"]:hover
-{
-	background:Transparent url(login.png) no-repeat 0 -25px;
 }
 
 .informationLabel
