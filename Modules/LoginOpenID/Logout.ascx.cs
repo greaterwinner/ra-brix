@@ -16,7 +16,7 @@ namespace LoginOpenIDModules
     [ActiveModule]
     public class Logout : System.Web.UI.UserControl
     {
-        protected global::Ra.Widgets.LinkButton logout;
+        protected global::Ra.Extensions.Widgets.ExtButton logout;
 
         protected void Page_Load(object sender, EventArgs e)
         {

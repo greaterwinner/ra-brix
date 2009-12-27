@@ -27,7 +27,7 @@ namespace LoginOpenIDModules
     public class Login : System.Web.UI.UserControl, IModule
     {
         protected global::Ra.Widgets.TextBox openIdURL;
-        protected global::Ra.Widgets.Button logInButton;
+        protected global::Ra.Extensions.Widgets.ExtButton logInButton;
         protected global::Ra.Widgets.Panel openIdWrp;
  
         private static readonly Regex REGEX_LINK = 

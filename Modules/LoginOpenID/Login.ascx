@@ -24,16 +24,16 @@
                             runat="server" 
                             id="unveilLogin" />
                     </ra:TextBox>
-                    <ra:Button
+                    <ra:ExtButton
                         runat="server"
                         ID="logInButton"
-                        Text="&nbsp;"
-                        style="border:none 0;background-color:Transparent;opacity:0.3"
+                        style="opacity:0.3;"
+                        Text='<%#LanguageRecords.Language.Instance["Login", null, "Login"] %>'
                         OnClick="logInButton_Click">
                         <ra:BehaviorUnveiler 
                             runat="server" 
                             id="unveilerLogin" />
-                    </ra:Button>
+                    </ra:ExtButton>
                 </div>
             </td>
         </tr>
