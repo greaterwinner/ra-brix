@@ -9,22 +9,20 @@
 
 .light-window_nw
 {
-	background: transparent url(light-window.png) no-repeat 0 0;
-	padding-left:40px;
+/* background: transparent url(light-window.png) no-repeat 0 0; */
+	padding-left:10px;
 	position:relative;
 }
 
 .light-window_ne
 {
-	background: transparent url(light-window.png) no-repeat right 0;
-	padding-right:40px;
+	padding-right:10px;
 }
 
 .light-window_n
 {
-	background: transparent url(light-window-vert.png) repeat-x 0 0;
 	overflow:hidden;
-	height:40px;
+	height:10px;
 }
 
 .light-window_body
@@ -35,13 +33,11 @@
 
 .light-window_w
 {
-	background: transparent url(light-window-horz.png) repeat-y 0 0;
 	padding-left:40px;
 }
 
 .light-window_e
 {
-	background: transparent url(light-window-horz.png) repeat-y right 0;
 	padding-right:40px;
 }
 
@@ -52,11 +48,11 @@
 
 .light-window_content
 {
-	bottom:auto;
-	display:block;
-	background-color:#cfecff;
-	margin-left:-20px;
-	margin-right:-20px;
+	bottom: auto;
+	display: block;
+	margin-left: -20px;
+	margin-right: -20px;
+	background-color: #FFFFFF;
 }
 
 .no-background .light-window_content
@@ -66,19 +62,16 @@
 
 .light-window_sw
 {
-	background: transparent url(light-window.png) no-repeat 0 -40px;
 	padding-left:40px;
 }
 
 .light-window_se
 {
-	background: transparent url(light-window.png) no-repeat right -40px;
-	padding-right:40px;
+ 	padding-right:40px;
 }
 
 .light-window_s
 {
-	background: transparent url(light-window-vert.png) repeat-x 0 -40px;
 	height:40px;
 }
 
@@ -151,20 +144,20 @@
 
 .tab-light .tab-header ul li span.left 
 {
-	background:Transparent url('window-sprite-dark.png') no-repeat 0 0;
+	background:url('window-sprite-dark.png') no-repeat 0 0;
 	padding-left:10px;
  	border-bottom:solid 1px #76B4E0;
  }
 
 .tab-light .tab-header ul li span.center
 {
-	background: Transparent url('window-sprite-dark.png') repeat-x 0 -52px;
+	background: url('window-sprite-dark.png') repeat-x 0 -52px;
 	border-bottom:solid 1px #76B4E0;
 }
 
 .tab-light .tab-header ul li span.right
 {
-	background:Transparent url('window-sprite-dark.png') no-repeat 0 -26px;
+	background:url('window-sprite-dark.png') no-repeat 0 -26px;
 	padding-right:6px;
  	border-bottom:solid 1px #76B4E0;
 }
@@ -196,7 +189,7 @@
 
 .tab-light .tab-header ul li.active span.right
 {
-	background: Transparent url('window-sprite-dark.png') no-repeat 0 -26px;
+	background: url('window-sprite-dark.png') no-repeat 0 -26px;
 	border-bottom:solid 1px #E6F4FF;
 }
 
