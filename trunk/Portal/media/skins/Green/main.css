@@ -9,10 +9,12 @@ html
 
 body
 {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	overflow:auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    margin: 0;
+    overflow: auto;
+    background-color: #7D7D7D;
 }
 
 form
@@ -176,7 +178,7 @@ a.noHoverLink:hover
 
 a
 {
-	text-decoration: none;
+    
 }
 
 a:hover
@@ -982,9 +984,9 @@ span.button
 
 .menuLink
 {
-	display: block;
-	margin-right: 15px;
-	color:#33b;
+    display: block;
+    margin-right: 15px;
+    color: white;
 }
 
 .button .menuLink:hover
@@ -1376,6 +1378,7 @@ span.buttonFlat
 
 #paper
 {
+    background-color: white; 
 	width:1056px;
 	margin:0 auto 0 auto;
 	overflow:auto;
@@ -1386,7 +1389,7 @@ span.buttonFlat
 
 #header
 {
-	height:300px;
+	height:200px;
 	background:url('sun_background.jpg') no-repeat 0 0;
 	width:1024px;
 	position:relative;
