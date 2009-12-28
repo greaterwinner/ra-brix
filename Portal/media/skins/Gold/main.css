@@ -558,11 +558,13 @@ div.edit input, div.edit textarea
 	background:Transparent url('steel/tree-sprites.png') no-repeat -272px 0;
 	width: 16px;
 	height: 16px;
+	margin-right:3px;
 }
 
-.deleteBtn:hover
+a.deleteBtn:hover
 {
 	background:Transparent url('steel/tree-sprites.png') no-repeat -288px 0;
+	text-decoration:none !important;
 }
 
 
@@ -1232,7 +1234,6 @@ span.button
 	width: 66%;
 	padding: 1%;
 	margin-left: 1%;
-	background-color: #fff;
 	border: 1px solid #CCD1FF;
 	height: 250px;
 }
