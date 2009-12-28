@@ -24,11 +24,11 @@ namespace WhiteBoardController
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
-            Language.Instance.SetDefaultValue("ButtonWhiteboards", "Lists");
-            Language.Instance.SetDefaultValue("ButtonCreateWhiteboard", "Create New");
-            Language.Instance.SetDefaultValue("ButtonViewAllWhiteboards", "View All");
-            Language.Instance.SetDefaultValue("ButtonEditWhiteboard", "Configure");
-            Language.Instance.SetDefaultValue("ButtonViewWhiteboard", "View");
+            Language.Instance.SetDefaultValue("ButtonLists", "Lists");
+            Language.Instance.SetDefaultValue("ButtonCreateNewList", "New List");
+            Language.Instance.SetDefaultValue("ButtonViewAllLists", "View All");
+            Language.Instance.SetDefaultValue("ButtonEditList", "Configure");
+            Language.Instance.SetDefaultValue("ButtonViewList", "View");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -74,10 +74,10 @@ namespace WhiteBoardController
             Node init = new Node();
             init["TabCaption"].Value = Language.Instance["WhiteboardAllCaption", null, "All Whiteboards"];
             init["ModuleSettings"]["Grid"]["Columns"]["View"]["Caption"].Value =
-                Language.Instance["ViewWhiteboard", null, "View Whiteboard"];
+                Language.Instance["ViewList", null, "View List"];
             init["ModuleSettings"]["Grid"]["Columns"]["View"]["ControlType"].Value = "LinkButton";
             init["ModuleSettings"]["Grid"]["Columns"]["Edit"]["Caption"].Value =
-                Language.Instance["EditWhiteboard", null, "Edit Whiteboard"];
+                Language.Instance["EditList", null, "Edit List"];
             init["ModuleSettings"]["Grid"]["Columns"]["Edit"]["ControlType"].Value = "LinkButton";
 
             int idxNo = 0;
