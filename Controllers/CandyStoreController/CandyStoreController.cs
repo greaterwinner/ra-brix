@@ -44,12 +44,17 @@ namespace CandyStoreController
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonCandyStore", "Bazaar");
+            Language.Instance.SetDefaultValue("ButtonVisitBazaar", "Visit Bazaar");
+            Language.Instance.SetDefaultValue("ButtonInstalledApps", "Manage Apps");
+            Language.Instance.SetDefaultValue("ButtonViewInstalledApps", "View Apps");
+            Language.Instance.SetDefaultValue("ButtonInstallNewApp", "Install App");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
             e.Params["ButtonCandyStore"].Value = "Menu-OpenCandyStore";
+            e.Params["ButtonAdmin"]["ButtonInstalledApps"]["ButtonVisitBazaar"].Value = "Menu-OpenCandyStore";
         }
 
         [ActiveEvent(Name = "Menu-OpenCandyStore")]

@@ -151,7 +151,7 @@ minutes. You might also - dependent upon your portal installation - be forced to
             Load +=
                 delegate
                 {
-                    filter.Text = Language.Instance["Updates", null, "Updates"];
+                    //filter.Text = Language.Instance["Updates", null, "Updates"];
                     Modules = node["Modules"];
                     rep.DataSource = FilterApplications();
                     rep.DataBind();
