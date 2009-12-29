@@ -274,7 +274,7 @@ namespace Ra.Brix.Loader
             {
                 name = name.Substring(0, name.IndexOf(","));
             }
-            foreach (Assembly idx in PluginLoader.PluginAssemblies)
+            foreach (Assembly idx in PluginAssemblies)
             {
                 if (idx.CodeBase.Substring(idx.CodeBase.LastIndexOf("/") + 1).Replace(".dll", "").Replace(".DLL", "") == name)
                     return idx;

@@ -35,13 +35,13 @@
   <system.web>
     <pages>
       <controls>
-        <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra"/>
-        <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra"/>
-        <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra"/>
-        <add assembly="Components" namespace="Components" tagPrefix="ext"/>
+        <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra" />
+        <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra" />
+        <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra" />
+        <add assembly="Components" namespace="Components" tagPrefix="ext" />
       </controls>
     </pages>
-    <compilation debug="true"/>
-    <authentication mode="Windows"/>
+    <compilation debug="false" />
+    <authentication mode="Windows" />
   </system.web>
 </configuration>
