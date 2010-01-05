@@ -279,6 +279,10 @@ If this is not correct, then please click the button..."],
 
         private static void LoadMenu()
         {
+            // We don't load menu if this is just the OpenID login re-direct request...
+            // This to avoid wasted resources, but also to avoid a bug in the SlidingMenu...
+            if (HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] != null)
+                return;
             if (Settings.Instance.Get("MenuType", "SlidingMenu") == "SlidingMenu")
             {
                 Node tmp = new Node();
