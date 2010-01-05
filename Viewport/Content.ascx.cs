@@ -204,7 +204,7 @@ namespace Viewport
             if (Settings.Instance.Get("UseNotificationSounds", true))
             {
                 if (Request.Browser.Browser == "Firefox")
-                    AjaxManager.Instance.WriterAtBack.Write("Ra.$('pingSound').play();");
+                    AjaxManager.Instance.WriterAtBack.Write("Ra.$('ctl03_informationPanel_pingSound').play();");
             }
         }
 

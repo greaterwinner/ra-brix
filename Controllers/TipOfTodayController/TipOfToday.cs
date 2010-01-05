@@ -25,7 +25,7 @@ namespace TipOfTodayController
             if (UserSettings.Instance.Get("ShowTipOfToday", Users.LoggedInUserName, true))
             {
                 Node node = new Node();
-                node["Username"].Value = Users.LoggedInUserName;
+                node["ModuleSettings"]["Username"].Value = Users.LoggedInUserName;
                 node["Caption"].Value = Language.Instance["TipOfToday", null, "Tip of today"];
                 ActiveEvents.Instance.RaiseLoadControl(
                     "TipOfTodayModules.TipOfToday",
