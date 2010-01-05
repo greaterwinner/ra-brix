@@ -7,6 +7,22 @@
 
   ------------------------------------------------------------------
 
+                          Version 0.6.1
+
+  ------------------------------------------------------------------
+
+* Fixed a bug in the SlidingMenu which would make link non-clickable
+  in Google Chrome.
+
+* Fixed a bug in the SlidingMenu which would make the BreadCrumb
+  show up "twice" and make the design scewed...
+
+
+
+
+
+  ------------------------------------------------------------------
+
                           Version 0.4.0
 
   ------------------------------------------------------------------
