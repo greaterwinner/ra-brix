@@ -92,6 +92,7 @@ namespace CMSController
 
             Node node = new Node();
             node["URL"].Value = e.Params["URL"].Value;
+            node["Text"].Value = e.Params["Text"].Value;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "CMSInsertLink",
@@ -105,7 +106,7 @@ namespace CMSController
             node["TabCaption"].Value =
                 Language.Instance["CreateHyperLink", null, "Create HyperLink"];
             node["Width"].Value = 300;
-            node["Height"].Value = 100;
+            node["Height"].Value = 150;
             int idxNo = 0;
             foreach (Page idx in ActiveType<Page>.Select())
             {
@@ -120,6 +121,7 @@ namespace CMSController
                 }
                 idxNo += 1;
             }
+            node["ModuleSettings"]["AnchorText"].Value = e.Params["AnchorText"].Value;
             ActiveEvents.Instance.RaiseLoadControl(
                 "CMSModules.CreateHyperLink",
                 "dynPopup",

@@ -109,9 +109,12 @@ namespace CMSModules
 
         protected void editor_GetHyperLinkDialog(object sender, EventArgs e)
         {
+            Node node = new Node();
+            node["AnchorText"].Value = editor.Selection;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
-                "CMSGetHyperLinkDialog");
+                "CMSGetHyperLinkDialog",
+                node);
         }
 
         [ActiveEvent(Name = "CMSInsertLink")]
@@ -119,8 +122,8 @@ namespace CMSModules
         {
             string html = string.Format(
                 @"<a href=""{0}"">{1}</a>", 
-                e.Params["URL"].Get<string>(), 
-                editor.Selection);
+                e.Params["URL"].Get<string>(),
+                e.Params["Text"].Get<string>());
             editor.PasteHTML(html);
         }
 
