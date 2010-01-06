@@ -77,4 +77,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\ArticlePublishing"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\ArticlePublishing"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
