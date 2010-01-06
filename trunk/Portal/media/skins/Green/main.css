@@ -178,7 +178,7 @@ a.noHoverLink:hover
 
 a
 {
-    
+	text-decoration: none;
 }
 
 a:hover
@@ -206,7 +206,7 @@ a.disabled
 	position:absolute;
 	float:right;
 	top:35px;
-	right:155px;
+	right:45px;
 }
 
 .openIDTextBox
@@ -240,15 +240,13 @@ a.disabled
 	z-index: 1000;
 }
 
-.logoutLinkButton a
+.logoutLinkButton
 {
-	background:Transparent url(login.png) no-repeat -85px 0;
-	height: 25px;
+    
 	top: 35px;
 	right: 50px;
-	float: right;
 	position: absolute;
-	width: 85px;
+
 }
 
 .logoutLinkButton a:hover
@@ -1259,7 +1257,6 @@ span.button
 	width: 66%;
 	padding: 1%;
 	margin-left: 1%;
-	background-color: #fff;
 	border: 1px solid #CCD1FF;
 	height: 250px;
 }
@@ -1378,7 +1375,7 @@ span.buttonFlat
 
 #paper
 {
-    background-color: white; 
+    background-color: #DDE693;
 	width:1056px;
 	margin:0 auto 0 auto;
 	overflow:auto;
@@ -1390,7 +1387,7 @@ span.buttonFlat
 #header
 {
 	height:200px;
-	background:url('sun_background.jpg') no-repeat 0 0;
+	background:url('sun_background.png') no-repeat 0 0;
 	width:1024px;
 	position:relative;
 }
