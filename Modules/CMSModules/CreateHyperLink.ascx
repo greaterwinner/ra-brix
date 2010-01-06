@@ -40,6 +40,17 @@
             </td>
         </tr>
         <tr>
+            <td>
+                <%=Language.Instance["AnchorText", null, "Anchor text: "] %>
+            </td>
+            <td>
+                <ra:TextBox 
+                    runat="server" 
+                    OnEscPressed="urlText_EscPressed"
+                    id="anchorText" />
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" style="text-align:right;">
                 <ra:ExtButton 
                     runat="server" 

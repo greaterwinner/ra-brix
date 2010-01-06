@@ -22,6 +22,7 @@ namespace CMSModules
     {
         protected global::Ra.Widgets.SelectList internalPages;
         protected global::Ra.Widgets.TextBox urlText;
+        protected global::Ra.Widgets.TextBox anchorText;
         protected global::Ra.Widgets.Panel wrp;
 
         protected void internalPages_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,9 +41,9 @@ namespace CMSModules
 
         protected void submit_Click(object sender, EventArgs e)
         {
-            string url = urlText.Text;
             Node node = new Node();
-            node["URL"].Value = url;
+            node["URL"].Value = urlText.Text;
+            node["Text"].Value = anchorText.Text; ;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "CMSCreateNewLink",
@@ -68,6 +69,7 @@ namespace CMSModules
                 };
             wrp.DataBind();
             urlText.Text = Language.Instance["LinkURL", null, "Link URL..."];
+            anchorText.Text = node["AnchorText"].Get<string>();
             new EffectFocusAndSelect(urlText).Render();
         }
 
