@@ -15,6 +15,7 @@ using Ra.Brix.Types;
 using Ra.Brix.Data;
 using System.Web;
 using Ra;
+using SettingsRecords;
 
 namespace CMSController
 {
@@ -386,8 +387,13 @@ namespace CMSController
             {
                 contentId = contentId.Trim('/');
             }
+            if (contentId == null)
+            {
+                if (Settings.Instance["CMSHideLandingPage"] == "True")
+                    return;
+            }
             Page page = Page.FindPage(contentId);
-
+            
             if (page != null)
             {
                 string pageUrl = page.URL == "home" ? "" : (page.URL + ".aspx");
