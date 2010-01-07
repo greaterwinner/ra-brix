@@ -118,6 +118,22 @@ namespace Ra.Brix.Data
         {
             return new HasChildId(id);
         }
+
+        /**
+         * Static constructor to create a criteria of type Sort.
+         */
+        public static Criteria Sort(string colName)
+        {
+            return new SortOn(colName);
+        }
+
+        /**
+         * Static constructor to create a criteria of type Sort.
+         */
+        public static Criteria Sort(string colName, bool ascending)
+        {
+            return new SortOn(colName, ascending);
+        }
     }
 
     /**
@@ -129,6 +145,29 @@ namespace Ra.Brix.Data
         public HasChildId(int id)
             : base(null, id)
         { }
+    }
+
+    /**
+     * A criteria that sorts the result
+     */
+    public class SortOn : Criteria
+    {
+        private bool _ascending;
+
+        public SortOn(string columnName)
+            : this(columnName, true)
+        { }
+
+        public SortOn(string columnName, bool ascending)
+            : base(null, columnName)
+        {
+            _ascending = ascending;
+        }
+
+        public bool Ascending
+        {
+            get { return _ascending; }
+        }
     }
 
     /**

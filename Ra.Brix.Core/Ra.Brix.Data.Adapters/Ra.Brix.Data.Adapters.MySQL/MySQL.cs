@@ -171,8 +171,8 @@ namespace Ra.Brix.Data.Adapters.MySQL
 
         public override object SelectFirst(Type type, string propertyName, params Criteria[] args)
         {
-            string where = CreateCriteriasForDocument(type, propertyName, args);
-            MySqlCommand cmd = new MySqlCommand("select ID from Documents as d" + where, _connection);
+            string where = CreateSelectStatementForDocument(type, propertyName, args);
+            MySqlCommand cmd = new MySqlCommand(where, _connection);
             int retValID;
             using (MySqlDataReader reader = cmd.ExecuteReader())
             {
@@ -185,8 +185,8 @@ namespace Ra.Brix.Data.Adapters.MySQL
 
         public override IEnumerable<object> Select(Type type, string propertyName, params Criteria[] args)
         {
-            string where = CreateCriteriasForDocument(type, propertyName, args);
-            MySqlCommand cmd = new MySqlCommand("select ID from Documents as d" + where, _connection);
+            string where = CreateSelectStatementForDocument(type, propertyName, args);
+            MySqlCommand cmd = new MySqlCommand(where, _connection);
             List<int> retValIDs = new List<int>();
             using (MySqlDataReader reader = cmd.ExecuteReader())
             {

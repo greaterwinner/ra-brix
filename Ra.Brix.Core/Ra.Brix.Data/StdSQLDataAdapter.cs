@@ -48,9 +48,56 @@ namespace Ra.Brix.Data
                 }
             }
 
+            protected string CreateSelectStatementForDocument(Type type, string propertyName, Criteria[] args)
+            {
+                string retVal = "";
+                string join = "";
+                string where = "";
+                string order = "";
+                foreach (Criteria idx in args)
+                {
+                    if (idx is SortOn)
+                    {
+                        SortOn tmp = idx as SortOn;
+                        string propName = (string)tmp.Value;
+                        bool ascending = tmp.Ascending;
+                        PropertyInfo info = type.GetProperty(propName);
+                        string tableName = "";
+                        switch (info.PropertyType.FullName)
+                        {
+                            case "System.String":
+                                tableName = "PropertyStrings";
+                                break;
+                            case "System.Boolean":
+                                tableName = "PropertyBools";
+                                break;
+                            case "System.DateTime":
+                                tableName = "PropertyDates";
+                                break;
+                            case "System.Int32":
+                                tableName = "PropertyInts";
+                                break;
+                            case "System.Decimal":
+                                tableName = "PropertyDecimals";
+                                break;
+                        }
+                        join += ", " + tableName + " as prop";
+                        where += " and prop.FK_Document = d.ID and prop.Name = 'prop" + propName + "'";
+                        order += " order by prop.Value " + (ascending ? "asc" : "desc");
+                    }
+                }
+                retVal += "select d.ID from Documents as d";
+                retVal += join;
+                retVal += CreateCriteriasForDocument(type, propertyName, args);
+                retVal += where;
+                retVal += order;
+                return retVal;
+            }
+
             protected string CreateCriteriasForDocument(Type type, string propertyName, Criteria[] args)
             {
                 string where = "";
+                string order = "";
                 if (type == null)
                     where += " where ID!=NULL";
                 else
@@ -70,7 +117,11 @@ namespace Ra.Brix.Data
                 {
                     foreach (Criteria idx in args)
                     {
-                        if (idx is ParentIdEquals)
+                        if (idx is SortOn)
+                        {
+                            ; // Intentionally drop over...
+                        }
+                        else if (idx is ParentIdEquals)
                         {
                             where += " and Parent=" + idx.Value;
                         }
@@ -212,7 +263,7 @@ and exists(select * from Documents as d2 where ParentPropertyName='{1}' and Pare
                         }
                     }
                 }
-                return where;
+                return where + " " + order;
             }
         }
         
