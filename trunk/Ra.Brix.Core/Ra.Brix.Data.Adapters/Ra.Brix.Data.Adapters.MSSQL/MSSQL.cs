@@ -172,8 +172,8 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
         public override object SelectFirst(Type type, string propertyName, params Criteria[] args)
         {
-            string where = CreateCriteriasForDocument(type, propertyName, args);
-            SqlCommand cmd = new SqlCommand("select ID from Documents as d" + where, _connection);
+            string where = CreateSelectStatementForDocument(type, propertyName, args);
+            SqlCommand cmd = new SqlCommand(where, _connection);
             int retValID;
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -186,8 +186,8 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
         public override IEnumerable<object> Select(Type type, string propertyName, params Criteria[] args)
         {
-            string where = CreateCriteriasForDocument(type, propertyName, args);
-            SqlCommand cmd = new SqlCommand("select ID from Documents as d" + where, _connection);
+            string where = CreateSelectStatementForDocument(type, propertyName, args);
+            SqlCommand cmd = new SqlCommand(where, _connection);
             List<int> retValIDs = new List<int>();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {

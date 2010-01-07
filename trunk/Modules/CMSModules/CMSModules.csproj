@@ -105,7 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewPages.ascx">
-      <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
