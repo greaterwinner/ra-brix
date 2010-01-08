@@ -104,7 +104,21 @@ namespace ArticlePublisherController
             {
                 contentId = contentId.Trim('/');
             }
-            if (contentId == null)
+            if (contentId != null)
+            {
+                Article a = Article.FindArticle(contentId);
+                Node node = new Node();
+                node["ModuleSettings"]["Header"].Value = a.Header;
+                node["ModuleSettings"]["Body"].Value = a.Body;
+                node["ModuleSettings"]["Date"].Value = a.Published;
+                node["ModuleSettings"]["Ingress"].Value = a.Ingress;
+                node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.ViewArticle",
+                    "dynMid",
+                    node);
+            }
+            else
             {
                 if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
                     return;
