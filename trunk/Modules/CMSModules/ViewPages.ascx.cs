@@ -29,7 +29,7 @@ namespace CMSModules
         protected global::System.Web.UI.HtmlControls.HtmlAnchor hyperlink;
         protected global::Ra.Extensions.Widgets.RichEdit editor;
 
-        protected void editor_GetExtraToolbarControls(object sender, Ra.Extensions.Widgets.RichEdit.ExtraToolbarControlsEventArgs e)
+        protected void editor_GetExtraToolbarControls(object sender, RichEdit.ExtraToolbarControlsEventArgs e)
         {
             // Inject Plugin select list...
             Node node = new Node();

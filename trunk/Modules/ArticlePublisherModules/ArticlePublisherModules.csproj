@@ -33,6 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Builder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Builder.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Selector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -40,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateArticle.ascx.cs">
+      <DependentUpon>CreateArticle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LandingPage.ascx.cs">
       <DependentUpon>LandingPage.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -60,6 +80,15 @@
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
+      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
+      <Name>LanguageRecords</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CreateArticle.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

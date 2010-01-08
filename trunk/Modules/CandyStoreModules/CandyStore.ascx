@@ -43,35 +43,35 @@ those vendors."] %>
             <ra:Panel 
                 runat="server" 
                 OnClick="SelectModule"
-                Xtra='<%#Eval("[\"CandyName\"].Value") %>'
-                CssClass='<%#"candy " + GetCssClassAccordingToIsInstalled(Eval("[\"Installed\"].Value"), Eval("[\"HasUpdate\"].Value")) %>'
-                ToolTip='<%#GetToolTip(Eval("[\"Installed\"].Value")) %>'
+                Xtra='<%#Eval("[CandyName].Value") %>'
+                CssClass='<%#"candy " + GetCssClassAccordingToIsInstalled(Eval("[Installed].Value"), Eval("[HasUpdate].Value")) %>'
+                ToolTip='<%#GetToolTip(Eval("[Installed].Value")) %>'
                 style="opacity:0.3;">
                 <ra:ExtButton 
                     runat="server" 
-                    Visible='<%#GetVisibilityForButton(Eval("[\"Installed\"].Value"), Eval("[\"HasUpdate\"].Value")) %>'
-                    Text='<%#GetCaptionForButton(Eval("[\"Installed\"].Value")) %>'
+                    Visible='<%#GetVisibilityForButton(Eval("[Installed].Value"), Eval("[HasUpdate].Value")) %>'
+                    Text='<%#GetCaptionForButton(Eval("[Installed].Value")) %>'
                     style="position:absolute;top:15px;left:220px;"
                     OnClick="ClickToInstallModule" />
                 <strong 
                     style="margin-bottom:10px;display:block;position:absolute;top:5px;left:5px;">
-                    <%#Eval("[\"CandyName\"].Value").ToString().Replace(".zip", "") %>
+                    <%#Eval("[CandyName].Value").ToString().Replace(".zip", "") %>
                 </strong>
                 <img 
-                    src='<%#Eval("[\"CandyUrl\"].Value") %>' 
+                    src='<%#Eval("[CandyUrl].Value") %>' 
                     style="position:absolute;top:40px;left:55px;"
-                    alt='<%#Eval("[\"CandyName\"].Value") %>' />
+                    alt='<%#Eval("[CandyName].Value") %>' />
                 <div style="position:absolute;top:140px;">
                     <p 
                         style="font-style:italic;position:absolute;left:5px;font-size:10px;white-space:nowrap;">
-                        <%# ((DateTime)Eval("[\"Date\"].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%>
+                        <%# ((DateTime)Eval("[Date].Value")).ToString("dddd d. MMMM yyyy", System.Globalization.CultureInfo.InvariantCulture)%>
                     </p>
                     <p>&nbsp;</p>
                     <ra:Label 
                         runat="server" 
                         Tag="div"
                         style="display:none;text-align:justify;border:dashed 1px #999;overflow:auto;height:100px;width:90%;padding:10px;font-size:10px;"
-                        Text='<%# Eval("[\"Description\"].Value")%>' />
+                        Text='<%# Eval("[Description].Value")%>' />
                 </div>
                 <ra:BehaviorUnveiler 
                     runat="server" />

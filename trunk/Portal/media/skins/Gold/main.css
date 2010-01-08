@@ -460,7 +460,8 @@ a.disabled
 	margin-left: -10px;
 }
 
-div.edit
+div.edit,
+h3.edit
 {
 	color: Blue;
 	cursor: pointer;
@@ -469,17 +470,23 @@ div.edit
 }
 
 div.edit:hover,
-div.edit:hover a
+div.edit:hover a,
+h3.edit:hover,
+h3.edit:hover a
 {
 	background-color:Transparent;
 }
 
-div.edit span
+div.edit span,
+h3.edit span
 {
 	display: block;
 }
 
-div.edit input, div.edit textarea
+div.edit input, 
+div.edit textarea,
+h3.edit input, 
+h3.edit textarea
 {
 	display: block;
 	width: 90%;
@@ -1551,5 +1558,35 @@ span.buttonFlat
 {
     background-color:#ffa;
 }
+
+.article
+{
+	display:block;
+	border:dashed 1px #999;
+	width:220px;
+	height:150px;
+	margin:5px;
+	padding:10px;
+	float:left;
+	position:relative;
+}
+
+.article a
+{
+	color:Black;
+}
+
+.createArticle textarea
+{
+	width:100%;
+	height:100px;
+}
+
+
+
+
+
+
+
 
 
