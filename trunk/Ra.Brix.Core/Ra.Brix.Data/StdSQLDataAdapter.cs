@@ -241,7 +241,7 @@ namespace Ra.Brix.Data
                                     break;
                                 case "Ra.Brix.Data.MoreThen":
                                     whereAdd = string.Format(
-                                        " and exists(select * from {0} as q{0} where q{0}.Value>{1} and {3}=q{0}.FK_Document and q{0}.Name='{2}')",
+                                        " and exists(select q{1}.ID from {0} as q{0} where q{0}.Value>{1} and {3}=q{0}.FK_Document and q{0}.Name='{2}')",
                                         tableName,
                                         sqlEscapedValue,
                                         Helpers.PropertyName(propertySqlName),
@@ -253,10 +253,14 @@ namespace Ra.Brix.Data
                             if (isInnerJoin)
                             {
                                 string whereInner = string.Format(@"
-and exists(select * from Documents as d2 where ParentPropertyName='{1}' and Parent=d.ID {0})
+and ((exists(select d2.ID from Documents as d2 where ParentPropertyName='{1}' and Parent=d.ID {0}))
+or exists(
+    select d3.Document1ID from Documents2Documents as d3 where PropertyName='{1}' and Document1ID=d.id {2}))
+
 ",
                                     whereAdd,
-                                    idx.PropertyName.Split('.')[0]);
+                                    idx.PropertyName.Split('.')[0],
+                                    whereAdd.Replace("d2.ID", "d3.Document2ID"));
                                 whereAdd = whereInner;
                             }
                             where += whereAdd;
