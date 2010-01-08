@@ -10,6 +10,8 @@
 
 using System;
 using Ra.Brix.Data;
+using UserRecords;
+using HelperGlobals;
 
 namespace ArticlePublisherRecords
 {
@@ -34,6 +36,9 @@ namespace ArticlePublisherRecords
         [ActiveField]
         public string MainImage { get; set; }
 
+        [ActiveField(IsOwner=false)]
+        public User Author { get; set; }
+
         [ActiveField]
         public DateTime Published { get; set; }
 
@@ -48,6 +53,7 @@ namespace ArticlePublisherRecords
             {
                 // This is a newly created root page. Hence we must give it a unique URL
                 GetUniqueURL(this);
+                Author = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             }
             if (string.IsNullOrEmpty(Ingress))
             {

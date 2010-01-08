@@ -18,6 +18,8 @@ using LanguageRecords;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using HelperGlobals;
+using System.Collections.Generic;
 
 namespace ArticlePublisherController
 {
@@ -75,7 +77,7 @@ namespace ArticlePublisherController
                     }
                     icon.Save(resourceFolder + "Images\\Small\\" + fileName + ".png", ImageFormat.Png);
                 }
-                using (Image main = new Bitmap(250, (int)(250 * ratio)))
+                using (Image main = new Bitmap(350, (int)(350 * ratio)))
                 {
                     using (Graphics g = Graphics.FromImage(main))
                     {
@@ -104,7 +106,19 @@ namespace ArticlePublisherController
             {
                 contentId = contentId.Trim('/');
             }
-            if (contentId != null)
+            if (contentId == null)
+            {
+                // Showing all articles, but ONLY if Article system is NOT turned off in settings...
+                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
+                    return;
+                ShowArticles(null);
+            }
+            else if (contentId != null && contentId.Contains("authors/"))
+            {
+                // Showing articles from specific authors...
+                ShowArticles(contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", ""));
+            }
+            else
             {
                 Article a = Article.FindArticle(contentId);
                 Node node = new Node();
@@ -112,37 +126,44 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["Body"].Value = a.Body;
                 node["ModuleSettings"]["Date"].Value = a.Published;
                 node["ModuleSettings"]["Ingress"].Value = a.Ingress;
+                node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
                 node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
                 ActiveEvents.Instance.RaiseLoadControl(
                     "ArticlePublisherModules.ViewArticle",
                     "dynMid",
                     node);
             }
-            else
-            {
-                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
-                    return;
-                Node node = new Node();
-                int idxNo = 0;
-                foreach (Article idx in Article.Select(Criteria.Sort("Published", false)))
-                {
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
+        }
 
-                    // Making sure we only show the 10 latest articles...
-                    if (++idxNo == 10)
-                        break;
-                }
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.LandingPage",
-                    "dynMid",
-                    node);
+        private static void ShowArticles(string userNameFilter)
+        {
+            Node node = new Node();
+            int idxNo = 0;
+            List<Criteria> criteria = new List<Criteria>();
+            criteria.Add(Criteria.Sort("Published", false));
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                criteria.Add(Criteria.Eq("Author.Username", userNameFilter));
             }
+            foreach (Article idx in Article.Select(criteria.ToArray()))
+            {
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
+
+                // Making sure we only show the 10 latest articles...
+                if (++idxNo == 10)
+                    break;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.LandingPage",
+                "dynMid",
+                node);
         }
     }
 }

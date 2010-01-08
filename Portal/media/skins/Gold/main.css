@@ -1570,12 +1570,13 @@ span.buttonFlat
 	float:left;
 	position:relative;
 	overflow:hidden;
+	position:relative;
 }
 
-.article a
+.article a.mainLink
 {
 	color:Black;
-	height:100%;
+	height:150px;
 	display:block;
 	margin-left:5px;
 }
