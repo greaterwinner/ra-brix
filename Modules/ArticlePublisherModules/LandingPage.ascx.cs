@@ -16,8 +16,16 @@ namespace ArticlePublisherModules
     [ActiveModule]
     public class LandingPage : System.Web.UI.UserControl, IModule
     {
+        protected global::System.Web.UI.WebControls.Repeater rep;
+
         public void InitialLoading(Node node)
         {
+            Load +=
+                delegate
+                {
+                    rep.DataSource = node["Articles"];
+                    rep.DataBind();
+                };
         }
 
         public string GetCaption()
