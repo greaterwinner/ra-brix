@@ -23,6 +23,7 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl date;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl content;
         protected global::System.Web.UI.HtmlControls.HtmlImage image;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
 
         public void InitialLoading(Node node)
         {
@@ -32,6 +33,8 @@ namespace ArticlePublisherModules
             date.InnerHtml = DateFormatter.FormatDate(node["Date"].Get<DateTime>());
             image.Src = node["MainImage"].Get<string>();
             image.Alt = node["Ingress"].Get<string>();
+            author.HRef = "~/authors/" + node["Author"].Get<string>() + ".aspx";
+            author.InnerHtml = "/.~ " + node["Author"].Get<string>();
         }
 
         public string GetCaption()
