@@ -56,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewArticle.ascx.cs">
+      <DependentUpon>ViewArticle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CreateArticle.ascx.cs">
       <DependentUpon>CreateArticle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -72,6 +76,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Commons\Commons.csproj">
+      <Project>{EA4DB865-734B-44D3-9AD9-132FD680446D}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
       <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
       <Name>Ra.Brix.Loader</Name>
@@ -87,6 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CreateArticle.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewArticle.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
