@@ -20,7 +20,7 @@
                     href='<%#Eval("[URL].Value") %>'>
                     <ra:Label 
                         runat="server" 
-                        style="display:block;font-size:16px;font-weight:bold;"
+                        style="display:block;font-size:16px;font-weight:bold;margin-bottom:10px;"
                         Text='<%#Eval("[Header].Value") %>' />
                     <img 
                         runat="server"

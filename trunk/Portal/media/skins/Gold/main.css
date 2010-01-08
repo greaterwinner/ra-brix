@@ -1564,16 +1564,20 @@ span.buttonFlat
 	display:block;
 	border:dashed 1px #999;
 	width:220px;
-	height:150px;
+	height:180px;
 	margin:5px;
 	padding:10px;
 	float:left;
 	position:relative;
+	overflow:hidden;
 }
 
 .article a
 {
 	color:Black;
+	height:100%;
+	display:block;
+	margin-left:5px;
 }
 
 .createArticle textarea
