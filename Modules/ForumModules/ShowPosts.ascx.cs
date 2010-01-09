@@ -126,6 +126,7 @@ namespace ForumModules
                 l.ID = "hdr" + idx.ID;
                 l.Text = idx.Header;
                 l.CssClass = "headerTxtComment";
+                l.Style[Styles.width] = (350 - (Math.Min(curLevel, 11) * 16)) + "px";
                 n.Controls.Add(l);
 
                 Label lblDate = new Label();
