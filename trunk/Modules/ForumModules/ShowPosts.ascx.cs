@@ -78,13 +78,17 @@ namespace ForumModules
             set { ViewState["Forum"] = value.ID; }
         }
 
-        private string GetLinks(string content)
+        private string FormatComment(string content)
         {
             content = Regex.Replace(
-                " " + content,
+                content.Replace("http://", " http://"),
                 "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
                 "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>",
-                RegexOptions.Compiled).Trim();
+                RegexOptions.Compiled).Replace(" <a", "<a");
+            content = Regex.Replace(content,
+                "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
+                "<strong>${content}</strong>",
+                RegexOptions.Compiled);
             return content;
         }
 
@@ -92,7 +96,7 @@ namespace ForumModules
         {
             ForumPost p = new ForumPost();
             p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            p.Body = GetLinks(body.Text);
+            p.Body = body.Text;
             p.When = DateTime.Now;
             p.Name = anonTxt.Text;
             if (Users.LoggedInUserName != null)
@@ -115,7 +119,7 @@ namespace ForumModules
             string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
             string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
             ForumPost n = new ForumPost();
-            n.Body = GetLinks(bodyTxt);
+            n.Body = bodyTxt;
             n.Header = headerTxt;
             n.When = DateTime.Now;
             n.Name = anonTxt.Text;
@@ -181,7 +185,14 @@ namespace ForumModules
                 Label lblUser = new Label();
                 lblUser.ID = "lusr" + idx.ID;
                 lblUser.CssClass = "userLbl";
-                lblUser.Text = idx.GetNameOfPoster();
+                if (idx.IsRegisteredPosting)
+                {
+                    lblUser.Text = string.Format("<a href=\"authors/{0}.aspx\">{0}</a>", idx.GetNameOfPoster());
+                }
+                else
+                {
+                    lblUser.Text = idx.GetNameOfPoster();
+                }
                 n.Controls.Add(lblUser);
 
                 Panel pnl = new Panel();
@@ -203,6 +214,7 @@ namespace ForumModules
                 Label ltext = new Label();
                 ltext.ID = "lTxt" + idx.ID;
                 string bodyStr = idx.Body.Trim().Replace("\r\n", "\n");
+                bodyStr = FormatComment(bodyStr);
                 bool hasFound = true;
                 while (hasFound)
                 {

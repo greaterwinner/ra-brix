@@ -58,6 +58,11 @@ namespace ForumRecords
             base.Save();
         }
 
+        public bool IsRegisteredPosting
+        {
+            get { return RegisteredUser != null; }
+        }
+
         public string GetNameOfPoster()
         {
             if (RegisteredUser == null)
