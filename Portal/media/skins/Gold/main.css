@@ -1632,18 +1632,23 @@ span.buttonFlat
 .no-lines .selected
 {
 	background-color:Transparent !important;
+	position:relative;
 }
 
-.no-lines .selected:hover
+.no-lines .tree-active
 {
 	background-color:#bfdcef !important;
 }
 
+.tree .bodyOfCommentWrp
+{
+}
+
 .tree .bodyOfComment
 {
-	border:dashed 1px #999;
+	border:solid 1px #C1DEF1;
+	background-color:#C9E7F9;
 	padding:5px 5px 35px 5px;
-	background-color:#CFECFF;
 	white-space:normal;
 	position:relative;
 }
@@ -1669,9 +1674,9 @@ span.buttonFlat
 
 .no-lines .quote
 {
-	background-color:#C9E6F9;
+	background-color:#C1DEF1;
 	margin-bottom:0;
-	padding:5px 5px 5px 15px;
+	padding:10px 10px 5px 15px;
 }
 
 .no-lines .no-quote
