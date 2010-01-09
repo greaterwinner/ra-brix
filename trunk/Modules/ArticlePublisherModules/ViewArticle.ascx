@@ -13,6 +13,8 @@
     <p runat="server" id="ingress" style="font-style:italic;color:#666;" />
     <div runat="server" id="content" />
     <a runat="server" id="author" style="position:absolute;top:5px;right:5px;font-style:italic;" />
+    <br style="clear:both;" />
+    <hr style="margin-top:25px;margin-bottom:25px;" />
 </div>
 
 
