@@ -120,6 +120,10 @@ namespace Viewport
         protected void LoadControl(object sender, ActiveEventArgs e)
         {
             Dynamic dyn;
+            bool clearOldControls = true;
+            if (e.Params["Parameters"]["AddToExistingCollection"].Value != null &&
+                e.Params["Parameters"]["AddToExistingCollection"].Get<bool>() == true)
+                clearOldControls = false;
             switch (e.Params["Position"].Value.ToString())
             {
                 case "dynPopup":
@@ -147,7 +151,8 @@ namespace Viewport
                     dynPopup2.Style[Styles.height] = "50px";
                     dynPopup2.Style[Styles.display] = "none";
                     zoomImage.Style[Styles.display] = "none";
-                    new EffectFadeIn(zoomImage, 200).Render();
+                    new EffectFadeIn(zoomImage, 200)
+                        .Render();
                     zoomImage.Style[Styles.height] = "50px";
                     zoomImage.Style[Styles.position] = "";
                     break;
@@ -160,9 +165,62 @@ namespace Viewport
                 // Defaulting to Center piece of screen...
                 dyn = dynMid;
             }
-            ClearControls(dyn);
+            if (clearOldControls)
+                ClearControls(dyn);
+
             _initializingParameter = e.Params["Parameters"]["ModuleSettings"];
-            dyn.LoadControls(e.Params["Name"].Value.ToString());
+            if (clearOldControls)
+                dyn.LoadControls(e.Params["Name"].Value.ToString());
+            else
+                dyn.AppendControl(e.Params["Name"].Value.ToString());
+        }
+
+        protected void dynamic_LoadControls(object sender, Dynamic.ReloadEventArgs e)
+        {
+            Dynamic dynamic = sender as Dynamic;
+            if (dynamic == null)
+                return;
+            string key = e.Key;
+            if (key.Contains("|"))
+            {
+                if (e.FirstReload)
+                {
+                    string[] keys = key.Split('|');
+                    key = keys[keys.Length - 1];
+                    LoadOneControl(e, dynamic, key);
+                }
+                else
+                {
+                    // Need to loop through all keys...
+                    string[] keys = key.Split('|');
+                    foreach (string idxKey in keys)
+                    {
+                        LoadOneControl(e, dynamic, idxKey);
+                    }
+                }
+            }
+            else
+            {
+                LoadOneControl(e, dynamic, key);
+            }
+        }
+
+        private void LoadOneControl(Dynamic.ReloadEventArgs e, Dynamic dynamic, string key)
+        {
+            Control ctrl = PluginLoader.Instance.LoadControl(key);
+            if (e.FirstReload)
+            {
+                ctrl.Init +=
+                    delegate
+                    {
+                        IModule module = ctrl as IModule;
+                        if (module != null)
+                        {
+                            module.InitialLoading(_initializingParameter);
+                        }
+                    };
+            }
+            dynamic.Controls.Add(ctrl);
         }
 
         protected void handleInformationEvt_Click(object sender, EventArgs e)
@@ -233,27 +291,6 @@ namespace Viewport
                 ActiveEvents.Instance.RemoveListener(tmp);
                 dyn.ClearControls();
             }
-        }
-
-        protected void dynamic_LoadControls(object sender, Dynamic.ReloadEventArgs e)
-        {
-            Dynamic dynamic = sender as Dynamic;
-            if (dynamic == null)
-                return;
-            Control ctrl = PluginLoader.Instance.LoadControl(e.Key);
-            if (e.FirstReload)
-            {
-                ctrl.Init +=
-                    delegate
-                    {
-                        IModule module = ctrl as IModule;
-                        if (module != null)
-                        {
-                            module.InitialLoading(_initializingParameter);
-                        }
-                    };
-            }
-            dynamic.Controls.Add(ctrl);
         }
 
         protected string GetMostWantedResponseUrl()
