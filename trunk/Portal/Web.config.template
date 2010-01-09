@@ -26,7 +26,11 @@
 
     <add key="MostWantedResponseTooltip" value="Download Ra-Brix" />
 
+    <add key="ArticleMainLandingPageTitle" value="Welcome to Ra-Brix Magazine" />
+
     <add key="UseNotificationSounds" value="True" />
+
+    <add key="UseForumsForArticles" value="True" />
 
     <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
 

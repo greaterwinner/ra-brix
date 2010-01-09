@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using HelperGlobals;
 using System.Collections.Generic;
+using ForumRecords;
 
 namespace ArticlePublisherController
 {
@@ -111,25 +112,57 @@ namespace ArticlePublisherController
                 // Showing all articles, but ONLY if Article system is NOT turned off in settings...
                 if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
                     return;
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Settings.Instance["ArticleMainLandingPageTitle"];
                 ShowArticles(null);
             }
             else if (contentId != null && contentId.Contains("authors/"))
             {
                 // Showing articles from specific authors...
-                ShowArticles(contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", ""));
+                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleFromAuthor", null, "Articles written by "] + author;
+                ShowArticles(author);
             }
             else
             {
-                Article a = Article.FindArticle(contentId);
-                Node node = new Node();
-                node["ModuleSettings"]["Header"].Value = a.Header;
-                node["ModuleSettings"]["Body"].Value = a.Body;
-                node["ModuleSettings"]["Date"].Value = a.Published;
-                node["ModuleSettings"]["Ingress"].Value = a.Ingress;
-                node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
-                node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
+                ShowSpecificArticle(contentId);
+            }
+        }
+
+        private static void ShowSpecificArticle(string contentId)
+        {
+            // First loading actual Article...
+            Article a = Article.FindArticle(contentId);
+            Node node = new Node();
+            node["ModuleSettings"]["Header"].Value = a.Header;
+            node["ModuleSettings"]["Body"].Value = a.Body;
+            node["ModuleSettings"]["Date"].Value = a.Published;
+            node["ModuleSettings"]["Ingress"].Value = a.Ingress;
+            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] + 
+                a.Header;
+            node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
+            node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.ViewArticle",
+                "dynMid",
+                node);
+
+            // Then loading Forum
+            if (Settings.Instance["UseForumsForArticles"] == "True")
+            {
+                node = new Node();
+                Forum forum = Forum.SelectFirst(Criteria.Eq("Name", a.URL));
+                if (forum == null)
+                {
+                    // Making sure we're creating a forum if none already exists for this article...
+                    forum = new Forum();
+                    forum.Name = a.URL;
+                    forum.Save();
+                }
+                node["ModuleSettings"]["Forum"].Value = forum;
+                node["AddToExistingCollection"].Value = true;
                 ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.ViewArticle",
+                    "ForumModules.ShowPosts",
                     "dynMid",
                     node);
             }
