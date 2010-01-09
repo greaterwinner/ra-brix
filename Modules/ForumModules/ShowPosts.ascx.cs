@@ -23,6 +23,7 @@ using Ra.Selector;
 using LanguageRecords;
 using HelperGlobals;
 using UserRecords;
+using System.Text.RegularExpressions;
 
 namespace ForumModules
 {
@@ -77,11 +78,21 @@ namespace ForumModules
             set { ViewState["Forum"] = value.ID; }
         }
 
+        private string GetLinks(string content)
+        {
+            content = Regex.Replace(
+                " " + content,
+                "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
+                "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>",
+                RegexOptions.Compiled).Trim();
+            return content;
+        }
+
         protected void submit_Click(object sender, EventArgs e)
         {
             ForumPost p = new ForumPost();
             p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            p.Body = body.Text;
+            p.Body = GetLinks(body.Text);
             p.When = DateTime.Now;
             p.Name = anonTxt.Text;
             if (Users.LoggedInUserName != null)
@@ -95,6 +106,29 @@ namespace ForumModules
                 .Render();
             body.Text = "";
             header.Text = "";
+        }
+
+        protected void submitComment_Click(object sender, EventArgs e)
+        {
+            replyWnd.Visible = false;
+            int idOfPost = int.Parse(replyWnd.Xtra);
+            string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
+            string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
+            ForumPost n = new ForumPost();
+            n.Body = GetLinks(bodyTxt);
+            n.Header = headerTxt;
+            n.When = DateTime.Now;
+            n.Name = anonTxt.Text;
+            if (Users.LoggedInUserName != null)
+                n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            ForumPost parent = ForumPost.SelectByID(idOfPost);
+            parent.Replies.Add(n);
+            parent.Save();
+            root.Controls.Clear();
+            InitializeForum(n.ID);
+            root.ReRender();
+            new EffectHighlight(tree, 500)
+                .Render();
         }
 
         private void InitializeForum(int commentToShow)
@@ -281,29 +315,6 @@ namespace ForumModules
             bodyReply.Text = bodyFormatted;
             headerReply.Select();
             headerReply.Focus();
-        }
-
-        protected void submitComment_Click(object sender, EventArgs e)
-        {
-            replyWnd.Visible = false;
-            int idOfPost = int.Parse(replyWnd.Xtra);
-            string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            ForumPost n = new ForumPost();
-            n.Body = bodyTxt;
-            n.Header = headerTxt;
-            n.When = DateTime.Now;
-            n.Name = anonTxt.Text;
-            if (Users.LoggedInUserName != null)
-                n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-            ForumPost parent = ForumPost.SelectByID(idOfPost);
-            parent.Replies.Add(n);
-            parent.Save();
-            root.Controls.Clear();
-            InitializeForum(n.ID);
-            root.ReRender();
-            new EffectHighlight(tree, 500)
-                .Render();
         }
 
         private string PreviouslyShownComment
