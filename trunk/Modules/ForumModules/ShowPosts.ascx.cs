@@ -39,6 +39,7 @@ namespace ForumModules
         protected global::Ra.Widgets.TextArea bodyReply;
         protected global::Ra.Widgets.TextBox anonTxt;
         protected global::Ra.Widgets.Label lblLoggedInUsername;
+        protected global::Ra.Widgets.Label count;
         private bool _firstRequest;
         private int _commentCount;
 
@@ -99,6 +100,7 @@ namespace ForumModules
         private void InitializeForum(int commentToShow)
         {
             CreateLevel(root, Main.Posts, commentToShow, 0);
+            count.Text = _commentCount.ToString() + Language.Instance["CommentCount", null, " comments in article..."];
             int treeMinHeight = (_commentCount * 15) + 250;
             tree.Style[Styles.minHeight] = treeMinHeight.ToString() + "px";
         }
@@ -162,6 +164,8 @@ namespace ForumModules
                 else
                     pnl.Style[Styles.display] = "none";
                 pnlInner.CssClass = "bodyOfComment";
+                pnlInner.Style[Styles.left] = ((Math.Min(curLevel, 11) * 16)).ToString() + "px";
+                pnlInner.Style[Styles.marginRight] = (25 + (Math.Min(curLevel, 11) * 16)).ToString() + "px";
                 Label ltext = new Label();
                 ltext.ID = "lTxt" + idx.ID;
                 string bodyStr = idx.Body.Trim().Replace("\r\n", "\n");
@@ -234,6 +238,11 @@ namespace ForumModules
                     }
                 }
             }
+        }
+
+        protected void headerReply_EscPressed(object sender, EventArgs e)
+        {
+            replyWnd.Visible = false;
         }
 
         void replyButton_Clicked(object sender, EventArgs e)
