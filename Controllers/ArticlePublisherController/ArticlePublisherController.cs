@@ -121,6 +121,15 @@ namespace ArticlePublisherController
                 string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleFromAuthor", null, "Articles written by "] + author;
                 ShowArticles(author);
+
+                // Then showing comments from specific author...
+                Node node = new Node();
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Username"].Value = author;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ForumModules.ShowPostsFromUser",
+                    "dynMid",
+                    node);
             }
             else
             {
