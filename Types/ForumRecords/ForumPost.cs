@@ -12,6 +12,7 @@ using System;
 using Ra.Brix.Data;
 using Ra.Brix.Types;
 using UserRecords;
+using HelperGlobals;
 
 namespace ForumRecords
 {
@@ -40,5 +41,28 @@ namespace ForumRecords
 
         [ActiveField(IsOwner = false)]
         public User RegisteredUser { get; set; }
+
+        public override void Save()
+        {
+            if (string.IsNullOrEmpty(Name) && RegisteredUser == null)
+            {
+                if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                {
+                    RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                }
+                else
+                {
+                    Name = "Anonymous Coward";
+                }
+            }
+            base.Save();
+        }
+
+        public string GetNameOfPoster()
+        {
+            if (RegisteredUser == null)
+                return Name;
+            return RegisteredUser.Username;
+        }
     }
 }

@@ -4,7 +4,6 @@ html
 	height: 100%;
 	width: 100%;
 	margin: 0;
-	overflow:auto;
 }
 
 body
@@ -12,12 +11,10 @@ body
 	height: 100%;
 	width: 100%;
 	margin: 0;
-	overflow:auto;
 }
 
 form
 {
-	overflow:auto;
 	height:100%;
 }
 
@@ -1590,7 +1587,7 @@ span.buttonFlat
 .forumPost
 {
 	width:60%;
-	height:220px;
+	height:270px;
 	position:relative;
 	margin-left:auto;
 	margin-right:auto;
@@ -1614,6 +1611,12 @@ span.buttonFlat
 	bottom:5px;
 }
 
+.no-lines
+{
+	border:solid 1px #999;
+	overflow:hidden;
+}
+
 .no-lines .lines, 
 .no-lines .linesElbow, 
 .no-lines .expanded .leaf, 
@@ -1626,10 +1629,14 @@ span.buttonFlat
 	background-image:none;
 }
 
-.no-lines .selected:hover,
 .no-lines .selected
 {
 	background-color:Transparent !important;
+}
+
+.no-lines .selected:hover
+{
+	background-color:#bfdcef !important;
 }
 
 .tree .bodyOfComment
@@ -1647,6 +1654,20 @@ span.buttonFlat
 	bottom:5px;
 	right:5px;
 }
+
+.no-lines .dateLbl
+{
+	position:absolute;
+	left:400px;
+}
+
+.no-lines .userLbl
+{
+	position:absolute;
+	left:520px;
+}
+
+
 
 
 
