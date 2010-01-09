@@ -74,6 +74,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Commons\Commons.csproj">
+      <Project>{EA4DB865-734B-44D3-9AD9-132FD680446D}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
       <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
       <Name>Ra.Brix.Data</Name>
@@ -93,6 +97,10 @@
     <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
       <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
       <Name>LanguageRecords</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Types\User\UserRecords.csproj">
+      <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
+      <Name>UserRecords</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

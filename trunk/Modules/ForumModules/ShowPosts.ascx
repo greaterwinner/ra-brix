@@ -25,6 +25,18 @@
             CssClass="forumBodyTxt"
             id="body" />
         <br />
+        <strong><%#LanguageRecords.Language.Instance["NameLogInToShowReal", null, "Name - login to show verified username"] %></strong>
+        <br />
+        <ra:TextBox 
+            runat="server" 
+            CssClass="forumHeaderTxt"
+            Text="Anonymous Coward"
+            id="anonTxt" />
+        <ra:Label 
+            runat="server" 
+            style="font-style:italic;"
+            id="lblLoggedInUsername" />
+        <br />
         <ra:ExtButton 
             runat="server" 
             CssClass="button forumSubmitBtn"
@@ -37,7 +49,6 @@
         runat="server" 
         UseRichAnimations="true"
         CssClass="tree no-lines"
-        style="min-height:800px;"
         Expansion="SingleClickPlusSign"
         OnSelectedNodeChanged="menu_SelectedNodeChanged"
         ID="tree">
@@ -51,7 +62,7 @@
     <ra:Window 
         runat="server" 
         Visible="false"
-        style="z-index:1000;position:absolute;left:5px;top:250px;width:450px;"
+        style="z-index:1000;position:fixed;top:150px;left:150px;width:450px;"
         id="replyWnd">
         <div style="padding:15px 0 35px 0;position:relative;margin-left:auto;margin-right:auto;">
             <strong><%#LanguageRecords.Language.Instance["HeaderOfComment", null, "Header of Comment"] %></strong>
