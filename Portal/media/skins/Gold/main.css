@@ -1667,6 +1667,32 @@ span.buttonFlat
 	left:520px;
 }
 
+.no-lines .quote
+{
+	background-color:#C9E6F9;
+	margin-bottom:0;
+	padding:5px 5px 5px 15px;
+}
+
+.no-lines .no-quote
+{
+	margin:5px;
+}
+
+.no-lines .headerTxtComment
+{
+	width:180px;
+	overflow:hidden;
+	height:11px;
+	display:inline-block;
+}
+
+.no-lines .tree-more .icon
+{
+	background-position:-304px 0px;
+}
+
+
 
 
 

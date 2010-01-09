@@ -98,22 +98,34 @@ namespace ForumModules
 
         private void InitializeForum(int commentToShow)
         {
-            CreateLevel(root, Main.Posts, commentToShow);
-            int treeMinHeight = (_commentCount * 15) + 200;
+            CreateLevel(root, Main.Posts, commentToShow, 0);
+            int treeMinHeight = (_commentCount * 15) + 250;
             tree.Style[Styles.minHeight] = treeMinHeight.ToString() + "px";
         }
 
-        private void CreateLevel(TreeNodes level, IList<ForumPost> list, int commentToShow)
+        private void CreateLevel(TreeNodes level, IList<ForumPost> list, int commentToShow, int curLevel)
         {
+            curLevel += 1;
             foreach (ForumPost idx in list)
             {
                 _commentCount += 1;
                 TreeNode n = new TreeNode();
                 n.ID = "pst" + idx.ID;
+                if (curLevel > 11)
+                {
+                    n.Load +=
+                        delegate(object sender, EventArgs e)
+                        {
+                            TreeNode n1 = sender as TreeNode;
+                            if (!n1.CssClass.Contains("tree-more"))
+                                n1.CssClass += " tree-more";
+                        };
+                }
 
                 Label l = new Label();
                 l.ID = "hdr" + idx.ID;
                 l.Text = idx.Header;
+                l.CssClass = "headerTxtComment";
                 n.Controls.Add(l);
 
                 Label lblDate = new Label();
@@ -152,12 +164,35 @@ namespace ForumModules
                 Label ltext = new Label();
                 ltext.ID = "lTxt" + idx.ID;
                 string bodyStr = idx.Body.Trim().Replace("\r\n", "\n");
-                string bodyStrFormatted = "<p>";
+                bool hasFound = true;
+                while (hasFound)
+                {
+                    if (bodyStr.Contains("\n\n"))
+                    {
+                        bodyStr = bodyStr.Replace("\n\n", "\n");
+                    }
+                    else
+                        hasFound = false;
+                }
+                string bodyStrFormatted = "<p";
+                bool hasOpened = false;
+                bool isFirst = true;
                 foreach (char idxChar in bodyStr)
                 {
-                    if (idxChar == '\n')
+                    if (hasOpened || isFirst)
                     {
-                        bodyStrFormatted += "</p><p>";
+                        isFirst = false;
+                        if (idxChar == ':')
+                            bodyStrFormatted += " class=\"quote\">";
+                        else
+                            bodyStrFormatted += " class=\"no-quote\">";
+                        hasOpened = false;
+                        bodyStrFormatted += idxChar;
+                    }
+                    else if (idxChar == '\n')
+                    {
+                        bodyStrFormatted += "</p><p";
+                        hasOpened = true;
                     }
                     else
                     {
@@ -170,27 +205,37 @@ namespace ForumModules
                 pnl.Controls.Add(pnlInner);
                 n.Controls.Add(pnl);
 
-                ExtButton b = new ExtButton();
-                b.ID = "btn" + idx.ID;
-                b.CssClass = "button downRight";
-                b.Xtra = idx.ID.ToString();
-                b.Click += b_Click;
-                b.Text = Language.Instance["Reply", null, "Reply"];
-                pnlInner.Controls.Add(b);
-                
+                ExtButton replyButton = new ExtButton();
+                replyButton.ID = "btn" + idx.ID;
+                replyButton.CssClass = "button downRight";
+                replyButton.Xtra = idx.ID.ToString();
+                replyButton.Click += replyButton_Clicked;
+                replyButton.Text = Language.Instance["Reply", null, "Reply"];
+                pnlInner.Controls.Add(replyButton);
+
+                level.Controls.Add(n);
                 if (idx.Replies.Count > 0)
                 {
-                    TreeNodes children = new TreeNodes();
-                    children.Expanded = true;
-                    children.ID = "chl" + idx.ID;
-                    CreateLevel(children, idx.Replies, commentToShow);
-                    n.Controls.Add(children);
+                    if (curLevel <= 10)
+                    {
+                        TreeNodes children = new TreeNodes();
+                        children.Expanded = true;
+                        children.ID = "chl" + idx.ID;
+                        CreateLevel(children, idx.Replies, commentToShow, curLevel);
+                        n.Controls.Add(children);
+                    }
+                    else
+                    {
+                        // We do NOT indent more than 10 levels...!
+                        // After 10 levels, we get a funny folder icon to indicate 
+                        // that we're at more than 10 levels...!
+                        CreateLevel(level, idx.Replies, commentToShow, curLevel);
+                    }
                 }
-                level.Controls.Add(n);
             }
         }
 
-        void b_Click(object sender, EventArgs e)
+        void replyButton_Clicked(object sender, EventArgs e)
         {
             ExtButton b = sender as ExtButton;
             int idOfPost = int.Parse(b.Xtra);
@@ -203,8 +248,27 @@ namespace ForumModules
                 headerReply.Text = p.Header;
             else
                 headerReply.Text = "Re: " + p.Header;
-            string body = p.Body;
-            bodyReply.Text = body;
+            string bodyStr = p.Body.Trim().Replace("\r\n", "\n");
+            bool hasFound = true;
+            while (hasFound)
+            {
+                if (bodyStr.Contains("\n\n"))
+                {
+                    bodyStr = bodyStr.Replace("\n\n", "\n");
+                }
+                else
+                    hasFound = false;
+            }
+            string bodyFormatted = ":";
+            foreach (char idxChar in bodyStr)
+            {
+                if (idxChar == '\n')
+                    bodyFormatted += "\n:";
+                else
+                    bodyFormatted += idxChar;
+
+            }
+            bodyReply.Text = bodyFormatted;
             headerReply.Select();
             headerReply.Focus();
         }
