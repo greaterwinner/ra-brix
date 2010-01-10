@@ -44,6 +44,7 @@
                     Visible="false"
                     AlternateText='<%#Eval("[Title].Value") %>' 
                     OnMouseOut="MouseOutOverPreview"
+                    OnClick="ImageChosen"
                     ImageUrl='<%#Eval("[Medium].Value")%>' />
             </ra:Panel>
         </ItemTemplate>

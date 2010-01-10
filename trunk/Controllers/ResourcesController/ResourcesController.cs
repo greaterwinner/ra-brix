@@ -49,6 +49,64 @@ namespace ResourcesController
                 node);
         }
 
+        [ActiveEvent(Name = "ImageSelectedFromFlickr")]
+        protected void ImageSelectedFromFlickr(object sender, ActiveEventArgs e)
+        {
+            string activeFolder = e.Params["ActiveFolder"].Get<string>();
+            string imageUrl = e.Params["ImageURL"].Get<string>();
+            string imageName = e.Params["ImageName"].Get<string>();
+
+            int index = 0;
+            while (index < imageName.Length)
+            {
+                if (("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789()_").IndexOf(imageName[index]) == -1)
+                {
+                    imageName = imageName.Substring(0, index) + "-" + imageName.Substring(index + 1);
+                }
+                index += 1;
+            }
+            imageName = imageName.Trim('-');
+            bool found = true;
+            while (found)
+            {
+                found = false;
+                if (imageName.IndexOf("--") != -1)
+                {
+                    imageName = imageName.Replace("--", "-");
+                    found = true;
+                }
+            }            
+            
+            imageName += imageUrl.Substring(imageUrl.LastIndexOf("."));
+            HttpWebRequest request = WebRequest.Create(imageUrl) as HttpWebRequest;
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                Stream input = response.GetResponseStream();
+                using (Stream output = new FileStream(activeFolder + "\\" + imageName, FileMode.Create))
+                {
+                    byte[] buffer = new byte[8096];
+                    int read;
+                    while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, read);
+                    }
+                }
+            }
+
+            // Re-opening up Resource Dialog...
+            Node node = new Node();
+            node["TabCaption"].Value =
+                Language.Instance["SelectImage", null, "Select Image"];
+            node["Width"].Value = 800;
+            node["Height"].Value = 310;
+            node["ModuleSettings"]["Mode"].Value = "Select";
+            node["ModuleSettings"]["EventToRaise"].Value = "FileExplorerImageFileChosen";
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ResourcesModules.Explorer",
+                "dynPopup",
+                node);
+        }
+
         [ActiveEvent(Name = "SearchFlickrForImages")]
         protected void SearchFlickrForImages(object sender, ActiveEventArgs e)
         {
