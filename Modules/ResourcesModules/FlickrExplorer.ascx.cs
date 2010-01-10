@@ -43,6 +43,7 @@ namespace ResourcesModules
             rep.DataSource = node["Images"];
             rep.DataBind();
             pnlRepWrp.ReRender();
+            OldPreviewImageID = null;
         }
 
         private string OldPreviewImageID
@@ -104,6 +105,18 @@ namespace ResourcesModules
             }
         }
 
+        protected void ImageChosen(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ActiveFolder"].Value = ActiveFolder;
+            node["ImageURL"].Value = (sender as Image).ImageUrl;
+            node["ImageName"].Value = (sender as Image).AlternateText;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ImageSelectedFromFlickr",
+                node);
+        }
+
         private string ActiveFolder
         {
             get { return ViewState["ActiveFolder"] as string; }
@@ -112,6 +125,8 @@ namespace ResourcesModules
 
         void IModule.InitialLoading(Node node)
         {
+            search.Select();
+            search.Focus();
             Load +=
                 delegate
                 {
