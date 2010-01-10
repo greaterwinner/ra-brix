@@ -22,7 +22,7 @@ namespace TipOfTodayController
         [ActiveEvent(Name = "AfterUserLoggedIn")]
         protected void AfterUserLoggedIn(object sender, ActiveEventArgs e)
         {
-            if (UserSettings.Instance.Get("ShowTipOfToday", Users.LoggedInUserName, true))
+            if (UserSettings.Instance.Get("ShowTipOfToday", Users.LoggedInUserName, false))
             {
                 Node node = new Node();
                 node["ModuleSettings"]["Username"].Value = Users.LoggedInUserName;

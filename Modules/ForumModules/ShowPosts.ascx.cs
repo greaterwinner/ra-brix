@@ -103,6 +103,10 @@ namespace ForumModules
                 p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             Main.Posts.Add(p);
             Main.Save();
+
+            // Need to save comment before getting its ID and then save it again to give it a URL...!
+            p.URL = Main.Name + ".aspx#" + root.ClientID + "_pst" + p.ID;
+            p.Save();
             root.Controls.Clear();
             InitializeForum(p.ID);
             root.ReRender();
@@ -116,6 +120,7 @@ namespace ForumModules
         {
             replyWnd.Visible = false;
             int idOfPost = int.Parse(replyWnd.Xtra);
+            ForumPost parent = ForumPost.SelectByID(idOfPost);
             string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
             string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
             ForumPost n = new ForumPost();
@@ -125,9 +130,11 @@ namespace ForumModules
             n.Name = anonTxt.Text;
             if (Users.LoggedInUserName != null)
                 n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-            ForumPost parent = ForumPost.SelectByID(idOfPost);
             parent.Replies.Add(n);
             parent.Save();
+            string parentUrl = parent.URL + "_chl" + parent.ID;
+            n.URL = parentUrl + "_pst" + n.ID;
+            n.Save();
             root.Controls.Clear();
             InitializeForum(n.ID);
             root.ReRender();

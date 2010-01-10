@@ -114,6 +114,14 @@ namespace ArticlePublisherController
                     return;
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Settings.Instance["ArticleMainLandingPageTitle"];
                 ShowArticles(null);
+
+                // Then showing latest comments...
+                Node node = new Node();
+                node["AddToExistingCollection"].Value = true;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ForumModules.ShowPostsFromUser",
+                    "dynMid",
+                    node);
             }
             else if (contentId != null && contentId.Contains("authors/"))
             {
