@@ -46,9 +46,11 @@ namespace ForumModules
         private void LoadPostsFromUser()
         {
             int commentCount = 0;
-            foreach (ForumPost idx in ForumPost.Select(
-                Criteria.Eq("RegisteredUser.Username", Username),
-                Criteria.Sort("When", false)))
+            List<Criteria> criteria = new List<Criteria>();
+            criteria.Add(Criteria.Sort("When", false));
+            if (!string.IsNullOrEmpty(Username))
+                criteria.Add(Criteria.Eq("RegisteredUser.Username", Username));
+            foreach (ForumPost idx in ForumPost.Select(criteria.ToArray()))
             {
                 if (commentCount > 100)
                     break;
@@ -74,6 +76,16 @@ namespace ForumModules
                         (sender as Label).Text = DateFormatter.FormatDate(dateTmp);
                     };
                 n.Controls.Add(lblDate);
+
+                // Link to page where Forum is embedded...!
+                Label link = new Label();
+                link.ID = "lnkArt" + idx.ID;
+                link.Text = 
+                    string.Format("<a href=\"{0}\">{1}</a>",
+                        idx.URL,
+                        Language.Instance["ViewInContext", null, "View in context..."]);
+                link.CssClass = "userLbl";
+                n.Controls.Add(link);
 
                 // Actual comment text
                 Panel pnl = new Panel();

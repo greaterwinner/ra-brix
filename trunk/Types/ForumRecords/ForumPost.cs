@@ -39,6 +39,9 @@ namespace ForumRecords
         [ActiveField]
         public string Name { get; set; }
 
+        [ActiveField]
+        public string URL { get; set; }
+
         [ActiveField(IsOwner = false)]
         public User RegisteredUser { get; set; }
 
