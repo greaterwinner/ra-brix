@@ -130,10 +130,14 @@ namespace Viewport
                     dyn = dynPopup;
                     popupWindow.Visible = true;
                     popupWindow.Caption = e.Params["Parameters"]["TabCaption"].Get<string>();
-                    popupWindow.Style[Styles.width] =
-                        e.Params["Parameters"]["Width"].Get(350) + "px";
-                    dynPopup.Style[Styles.height] =
-                        e.Params["Parameters"]["Height"].Get(150) + "px";
+                    if (!(e.Params["Parameters"]["NoResize"].Value != null && 
+                        e.Params["Parameters"]["NoResize"].Get<bool>() == true))
+                    {
+                        popupWindow.Style[Styles.width] =
+                            e.Params["Parameters"]["Width"].Get(350) + "px";
+                        dynPopup.Style[Styles.height] =
+                            e.Params["Parameters"]["Height"].Get(150) + "px";
+                    }
                     break;
                 case "dynPopup2":
                     dyn = dynPopup2;
