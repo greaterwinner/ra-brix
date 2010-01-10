@@ -47,6 +47,12 @@
                 ID="btnSaveFile" 
                 OnClick="btnSaveFile_Click"
                 Text='<%#Language.Instance["Save", null, "Save"] %>' />
+            <ra:LinkButton 
+                runat="server" 
+                id="flickr" 
+                CssClass="flickr"
+                OnClick="flickr_Click"
+                Text="&nbsp;" />
         </div>
         <ext:Grid 
             runat="server" 

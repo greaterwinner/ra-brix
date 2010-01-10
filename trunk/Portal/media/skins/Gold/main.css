@@ -1240,6 +1240,7 @@ span.button
 	margin-left: 1%;
 	border: 1px solid #CCD1FF;
 	height: 250px;
+	position:relative;
 }
 
 .CMSInfoLabel
@@ -1696,7 +1697,16 @@ span.buttonFlat
 	background-position:-304px 0px;
 }
 
-
+.flickr
+{
+	background:Transparent url(Images/flickr.png) no-repeat 0 0;
+	width:57px;
+	height:22px;
+	display:inline-block;
+	position:absolute;
+	top:5px;
+	right:5px;
+}
 
 
 

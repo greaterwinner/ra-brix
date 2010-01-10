@@ -39,6 +39,16 @@ namespace ResourcesModules
             BuildTree();
         }
 
+        protected void flickr_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ActiveFolder"].Value = tree.SelectedNodes[0].Xtra;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "RequestFlickrResourceDownloadDialog",
+                node);
+        }
+
         private void BuildTree()
         {
             string baseDir = Server.MapPath("~/Resources/");
