@@ -93,7 +93,7 @@ namespace ResourcesController
                 }
             }
 
-            // Re-opening up Resource Dialog...
+            // Reopening up Resource Dialog...
             Node node = new Node();
             node["TabCaption"].Value =
                 Language.Instance["SelectImage", null, "Select Image"];
