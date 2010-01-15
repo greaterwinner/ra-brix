@@ -58,6 +58,7 @@ namespace ArticlePublisherController
             string ingress = e.Params["Ingress"].Get<string>();
             string body = e.Params["Body"].Get<string>();
             string image = e.Params["Image"].Get<string>();
+            int id = e.Params["ID"].Get<int>();
 
             // Extracting image and saving in different formats...
             string imagePath = HttpContext.Current.Server.MapPath("~/" + image);
@@ -89,14 +90,36 @@ namespace ArticlePublisherController
             }
 
             // Creating actual article and saving it...
-            Article a = new Article();
+            Article a;
+            if (id == -1)
+            {
+                // NEW article...!
+                a = new Article();
+                a.Published = DateTime.Now;
+            }
+            else
+            {
+                // Editing old article...
+                a = Article.SelectByID(id);
+            }
             a.Header = header;
             a.Ingress = ingress;
             a.IconImage = "Resources/Images/Small/" + fileName + ".png";
             a.MainImage = "Resources/Images/Medium/" + fileName + ".png";
             a.Body = body;
-            a.Published = DateTime.Now;
             a.Save();
+
+            // Notifying of saved article...
+            Node nodeMessage = new Node();
+            string msg = Language.Instance["ArticleSavedNotification", null, @"
+Article was saved and will display on the front page at the top."];
+            nodeMessage["Message"].Value = msg;
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
+            e.Params["ID"].Value = a.ID;
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
