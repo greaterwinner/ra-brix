@@ -8,7 +8,7 @@
 
 <ra:Window 
     runat="server" 
-    style="z-index:2000;position:absolute;left:200px;top:50px;width:350px;"
+    style="z-index:2000;position:fixed;left:200px;top:50px;width:350px;"
     Visible="false"
     CssClass="window"
     OnClosed="popupWindow_Closed"

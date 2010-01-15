@@ -78,6 +78,12 @@ namespace ArticlePublisherModules
             SaveArticle();
         }
 
+        protected int ArticleID
+        {
+            get { return (int)ViewState["ArticleID"]; }
+            set { ViewState["ArticleID"] = value; }
+        }
+
         private void SaveArticle()
         {
             Node node = new Node();
@@ -85,10 +91,12 @@ namespace ArticlePublisherModules
             node["Body"].Value = editor.Text;
             node["Ingress"].Value = ingress.Text;
             node["Image"].Value = img.ImageUrl;
+            node["ID"].Value = ArticleID;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "SaveArticle",
                 node);
+            ArticleID = node["ID"].Get<int>();
         }
 
         protected void editor_GetResourceDialog(object sender, EventArgs e)
@@ -139,6 +147,11 @@ namespace ArticlePublisherModules
 
         public void InitialLoading(Node node)
         {
+            Load +=
+                delegate
+                {
+                    ArticleID = -1;
+                };
         }
 
         public string GetCaption()

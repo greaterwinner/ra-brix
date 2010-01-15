@@ -98,15 +98,13 @@ namespace ForumModules
             p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
             p.Body = body.Text;
             p.When = DateTime.Now;
+            p.URL = Main.Name + ".aspx";
             p.Name = anonTxt.Text;
             if (Users.LoggedInUserName != null)
                 p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             Main.Posts.Add(p);
             Main.Save();
 
-            // Need to save comment before getting its ID and then save it again to give it a URL...!
-            p.URL = Main.Name + ".aspx#" + root.ClientID + "_pst" + p.ID;
-            p.Save();
             root.Controls.Clear();
             InitializeForum(p.ID);
             root.ReRender();
@@ -128,13 +126,11 @@ namespace ForumModules
             n.Header = headerTxt;
             n.When = DateTime.Now;
             n.Name = anonTxt.Text;
+            n.URL = parent.URL;
             if (Users.LoggedInUserName != null)
                 n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             parent.Replies.Add(n);
             parent.Save();
-            string parentUrl = parent.URL + "_chl" + parent.ID;
-            n.URL = parentUrl + "_pst" + n.ID;
-            n.Save();
             root.Controls.Clear();
             InitializeForum(n.ID);
             root.ReRender();
