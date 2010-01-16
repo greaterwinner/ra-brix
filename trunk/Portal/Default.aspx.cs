@@ -41,6 +41,15 @@ namespace Ra.Brix.Portal
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "LoadComplete");
+
+            // Changing the URL to un-escaped to get rid of the ContentID parameter and
+            // make the URL for the form "beautiful"...
+            string url = Request.Url.ToString();
+            if (url.Contains("ContentID"))
+            {
+                string endsWith = Request.Params["ContentID"].Trim('/') + ".aspx";
+                Form.Action = endsWith;
+            }
         }
 
         protected string GetBaseURL()

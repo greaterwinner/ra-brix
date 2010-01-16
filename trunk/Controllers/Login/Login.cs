@@ -29,7 +29,8 @@ namespace LoginController
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["openid.return_to"]) && !string.IsNullOrEmpty(Settings.Instance["StaticReturnValue"]))
             {
                 string returnTo = HttpContext.Current.Request.Params["openid.return_to"];
-                string response = returnTo + "?openid.identity=" + Settings.Instance["StaticReturnValue"];
+                returnTo += returnTo.Contains("?") ? "&" : "?";
+                string response = returnTo + "openid.identity=" + Settings.Instance["StaticReturnValue"];
 
                 AjaxManager.Instance.Redirect(response);
             }

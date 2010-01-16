@@ -25,7 +25,7 @@
             CssClass="forumBodyTxt"
             id="body" />
         <br />
-        <strong><%#LanguageRecords.Language.Instance["NameLogInToShowReal", null, "Name - login to show verified username"] %></strong>
+        <strong><%#LanguageRecords.Language.Instance["CommentingAs", null, "Commenting as..."] %></strong>
         <br />
         <ra:TextBox 
             runat="server" 

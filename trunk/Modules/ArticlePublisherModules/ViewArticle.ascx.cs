@@ -24,17 +24,47 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl content;
         protected global::System.Web.UI.HtmlControls.HtmlImage image;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
+        protected global::Ra.Extensions.Widgets.ExtButton edit;
+
+        private int ArticleID
+        {
+            get { return (int)ViewState["ArticleID"]; }
+            set { ViewState["ArticleID"] = value; }
+        }
 
         public void InitialLoading(Node node)
         {
+            Load +=
+                delegate
+                {
+                    edit.DataBind();
+                    Node n2 = new Node();
+                    ArticleID = node["ArticleID"].Get<int>();
+                    n2["ArticleID"].Value = ArticleID;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "ShouldAllowArticleEditing",
+                        n2);
+                    edit.Visible = n2["ShouldShow"].Get<bool>();
+                };
             header.InnerHtml = node["Header"].Get<string>();
             ingress.InnerHtml = node["Ingress"].Get<string>();
             content.InnerHtml = node["Body"].Get<string>();
             date.InnerHtml = DateFormatter.FormatDate(node["Date"].Get<DateTime>());
             image.Src = node["MainImage"].Get<string>();
-            image.Alt = node["Ingress"].Get<string>();
+            image.Alt = node["Header"].Get<string>() + " - " + node["Ingress"].Get<string>();
             author.HRef = "~/authors/" + node["Author"].Get<string>() + ".aspx";
             author.InnerHtml = "/.~ " + node["Author"].Get<string>();
+        }
+
+        protected void edit_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ArticleID"].Value = ArticleID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "EditArticle",
+                node);
         }
 
         public string GetCaption()

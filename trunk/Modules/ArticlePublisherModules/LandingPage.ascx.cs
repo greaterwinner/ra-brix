@@ -17,14 +17,24 @@ namespace ArticlePublisherModules
     public class LandingPage : System.Web.UI.UserControl, IModule
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
+        protected global::Ra.Widgets.Panel infoWrp;
 
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
                 {
-                    rep.DataSource = node["Articles"];
-                    rep.DataBind();
+                    infoWrp.DataBind();
+                    if (node["Articles"].Count == 0)
+                    {
+                        infoWrp.Visible = true;
+                    }
+                    else
+                    {
+                        infoWrp.Visible = false;
+                        rep.DataSource = node["Articles"];
+                        rep.DataBind();
+                    }
                 };
         }
 

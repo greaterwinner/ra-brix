@@ -73,40 +73,50 @@ namespace LoginOpenIDModules
                         url = url.Replace("Default.aspx", "");
                         url = url.Replace("DEFAULT.ASPX", "");
                     }
-                    Response.Redirect(url, true);
-                }
-                else
-                {
-                    // Checking to see if this is our second roundtrip around...
-                    if (Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] != null)
+                    if (!string.IsNullOrEmpty(Request.Params["ContentID"]))
                     {
-                        string openIdentity = (string)Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"];
-                        StoreOpenIDInCookie(openIdentity);
-                        Node node = new Node("Username", openIdentity);
-
-                        string roles = Session["Ra.Brix.PluinsViews.LoginpenID.Roles"] as string;
-                        if (!string.IsNullOrEmpty(roles))
-                        {
-                            string[] groups = roles.Split(',');
-                            int idxNo = 0;
-                            foreach (string idx in groups)
-                            {
-                                node["Groups"]["Group" + idxNo].Value = idx;
-                                idxNo += 1;
-                            }
-                        }
-
-                        Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] = null;
-                        ActiveEvents.Instance.RaiseActiveEvent(
-                            this,
-                            "UserLoggedIn",
-                            node);
+                        url += Request.Params["ContentID"].Trim('/') + ".aspx";
                     }
+                    Response.Redirect(url, true);
                 }
             }
         }
 
-        private void StoreOpenIDInCookie(string openIdentity)
+        [ActiveEvent(Name = "Page_Init")]
+        protected static void Initialization(object sender, ActiveEventArgs e)
+        {
+            string openIdIdentity = HttpContext.Current.Request.Params["openid.identity"];
+            if (string.IsNullOrEmpty(openIdIdentity))
+            {
+                // Checking to see if this is our second roundtrip around...
+                if (HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] != null)
+                {
+                    string openIdentity = (string)HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"];
+                    StoreOpenIDInCookie(openIdentity);
+                    Node node = new Node("Username", openIdentity);
+
+                    string roles = HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.Roles"] as string;
+                    if (!string.IsNullOrEmpty(roles))
+                    {
+                        string[] groups = roles.Split(',');
+                        int idxNo = 0;
+                        foreach (string idx in groups)
+                        {
+                            node["Groups"]["Group" + idxNo].Value = idx;
+                            idxNo += 1;
+                        }
+                    }
+
+                    HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] = null;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        typeof(Login),
+                        "UserLoggedIn",
+                        node);
+                }
+            }
+        }
+
+        private static void StoreOpenIDInCookie(string openIdentity)
         {
             // Storing Username in cookie
             HttpCookie usernameCookie = new HttpCookie("LoginOpenIDModules.Login.Username")
@@ -139,11 +149,21 @@ namespace LoginOpenIDModules
                 openIdServer = "http://" + openIdServer;
 
             string currentURL = HttpContext.Current.Request.Url.ToString();
-            if (currentURL.EndsWith("default.aspx", true, CultureInfo.InvariantCulture))
+            string trustRoot = currentURL;
+            if (trustRoot.Contains("?"))
+                trustRoot = trustRoot.Substring(0, trustRoot.IndexOf("?"));
+            trustRoot = trustRoot.Replace("default.aspx", "");
+            trustRoot = trustRoot.Replace("Default.aspx", "");
+            trustRoot = trustRoot.Replace("DEFAULT.ASPX", "");
+
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["ContentID"]))
             {
+                string page = HttpContext.Current.Request.Params["ContentID"].Trim('/') + ".aspx";
+                currentURL = currentURL.Substring(0, currentURL.IndexOf("?"));
                 currentURL = currentURL.Replace("default.aspx", "");
                 currentURL = currentURL.Replace("Default.aspx", "");
                 currentURL = currentURL.Replace("DEFAULT.ASPX", "");
+                currentURL += page;
             }
 
             StringBuilder getRequest = new StringBuilder();
@@ -154,7 +174,7 @@ namespace LoginOpenIDModules
             getRequest.Append("&openid.return_to=" + 
                 Server.UrlEncode(currentURL));
             getRequest.Append("&openid.trust_root=" + 
-                Server.UrlEncode(currentURL));
+                Server.UrlEncode(trustRoot));
 
             AjaxManager.Instance.Redirect(getRequest.ToString());
         }

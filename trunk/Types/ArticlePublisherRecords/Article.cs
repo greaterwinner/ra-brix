@@ -36,7 +36,10 @@ namespace ArticlePublisherRecords
         [ActiveField]
         public string MainImage { get; set; }
 
-        [ActiveField(IsOwner=false)]
+        [ActiveField]
+        public string OriginalImage { get; set; }
+
+        [ActiveField(IsOwner = false)]
         public User Author { get; set; }
 
         [ActiveField]
