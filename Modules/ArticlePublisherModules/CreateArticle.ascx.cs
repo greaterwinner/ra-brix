@@ -150,7 +150,18 @@ namespace ArticlePublisherModules
             Load +=
                 delegate
                 {
-                    ArticleID = -1;
+                    if (node["IsEditing"].Value != null && node["IsEditing"].Get<bool>())
+                    {
+                        ArticleID = node["ID"].Get<int>();
+                        editor.Text = node["Body"].Get<string>();
+                        header.Text = node["Header"].Get<string>();
+                        ingress.Text = node["Ingress"].Get<string>();
+                        img.ImageUrl = node["Image"].Get<string>();
+                    }
+                    else
+                    {
+                        ArticleID = -1;
+                    }
                 };
         }
 

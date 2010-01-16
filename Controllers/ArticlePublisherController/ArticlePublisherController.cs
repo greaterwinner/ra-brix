@@ -21,6 +21,7 @@ using System.Drawing.Imaging;
 using HelperGlobals;
 using System.Collections.Generic;
 using ForumRecords;
+using UserRecords;
 
 namespace ArticlePublisherController
 {
@@ -104,6 +105,7 @@ namespace ArticlePublisherController
             }
             a.Header = header;
             a.Ingress = ingress;
+            a.OriginalImage = image;
             a.IconImage = "Resources/Images/Small/" + fileName + ".png";
             a.MainImage = "Resources/Images/Medium/" + fileName + ".png";
             a.Body = body;
@@ -120,6 +122,39 @@ Article was saved and will display on the front page at the top."];
                 "ShowInformationMessage",
                 nodeMessage);
             e.Params["ID"].Value = a.ID;
+        }
+
+        [ActiveEvent(Name = "EditArticle")]
+        protected void EditArticle(object sender, ActiveEventArgs e)
+        {
+            int articleID = e.Params["ArticleID"].Get<int>();
+            Article a = Article.SelectByID(articleID);
+            Node node = new Node();
+            node["ModuleSettings"]["IsEditing"].Value = true;
+            node["ModuleSettings"]["ID"].Value = a.ID;
+            node["ModuleSettings"]["Body"].Value = a.Body;
+            node["ModuleSettings"]["Header"].Value = a.Header;
+            node["ModuleSettings"]["Ingress"].Value = a.Ingress;
+            node["ModuleSettings"]["Image"].Value = a.OriginalImage;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.CreateArticle",
+                "dynMid",
+                node);
+        }
+
+        [ActiveEvent(Name = "ShouldAllowArticleEditing")]
+        protected void ShouldAllowArticleEditing(object sender, ActiveEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                e.Params["ShouldShow"].Value = false;
+            }
+            else
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                Article article = Article.SelectByID(e.Params["ArticleID"].Get<int>());
+                e.Params["ShouldShow"].Value = article.Author == user;
+            }
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
@@ -177,6 +212,7 @@ Article was saved and will display on the front page at the top."];
             node["ModuleSettings"]["Body"].Value = a.Body;
             node["ModuleSettings"]["Date"].Value = a.Published;
             node["ModuleSettings"]["Ingress"].Value = a.Ingress;
+            node["ModuleSettings"]["ArticleID"].Value = a.ID;
             ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
                 Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] + 
                 a.Header;

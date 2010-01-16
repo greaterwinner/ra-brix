@@ -50,8 +50,7 @@ namespace ForumModules
             lblLoggedInUsername.Visible = !string.IsNullOrEmpty(Users.LoggedInUserName);
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
             {
-                lblLoggedInUsername.Text = Language.Instance["LoggedInAs", null, "Logged in as: "] + 
-                    Users.LoggedInUserName;
+                lblLoggedInUsername.Text = Users.LoggedInUserName;
             }
             if (!_firstRequest)
             {
@@ -94,48 +93,75 @@ namespace ForumModules
 
         protected void submit_Click(object sender, EventArgs e)
         {
-            ForumPost p = new ForumPost();
-            p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            p.Body = body.Text;
-            p.When = DateTime.Now;
-            p.URL = Main.Name + ".aspx";
-            p.Name = anonTxt.Text;
-            if (Users.LoggedInUserName != null)
-                p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-            Main.Posts.Add(p);
-            Main.Save();
+            if (string.IsNullOrEmpty(body.Text.Trim()) || string.IsNullOrEmpty(header.Text.Trim()))
+            {
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = Language.Instance["CantHaveEmptyHeaderBody", null, "You need to supply both a header and a body of your comment."];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+            else
+            {
+                ForumPost p = new ForumPost();
+                p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
+                p.Body = body.Text;
+                p.When = DateTime.Now;
+                p.URL = Main.Name + ".aspx";
+                p.Name = anonTxt.Text;
+                if (Users.LoggedInUserName != null)
+                    p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                Main.Posts.Add(p);
+                Main.Save();
 
-            root.Controls.Clear();
-            InitializeForum(p.ID);
-            root.ReRender();
-            new EffectHighlight(tree, 500)
-                .Render();
-            body.Text = "";
-            header.Text = "";
+                root.Controls.Clear();
+                InitializeForum(p.ID);
+                root.ReRender();
+                new EffectHighlight(tree, 500)
+                    .Render();
+                body.Text = "";
+                header.Text = "";
+            }
         }
 
         protected void submitComment_Click(object sender, EventArgs e)
         {
-            replyWnd.Visible = false;
-            int idOfPost = int.Parse(replyWnd.Xtra);
-            ForumPost parent = ForumPost.SelectByID(idOfPost);
-            string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
-            ForumPost n = new ForumPost();
-            n.Body = bodyTxt;
-            n.Header = headerTxt;
-            n.When = DateTime.Now;
-            n.Name = anonTxt.Text;
-            n.URL = parent.URL;
-            if (Users.LoggedInUserName != null)
-                n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-            parent.Replies.Add(n);
-            parent.Save();
-            root.Controls.Clear();
-            InitializeForum(n.ID);
-            root.ReRender();
-            new EffectHighlight(tree, 500)
-                .Render();
+            if (string.IsNullOrEmpty(bodyReply.Text.Trim()) || 
+                string.IsNullOrEmpty(headerReply.Text.Trim()))
+            {
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = Language.Instance["CantHaveEmptyHeaderBody", null, "You need to supply both a header and a body of your comment."];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+            else
+            {
+                replyWnd.Visible = false;
+                int idOfPost = int.Parse(replyWnd.Xtra);
+                ForumPost parent = ForumPost.SelectByID(idOfPost);
+                string headerTxt = headerReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
+                string bodyTxt = bodyReply.Text.Replace("<", "&lt;").Replace(">", "&gt;");
+                ForumPost n = new ForumPost();
+                n.Body = bodyTxt;
+                n.Header = headerTxt;
+                n.When = DateTime.Now;
+                n.Name = anonTxt.Text;
+                n.URL = parent.URL;
+                if (Users.LoggedInUserName != null)
+                    n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                parent.Replies.Add(n);
+                parent.Save();
+                root.Controls.Clear();
+                InitializeForum(n.ID);
+                root.ReRender();
+                new EffectHighlight(tree, 500)
+                    .Render();
+            }
         }
 
         private void InitializeForum(int commentToShow)

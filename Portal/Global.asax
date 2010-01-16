@@ -39,6 +39,11 @@
                 .Replace("~", "");
             string sTargetURL = "~/Default.aspx?ContentID=" +
                 HttpUtility.UrlEncode(sRequestedURL);
+            string url = Request.Url.ToString();
+            if (url.Contains("?"))
+            {
+                sTargetURL += "&" + url.Substring(url.IndexOf("?") + 1);
+            }
             Context.RewritePath(sTargetURL);
         }
     }

@@ -256,7 +256,12 @@ If this is not correct, then please click the button..."],
         {
             Users.Instance.Remove(Users.LoggedInUserName);
             Users.LoggedInUserName = null;
-            AjaxManager.Instance.Redirect("~/");
+            string url = "~/";
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["ContentID"]))
+            {
+                url += HttpContext.Current.Request.Params["ContentID"].Trim('/') + ".aspx";
+            }
+            AjaxManager.Instance.Redirect(url);
         }
 
         private void LoadLoginModule()
