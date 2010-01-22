@@ -66,6 +66,7 @@ namespace ForumModules
                 {
                     Forum forum = node["Forum"].Get<Forum>();
                     Main = forum;
+                    AllowVoting = node["AllowVoting"].Get<bool>();
                     InitializeForum(-1);
                     pnlWrp.DataBind();
                 };
@@ -77,17 +78,40 @@ namespace ForumModules
             set { ViewState["Forum"] = value.ID; }
         }
 
-        private string FormatComment(string content)
+        private bool AllowVoting
         {
-            content = Regex.Replace(
-                content.Replace("http://", " http://"),
-                "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
-                "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>",
-                RegexOptions.Compiled).Replace(" <a", "<a");
-            content = Regex.Replace(content,
-                "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
-                "<strong>${content}</strong>",
-                RegexOptions.Compiled);
+            get { return (bool)ViewState["AllowVoting"]; }
+            set { ViewState["AllowVoting"] = value; }
+        }
+
+        private string FormatComment(ForumPost comment)
+        {
+            string content = comment.Body.Trim().Replace("\r\n", "\n");
+            // We add nofollow to all links in comments that have less than 5 in score...
+            if (comment.Score < 1)
+            {
+                content = Regex.Replace(
+                    content.Replace("http://", " http://"),
+                    "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
+                    "${spaceChar}<a href=\"${linkType}${link}\" rel=\"nofollow\">${link}</a>",
+                    RegexOptions.Compiled).Replace(" <a", "<a");
+                content = Regex.Replace(content,
+                    "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
+                    "<strong>${content}</strong>",
+                    RegexOptions.Compiled);
+            }
+            else
+            {
+                content = Regex.Replace(
+                    content.Replace("http://", " http://"),
+                    "(?<spaceChar>\\s+)(?<linkType>http://|https://)(?<link>\\S+)",
+                    "${spaceChar}<a href=\"${linkType}${link}\">${link}</a>",
+                    RegexOptions.Compiled).Replace(" <a", "<a");
+                content = Regex.Replace(content,
+                    "(?<begin>\\*{1})(?<content>.+?)(?<end>\\*{1})",
+                    "<strong>${content}</strong>",
+                    RegexOptions.Compiled);
+            }
             return content;
         }
 
@@ -172,8 +196,15 @@ namespace ForumModules
             tree.Style[Styles.minHeight] = treeMinHeight.ToString() + "px";
         }
 
-        private void CreateLevel(TreeNodes level, IList<ForumPost> list, int commentToShow, int curLevel)
+        private void CreateLevel(TreeNodes level, LazyList<ForumPost> list, int commentToShow, int curLevel)
         {
+            list.Sort(
+                delegate(ForumPost left, ForumPost right)
+                {
+                    if (left.Score == right.Score)
+                        return left.When.CompareTo(right.When);
+                    return right.Score.CompareTo(left.Score);
+                });
             curLevel += 1;
             foreach (ForumPost idx in list)
             {
@@ -224,6 +255,12 @@ namespace ForumModules
                 }
                 n.Controls.Add(lblUser);
 
+                Label lblScore = new Label();
+                lblScore.ID = "lscr" + idx.ID;
+                lblScore.CssClass = "scoreLbl";
+                lblScore.Text = FormatScore(idx.Score);
+                n.Controls.Add(lblScore);
+
                 Panel pnl = new Panel();
                 pnl.ID = "pnlWrp" + idx.ID;
                 pnl.CssClass = "bodyOfCommentWrp";
@@ -242,8 +279,7 @@ namespace ForumModules
                 pnlInner.Style[Styles.marginRight] = (25 + (Math.Min(curLevel, 11) * 16)).ToString() + "px";
                 Label ltext = new Label();
                 ltext.ID = "lTxt" + idx.ID;
-                string bodyStr = idx.Body.Trim().Replace("\r\n", "\n");
-                bodyStr = FormatComment(bodyStr);
+                string bodyStr = FormatComment(idx);
                 bool hasFound = true;
                 while (hasFound)
                 {
@@ -285,13 +321,42 @@ namespace ForumModules
                 pnl.Controls.Add(pnlInner);
                 n.Controls.Add(pnl);
 
+                // Social parts + reply button
+                Panel pnlSocial = new Panel();
+                pnlSocial.ID = "soc" + idx.ID;
+                pnlSocial.CssClass = "downRight";
+
+                if (AllowVoting)
+                {
+                    // Like button
+                    ExtButton like = new ExtButton();
+                    like.ID = "lik" + idx.ID;
+                    like.CssClass = "button";
+                    like.Xtra = idx.ID.ToString();
+                    like.Click += like_Click;
+                    like.Text = Language.Instance["Like", null, "Like"];
+                    pnlSocial.Controls.Add(like);
+
+                    // Dislike button
+                    ExtButton dislike = new ExtButton();
+                    dislike.ID = "dis" + idx.ID;
+                    dislike.CssClass = "button";
+                    dislike.Xtra = idx.ID.ToString();
+                    dislike.Click += dislike_Click;
+                    dislike.Text = Language.Instance["Dislike", null, "Dislike"];
+                    pnlSocial.Controls.Add(dislike);
+                }
+
+                // Reply button
                 ExtButton replyButton = new ExtButton();
                 replyButton.ID = "btn" + idx.ID;
-                replyButton.CssClass = "button downRight";
+                replyButton.CssClass = "button";
                 replyButton.Xtra = idx.ID.ToString();
                 replyButton.Click += replyButton_Clicked;
                 replyButton.Text = Language.Instance["Reply", null, "Reply"];
-                pnlInner.Controls.Add(replyButton);
+                pnlSocial.Controls.Add(replyButton);
+
+                pnlInner.Controls.Add(pnlSocial);
 
                 level.Controls.Add(n);
                 if (idx.Replies.Count > 0)
@@ -313,6 +378,44 @@ namespace ForumModules
                     }
                 }
             }
+        }
+
+        private string FormatScore(int score)
+        {
+            return "(" + score.ToString() + ")";
+        }
+
+        protected void dislike_Click(object sender, EventArgs e)
+        {
+            ExtButton btn = sender as ExtButton;
+            VoteForComment(btn, -1);
+        }
+
+        protected void like_Click(object sender, EventArgs e)
+        {
+            ExtButton btn = sender as ExtButton;
+            VoteForComment(btn, 1);
+        }
+
+        private void VoteForComment(ExtButton btn, int value)
+        {
+            int commentId = int.Parse(btn.Xtra);
+            Node node = new Node();
+            node["CommentID"].Value = commentId;
+            node["Score"].Value = value;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ArticleDislikeComment",
+                node);
+            Label lbl = Selector.SelectFirst<Label>(btn.Parent.Parent.Parent.Parent,
+                delegate(System.Web.UI.Control idx)
+                {
+                    return idx.ID == "lscr" + commentId;
+                });
+            PreviouslyShownComment = null;
+            root.Controls.Clear();
+            InitializeForum(-1);
+            root.ReRender();
         }
 
         protected void headerReply_EscPressed(object sender, EventArgs e)

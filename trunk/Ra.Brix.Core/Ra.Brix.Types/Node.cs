@@ -302,6 +302,34 @@ namespace Ra.Brix.Types
         }
 
         /**
+         * Returns true if node exists in children collection
+         */
+        public bool Exists(Predicate<Node> functor)
+        {
+            return Exists(functor, false);
+        }
+
+        /**
+         * Returns true if node exists in children collection
+         */
+        public bool Exists(Predicate<Node> functor, bool flat)
+        {
+            if (!flat && functor(this))
+                return true;
+            foreach (Node idx in this._children)
+            {
+                if (functor(idx))
+                    return true;
+                if (flat)
+                    continue;
+                bool tmp = idx.Exists(functor);
+                if (tmp)
+                    return true;
+            }
+            return false;
+        }
+
+        /**
          * Will "disconnect" the node from its parent node. Useful for parsing subtrees
          * where you're dependant upon the DNA code or something...
          */
@@ -381,8 +409,8 @@ namespace Ra.Brix.Types
 
         public void RemoveAt(int index)
         {
-            _children.RemoveAt(index);
             _children[index]._parent = null;
+            _children.RemoveAt(index);
         }
 
         public Node this[int index]

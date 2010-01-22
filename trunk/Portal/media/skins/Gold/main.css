@@ -1577,6 +1577,7 @@ span.buttonFlat
 	height:150px;
 	display:block;
 	margin-left:5px;
+	overflow:hidden;
 }
 
 .createArticle textarea
@@ -1670,7 +1671,13 @@ span.buttonFlat
 .no-lines .userLbl
 {
 	position:absolute;
-	left:520px;
+	left:550px;
+}
+
+.no-lines .scoreLbl
+{
+	position:absolute;
+	left:500px;
 }
 
 .no-lines .quote
@@ -1688,8 +1695,23 @@ span.buttonFlat
 .no-lines .headerTxtComment
 {
 	overflow:hidden;
-	height:11px;
 	display:inline-block;
+}
+
+.no-lines .headerTxtComment
+{
+	line-height:inherit !important;
+}
+
+.no-lines .item
+{
+	line-height:13px;
+}
+
+.no-lines .icon
+{
+	vertical-align:top;
+	margin-right:2px;
 }
 
 .no-lines .tree-more .icon

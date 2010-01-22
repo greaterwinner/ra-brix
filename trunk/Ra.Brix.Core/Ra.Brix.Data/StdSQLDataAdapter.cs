@@ -137,7 +137,7 @@ namespace Ra.Brix.Data
                                 parentType = string.Format(" and PropertyName='{0}'", propertyName);
                             }
                             where += string.Format(
-                                " and exists(select * from Documents2Documents d2 where d2.Document1ID={0} and d2.Document2ID=d.ID{1})", idx.Value, parentType);
+                                " and exists(select * from Documents2Documents d2 where ((d2.Document1ID={0} and d2.Document2ID=d.ID) or (d2.Document2ID={0} and d2.Document1ID=d.ID)){1})", idx.Value, parentType);
                         }
                         else
                         {

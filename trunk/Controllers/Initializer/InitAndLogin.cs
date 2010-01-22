@@ -167,10 +167,16 @@ This is a global setting though and will make those changes for all users of the
             {
                 // Need to create our user
                 user = new User {Username = username};
-                if(ActiveType<User>.Count == 0)
+                if (ActiveType<User>.Count == 0)
                 {
-                    user.Roles.Add(ActiveType<Role>.SelectFirst(Criteria.Eq("Name", "Administrator")));
+                    user.Roles.Add(ActiveType<Role>.SelectFirst(
+                        Criteria.Eq("Name", "Administrator")));
                     Settings.Instance["PowerUser"] = user.Username;
+                }
+                else
+                {
+                    user.Roles.Add(ActiveType<Role>.SelectFirst(
+                        Criteria.Eq("Name", Settings.Instance["DefaultRoleForUsers"])));
                 }
                 user.Save();
             }
