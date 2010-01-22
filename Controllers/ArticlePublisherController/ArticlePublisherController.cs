@@ -22,6 +22,7 @@ using HelperGlobals;
 using System.Collections.Generic;
 using ForumRecords;
 using UserRecords;
+using Ra;
 
 namespace ArticlePublisherController
 {
@@ -110,18 +111,7 @@ namespace ArticlePublisherController
             a.MainImage = "Resources/Images/Medium/" + fileName + ".png";
             a.Body = body;
             a.Save();
-
-            // Notifying of saved article...
-            Node nodeMessage = new Node();
-            string msg = Language.Instance["ArticleSavedNotification", null, @"
-Article was saved and will display on the front page at the top."];
-            nodeMessage["Message"].Value = msg;
-            nodeMessage["Duration"].Value = 2000;
-            ActiveEvents.Instance.RaiseActiveEvent(
-                this,
-                "ShowInformationMessage",
-                nodeMessage);
-            e.Params["ID"].Value = a.ID;
+            AjaxManager.Instance.Redirect("~/" + a.URL + ".aspx");
         }
 
         [ActiveEvent(Name = "EditArticle")]
@@ -157,6 +147,52 @@ Article was saved and will display on the front page at the top."];
             }
         }
 
+        [ActiveEvent(Name = "FilterArticles")]
+        protected void FilterArticles(object sender, ActiveEventArgs e)
+        {
+            // Showing all articles...
+            ShowArticles(null, e.Params["Query"].Get<string>());
+        }
+
+        [ActiveEvent(Name = "ArticleLikeComment")]
+        [ActiveEvent(Name = "ArticleDislikeComment")]
+        protected void ArticleLikeDislikeComment(object sender, ActiveEventArgs e)
+        {
+            int commentId = e.Params["CommentID"].Get<int>();
+            int score = e.Params["Score"].Get<int>();
+            ForumPost post = ForumPost.SelectByID(commentId);
+            if (post.RegisteredUser != null && 
+                post.RegisteredUser.Username == Users.LoggedInUserName)
+            {
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = 
+                    Language.Instance["YouCannotVoteForOwnComments", null, "You cannot vote for your own comments"];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+                return;
+            }
+            ForumPostVote vote = ForumPostVote.SelectFirst(
+                Criteria.Eq("User.Username", Users.LoggedInUserName),
+                Criteria.ExistsIn(post.ID));
+            if (vote != null)
+            {
+                post.Score -= vote.Score;
+            }
+            else
+            {
+                vote = new ForumPostVote();
+                vote.ForumPost = post;
+                vote.User = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            }
+            post.Score += score;
+            vote.Score = score;
+            vote.Save();
+            post.Save();
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
@@ -170,52 +206,61 @@ Article was saved and will display on the front page at the top."];
                 // Showing all articles, but ONLY if Article system is NOT turned off in settings...
                 if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
                     return;
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Settings.Instance["ArticleMainLandingPageTitle"];
-                ShowArticles(null);
 
-                // Then showing latest comments...
-                Node node = new Node();
-                node["AddToExistingCollection"].Value = true;
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ForumModules.ShowPostsFromUser",
-                    "dynMid",
-                    node);
+                // Setting title of page
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                    Settings.Instance["ArticleMainLandingPageTitle"];
+
+                // Showing all articles...
+                ShowArticles(null, null);
             }
             else if (contentId != null && contentId.Contains("authors/"))
             {
                 // Showing articles from specific authors...
                 string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleFromAuthor", null, "Articles written by "] + author;
-                ShowArticles(author);
 
-                // Then showing comments from specific author...
-                Node node = new Node();
-                node["AddToExistingCollection"].Value = true;
-                node["ModuleSettings"]["Username"].Value = author;
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ForumModules.ShowPostsFromUser",
-                    "dynMid",
-                    node);
+                // Showing articles from author
+                ShowArticles(author, null);
             }
             else
             {
+                // Showing search
+                Node node = new Node();
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.SearchArticles",
+                    "dynMid",
+                    node);
+
+                // Showing specific article
                 ShowSpecificArticle(contentId);
             }
         }
 
         private static void ShowSpecificArticle(string contentId)
         {
-            // First loading actual Article...
+            // Showing search
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.SearchArticles",
+                "dynMid");
+
+            // Loading actual Article...
             Article a = Article.FindArticle(contentId);
+            if (a == null)
+                return;
+
+            // Setting title of page
+            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
+                Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] +
+                a.Header;
+
             Node node = new Node();
+            node["AddToExistingCollection"].Value = true;
             node["ModuleSettings"]["Header"].Value = a.Header;
             node["ModuleSettings"]["Body"].Value = a.Body;
             node["ModuleSettings"]["Date"].Value = a.Published;
             node["ModuleSettings"]["Ingress"].Value = a.Ingress;
             node["ModuleSettings"]["ArticleID"].Value = a.ID;
-            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
-                Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] + 
-                a.Header;
             node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
             node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
             ActiveEvents.Instance.RaiseLoadControl(
@@ -236,6 +281,8 @@ Article was saved and will display on the front page at the top."];
                     forum.Save();
                 }
                 node["ModuleSettings"]["Forum"].Value = forum;
+                node["ModuleSettings"]["AllowVoting"].Value = 
+                    !string.IsNullOrEmpty(Users.LoggedInUserName);
                 node["AddToExistingCollection"].Value = true;
                 ActiveEvents.Instance.RaiseLoadControl(
                     "ForumModules.ShowPosts",
@@ -244,15 +291,29 @@ Article was saved and will display on the front page at the top."];
             }
         }
 
-        private static void ShowArticles(string userNameFilter)
+        private static void ShowArticles(string userNameFilter, string filter)
         {
+            // Showing search
             Node node = new Node();
+            if (filter != null)
+                node["ModuleSettings"]["Filter"].Value = filter;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.SearchArticles",
+                "dynMid",
+                node);
+
+            // Showing articles
+            node = new Node();
             int idxNo = 0;
             List<Criteria> criteria = new List<Criteria>();
             criteria.Add(Criteria.Sort("Published", false));
             if (!string.IsNullOrEmpty(userNameFilter))
             {
                 criteria.Add(Criteria.Eq("Author.Username", userNameFilter));
+            }
+            if (filter != null && filter.Length > 0)
+            {
+                criteria.AddRange(DataHelper.CreateSearchFilter("Header", filter));
             }
             foreach (Article idx in Article.Select(criteria.ToArray()))
             {
@@ -269,10 +330,63 @@ Article was saved and will display on the front page at the top."];
                 if (++idxNo == 10)
                     break;
             }
+            if (idxNo < 10)
+            {
+                if (filter != null && filter.Length > 0)
+                {
+                    // Further looking through ingress...
+                    criteria = new List<Criteria>();
+                    criteria.Add(Criteria.Sort("Published", false));
+                    if (!string.IsNullOrEmpty(userNameFilter))
+                    {
+                        criteria.Add(Criteria.Eq("Author.Username", userNameFilter));
+                    }
+                    criteria.AddRange(DataHelper.CreateSearchFilter("Ingress", filter));
+                    foreach (Article idx in Article.Select(criteria.ToArray()))
+                    {
+                        if (node["ModuleSettings"]["Articles"].Exists(
+                            delegate(Node idxNode)
+                            {
+                                return idxNode["URL"].Get<string>() == "~/" + idx.URL + ".aspx";
+                            }, true))
+                            continue;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
+
+                        // Making sure we only show the 10 latest articles...
+                        if (++idxNo == 10)
+                            break;
+                    }
+                }
+            }
+            node["AddToExistingCollection"].Value = true;
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.LandingPage",
                 "dynMid",
                 node);
+
+            // Then showing latest comments...
+            if (Settings.Instance["UseForumsForArticles"] == "True")
+            {
+                node = new Node();
+                if (!string.IsNullOrEmpty(userNameFilter))
+                {
+                    node["ModuleSettings"]["Username"].Value = userNameFilter;
+                }
+                node["AddToExistingCollection"].Value = true;
+                if (filter != null)
+                    node["ModuleSettings"]["Filter"].Value = filter;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ForumModules.ShowPostsFromUser",
+                    "dynMid",
+                    node);
+            }
         }
     }
 }

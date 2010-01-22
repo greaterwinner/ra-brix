@@ -34,16 +34,19 @@ namespace ForumRecords
         public DateTime When { get; set; }
 
         [ActiveField]
-        public LazyList<ForumPost> Replies { get; set; }
-
-        [ActiveField]
         public string Name { get; set; }
 
         [ActiveField]
         public string URL { get; set; }
 
+        [ActiveField]
+        public LazyList<ForumPost> Replies { get; set; }
+
         [ActiveField(IsOwner = false)]
         public User RegisteredUser { get; set; }
+
+        [ActiveField]
+        public int Score { get; set; }
 
         public override void Save()
         {

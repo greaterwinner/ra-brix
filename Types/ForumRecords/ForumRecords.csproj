@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForumPostVote.cs" />
     <Compile Include="Forum.cs" />
     <Compile Include="ForumPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

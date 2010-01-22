@@ -47,6 +47,12 @@ namespace Viewport
             informationPanel.DataBind();
         }
 
+        protected void timer_Tick(object sender, EventArgs e)
+        {
+            // Completely dummy, just to make sure users are kept logged in
+            // to their sessions while browser is open...
+        }
+
         protected string GetCssRootFolder()
         {
             string portalDefault = Settings.Instance.Get(

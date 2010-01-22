@@ -92,7 +92,7 @@ namespace LoginOpenIDModules
                 if (HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"] != null)
                 {
                     string openIdentity = (string)HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.LoggedIn"];
-                    StoreOpenIDInCookie(openIdentity);
+                    StoreOpenIDInCookie(HttpContext.Current.Session["LoginOpenIDModules.Login.OpenID"] as string);
                     Node node = new Node("Username", openIdentity);
 
                     string roles = HttpContext.Current.Session["Ra.Brix.PluinsViews.LoginpenID.Roles"] as string;
@@ -130,6 +130,7 @@ namespace LoginOpenIDModules
  
         protected void logInButton_Click(object sender, EventArgs e)
         {
+            Session["LoginOpenIDModules.Login.OpenID"] = openIdURL.Text;
             string url = openIdURL.Text;
             if (!url.Contains("http"))
                 url = "http://" + url;

@@ -6,6 +6,12 @@
     AutoEventWireup="true" 
     Inherits="Viewport.Content" %>
 
+<ra:Timer 
+    runat="server" 
+    id="timer" 
+    Duration="600000"
+    OnTick="timer_Tick" />
+
 <ra:Window 
     runat="server" 
     style="z-index:2000;position:fixed;left:200px;top:50px;width:350px;"
@@ -80,7 +86,10 @@
             runat="server" 
             id="pnlLogo" 
             CssClass="logoRaBrix">
-            <a href='<%=GetMostWantedResponseUrl() %>' title='<%=GetMostWantedResponseTooltip() %>' class="logoImg">&nbsp;</a>
+            <a 
+                href='<%=GetMostWantedResponseUrl() %>' 
+                title='<%=GetMostWantedResponseTooltip() %>' 
+                class="logoImg">&nbsp;</a>
         </ra:Panel>
         <ra:Dynamic 
             runat="server" 

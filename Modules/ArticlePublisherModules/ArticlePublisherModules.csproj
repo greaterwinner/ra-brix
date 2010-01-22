@@ -56,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SearchArticles.ascx.cs">
+      <DependentUpon>SearchArticles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewArticle.ascx.cs">
       <DependentUpon>ViewArticle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -100,6 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewArticle.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SearchArticles.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

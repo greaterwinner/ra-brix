@@ -14,11 +14,11 @@
             runat="server" 
             id="lblInfo" 
             Tag="h1" 
-            Text='<%#LanguageRecords.Language.Instance["NoArticlesYet", null, "No articles yet"] %>' />
+            Text='<%#LanguageRecords.Language.Instance["NoArticlesFound", null, "No articles found"] %>' />
         <ra:Label 
             runat="server" 
             id="description" 
-            Text='<%#LanguageRecords.Language.Instance["NoArticlesYetDescriptionText", null, "There are no articles here yet for this part or user. If this is your first visit here, you may login and start writing articles to publish here."] %>'
+            Text='<%#LanguageRecords.Language.Instance["NoArticlesFoundYetDescriptionText", null, "No articles found. If this is your first visit here, you should login and start writing articles to publish here."] %>'
             Tag="p" />
     </ra:Panel>
     <asp:Repeater 

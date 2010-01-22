@@ -49,6 +49,12 @@ namespace Ra.Brix.Types
             get { return _listRetrieved; }
         }
 
+        public void Sort(Comparison<T> functor)
+        {
+            FillList();
+            _list.Sort(functor);
+        }
+
         public bool Exists(Predicate<T> functor)
         {
             FillList();

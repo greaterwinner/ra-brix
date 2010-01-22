@@ -50,6 +50,8 @@ namespace ForumModules
             criteria.Add(Criteria.Sort("When", false));
             if (!string.IsNullOrEmpty(Username))
                 criteria.Add(Criteria.Eq("RegisteredUser.Username", Username));
+            if (!string.IsNullOrEmpty(Filter))
+                criteria.AddRange(DataHelper.CreateSearchFilter("Header", Filter));
             foreach (ForumPost idx in ForumPost.Select(criteria.ToArray()))
             {
                 if (commentCount > 100)
@@ -206,6 +208,12 @@ namespace ForumModules
             set { ViewState["Username"] = value; }
         }
 
+        private string Filter
+        {
+            get { return ViewState["Filter"] as string; }
+            set { ViewState["Filter"] = value; }
+        }
+
         public void InitialLoading(Node node)
         {
             _isFirstLoad = true;
@@ -213,6 +221,8 @@ namespace ForumModules
                 delegate
                 {
                     Username = node["Username"].Get<string>();
+                    if (node["Filter"].Value != null)
+                        Filter = node["Filter"].Get<string>();
                     LoadPostsFromUser();
                 };
         }

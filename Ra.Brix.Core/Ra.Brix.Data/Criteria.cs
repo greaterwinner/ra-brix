@@ -112,7 +112,7 @@ namespace Ra.Brix.Data
         }
 
         /**
-         * Static constructor to create a criteria of type ExistsInEquals.
+         * Static constructor to create a criteria of type HasChildId.
          */
         public static Criteria HasChild(int id)
         {
