@@ -172,6 +172,7 @@ namespace ArticlePublisherController
                     this,
                     "ShowInformationMessage",
                     nodeMessage);
+                e.Params["Refresh"].Value = false;
                 return;
             }
             ForumPostVote vote = ForumPostVote.SelectFirst(
@@ -191,6 +192,7 @@ namespace ArticlePublisherController
             vote.Score = score;
             vote.Save();
             post.Save();
+            e.Params["Refresh"].Value = true;
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]

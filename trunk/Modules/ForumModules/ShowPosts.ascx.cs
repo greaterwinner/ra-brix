@@ -407,15 +407,19 @@ namespace ForumModules
                 this,
                 "ArticleDislikeComment",
                 node);
-            Label lbl = Selector.SelectFirst<Label>(btn.Parent.Parent.Parent.Parent,
-                delegate(System.Web.UI.Control idx)
-                {
-                    return idx.ID == "lscr" + commentId;
-                });
-            PreviouslyShownComment = null;
-            root.Controls.Clear();
-            InitializeForum(-1);
-            root.ReRender();
+            if (node["Refresh"].Get<bool>())
+            {
+                Label lbl = Selector.SelectFirst<Label>(btn.Parent.Parent.Parent.Parent,
+                    delegate(System.Web.UI.Control idx)
+                    {
+                        return idx.ID == "lscr" + commentId;
+                    });
+                int commentToShow = int.Parse(PreviouslyShownComment.Replace(pnlWrp.ID, ""));
+                PreviouslyShownComment = null;
+                root.Controls.Clear();
+                InitializeForum(commentToShow);
+                root.ReRender();
+            }
         }
 
         protected void headerReply_EscPressed(object sender, EventArgs e)
