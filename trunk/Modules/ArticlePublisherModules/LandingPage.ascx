@@ -47,10 +47,14 @@
                         style="display:block;"
                         Text='<%#Eval("[Ingress].Value") %>' />
                 </a>
+                <span style="position:absolute;bottom:5px;left:5px;font-size:10px;">
+                    <%#Eval("[CommentCount].Value") %> 
+                    <%#LanguageRecords.Language.Instance["Comments", null, "Comments"] %>
+                </span>
                 <a 
                     runat="server" 
                     href='<%#"~/authors/" + Eval("[Author].Value") + ".aspx" %>'
-                    style="position:absolute;bottom:5px;right:5px;">
+                    style="position:absolute;bottom:5px;right:5px;font-size:10px;">
                     <%#Eval("[Author].Value") %>
                 </a>
                 <ra:BehaviorUnveiler 

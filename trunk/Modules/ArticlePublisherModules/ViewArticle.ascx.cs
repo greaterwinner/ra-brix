@@ -25,6 +25,7 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlImage image;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
         protected global::Ra.Extensions.Widgets.ExtButton edit;
+        protected global::Ra.Widgets.LinkButton bookmark;
 
         private int ArticleID
         {
@@ -55,6 +56,26 @@ namespace ArticlePublisherModules
             image.Alt = node["Header"].Get<string>() + " - " + node["Ingress"].Get<string>();
             author.HRef = "~/authors/" + node["Author"].Get<string>() + ".aspx";
             author.InnerHtml = "/.~ " + node["Author"].Get<string>();
+            bookmark.Visible = Users.LoggedInUserName != null;
+            bookmark.CssClass = node["Bookmarked"].Get<bool>() ? "bookmarked" : "bookmark";
+        }
+
+        protected void bookmark_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ArticleID"].Value = ArticleID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ToggleArticleBookmark",
+                node);
+            if (node["Bookmarked"].Get<bool>())
+            {
+                bookmark.CssClass = "bookmarked";
+            }
+            else
+            {
+                bookmark.CssClass = "bookmark";
+            }
         }
 
         protected void edit_Click(object sender, EventArgs e)

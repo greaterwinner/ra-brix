@@ -12,12 +12,18 @@ using System;
 using Ra.Brix.Data;
 using UserRecords;
 using HelperGlobals;
+using Ra.Brix.Types;
 
 namespace ArticlePublisherRecords
 {
     [ActiveType]
     public class Article : ActiveType<Article>
     {
+        public Article()
+        {
+            Tags = new LazyList<Tag>();
+        }
+
         [ActiveField]
         public string Header { get; set; }
 
@@ -38,6 +44,9 @@ namespace ArticlePublisherRecords
 
         [ActiveField]
         public string OriginalImage { get; set; }
+
+        [ActiveField(IsOwner = false)]
+        public LazyList<Tag> Tags { get; set; }
 
         [ActiveField(IsOwner = false)]
         public User Author { get; set; }

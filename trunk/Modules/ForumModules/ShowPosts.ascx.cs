@@ -117,7 +117,8 @@ namespace ForumModules
 
         protected void submit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(body.Text.Trim()) || string.IsNullOrEmpty(header.Text.Trim()))
+            if (string.IsNullOrEmpty(body.Text.Trim()) || 
+                string.IsNullOrEmpty(header.Text.Trim()))
             {
                 Node nodeMessage = new Node();
                 nodeMessage["Message"].Value = Language.Instance["CantHaveEmptyHeaderBody", null, "You need to supply both a header and a body of your comment."];
@@ -356,6 +357,22 @@ namespace ForumModules
                 replyButton.Text = Language.Instance["Reply", null, "Reply"];
                 pnlSocial.Controls.Add(replyButton);
 
+                if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                {
+                    User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    if (user.InRole("Administrator"))
+                    {
+                        // Delete button
+                        ExtButton deleteButton = new ExtButton();
+                        deleteButton.ID = "delBtn" + idx.ID;
+                        deleteButton.CssClass = "button";
+                        deleteButton.Xtra = idx.ID.ToString();
+                        deleteButton.Click += deleteButton_Clicked;
+                        deleteButton.Text = Language.Instance["Delete", null, "Delete"];
+                        pnlSocial.Controls.Add(deleteButton);
+                    }
+                }
+
                 pnlInner.Controls.Add(pnlSocial);
 
                 level.Controls.Add(n);
@@ -419,12 +436,37 @@ namespace ForumModules
                 root.Controls.Clear();
                 InitializeForum(commentToShow);
                 root.ReRender();
+                System.Web.UI.Control ctrl = Selector.FindControl<System.Web.UI.Control>(root, PreviouslyShownComment);
+                new EffectRollUp(ctrl, 100)
+                    .ChainThese(new EffectRollDown(ctrl, 400))
+                    .Render();
             }
         }
 
         protected void headerReply_EscPressed(object sender, EventArgs e)
         {
             replyWnd.Visible = false;
+        }
+
+        void deleteButton_Clicked(object sender, EventArgs e)
+        {
+            ExtButton btn = sender as ExtButton;
+            ForumPost post = ForumPost.SelectByID(int.Parse(btn.Xtra));
+            post.Delete();
+
+            // TODO: Implement refreshing of forum...
+            // Showing message
+            Node nodeMessage = new Node();
+            nodeMessage["Message"].Value =
+                Language.Instance[
+                    "CommentWasDeleted",
+                    null,
+                    "Comment was deleted, refresh page to update comments..."];
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
         }
 
         void replyButton_Clicked(object sender, EventArgs e)

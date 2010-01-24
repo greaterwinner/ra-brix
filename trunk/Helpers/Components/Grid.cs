@@ -618,10 +618,17 @@ namespace Components
                                 break;
                             case "Link":
                                 {
-                                    cell.InnerHtml = 
-                                        string.Format(@"<a href=""{0}"" target=""_blank"">{1}</a>",
-                                            idxCell["href"].Value,
-                                            idxCell.Get<string>());
+                                    if (idxCell["target"].Value != null && 
+                                        idxCell["target"].Get<string>() == "same")
+                                        cell.InnerHtml =
+                                            string.Format(@"<a href=""{0}"">{1}</a>",
+                                                idxCell["href"].Value,
+                                                idxCell.Get<string>());
+                                    else
+                                        cell.InnerHtml =
+                                            string.Format(@"<a href=""{0}"" target=""_blank"">{1}</a>",
+                                                idxCell["href"].Value,
+                                                idxCell.Get<string>());
                                 } break;
                             default:
                                 {

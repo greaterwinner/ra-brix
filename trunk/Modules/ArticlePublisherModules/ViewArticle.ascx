@@ -35,7 +35,13 @@
     <a 
         runat="server" 
         id="author" 
-        style="position:absolute;top:5px;right:5px;font-style:italic;" />
+        style="position:absolute;top:5px;right:25px;font-style:italic;" />
+
+    <ra:LinkButton 
+        runat="server" 
+        id="bookmark" 
+        OnClick="bookmark_Click"
+        CssClass="bookmark" />
 
     <ra:ExtButton 
         runat="server" 
@@ -45,7 +51,7 @@
         Text='<%#LanguageRecords.Language.Instance["Edit", null, "Edit"] %>' />
 
     <br style="clear:both;" />
-    <hr style="margin-top:35px;margin-bottom:35px;" />
+    <hr style="margin-top:35px;margin-bottom:15px;" />
 
 </div>
 

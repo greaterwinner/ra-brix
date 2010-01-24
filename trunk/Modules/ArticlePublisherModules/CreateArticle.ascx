@@ -15,6 +15,14 @@
         Text="Header of article" />
 
     <div style="margin:5px;">
+        <h3>Tags</h3>
+        <ra:TextBox 
+            runat="server" 
+            style="width:100%;"
+            id="tags" />
+    </div>
+
+    <div style="margin:5px;">
         <h3>Ingress</h3>
         <ra:TextArea 
             runat="server" 
