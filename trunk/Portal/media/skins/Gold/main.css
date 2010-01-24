@@ -1768,6 +1768,23 @@ a.bookmarks
 	background:Transparent url(Images/star.png) no-repeat -36px 0;
 }
 
+.tagLink
+{
+	padding:1px 5px 1px 5px;
+	margin:1px 5px 1px 5px;
+	border:dashed 1px #999;
+	display:block;
+	float:left;
+	background-color:#adf;
+}
+
+.tagLink a
+{
+	display:block;
+	white-space:nowrap;
+}
+
+
 
 
 

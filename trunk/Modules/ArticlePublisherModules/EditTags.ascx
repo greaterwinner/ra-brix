@@ -23,6 +23,7 @@
                     runat="server" 
                     OnCheckedChanged="StickyChanged"
                     Xtra='<%#Eval("[ID].Value") %>'
+                    ToolTip='<%#LanguageRecords.Language.Instance["StickyMeans", null, "Sticky means that the tag will be visible on the main landing page as a category"] %>'
                     Checked='<%#Eval("[Sticky].Value") %>'
                     Text='<%#LanguageRecords.Language.Instance["Sticky", null, "Sticky"] %>' />
             </div>
