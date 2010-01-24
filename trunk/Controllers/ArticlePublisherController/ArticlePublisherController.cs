@@ -271,7 +271,7 @@ namespace ArticlePublisherController
             else if (contentId != null && contentId.Contains("tags/"))
             {
                 // Showing articles from specific authors...
-                string tag = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
+                string tag = HttpContext.Current.Server.UrlDecode(contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", ""));
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleTags", null, "Articles tagged with "] + tag;
 
                 // Showing articles from author
@@ -351,7 +351,8 @@ namespace ArticlePublisherController
             foreach (Tag idx in a.Tags)
             {
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
-                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" + idx.Name + ".aspx";
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" + 
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
                 idxNo += 1;
             }
             node["AddToExistingCollection"].Value = true;
