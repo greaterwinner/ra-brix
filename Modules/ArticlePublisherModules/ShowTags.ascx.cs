@@ -20,9 +20,26 @@ namespace ArticlePublisherModules
     public class ShowTags : System.Web.UI.UserControl, IModule
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
+        protected global::Ra.Widgets.Panel pnl;
 
         public void InitialLoading(Node node)
         {
+            Page.Load +=
+                delegate
+                {
+                    if (node["AlignBottomRight"].Value != null && node["AlignBottomRight"].Get<bool>())
+                    {
+                        pnl.Style[Styles.position] = "absolute";
+                        pnl.Style[Styles.right] = "45px";
+                        pnl.Style[Styles.bottom] = "0";
+                    }
+                    else if (node["CenterAlign"].Value != null && node["CenterAlign"].Get<bool>())
+                    {
+                        pnl.Style[Styles.marginLeft] = "auto";
+                        pnl.Style[Styles.marginRight] = "auto";
+                        pnl.Style[Styles.width] = "464px";
+                    }
+                };
             rep.DataSource = node["Tags"];
             rep.DataBind();
         }

@@ -277,9 +277,11 @@ If this is not correct, then please click the button..."],
         {
             Node node = new Node();
             node["GiveFocus"].Value = Settings.Instance["AutoGiveLoginFocus"] == "True";
+            node["AddToExistingCollection"].Value = true;
             ActiveEvents.Instance.RaiseLoadControl(
                 "LoginOpenIDModules.Login",
-                "dynTop");
+                "dynTop",
+                node);
             if (Settings.Instance["HideLogin"] == "True")
             {
                 if (HttpContext.Current.Request.Params["ShowLogin"] != "true")

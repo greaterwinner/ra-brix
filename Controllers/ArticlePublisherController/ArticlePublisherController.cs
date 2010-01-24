@@ -278,6 +278,7 @@ namespace ArticlePublisherController
             {
                 contentId = contentId.Trim('/');
             }
+
             // Showing main/landing-page tags...
             Node node = new Node();
             int idxNo = 0;
@@ -288,6 +289,7 @@ namespace ArticlePublisherController
                     HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
                 idxNo += 1;
             }
+            node["ModuleSettings"]["AlignBottomRight"].Value = true;
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.ShowTags",
                 "dynTop",
@@ -403,6 +405,7 @@ namespace ArticlePublisherController
                 idxNo += 1;
             }
             node["AddToExistingCollection"].Value = true;
+            node["ModuleSettings"]["CenterAlign"].Value = true;
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.ShowTags",
                 "dynMid",
