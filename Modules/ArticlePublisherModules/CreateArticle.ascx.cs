@@ -23,6 +23,7 @@ namespace ArticlePublisherModules
         protected global::Ra.Extensions.Widgets.InPlaceEdit header;
         protected global::Ra.Widgets.TextArea ingress;
         protected global::Ra.Widgets.Image img;
+        protected global::Ra.Widgets.TextBox tags;
 
         protected void editor_GetExtraToolbarControls(object sender, RichEdit.ExtraToolbarControlsEventArgs e)
         {
@@ -92,6 +93,8 @@ namespace ArticlePublisherModules
             node["Ingress"].Value = ingress.Text;
             node["Image"].Value = img.ImageUrl;
             node["ID"].Value = ArticleID;
+            string[] strTags = tags.Text.Split(',');
+            node["Tags"].Value = strTags;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "SaveArticle",
@@ -156,6 +159,7 @@ namespace ArticlePublisherModules
                         editor.Text = node["Body"].Get<string>();
                         header.Text = node["Header"].Get<string>();
                         ingress.Text = node["Ingress"].Get<string>();
+                        tags.Text = node["TagList"].Get<string>();
                         img.ImageUrl = node["Image"].Get<string>();
                     }
                     else

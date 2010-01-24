@@ -60,6 +60,7 @@ namespace ArticlePublisherController
             string ingress = e.Params["Ingress"].Get<string>();
             string body = e.Params["Body"].Get<string>();
             string image = e.Params["Image"].Get<string>();
+            string[] tags = e.Params["Tags"].Get<string[]>();
             int id = e.Params["ID"].Get<int>();
 
             // Extracting image and saving in different formats...
@@ -110,6 +111,24 @@ namespace ArticlePublisherController
             a.IconImage = "Resources/Images/Small/" + fileName + ".png";
             a.MainImage = "Resources/Images/Medium/" + fileName + ".png";
             a.Body = body;
+
+            // Adding up tags
+            a.Tags.Clear();
+            foreach (string tagIdx in tags)
+            {
+                string tagName = tagIdx.ToLowerInvariant().Trim();
+                if (tagName == string.Empty)
+                    continue;
+                Tag tag = Tag.SelectFirst(Criteria.Eq("Name", tagName));
+                if (tag == null)
+                {
+                    tag = new Tag();
+                    tag.Name = tagName;
+                    tag.Save();
+                }
+                a.Tags.Add(tag);
+            }
+
             a.Save();
             AjaxManager.Instance.Redirect("~/" + a.URL + ".aspx");
         }
@@ -126,6 +145,13 @@ namespace ArticlePublisherController
             node["ModuleSettings"]["Header"].Value = a.Header;
             node["ModuleSettings"]["Ingress"].Value = a.Ingress;
             node["ModuleSettings"]["Image"].Value = a.OriginalImage;
+            string tagList = "";
+            foreach (Tag idxTag in a.Tags)
+            {
+                tagList += idxTag.Name + ",";
+            }
+            tagList = tagList.Trim(',');
+            node["ModuleSettings"]["TagList"].Value = tagList;
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.CreateArticle",
                 "dynMid",
@@ -143,7 +169,8 @@ namespace ArticlePublisherController
             {
                 User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
                 Article article = Article.SelectByID(e.Params["ArticleID"].Get<int>());
-                e.Params["ShouldShow"].Value = article.Author == user;
+                e.Params["ShouldShow"].Value = article.Author == user || 
+                    user.InRole("Administrator");
             }
         }
 
@@ -151,7 +178,7 @@ namespace ArticlePublisherController
         protected void FilterArticles(object sender, ActiveEventArgs e)
         {
             // Showing all articles...
-            ShowArticles(null, e.Params["Query"].Get<string>());
+            ShowArticles(null, e.Params["Query"].Get<string>(), null);
         }
 
         [ActiveEvent(Name = "ArticleLikeComment")]
@@ -195,6 +222,22 @@ namespace ArticlePublisherController
             e.Params["Refresh"].Value = true;
         }
 
+        [ActiveEvent(Name = "GetArticleBookmarks")]
+        protected void GetArticleBookmarks(object sender, ActiveEventArgs e)
+        {
+            e.Params["Grid"]["Columns"]["Bookmarks"]["Caption"].Value = Language.Instance["Bookmarks", null, "Bookmarks"];
+            e.Params["Grid"]["Columns"]["Bookmarks"]["ControlType"].Value = "Link";
+            int idxNo = 0;
+            foreach (Bookmark idx in Bookmark.Select(Criteria.Eq("User.Username", Users.LoggedInUserName)))
+            {
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"].Value = idx.Article.Header;
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"]["href"].Value = idx.Article.URL + ".aspx";
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"]["target"].Value = "same";
+                idxNo += 1;
+            }
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
@@ -214,7 +257,7 @@ namespace ArticlePublisherController
                     Settings.Instance["ArticleMainLandingPageTitle"];
 
                 // Showing all articles...
-                ShowArticles(null, null);
+                ShowArticles(null, null, null);
             }
             else if (contentId != null && contentId.Contains("authors/"))
             {
@@ -223,7 +266,16 @@ namespace ArticlePublisherController
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleFromAuthor", null, "Articles written by "] + author;
 
                 // Showing articles from author
-                ShowArticles(author, null);
+                ShowArticles(author, null, null);
+            }
+            else if (contentId != null && contentId.Contains("tags/"))
+            {
+                // Showing articles from specific authors...
+                string tag = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleTags", null, "Articles tagged with "] + tag;
+
+                // Showing articles from author
+                ShowArticles(null, null, tag);
             }
             else
             {
@@ -241,10 +293,22 @@ namespace ArticlePublisherController
 
         private static void ShowSpecificArticle(string contentId)
         {
+            Node node = new Node();
+
+            // Showing bookmarks module
+            if (Users.LoggedInUserName != null)
+            {
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.Favorites",
+                    "dynMid");
+                node["AddToExistingCollection"].Value = true;
+            }
+
             // Showing search
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.SearchArticles",
-                "dynMid");
+                "dynMid",
+                node);
 
             // Loading actual Article...
             Article a = Article.FindArticle(contentId);
@@ -256,7 +320,7 @@ namespace ArticlePublisherController
                 Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] +
                 a.Header;
 
-            Node node = new Node();
+            node = new Node();
             node["AddToExistingCollection"].Value = true;
             node["ModuleSettings"]["Header"].Value = a.Header;
             node["ModuleSettings"]["Body"].Value = a.Body;
@@ -265,8 +329,34 @@ namespace ArticlePublisherController
             node["ModuleSettings"]["ArticleID"].Value = a.ID;
             node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
             node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                Bookmark bookmark = Bookmark.SelectFirst(
+                    Criteria.Eq("User.Username", Users.LoggedInUserName),
+                    Criteria.Eq("Article.URL", a.URL));
+                node["ModuleSettings"]["Bookmarked"].Value = bookmark != null;
+            }
+            else
+            {
+                node["ModuleSettings"]["Bookmarked"].Value = false;
+            }
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.ViewArticle",
+                "dynMid",
+                node);
+
+            // Then loading tags
+            node = new Node();
+            int idxNo = 0;
+            foreach (Tag idx in a.Tags)
+            {
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" + idx.Name + ".aspx";
+                idxNo += 1;
+            }
+            node["AddToExistingCollection"].Value = true;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.ShowTags",
                 "dynMid",
                 node);
 
@@ -293,10 +383,72 @@ namespace ArticlePublisherController
             }
         }
 
-        private static void ShowArticles(string userNameFilter, string filter)
+        [ActiveEvent(Name = "ToggleArticleBookmark")]
+        protected void ToggleArticleBookmark(object sender, ActiveEventArgs e)
         {
-            // Showing search
+            int articleId = e.Params["ArticleID"].Get<int>();
+            Article article = Article.SelectByID(articleId);
+            Bookmark bookmark = Bookmark.SelectFirst(
+                Criteria.Eq("Article.URL", article.URL),
+                Criteria.Eq("User.Username", Users.LoggedInUserName));
+            if (bookmark == null)
+            {
+                // Create bookmark
+                bookmark = new Bookmark();
+                bookmark.Article = article;
+                bookmark.User = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                bookmark.Save();
+                e.Params["Bookmarked"].Value = true;
+
+                // Showing message
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = Language.Instance[
+                    "ArticleWasBookmarked", 
+                    null, 
+                    "Article was bookmarked and will appear in your bookmarks"];
+                nodeMessage["Duration"].Value = 2000;
+
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+            else
+            {
+                // Delete bookmark
+                bookmark.Delete();
+                e.Params["Bookmarked"].Value = false;
+
+                // Showing message
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = 
+                    Language.Instance[
+                        "BookmarkedWasDeleted", 
+                        null, 
+                        "Bookmark was deleted and article will no longer appear in your bookmarks"];
+                nodeMessage["Duration"].Value = 2000;
+
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+        }
+
+        private static void ShowArticles(string userNameFilter, string filter, string tag)
+        {
             Node node = new Node();
+
+            // Showing bookmarks module
+            if (Users.LoggedInUserName != null)
+            {
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.Favorites",
+                    "dynMid");
+                node["AddToExistingCollection"].Value = true;
+            }
+
+            // Showing search
             if (filter != null)
                 node["ModuleSettings"]["Filter"].Value = filter;
             ActiveEvents.Instance.RaiseLoadControl(
@@ -319,6 +471,15 @@ namespace ArticlePublisherController
             }
             foreach (Article idx in Article.Select(criteria.ToArray()))
             {
+                if (!string.IsNullOrEmpty(tag))
+                {
+                    if (!idx.Tags.Exists(
+                        delegate(Tag idxTag)
+                        {
+                            return idxTag.Name == tag.ToLowerInvariant().Trim();
+                        }))
+                        continue;
+                }
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
@@ -327,6 +488,7 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
 
                 // Making sure we only show the 10 latest articles...
                 if (++idxNo == 10)
@@ -360,6 +522,7 @@ namespace ArticlePublisherController
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
 
                         // Making sure we only show the 10 latest articles...
                         if (++idxNo == 10)

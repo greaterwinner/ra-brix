@@ -1730,6 +1730,44 @@ span.buttonFlat
 	right:5px;
 }
 
+.bookmark
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	display:block;
+	width:18px;
+	height:16px;
+	background:Transparent url(Images/star.png) no-repeat 0 0;
+}
+
+.bookmarked
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	display:block;
+	width:18px;
+	height:16px;
+	background:Transparent url(Images/star.png) no-repeat -18px 0;
+}
+
+div.bookmarks
+{
+	position:absolute;
+	top:1px;
+	left:35px;
+	z-index:100;
+}
+
+a.bookmarks
+{
+	display:block;
+	width:18px;
+	height:16px;
+	background:Transparent url(Images/star.png) no-repeat -36px 0;
+}
+
 
 
 
