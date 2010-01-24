@@ -61,9 +61,12 @@ namespace InitializeController
             LoadMenu();
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
             {
+                Node node = new Node();
+                node["AddToExistingCollection"].Value = true;
                 ActiveEvents.Instance.RaiseLoadControl(
                     "LoginOpenIDModules.Logout",
-                    "dynTop");
+                    "dynTop",
+                    node);
             }
             else
             {
