@@ -17,5 +17,8 @@ namespace ArticlePublisherRecords
     {
         [ActiveField]
         public string Name { get; set; }
+
+        [ActiveField]
+        public bool ShowInLandingPage { get; set; }
     }
 }

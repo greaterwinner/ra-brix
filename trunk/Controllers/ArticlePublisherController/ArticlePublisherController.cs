@@ -34,6 +34,7 @@ namespace ArticlePublisherController
         {
             Language.Instance.SetDefaultValue("ButtonArticles", "Articles");
             Language.Instance.SetDefaultValue("ButtonCreateArticle", "Create Article");
+            Language.Instance.SetDefaultValue("ButtonAdministrateTags", "Edit Tags");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -41,6 +42,37 @@ namespace ArticlePublisherController
         {
             e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonCreateArticle"].Value = "Menu-CreateArticle";
+            e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonAdministrateTags"].Value = "Menu-EditArticleTags";
+        }
+
+        [ActiveEvent(Name = "Menu-EditArticleTags")]
+        protected void EditArticleTags(object sender, ActiveEventArgs e)
+        {
+            Node node = new Node();
+            int idxNo = 0;
+            foreach (Tag idx in Tag.Select())
+            {
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["ID"].Value = idx.ID;
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Sticky"].Value = idx.ShowInLandingPage;
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                idxNo += 1;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.EditTags",
+                "dynMid",
+                node);
+        }
+
+
+        [ActiveEvent(Name = "ArticleTagStickyChanged")]
+        protected void ArticleTagStickyChanged(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["ID"].Get<int>();
+            Tag tag = Tag.SelectByID(id);
+            tag.ShowInLandingPage = e.Params["Sticky"].Get<bool>();
+            tag.Save();
         }
 
         [ActiveEvent(Name = "Menu-CreateArticle")]
@@ -246,6 +278,21 @@ namespace ArticlePublisherController
             {
                 contentId = contentId.Trim('/');
             }
+            // Showing main/landing-page tags...
+            Node node = new Node();
+            int idxNo = 0;
+            foreach (Tag idx in Tag.Select(Criteria.Eq("ShowInLandingPage", true)))
+            {
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                idxNo += 1;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.ShowTags",
+                "dynTop",
+                node);
+
             if (contentId == null)
             {
                 // Showing all articles, but ONLY if Article system is NOT turned off in settings...
@@ -280,7 +327,7 @@ namespace ArticlePublisherController
             else
             {
                 // Showing search
-                Node node = new Node();
+                node = new Node();
                 ActiveEvents.Instance.RaiseLoadControl(
                     "ArticlePublisherModules.SearchArticles",
                     "dynMid",
