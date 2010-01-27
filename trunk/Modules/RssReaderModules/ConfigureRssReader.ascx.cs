@@ -61,11 +61,6 @@ namespace RssReaderModules
                     grd.DataSource = node["Grid"];
                 };
         }
-
-        public string GetCaption()
-        {
-            return Language.Instance["ConfigureRssModule", null, "Configure RSS module"];
-        }
     }
 }
 

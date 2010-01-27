@@ -226,10 +226,5 @@ namespace ForumModules
                     LoadPostsFromUser();
                 };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

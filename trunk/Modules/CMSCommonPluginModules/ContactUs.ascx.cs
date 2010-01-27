@@ -89,10 +89,5 @@ Something went wrong while trying to send email, message from server was: {0}", 
         public void InitialLoading(Node node)
         {
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

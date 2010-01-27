@@ -75,10 +75,5 @@ and not your currently active one (necessarily).
         {
             grd.DataSource = node["Grid"];
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

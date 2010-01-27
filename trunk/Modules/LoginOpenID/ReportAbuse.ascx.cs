@@ -31,11 +31,6 @@ namespace LoginOpenIDModules
             set { ViewState["Username"] = value; }
         }
 
-        public string GetCaption()
-        {
-            return Language.Instance["OpenIDCaption" , null, "Report abuse..."];
-        }
-
         public void InitialLoading(Node node)
         {
             Load +=

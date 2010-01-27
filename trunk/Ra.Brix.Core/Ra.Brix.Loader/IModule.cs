@@ -24,8 +24,5 @@ namespace Ra.Brix.Loader
          * parameter you pass into your LoadModule - if any.
          */
         void InitialLoading(Node node);
-
-        // TODO: Remove....?
-        string GetCaption();
     }
 }

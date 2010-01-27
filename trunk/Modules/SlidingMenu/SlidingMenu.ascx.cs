@@ -457,11 +457,6 @@ would have had to done in other similar applications.
                         }
                     };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

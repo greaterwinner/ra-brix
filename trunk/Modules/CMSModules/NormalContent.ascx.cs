@@ -96,10 +96,5 @@ namespace CMSModules
                 idxNo += 1;
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

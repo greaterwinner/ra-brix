@@ -56,11 +56,6 @@ namespace UsersModules
                 };
             usernameTxt.Text = Language.Instance["UsersTypeUserNameText", null, "Type in username"];
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

@@ -133,10 +133,5 @@ namespace UsersModules
                 "UpdateUser",
                 node);
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

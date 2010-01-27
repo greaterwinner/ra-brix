@@ -48,10 +48,5 @@ namespace ArticlePublisherModules
         void IModule.InitialLoading(Node node)
         {
         }
-
-        string IModule.GetCaption()
-        {
-            return "";
-        }
     }
 }

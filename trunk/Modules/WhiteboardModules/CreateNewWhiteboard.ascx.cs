@@ -43,11 +43,6 @@ namespace WhiteboardModules
             name.Select();
             name.Focus();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

@@ -62,11 +62,6 @@ to will be overridden by the AD Mappings.
             grd.DataSource = node["Grid"];
         }
 
-        public string GetCaption()
-        {
-            return "";
-        }
-
         [ActiveEvent("GetHelpContents")]
         protected static void GetHelpContents(object sender, ActiveEventArgs e)
         {

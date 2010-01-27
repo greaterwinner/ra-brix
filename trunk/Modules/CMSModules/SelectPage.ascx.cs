@@ -94,10 +94,5 @@ namespace CMSModules
                 }
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

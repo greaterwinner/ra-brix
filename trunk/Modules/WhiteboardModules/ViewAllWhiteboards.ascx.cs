@@ -92,11 +92,6 @@ namespace WhiteboardModules
                 this,
                 "Menu-ViewAllWhiteboards");
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

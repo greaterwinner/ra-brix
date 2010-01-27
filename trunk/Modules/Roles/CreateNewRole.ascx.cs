@@ -56,10 +56,5 @@ namespace RolesModules
                             .Render();
                     };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

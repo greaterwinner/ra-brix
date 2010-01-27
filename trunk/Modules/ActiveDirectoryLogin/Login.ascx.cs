@@ -69,11 +69,6 @@ namespace ActiveDirectoryLoginModules
         {
             domainAndUserName.Focus();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

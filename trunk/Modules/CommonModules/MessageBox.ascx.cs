@@ -72,10 +72,5 @@ namespace CommonModules
                         EventParamValue = node["Params"]["Value"].Get<string>();
                     };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

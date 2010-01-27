@@ -40,10 +40,5 @@ namespace InstalledAppsModules
         {
             submit.Focus();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

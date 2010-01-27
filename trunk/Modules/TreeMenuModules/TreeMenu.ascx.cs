@@ -242,11 +242,6 @@ namespace TreeMenuModules
         public void InitialLoading(Node node)
         {
         }
-
-        public string GetCaption()
-        {
-            return Language.Instance["TreeMenuCaption", null, "Tree Menu"];
-        }
     }
 }
 

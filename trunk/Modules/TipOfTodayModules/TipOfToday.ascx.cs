@@ -72,11 +72,6 @@ These tips will be presented to you every time you log in. Most modules will pro
 tips which means that thse tips will vary according to which modules you've installed and such.";
             e.Params["Tip"]["TipOfTipOfToday"].Value = Language.Instance["TipOfTodayFromTipOfToday", null, tmp];
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

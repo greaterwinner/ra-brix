@@ -40,10 +40,5 @@ namespace ArticlePublisherModules
             rep.DataSource = node["Tags"];
             rep.DataBind();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

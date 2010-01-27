@@ -41,10 +41,5 @@ namespace HistoryModules
         {
             grd.DataSource = node["Grid"];
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

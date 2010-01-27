@@ -67,10 +67,5 @@ namespace ChangeSkinModules
                     rep.DataBind();
                 };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

@@ -237,11 +237,6 @@ minutes. You might also - dependent upon your portal installation - be forced to
             filter.Focus();
         }
 
-        public string GetCaption()
-        {
-            return "";
-        }
-
         protected string GetCssClassAccordingToIsInstalled(object isInstalledObj, object hasUpdateObj)
         {
             bool isInstalled = (bool)isInstalledObj;

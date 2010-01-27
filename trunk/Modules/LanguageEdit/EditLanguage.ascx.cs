@@ -58,11 +58,6 @@ of your portal installation, or that your cannot find some other way.
             grd.DataSource = tmp;
         }
 
-        public string GetCaption()
-        {
-            return "";
-        }
-
         [ActiveEvent("GetHelpContents")]
         protected static void GetHelpContents(object sender, ActiveEventArgs e)
         {

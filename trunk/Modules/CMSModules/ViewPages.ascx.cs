@@ -249,10 +249,5 @@ namespace CMSModules
             CheckBox ch = Selector.FindControl<CheckBox>(this, "hideFromMenu");
             ch.Checked = node["HideFromMenu"].Get<bool>();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

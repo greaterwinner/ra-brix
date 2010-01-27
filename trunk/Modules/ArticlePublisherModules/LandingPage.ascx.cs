@@ -37,10 +37,5 @@ namespace ArticlePublisherModules
                     }
                 };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

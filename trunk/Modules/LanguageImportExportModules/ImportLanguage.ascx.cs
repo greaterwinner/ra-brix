@@ -58,10 +58,5 @@ You might want to ask your portal vendor if he have languages that you need in h
         public void InitialLoading(Node init)
         {
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

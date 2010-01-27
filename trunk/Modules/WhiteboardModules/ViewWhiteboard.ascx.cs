@@ -83,11 +83,6 @@ namespace WhiteboardModules
                 };
         }
 
-        public string GetCaption()
-        {
-            return "";
-        }
-
         [ActiveEvent("GetHelpContents")]
         protected static void GetHelpContents(object sender, ActiveEventArgs e)
         {
