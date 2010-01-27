@@ -63,10 +63,5 @@ namespace CMSModules
             cmsPageName.Select();
             cmsPageName.Focus();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

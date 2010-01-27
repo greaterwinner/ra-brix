@@ -151,11 +151,6 @@ namespace InstalledAppsModules
             numberOfFiles.InnerHtml = idxNoFiles.ToString();
             uninstall.DataBind();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

@@ -65,11 +65,6 @@ namespace SettingsModules
                     EditEventName = node["EditEventName"].Get<string>();
                 };
         }
-
-        public string GetCaption()
-        {
-            return Language.Instance["EditSettings", null, "Edit Settings"];
-        }
     }
 }
 

@@ -56,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewUser.ascx.cs">
+      <DependentUpon>ViewUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EditTags.ascx.cs">
       <DependentUpon>EditTags.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,6 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EditTags.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewUser.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

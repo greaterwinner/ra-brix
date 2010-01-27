@@ -99,10 +99,5 @@ as the Help module.
                     .Render();
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

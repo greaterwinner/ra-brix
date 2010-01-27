@@ -561,10 +561,5 @@ namespace ForumModules
                 PreviouslyShownComment = null;
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

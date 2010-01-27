@@ -205,10 +205,5 @@ namespace LoginOpenIDModules
                 openIdURL.Text = userNameCookie.Value;
             }
         }
-
-        public string GetCaption()
-        {
-            return Language.Instance["OpenIDCaption", null, "Login with OpenID"];
-        }
     }
 }

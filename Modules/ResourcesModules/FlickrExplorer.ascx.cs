@@ -134,10 +134,5 @@ namespace ResourcesModules
                     pnlWrp.DataBind();
                 };
         }
-
-        string IModule.GetCaption()
-        {
-            return "";
-        }
     }
 }

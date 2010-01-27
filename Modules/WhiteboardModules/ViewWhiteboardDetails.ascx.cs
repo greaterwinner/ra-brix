@@ -69,11 +69,6 @@ namespace WhiteboardModules
             _cells = node;
             headerLbl.Text = node["Header"].Get<string>();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

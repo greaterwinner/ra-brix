@@ -47,10 +47,5 @@ be imported into either other installations or kept as backups for the future.
         public void InitialLoading(Node init)
         {
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

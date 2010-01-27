@@ -54,10 +54,5 @@ namespace ADGroups2RolesModules
                             .Render();
                     };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

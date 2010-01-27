@@ -41,10 +41,5 @@ namespace ChangeSkinModules
         public void InitialLoading(Node node)
         {
         }
-
-        public string GetCaption()
-        {
-            return "Choose a skin-ZIP file to upload";
-        }
     }
 }

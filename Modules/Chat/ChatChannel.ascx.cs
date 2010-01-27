@@ -129,10 +129,5 @@ namespace ChatModules
             if (!string.IsNullOrEmpty(_chattingWith))
                 ChattingWith = _chattingWith;
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

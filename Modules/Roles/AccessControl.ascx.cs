@@ -253,11 +253,6 @@ This is being done through the Roles/Access Control menu item in the portal.
                 selectRoles.Items.Add(l);
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

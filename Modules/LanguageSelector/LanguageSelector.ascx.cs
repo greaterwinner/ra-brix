@@ -56,10 +56,5 @@ exist in your portal installation the default language - which is English - will
         public void InitialLoading(Node node)
         {
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

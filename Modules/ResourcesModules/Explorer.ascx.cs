@@ -193,10 +193,5 @@ namespace ResourcesModules
                     EventToRaise = node["EventToRaise"].Get<string>();
                 };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

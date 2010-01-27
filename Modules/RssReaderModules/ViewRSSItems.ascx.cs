@@ -48,11 +48,6 @@ namespace RssReaderModules
             rep.DataSource = node["Items"];
             rep.DataBind();
         }
-
-        public string GetCaption()
-        {
-            return Language.Instance["ConfigureRssModule", null, "News form the world..."];
-        }
     }
 }
 

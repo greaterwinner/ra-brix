@@ -35,10 +35,5 @@ namespace RolesModules
         {
             grd.DataSource = node["Grid"];
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

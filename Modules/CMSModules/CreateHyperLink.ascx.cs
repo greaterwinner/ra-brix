@@ -72,10 +72,5 @@ namespace CMSModules
             anchorText.Text = node["AnchorText"].Get<string>();
             new EffectFocusAndSelect(urlText).Render();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

@@ -786,10 +786,5 @@ namespace CalendarModules
         public void InitialLoading(Node node)
         {
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

@@ -60,10 +60,5 @@ to, for instance through some settings or similar.
                 iframe.Attributes.Add("src", src);
             }
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

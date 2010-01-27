@@ -87,10 +87,5 @@ namespace ArticlePublisherModules
                 "EditArticle",
                 node);
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }

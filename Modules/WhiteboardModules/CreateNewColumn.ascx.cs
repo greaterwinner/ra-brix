@@ -55,11 +55,6 @@ namespace WhiteboardModules
                     WhiteboardID = node["WhiteboardID"].Get<string>();
                 };
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

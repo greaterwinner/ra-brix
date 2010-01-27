@@ -507,6 +507,27 @@ namespace ArticlePublisherController
                 "dynMid",
                 node);
 
+            // If user is not null, we also display the user profile...
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", userNameFilter));
+                node = new Node();
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Username"].Value = user.Username;
+                node["ModuleSettings"]["Email"].Value = user.Email ?? "unknown";
+                node["ModuleSettings"]["LastLoggedIn"].Value = user.LastLoggedIn;
+                node["ModuleSettings"]["Phone"].Value = user.Phone ?? "555-whatever";
+                node["ModuleSettings"]["Roles"].Value = user.GetRolesString();
+                node["ModuleSettings"]["ArticleCount"].Value = Article.CountWhere(
+                    Criteria.Eq("Author.Username", user.Username));
+                node["ModuleSettings"]["CommentCount"].Value = ForumPost.CountWhere(
+                    Criteria.Eq("RegisteredUser.Username", user.Username));
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.ViewUser",
+                    "dynMid",
+                    node);
+            }
+
             // Showing articles
             node = new Node();
             int idxNo = 0;

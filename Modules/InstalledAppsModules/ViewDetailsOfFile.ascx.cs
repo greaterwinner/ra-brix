@@ -145,11 +145,6 @@ namespace InstalledAppsModules
             _node = node.UnTie();
             headerLbl.Text = node["FileFullPath"].Get<string>();
         }
-
-        public string GetCaption()
-        {
-            return "";
-        }
     }
 }
 

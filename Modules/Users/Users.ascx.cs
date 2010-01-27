@@ -29,11 +29,6 @@ namespace UsersModules
                 };
         }
 
-        public string GetCaption()
-        {
-            return "";
-        }
-
         protected void grid_Deleted(object sender, Grid.GridActionEventArgs e)
         {
             Node node = new Node();
