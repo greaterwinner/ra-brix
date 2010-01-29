@@ -137,7 +137,20 @@ namespace ForumModules
                 p.URL = Main.Name + ".aspx";
                 p.Name = anonTxt.Text;
                 if (Users.LoggedInUserName != null)
+                {
+                    p.Score = 3;
                     p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    Node node = new Node();
+                    node["Username"].Value = Users.LoggedInUserName;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "UserCreatedAnArticleComment",
+                        node);
+                }
+                else
+                {
+                    p.Score = -3;
+                }
                 Main.Posts.Add(p);
                 Main.Save();
 
@@ -178,7 +191,20 @@ namespace ForumModules
                 n.Name = anonTxt.Text;
                 n.URL = parent.URL;
                 if (Users.LoggedInUserName != null)
+                {
                     n.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    n.Score = 3;
+                    Node node = new Node();
+                    node["Username"].Value = Users.LoggedInUserName;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "UserCreatedAnArticleComment",
+                        node);
+                }
+                else
+                {
+                    n.Score = -3;
+                }
                 parent.Replies.Add(n);
                 parent.Save();
                 root.Controls.Clear();

@@ -32,6 +32,9 @@ namespace UserRecords
         public string Phone { get; set; }
 
         [ActiveField]
+        public int Score { get; set; }
+
+        [ActiveField]
         public DateTime LastLoggedIn { get; set; }
 
         [ActiveField(IsOwner = false)]

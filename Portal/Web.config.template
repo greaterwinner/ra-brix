@@ -34,6 +34,16 @@
 
     <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
 
+    <add key="PointsForNewComment" value="5" />
+
+    <add key="PointsForNewArticle" value="25" />
+
+    <add key="PointsForUpVote" value="1" />
+
+    <add key="PointsForDownVote" value="-1" />
+
+    <add key="NumberOfArticlesToDisplay" value="50" />
+
   </appSettings>
 
   <system.web>

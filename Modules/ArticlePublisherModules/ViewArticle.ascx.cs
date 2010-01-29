@@ -12,6 +12,7 @@ using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using HelperGlobals;
 using System;
+using LanguageRecords;
 
 namespace ArticlePublisherModules
 {
@@ -51,7 +52,14 @@ namespace ArticlePublisherModules
             header.InnerHtml = node["Header"].Get<string>();
             ingress.InnerHtml = node["Ingress"].Get<string>();
             content.InnerHtml = node["Body"].Get<string>();
-            date.InnerHtml = DateFormatter.FormatDate(node["Date"].Get<DateTime>());
+            date.InnerHtml = Language.Instance["Published", null, "Published"] + " " +
+                DateFormatter.FormatDate(node["Date"].Get<DateTime>()) +
+                " - " +
+                string.Format(
+                    Language.Instance["ArticleViewed", null, "viewed {0} times"], node["ViewCount"].Value) +
+                " - " +
+                string.Format(
+                    Language.Instance["BookmarkedBy", null, "bookmarked {0} times"], node["BookmarkedBy"].Value);
             image.Src = node["MainImage"].Get<string>();
             image.Alt = node["Header"].Get<string>() + " - " + node["Ingress"].Get<string>();
             author.HRef = "~/authors/" + node["Author"].Get<string>() + ".aspx";

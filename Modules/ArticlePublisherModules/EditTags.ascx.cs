@@ -22,6 +22,21 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::Ra.Widgets.Panel repWrp;
 
+        protected void DeleteTag(object sender, EventArgs e)
+        {
+            ExtButton b = sender as ExtButton;
+            int id = int.Parse(b.Xtra);
+            Node node = new Node();
+            node["ID"].Value = id;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ArticleDeleteTag",
+                node);
+            rep.DataSource = node["Tags"];
+            rep.DataBind();
+            repWrp.ReRender();
+        }
+
         protected void StickyChanged(object sender, EventArgs e)
         {
             CheckBox b = sender as CheckBox;
