@@ -1784,6 +1784,15 @@ a.bookmarks
 	white-space:nowrap;
 }
 
+.userDiv
+{
+	float:left;
+	width:250px;
+	height:64px;
+	padding:5px;
+	border:dashed 1px #999;
+}
+
 
 
 

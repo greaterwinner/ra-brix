@@ -22,10 +22,16 @@
                 <ra:CheckBox 
                     runat="server" 
                     OnCheckedChanged="StickyChanged"
+                    style="display:block;"
                     Xtra='<%#Eval("[ID].Value") %>'
                     ToolTip='<%#LanguageRecords.Language.Instance["StickyMeans", null, "Sticky means that the tag will be visible on the main landing page as a category"] %>'
                     Checked='<%#Eval("[Sticky].Value") %>'
                     Text='<%#LanguageRecords.Language.Instance["Sticky", null, "Sticky"] %>' />
+                <ra:ExtButton 
+                    runat="server" 
+                    Xtra='<%#Eval("[ID].Value") %>'
+                    Text='<%#LanguageRecords.Language.Instance["Delete", null, "Delete"] %>'
+                    OnClick="DeleteTag" />
             </div>
         </ItemTemplate>
     </asp:Repeater>

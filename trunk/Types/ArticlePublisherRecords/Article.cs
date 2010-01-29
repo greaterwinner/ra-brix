@@ -45,6 +45,9 @@ namespace ArticlePublisherRecords
         [ActiveField]
         public string OriginalImage { get; set; }
 
+        [ActiveField]
+        public int ViewCount { get; set; }
+
         [ActiveField(IsOwner = false)]
         public LazyList<Tag> Tags { get; set; }
 

@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using ForumRecords;
 using UserRecords;
 using Ra;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace ArticlePublisherController
 {
@@ -65,6 +67,23 @@ namespace ArticlePublisherController
                 node);
         }
 
+        [ActiveEvent(Name = "UserCreatedAnArticleComment")]
+        protected void UserCreatedAnArticleComment(object sender, ActiveEventArgs e)
+        {
+            User user = User.SelectFirst(
+                Criteria.Eq("Username", e.Params["Username"].Value));
+            user.Score += int.Parse(Settings.Instance["PointsForNewComment"]);
+            user.Save();
+        }
+
+        [ActiveEvent(Name = "UserCreatedNewArticle")]
+        protected void UserCreatedNewArticle(object sender, ActiveEventArgs e)
+        {
+            User user = User.SelectFirst(
+                Criteria.Eq("Username", e.Params["Username"].Value));
+            user.Score += int.Parse(Settings.Instance["PointsForNewArticle"]);
+            user.Save();
+        }
 
         [ActiveEvent(Name = "ArticleTagStickyChanged")]
         protected void ArticleTagStickyChanged(object sender, ActiveEventArgs e)
@@ -131,6 +150,13 @@ namespace ArticlePublisherController
                 // NEW article...!
                 a = new Article();
                 a.Published = DateTime.Now;
+
+                Node node = new Node();
+                node["Username"].Value = Users.LoggedInUserName;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "UserCreatedNewArticle",
+                    node);
             }
             else
             {
@@ -252,6 +278,13 @@ namespace ArticlePublisherController
             vote.Save();
             post.Save();
             e.Params["Refresh"].Value = true;
+
+            // Giving user score
+            if (score > 0)
+                vote.User.Score += int.Parse(Settings.Instance["PointsForUpVote"]);
+            else
+                vote.User.Score += int.Parse(Settings.Instance["PointsForDownVote"]);
+            vote.User.Save();
         }
 
         [ActiveEvent(Name = "GetArticleBookmarks")]
@@ -270,6 +303,25 @@ namespace ArticlePublisherController
             }
         }
 
+        [ActiveEvent(Name = "ArticleDeleteTag")]
+        protected void ArticleDeleteTag(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["ID"].Get<int>();
+            Tag tag = Tag.SelectByID(id);
+            tag.Delete();
+
+            int idxNo = 0;
+            foreach (Tag idx in Tag.Select())
+            {
+                e.Params["Tags"]["Tag" + idxNo]["ID"].Value = idx.ID;
+                e.Params["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
+                e.Params["Tags"]["Tag" + idxNo]["Sticky"].Value = idx.ShowInLandingPage;
+                e.Params["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                idxNo += 1;
+            }
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
@@ -279,6 +331,125 @@ namespace ArticlePublisherController
                 contentId = contentId.Trim('/');
             }
 
+            // Showing sticky tags at the top...
+            ShowLandingPageTags();
+
+            if (contentId == null)
+            {
+                // Showing all articles, but ONLY if Article system is NOT turned off in settings...
+                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
+                    return;
+
+                // Setting title of page
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                    Settings.Instance["ArticleMainLandingPageTitle"];
+
+                // Showing all articles...
+                ShowArticles(null, null, null);
+
+                // Display status bar, link to users...
+                DisplayStatusAndUsersLink();
+            }
+            else if (contentId != null && contentId == "authors/all")
+            {
+                Node nu = new Node();
+                int idxNo = 0;
+                foreach (User idx in User.Select(Criteria.Sort("Score", false)))
+                {
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["Name"].Value = idx.Username;
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["Score"].Value = idx.Score;
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username + ".aspx";
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["ImageSrc"].Value =
+                        string.Format(
+                            "http://www.gravatar.com/avatar/{0}?s=64&d=identicon",
+                            MD5Hash(idx.Email ?? "unknown"));
+                    idxNo += 1;
+                }
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.ViewUsers",
+                    "dynMid",
+                    nu);
+            }
+            else if (contentId != null && contentId.Contains("authors/"))
+            {
+                // Showing articles from specific authors...
+                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                    Language.Instance[
+                        "ShowingArticleFromAuthor", 
+                        null, 
+                        "Articles written by "] + author;
+
+                // Showing articles from author
+                ShowArticles(author, null, null);
+
+                // Display status bar, link to users...
+                DisplayStatusAndUsersLink();
+            }
+            else if (contentId != null && contentId.Contains("tags/"))
+            {
+                // Showing articles from specific authors...
+                string tag = HttpContext.Current.Server.UrlDecode(
+                    contentId.Substring(contentId.LastIndexOf("/") + 1)
+                        .Replace(".aspx", ""));
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                    Language.Instance[
+                        "ShowingArticleTags", 
+                        null, 
+                        "Articles tagged with "] + tag;
+
+                // Showing articles from author
+                ShowArticles(null, null, tag);
+
+                // Display status bar, link to users...
+                DisplayStatusAndUsersLink();
+            }
+            else
+            {
+                // Showing search
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.SearchArticles",
+                    "dynMid");
+
+                // Showing specific article
+                ShowSpecificArticle(contentId);
+
+                // Display status bar, link to users...
+                DisplayStatusAndUsersLink();
+            }
+        }
+
+        private static void DisplayStatusAndUsersLink()
+        {
+            Node node = new Node();
+            node["ModuleSettings"]["UserCount"].Value = User.Count;
+            node["ModuleSettings"]["ArticleCount"].Value = Article.Count;
+            node["ModuleSettings"]["CommentCount"].Value = ForumPost.Count;
+            node["AddToExistingCollection"].Value = true;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.Status",
+                "dynMid",
+                node);
+        }
+
+        private static string MD5Hash(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return string.Empty;
+
+            StringBuilder emailHash = new StringBuilder();
+            MD5 md5 = MD5.Create();
+            byte[] emailBuffer = Encoding.ASCII.GetBytes(email);
+            byte[] hash = md5.ComputeHash(emailBuffer);
+
+            foreach (byte hashByte in hash)
+                emailHash.Append(hashByte.ToString("x2"));
+
+            return emailHash.ToString();
+        }
+
+        private void ShowLandingPageTags()
+        {
             // Showing main/landing-page tags...
             Node node = new Node();
             int idxNo = 0;
@@ -294,50 +465,6 @@ namespace ArticlePublisherController
                 "ArticlePublisherModules.ShowTags",
                 "dynTop",
                 node);
-
-            if (contentId == null)
-            {
-                // Showing all articles, but ONLY if Article system is NOT turned off in settings...
-                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
-                    return;
-
-                // Setting title of page
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
-                    Settings.Instance["ArticleMainLandingPageTitle"];
-
-                // Showing all articles...
-                ShowArticles(null, null, null);
-            }
-            else if (contentId != null && contentId.Contains("authors/"))
-            {
-                // Showing articles from specific authors...
-                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleFromAuthor", null, "Articles written by "] + author;
-
-                // Showing articles from author
-                ShowArticles(author, null, null);
-            }
-            else if (contentId != null && contentId.Contains("tags/"))
-            {
-                // Showing articles from specific authors...
-                string tag = HttpContext.Current.Server.UrlDecode(contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", ""));
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = Language.Instance["ShowingArticleTags", null, "Articles tagged with "] + tag;
-
-                // Showing articles from author
-                ShowArticles(null, null, tag);
-            }
-            else
-            {
-                // Showing search
-                node = new Node();
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.SearchArticles",
-                    "dynMid",
-                    node);
-
-                // Showing specific article
-                ShowSpecificArticle(contentId);
-            }
         }
 
         private static void ShowSpecificArticle(string contentId)
@@ -364,6 +491,10 @@ namespace ArticlePublisherController
             if (a == null)
                 return;
 
+            // Incrementing view count
+            a.ViewCount += 1;
+            a.Save();
+
             // Setting title of page
             ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                 Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] +
@@ -376,6 +507,7 @@ namespace ArticlePublisherController
             node["ModuleSettings"]["Date"].Value = a.Published;
             node["ModuleSettings"]["Ingress"].Value = a.Ingress;
             node["ModuleSettings"]["ArticleID"].Value = a.ID;
+            node["ModuleSettings"]["ViewCount"].Value = a.ViewCount;
             node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
             node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
@@ -389,6 +521,9 @@ namespace ArticlePublisherController
             {
                 node["ModuleSettings"]["Bookmarked"].Value = false;
             }
+            node["ModuleSettings"]["BookmarkedBy"].Value = 
+                Bookmark.CountWhere(
+                    Criteria.Eq("Article.URL", a.URL));
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.ViewArticle",
                 "dynMid",
@@ -488,6 +623,7 @@ namespace ArticlePublisherController
 
         private static void ShowArticles(string userNameFilter, string filter, string tag)
         {
+            int noArticlesToDisplay = int.Parse(Settings.Instance["NumberOfArticlesToDisplay"]);
             Node node = new Node();
 
             // Showing bookmarks module
@@ -518,6 +654,7 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["LastLoggedIn"].Value = user.LastLoggedIn;
                 node["ModuleSettings"]["Phone"].Value = user.Phone ?? "555-whatever";
                 node["ModuleSettings"]["Roles"].Value = user.GetRolesString();
+                node["ModuleSettings"]["Score"].Value = user.Score;
                 node["ModuleSettings"]["ArticleCount"].Value = Article.CountWhere(
                     Criteria.Eq("Author.Username", user.Username));
                 node["ModuleSettings"]["CommentCount"].Value = ForumPost.CountWhere(
@@ -562,11 +699,11 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
 
-                // Making sure we only show the 10 latest articles...
-                if (++idxNo == 10)
+                // Making sure we only show the x latest articles...
+                if (++idxNo == noArticlesToDisplay)
                     break;
             }
-            if (idxNo < 10)
+            if (idxNo < noArticlesToDisplay)
             {
                 if (filter != null && filter.Length > 0)
                 {
@@ -596,8 +733,8 @@ namespace ArticlePublisherController
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
 
-                        // Making sure we only show the 10 latest articles...
-                        if (++idxNo == 10)
+                        // Making sure we only show the x latest articles...
+                        if (++idxNo == noArticlesToDisplay)
                             break;
                     }
                 }
