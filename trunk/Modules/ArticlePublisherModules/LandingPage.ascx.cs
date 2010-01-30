@@ -18,12 +18,18 @@ namespace ArticlePublisherModules
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::Ra.Widgets.Panel infoWrp;
+        protected global::Ra.Widgets.Label header;
 
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
                 {
+                    if (node["Header"].Value != null)
+                    {
+                        header.Visible = true;
+                        header.Text = node["Header"].Get<string>();
+                    }
                     infoWrp.DataBind();
                     if (node["Articles"].Count == 0)
                     {

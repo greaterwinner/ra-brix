@@ -43,7 +43,7 @@
             OnGetImageDialog="editor_GetImageDialog"
             OnGetResourceDialog="editor_GetResourceDialog"
             OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
-            CtrlKeys="s,g"
+            CtrlKeys="s"
             OnCtrlKey="editor_CtrlKeys"
             OnGetExtraToolbarControls="editor_GetExtraToolbarControls"
             runat="server" />

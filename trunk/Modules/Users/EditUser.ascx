@@ -55,30 +55,43 @@
         </div>
     </div>
     <div style="clear:both;">
-        <ra:SelectList 
+        <ra:Panel 
             runat="server" 
-            id="selectRole" 
-            OnSelectedIndexChanged="selectRole_SelectedIndexChanged">
-        </ra:SelectList>
-        <ra:Panel runat="server" id="repWrp">
-            <asp:Repeater runat="server" ID="rep">
-                <HeaderTemplate>
-                    <ul class="list">
-                </HeaderTemplate>
-                <FooterTemplate>
-                    </ul>
-                </FooterTemplate>
-                <ItemTemplate>
-                    <li>
-                        <ra:LinkButton 
-                            runat="server" 
-                            Text="X" 
-                            OnClick="RoleDeleted" 
-                            Xtra='<%#Eval("Value") %>' />
-                        <%#Eval("Value") %>
-                    </li>
-                </ItemTemplate>
-            </asp:Repeater>
+            id="roleEditing">
+            <ra:SelectList 
+                runat="server" 
+                id="selectRole" 
+                OnSelectedIndexChanged="selectRole_SelectedIndexChanged">
+            </ra:SelectList>
+            <ra:Panel runat="server" id="repWrp">
+                <asp:Repeater runat="server" ID="rep">
+                    <HeaderTemplate>
+                        <ul class="list">
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        </ul>
+                    </FooterTemplate>
+                    <ItemTemplate>
+                        <li>
+                            <ra:LinkButton 
+                                runat="server" 
+                                Text="X" 
+                                OnClick="RoleDeleted" 
+                                Xtra='<%#Eval("Value") %>' />
+                            <%#Eval("Value") %>
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ra:Panel>
         </ra:Panel>
     </div>
+    <h2><%=LanguageRecords.Language.Instance["Biography", null, "Biography"]%></h2>
+    <ra:RichEdit
+        ID="editor" 
+        CssClass="editor"
+        OnGetHyperLinkDialog="editor_GetHyperLinkDialog"
+        CtrlKeys="s"
+        OnCtrlKey="editor_CtrlKeys"
+        OnGetExtraToolbarControls="editor_GetExtraToolbarControls"
+        runat="server" />
 </div>

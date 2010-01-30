@@ -1790,8 +1790,17 @@ a.bookmarks
 	width:250px;
 	height:64px;
 	padding:5px;
+	margin:5px;
 	border:dashed 1px #999;
 }
+
+.biography
+{
+	padding:15px;
+	margin:25px 100px 25px 25px;
+	border:dashed 1px #999;
+}
+
 
 
 

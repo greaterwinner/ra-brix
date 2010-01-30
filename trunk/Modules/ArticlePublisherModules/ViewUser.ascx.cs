@@ -24,6 +24,7 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl summaryView;
         protected global::System.Web.UI.HtmlControls.HtmlImage gravatar;
+        protected global::Ra.Widgets.Label biography;
 
         public void InitialLoading(Node node)
         {
@@ -42,8 +43,9 @@ to check out if he passes the Turing Test you can call him at {4}. User has {6} 
             gravatar.Alt = "The facial expressions of the humanoid declared to own the OpenID of " + 
                 node["Username"].Get<string>();
             gravatar.Src = string.Format(
-                "http://www.gravatar.com/avatar/{0}?s=64&d=identicon",
+                "http://www.gravatar.com/avatar/{0}?s=80&d=identicon",
                 MD5Hash(node["Email"].Get<string>()));
+            biography.Text = node["Biography"].Get<string>();
         }
 
         private static string MD5Hash(string email)

@@ -30,7 +30,7 @@
         <ra:TextBox 
             runat="server" 
             CssClass="forumHeaderTxt"
-            Text="Anonymous Coward"
+            Text='<%#LanguageRecords.Language.Instance["AnonymousCoward", null, "Anonymous Coward"] %>'
             id="anonTxt" />
         <ra:Label 
             runat="server" 

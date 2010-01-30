@@ -69,6 +69,7 @@ namespace ForumModules
                     AllowVoting = node["AllowVoting"].Get<bool>();
                     InitializeForum(-1);
                     pnlWrp.DataBind();
+                    anonTxt.DataBind();
                 };
         }
 
@@ -149,6 +150,12 @@ namespace ForumModules
                 }
                 else
                 {
+                    if (anonTxt.Text != Language.Instance["AnonymousCoward", null, "Anonymous Coward"])
+                    {
+                        p.Name =
+                            Language.Instance["AnonymousCowardShort", null, "A.C."] + " - " +
+                            anonTxt.Text;
+                    }
                     p.Score = -3;
                 }
                 Main.Posts.Add(p);
@@ -203,6 +210,12 @@ namespace ForumModules
                 }
                 else
                 {
+                    if (anonTxt.Text != Language.Instance["AnonymousCoward", null, "Anonymous Coward"])
+                    {
+                        n.Name =
+                            Language.Instance["AnonymousCowardShort", null, "A.C."] + " - " +
+                            anonTxt.Text;
+                    }
                     n.Score = -3;
                 }
                 parent.Replies.Add(n);

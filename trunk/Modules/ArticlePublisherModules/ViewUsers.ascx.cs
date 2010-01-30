@@ -20,11 +20,13 @@ namespace ArticlePublisherModules
     public class ViewUsers : System.Web.UI.UserControl, IModule
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
+        protected global::Ra.Widgets.Label header;
 
         public void InitialLoading(Node node)
         {
             rep.DataSource = node["Users"];
             rep.DataBind();
+            header.Text = node["Header"].Get<string>();
         }
     }
 }

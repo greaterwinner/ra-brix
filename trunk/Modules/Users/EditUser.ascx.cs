@@ -14,6 +14,7 @@ using Ra.Widgets;
 using Ra.Brix.Loader;
 using ASP = System.Web.UI.WebControls;
 using Ra.Brix.Types;
+using Ra.Extensions.Widgets;
 
 namespace UsersModules
 {
@@ -24,11 +25,13 @@ namespace UsersModules
         protected global::Ra.Widgets.Label lblUsername;
         protected global::Ra.Widgets.Label lblLastLoggedIn;
         protected global::Ra.Widgets.Panel repWrp;
+        protected global::Ra.Widgets.Panel roleEditing;
         protected global::Ra.Extensions.Widgets.InPlaceEdit email;
         protected global::Ra.Extensions.Widgets.InPlaceEdit phone;
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl userData;
         protected global::Ra.Widgets.SelectList selectRole;
+        protected global::Ra.Extensions.Widgets.RichEdit editor;
 
         public void InitialLoading(Node node)
         {
@@ -40,6 +43,8 @@ namespace UsersModules
             email.Text = node["Email"].Get<string>();
             GetGravatar();
             phone.Text = node["Phone"].Get<string>();
+            roleEditing.Visible = node["AllowRoleEditing"].Get<bool>();
+            editor.Text = node["Biography"].Get<string>();
 
             // Bindig roles
             Session["UsersModules.EditUser.Roles"] = node["Roles"];
@@ -49,6 +54,61 @@ namespace UsersModules
             {
                 ListItem i = new ListItem(idx.Get<string>(), idx.Get<string>());
                 selectRole.Items.Add(i);
+            }
+        }
+
+        protected void editor_GetHyperLinkDialog(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["AnchorText"].Value = editor.Selection;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "CMSGetHyperLinkDialog",
+                node);
+        }
+
+        [ActiveEvent(Name = "CMSInsertLink")]
+        protected void CMSInsertLink(object sender, ActiveEventArgs e)
+        {
+            string html = string.Format(
+                @"<a href=""{0}"">{1}</a>",
+                e.Params["URL"].Get<string>(),
+                e.Params["Text"].Get<string>());
+            editor.PasteHTML(html);
+        }
+
+        protected void editor_GetExtraToolbarControls(object sender, RichEdit.ExtraToolbarControlsEventArgs e)
+        {
+            // Save button
+            LinkButton submit = new LinkButton();
+            submit.ID = "submit";
+            submit.CssClass = "editorBtn save";
+            submit.Click += submit_Click;
+            submit.Text = "&nbsp;";
+            e.Controls.Add(submit);
+        }
+
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            SaveBiography();
+        }
+
+        private void SaveBiography()
+        {
+            Node node = new Node();
+            node["Biography"].Value = editor.Text;
+            node["Username"].Value = lblUsername.Text;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "SaveUserBiography",
+                node);
+        }
+
+        protected void editor_CtrlKeys(object sender, RichEdit.CtrlKeysEventArgs e)
+        {
+            if (e.Key == 's')
+            {
+                SaveBiography();
             }
         }
 
