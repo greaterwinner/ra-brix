@@ -43,7 +43,7 @@ namespace ArticlePublisherController
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
             e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
-            e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonCreateArticle"].Value = "Menu-CreateArticle";
+            e.Params["ButtonCreateArticle"].Value = "Menu-CreateArticle";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonAdministrateTags"].Value = "Menu-EditArticleTags";
         }
 
@@ -354,8 +354,12 @@ namespace ArticlePublisherController
             {
                 Node nu = new Node();
                 int idxNo = 0;
+                nu["ModuleSettings"]["Header"].Value = 
+                    Language.Instance["The100MostActiveAuthors", null, "The 100 most active authors"];
                 foreach (User idx in User.Select(Criteria.Sort("Score", false)))
                 {
+                    if (idxNo > 100)
+                        break;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Name"].Value = idx.Username;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Score"].Value = idx.Score;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username + ".aspx";
@@ -655,6 +659,7 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["Phone"].Value = user.Phone ?? "555-whatever";
                 node["ModuleSettings"]["Roles"].Value = user.GetRolesString();
                 node["ModuleSettings"]["Score"].Value = user.Score;
+                node["ModuleSettings"]["Biography"].Value = user.Biography;
                 node["ModuleSettings"]["ArticleCount"].Value = Article.CountWhere(
                     Criteria.Eq("Author.Username", user.Username));
                 node["ModuleSettings"]["CommentCount"].Value = ForumPost.CountWhere(
@@ -673,6 +678,9 @@ namespace ArticlePublisherController
             if (!string.IsNullOrEmpty(userNameFilter))
             {
                 criteria.Add(Criteria.Eq("Author.Username", userNameFilter));
+                node["ModuleSettings"]["Header"].Value = 
+                    string.Format(Language.Instance["WrittenByAuthor", null, "Written by {0}"],
+                        userNameFilter);
             }
             if (filter != null && filter.Length > 0)
             {
@@ -744,6 +752,35 @@ namespace ArticlePublisherController
                 "ArticlePublisherModules.LandingPage",
                 "dynMid",
                 node);
+
+            // Then getting the articles bookmarked by user (if user is not null)
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                node = new Node();
+                idxNo = 0;
+                foreach (Bookmark idx in Bookmark.Select(Criteria.Eq("User.Username", userNameFilter)))
+                {
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Article.Header;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Article.Ingress;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Article.Body;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.Article.IconImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.Article.MainImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Article.Author == null ? "unknown" : idx.Article.Author.Username;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Article.Published;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.Article.URL + ".aspx";
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.Article.URL + ".aspx")).ToString();
+                    idxNo += 1;
+                }
+                node["ModuleSettings"]["Header"].Value =
+                    string.Format(Language.Instance["BookmarkedByUser", null, "Bookmarked by {0}"],
+                        userNameFilter);
+                node["AddToExistingCollection"].Value = true;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.LandingPage",
+                    "dynMid",
+                    node);
+            }
+
 
             // Then showing latest comments...
             if (Settings.Instance["UseForumsForArticles"] == "True")

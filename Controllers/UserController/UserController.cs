@@ -15,6 +15,7 @@ using Ra.Brix.Data;
 using System.Web;
 using SettingsRecords;
 using UserRecords;
+using HelperGlobals;
 
 namespace UserController
 {
@@ -27,6 +28,7 @@ namespace UserController
             Language.Instance.SetDefaultValue("ButtonUsers", "Users");
             Language.Instance.SetDefaultValue("ButtonViewAllUsers", "View All");
             Language.Instance.SetDefaultValue("ButtonCreateNewUser", "Create New");
+            Language.Instance.SetDefaultValue("ButtonEditMyUser", "Edit Profile");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -39,6 +41,28 @@ namespace UserController
             e.Params["ButtonAdmin"]["ButtonUsers"].Value = "Menu-AdminUsers";
             e.Params["ButtonAdmin"]["ButtonUsers"]["ButtonViewAllUsers"].Value = "Menu-ViewAllUsers";
             e.Params["ButtonAdmin"]["ButtonUsers"]["ButtonCreateNewUser"].Value = "Menu-CreateNewUser";
+            e.Params["ButtonEditMyUser"].Value = "Menu-EditMyProfile";
+        }
+
+        [ActiveEvent(Name = "Menu-EditMyProfile")]
+        protected void EditMyProfile(object sender, ActiveEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                Node nodeDoesntExist = new Node();
+                nodeDoesntExist["Message"].Value = 
+                    Language.Instance["ApparentlyYouDontExist", null, @"You must login before you can edit your profile..."];
+                nodeDoesntExist["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeDoesntExist);
+            }
+            else
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                EditUser(user, false);
+            }
         }
 
         [ActiveEvent(Name="Menu-CreateManyUsers")]
@@ -65,32 +89,58 @@ namespace UserController
             }
             else
             {
-                Node init = new Node();
-                init["TabCaption"].Value = Language.Instance["UserEditCaption", null, "Editing user; "] + user.Username;
-                init["ModuleSettings"]["Username"].Value = user.Username;
-                init["ModuleSettings"]["LastLoggedIn"].Value = user.LastLoggedIn;
-                init["ModuleSettings"]["Email"].Value = user.Email;
-                init["ModuleSettings"]["Phone"].Value = user.Phone;
-
-                int idxNo = 0;
-                foreach (Role idxRole in user.Roles)
-                {
-                    init["ModuleSettings"]["Roles"]["Role" + idxNo].Value = idxRole.Name;
-                    idxNo += 1;
-                }
-
-                idxNo = 0;
-                foreach (Role idxRole in ActiveType<Role>.Select())
-                {
-                    init["ModuleSettings"]["ExistingRoles"]["Role" + idxNo].Value = idxRole.Name;
-                    idxNo += 1;
-                }
-
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "UsersModules.EditUser",
-                    "dynMid",
-                    init);
+                EditUser(user, true);
             }
+        }
+
+        private static void EditUser(User user, bool allowRoleEditing)
+        {
+            Node init = new Node();
+            init["TabCaption"].Value = Language.Instance["UserEditCaption", null, "Editing user; "] + user.Username;
+            init["ModuleSettings"]["Username"].Value = user.Username;
+            init["ModuleSettings"]["LastLoggedIn"].Value = user.LastLoggedIn;
+            init["ModuleSettings"]["Email"].Value = user.Email;
+            init["ModuleSettings"]["Phone"].Value = user.Phone;
+            init["ModuleSettings"]["AllowRoleEditing"].Value = allowRoleEditing;
+            init["ModuleSettings"]["Biography"].Value = user.Biography;
+
+            int idxNo = 0;
+            foreach (Role idxRole in user.Roles)
+            {
+                init["ModuleSettings"]["Roles"]["Role" + idxNo].Value = idxRole.Name;
+                idxNo += 1;
+            }
+
+            idxNo = 0;
+            foreach (Role idxRole in ActiveType<Role>.Select())
+            {
+                init["ModuleSettings"]["ExistingRoles"]["Role" + idxNo].Value = idxRole.Name;
+                idxNo += 1;
+            }
+
+            ActiveEvents.Instance.RaiseLoadControl(
+                "UsersModules.EditUser",
+                "dynMid",
+                init);
+        }
+
+        [ActiveEvent(Name = "SaveUserBiography")]
+        protected void SaveUserBiography(object sender, ActiveEventArgs e)
+        {
+            string bio = e.Params["Biography"].Get<string>();
+            string username = e.Params["Username"].Get<string>();
+            User user = User.SelectFirst(Criteria.Eq("Username", username));
+            user.Biography = bio;
+            user.Save();
+
+            Node node = new Node();
+            node["Message"].Value =
+                Language.Instance["BiographySaved", null, @"Biography was saved..."];
+            node["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                node);
         }
 
         [ActiveEvent(Name = "CreateNewUser")]

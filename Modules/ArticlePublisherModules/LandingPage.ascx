@@ -7,18 +7,18 @@
     Inherits="ArticlePublisherModules.LandingPage" %>
 
 <div class="articleWrapper">
+    <ra:Label 
+        runat="server" 
+        Visible="true"
+        Tag="h2"
+        id="header" />
     <ra:Panel 
         runat="server" 
         id="infoWrp">
         <ra:Label 
             runat="server" 
-            id="lblInfo" 
-            Tag="h1" 
-            Text='<%#LanguageRecords.Language.Instance["NoArticlesFound", null, "No articles found"] %>' />
-        <ra:Label 
-            runat="server" 
             id="description" 
-            Text='<%#LanguageRecords.Language.Instance["NoArticlesFoundYetDescriptionText", null, "No articles found. If this is your first visit here, you should login and start writing articles to publish here."] %>'
+            Text='<%#LanguageRecords.Language.Instance["NoArticlesFoundYetDescription", null, "No articles found with these criteria."] %>'
             Tag="p" />
     </ra:Panel>
     <asp:Repeater 

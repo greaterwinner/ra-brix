@@ -6,11 +6,15 @@
     AutoEventWireup="true" 
     Inherits="ArticlePublisherModules.ViewUsers" %>
 
+<ra:Label 
+    runat="server" 
+    Tag="h1"
+    id="header" />
 <asp:Repeater runat="server" ID="rep">
     <ItemTemplate>
         <div class="userDiv">
             <img 
-                style="width:64px;height:64px;float:right;margin-left:5px;overflow:hidden;"
+                style="width:64px;height:64px;float:left;margin-right:5px;overflow:hidden;"
                 src='<%#Eval("[ImageSrc].Value") %>' 
                 alt='<%#Eval("[Name].Value") %>' />
             <strong style="display:block;">

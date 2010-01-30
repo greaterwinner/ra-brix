@@ -42,6 +42,10 @@
     <Compile Include="UserController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Commons\Commons.csproj">
+      <Project>{EA4DB865-734B-44D3-9AD9-132FD680446D}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
       <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
       <Name>Ra.Brix.Data</Name>
