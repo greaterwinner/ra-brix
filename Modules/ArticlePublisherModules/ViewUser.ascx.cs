@@ -28,7 +28,9 @@ namespace ArticlePublisherModules
 
         public void InitialLoading(Node node)
         {
-            header.InnerHtml = node["Username"].Get<string>();
+            header.InnerHtml = node["Username"].Get<string>() + 
+                " - " +
+                GetRank(node["Score"].Get<int>(), node["IsAdmin"].Get<bool>());
             summaryView.InnerHtml = string.Format(Language.Instance["UserInformationText", null, @"
 User has posted {0} articles and {1} comments. And was last seen {2}. User's email addresse is <a href=""mailto:{3}"">{3}</a> and if you want 
 to check out if he passes the Turing Test you can call him at {4}. User has {6} points. Oh yeah, and user belongs to these role(s); {5}...
@@ -46,6 +48,36 @@ to check out if he passes the Turing Test you can call him at {4}. User has {6} 
                 "http://www.gravatar.com/avatar/{0}?s=80&d=identicon",
                 MD5Hash(node["Email"].Get<string>()));
             biography.Text = node["Biography"].Get<string>();
+        }
+
+        private string GetRank(int score, bool isAdmin)
+        {
+            string retVal = "";
+            if (score < 25)
+                retVal = "Virgin";
+            else if (score < 50)
+                retVal = "Noob";
+            else if (score < 100)
+                retVal = "Mediocre";
+            else if (score < 200)
+                retVal = "Student";
+            else if (score < 400)
+                retVal = "Graduate";
+            else if (score < 800)
+                retVal = "Captain";
+            else if (score < 1600)
+                retVal = "Master";
+            else if (score < 3200)
+                retVal = "Artist";
+            else if (score < 6400)
+                retVal = "Guru";
+            else if (score < 12400)
+                retVal = "Prophet";
+            else
+                retVal = "Living God...!";
+            if (isAdmin)
+                retVal += " [Admin]";
+            return retVal;
         }
 
         private static string MD5Hash(string email)

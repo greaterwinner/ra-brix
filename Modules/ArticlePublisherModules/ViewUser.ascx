@@ -6,22 +6,23 @@
     AutoEventWireup="true" 
     Inherits="ArticlePublisherModules.ViewUser" %>
 
-<a href="http://gravatar.com">
-    <img 
-        runat="server" 
-        id="gravatar" 
-        style="float:right;margin-left:15px;width:80px;height:80px;overflow:hidden;" />
-</a>
-
 <h1 
     runat="server" 
     id="header" />
 
-<ra:Label 
-    runat="server" 
-    Tag="div"
-    CssClass="biography"
-    id="biography" />
+
+<div class="biography">
+    <a href="http://gravatar.com">
+        <img 
+            runat="server" 
+            id="gravatar" 
+            style="float:left;margin-right:15px;width:80px;height:80px;overflow:hidden;" />
+    </a>
+    <ra:Label 
+        runat="server" 
+        Tag="div"
+        id="biography" />
+</div>
 
 <em 
     runat="server" 

@@ -658,6 +658,7 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["LastLoggedIn"].Value = user.LastLoggedIn;
                 node["ModuleSettings"]["Phone"].Value = user.Phone ?? "555-whatever";
                 node["ModuleSettings"]["Roles"].Value = user.GetRolesString();
+                node["ModuleSettings"]["IsAdmin"].Value = user.InRole("Administrator");
                 node["ModuleSettings"]["Score"].Value = user.Score;
                 node["ModuleSettings"]["Biography"].Value = user.Biography;
                 node["ModuleSettings"]["ArticleCount"].Value = Article.CountWhere(
