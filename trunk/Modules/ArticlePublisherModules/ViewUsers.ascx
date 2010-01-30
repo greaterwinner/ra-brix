@@ -10,7 +10,10 @@
     runat="server" 
     Tag="h1"
     id="header" />
-<asp:Repeater runat="server" ID="rep">
+
+<asp:Repeater 
+    runat="server" 
+    ID="rep">
     <ItemTemplate>
         <div class="userDiv">
             <img 

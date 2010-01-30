@@ -1787,7 +1787,7 @@ a.bookmarks
 .userDiv
 {
 	float:left;
-	width:250px;
+	width:350px;
 	height:64px;
 	padding:5px;
 	margin:5px;
@@ -1799,6 +1799,7 @@ a.bookmarks
 	padding:15px;
 	margin:25px 27px 25px 25px;
 	border:dashed 1px #999;
+	overflow:auto;
 }
 
 
