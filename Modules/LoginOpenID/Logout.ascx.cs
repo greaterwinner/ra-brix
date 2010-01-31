@@ -10,17 +10,17 @@
 
 using System;
 using Ra.Brix.Loader;
+using Ra.Brix.Types;
 
 namespace LoginOpenIDModules
 {
     [ActiveModule]
-    public class Logout : System.Web.UI.UserControl
+    public class Logout : System.Web.UI.UserControl, IModule
     {
         protected global::Ra.Extensions.Widgets.ExtButton logout;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            logout.DataBind();
         }
 
         protected void logout_Click(object sender, EventArgs e)
@@ -28,6 +28,13 @@ namespace LoginOpenIDModules
             ActiveEvents.Instance.RaiseActiveEvent(
                 this, 
                 "UserWantsToLogOut");
+        }
+
+        public void InitialLoading(Node node)
+        {
+            logout.Text = LanguageRecords.Language.Instance["Logout", null, "Logout"] +
+                " " +
+                node["Username"].Value;
         }
     }
 }

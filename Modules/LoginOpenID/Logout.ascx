@@ -11,8 +11,7 @@
         runat="server" 
         id="logout" 
         OnClick="logout_Click"
-        style="opacity:0.3;"
-        Text='<%#LanguageRecords.Language.Instance["Logout", null, "Logout"] %>'>
+        style="opacity:0.3;">
         <ra:BehaviorUnveiler 
             runat="server" 
             id="unveilerLogin" />
