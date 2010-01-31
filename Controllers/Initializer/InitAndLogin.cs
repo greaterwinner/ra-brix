@@ -314,6 +314,11 @@ If this is not correct, then please click the button..."],
         [ActiveEvent(Name = "AfterUserLoggedIn")]
         protected void AfterUserLoggedIn(object sender, ActiveEventArgs e)
         {
+            CreatePersistantAutoLoginCookie();
+        }
+
+        private static void CreatePersistantAutoLoginCookie()
+        {
             // Creating persistant cookie, first hashed version...
             HttpCookie hash = new HttpCookie("InitializeController.InitAnLogin.InitialLoadingOfPage.Hash");
             hash.Expires = DateTime.Now.AddMonths(3);
@@ -332,10 +337,8 @@ If this is not correct, then please click the button..."],
         [ActiveEvent(Name = "UserWantsToLogOut")]
         protected void UserWantsToLogOut(object sender, ActiveEventArgs e)
         {
-            HttpCookie cookieServerUsernameHash =
-                HttpContext.Current.Request.Cookies["InitializeController.InitAnLogin.InitialLoadingOfPage.Hash"];
-            cookieServerUsernameHash.Value = "mumbo-jumbo";
-            HttpContext.Current.Response.Cookies.Add(cookieServerUsernameHash);
+            DestroyPersistantCookie();
+
             Users.Instance.Remove(Users.LoggedInUserName);
             Users.LoggedInUserName = null;
             string url = "~/";
@@ -344,6 +347,15 @@ If this is not correct, then please click the button..."],
                 url += HttpContext.Current.Request.Params["ContentID"].Trim('/') + ".aspx";
             }
             AjaxManager.Instance.Redirect(url);
+        }
+
+        private static void DestroyPersistantCookie()
+        {
+            // Destroying persistent cookie that'll "autologin" user next time he comes around...
+            HttpCookie cookieServerUsernameHash =
+                HttpContext.Current.Request.Cookies["InitializeController.InitAnLogin.InitialLoadingOfPage.Hash"];
+            cookieServerUsernameHash.Value = "mumbo-jumbo";
+            HttpContext.Current.Response.Cookies.Add(cookieServerUsernameHash);
         }
 
         private void LoadLoginModule()
