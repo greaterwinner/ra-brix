@@ -21,6 +21,8 @@ using Ra.Selector;
 using Ra.Brix.Data;
 using SettingsRecords;
 using UserRecords;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace InitializeController
 {
@@ -43,9 +45,26 @@ namespace InitializeController
             e.Params["ButtonAppl"].Value = "Menu-ButtonApplications";
         }
 
+        public static string MD5Hash(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return string.Empty;
+
+            StringBuilder strHash = new StringBuilder();
+            MD5 md5 = MD5.Create();
+            byte[] strBuffer = Encoding.ASCII.GetBytes(str);
+            byte[] hash = md5.ComputeHash(strBuffer);
+
+            foreach (byte hashByte in hash)
+                strHash.Append(hashByte.ToString("x2"));
+
+            return strHash.ToString();
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
+            TryToAutoLoginUserFromCookie();
             if (HttpContext.Current.Request.Params["message"] != null)
             {
                 string msgId = HttpContext.Current.Request.Params["message"];
@@ -63,6 +82,7 @@ namespace InitializeController
             {
                 Node node = new Node();
                 node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Username"].Value = Users.LoggedInUserName;
                 ActiveEvents.Instance.RaiseLoadControl(
                     "LoginOpenIDModules.Logout",
                     "dynTop",
@@ -71,6 +91,34 @@ namespace InitializeController
             else
             {
                 LoadLoginModule();
+            }
+        }
+
+        private static void TryToAutoLoginUserFromCookie()
+        {
+            // Checking to see if user has logged in before, if he has we "auto login" him...
+            if (string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                HttpCookie cookieServerUsernameHash =
+                    HttpContext.Current.Request.Cookies["InitializeController.InitAnLogin.InitialLoadingOfPage.Hash"];
+                if (cookieServerUsernameHash != null)
+                {
+                    HttpCookie cookieUsername =
+                        HttpContext.Current.Request.Cookies["InitializeController.InitAnLogin.InitialLoadingOfPage.Username"];
+                    string usernameServerHash = cookieServerUsernameHash.Value;
+                    string username = cookieUsername.Value;
+                    string toBeHashed = HttpContext.Current.Server.MachineName + username;
+                    string hashedValue = MD5Hash(toBeHashed);
+                    if (usernameServerHash == hashedValue)
+                    {
+                        // User has a persistant cookie on disc and should be automatically logged in...
+                        Node node = new Node("Username", username);
+                        ActiveEvents.Instance.RaiseActiveEvent(
+                            typeof(InitAndLogin),
+                            "UserLoggedIn",
+                            node);
+                    }
+                }
             }
         }
 
@@ -212,9 +260,12 @@ please contact administrator of portal to fix this."]);
                 userNode);
 
             LoadMenu();
+            Node logInNode = new Node();
+            logInNode["ModuleSettings"]["Username"].Value = Users.LoggedInUserName;
             ActiveEvents.Instance.RaiseLoadControl(
                 "LoginOpenIDModules.Logout", 
-                "dynTop");
+                "dynTop",
+                logInNode);
 
             DateTime lastLoggedIn = user.LastLoggedIn;
             user.LastLoggedIn = DateTime.Now;
@@ -260,9 +311,31 @@ If this is not correct, then please click the button..."],
                 e.Params);
         }
 
+        [ActiveEvent(Name = "AfterUserLoggedIn")]
+        protected void AfterUserLoggedIn(object sender, ActiveEventArgs e)
+        {
+            // Creating persistant cookie, first hashed version...
+            HttpCookie hash = new HttpCookie("InitializeController.InitAnLogin.InitialLoadingOfPage.Hash");
+            hash.Expires = DateTime.Now.AddMonths(3);
+            hash.HttpOnly = true;
+            hash.Value = MD5Hash(HttpContext.Current.Server.MachineName + Users.LoggedInUserName);
+            HttpContext.Current.Response.Cookies.Add(hash);
+
+            // Then username version
+            HttpCookie username = new HttpCookie("InitializeController.InitAnLogin.InitialLoadingOfPage.Username");
+            username.Expires = DateTime.Now.AddMonths(3);
+            username.HttpOnly = true;
+            username.Value = Users.LoggedInUserName;
+            HttpContext.Current.Response.Cookies.Add(username);
+        }
+
         [ActiveEvent(Name = "UserWantsToLogOut")]
         protected void UserWantsToLogOut(object sender, ActiveEventArgs e)
         {
+            HttpCookie cookieServerUsernameHash =
+                HttpContext.Current.Request.Cookies["InitializeController.InitAnLogin.InitialLoadingOfPage.Hash"];
+            cookieServerUsernameHash.Value = "mumbo-jumbo";
+            HttpContext.Current.Response.Cookies.Add(cookieServerUsernameHash);
             Users.Instance.Remove(Users.LoggedInUserName);
             Users.LoggedInUserName = null;
             string url = "~/";
