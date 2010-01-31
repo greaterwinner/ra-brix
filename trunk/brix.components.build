@@ -189,6 +189,56 @@
       </references>
     </csc>
 
+    <!-- ArticleRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/ArticlePublishing" />
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ArticlePublishing/ArticlePublisherRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/ArticlePublisherRecords/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
+    <!-- ForumRecords -->
+    <mkdir dir="${output.dir}/${library.dir}/Forum" />
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/Forum/ForumRecords.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Types/ForumRecords/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+      </references>
+    </csc>
+
     <!-- CalendarRecords -->
     <mkdir dir="${output.dir}/${library.dir}/Calendar" />
     <csc
@@ -357,6 +407,37 @@
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/Favourites/FavouritesRecords.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+      </references>
+    </csc>
+
+    <!-- ArticlePublisherController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ArticlePublishing/ArticlePublisherController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/ArticlePublisherController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Drawing.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Forum/ForumRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${output.dir}/${library.dir}/ArticlePublishing/ArticlePublisherRecords.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
     </csc>
@@ -1103,6 +1184,82 @@
         <include name="${output.dir}/${library.dir}/Calendar/CalendarRecords.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+      </references>
+    </csc>
+
+    <!-- ArticleModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ArticlePublishing/ArticlePublisherModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/ArticlePublisherModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="ArticlePublisherModules">
+        <include name="Modules/ArticlePublisherModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/ArticlePublisherModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/Calendar/CalendarRecords.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Forum/ForumRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/Components.dll" />
+      </references>
+    </csc>
+
+    <!-- ForumModules -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/Forum/ForumModules.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Modules/ForumModules/**/*.cs" />
+      </sources>
+      <resources failonempty="true" prefix="ForumModules">
+        <include name="Modules/ForumModules/**/*.ascx" if="${debug}" />
+        <include name="Modules/ForumModules/**/*.ascx" unless="${debug}" />
+      </resources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${references.dir}/Ra.dll" />
+        <include name="${references.dir}/Ra.Extensions.dll" />
+        <include name="${references.dir}/Ra.Selector.dll" />
+        <include name="${references.dir}/Ra.Builder.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/Calendar/CalendarRecords.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Forum/ForumRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/Components.dll" />

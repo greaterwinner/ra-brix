@@ -54,6 +54,8 @@
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/CMSCommonPlugins" />
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/Users" />
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/Roles" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/Forum" />
+    <mkdir dir="${output.dir}/${application.pool.dir}/bin/ArticlePublishing" />
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/ManageApplications" />
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/Resources" />
     <mkdir dir="${output.dir}/${application.pool.dir}/bin/MarketPlace" />
@@ -121,6 +123,18 @@
     <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/MarketPlace">
       <fileset>
         <include name="${output.dir}/${library.dir}/MarketPlace/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/Forum">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/Forum/*.*" />
+      </fileset>
+    </copy>
+
+    <copy flatten="true" todir="${output.dir}/${application.pool.dir}/bin/ArticlePublishing">
+      <fileset>
+        <include name="${output.dir}/${library.dir}/ArticlePublishing/*.*" />
       </fileset>
     </copy>
 
