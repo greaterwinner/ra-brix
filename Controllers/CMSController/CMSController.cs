@@ -86,6 +86,27 @@ namespace CMSController
             }
         }
 
+        [ActiveEvent(Name = "ShowCMSPageAtTop")]
+        protected void ShowCMSPageAtTop(object sender, ActiveEventArgs e)
+        {
+            string contentId = e.Params["PageURL"].Get<string>();
+            Page page = Page.FindPage(contentId);
+            if (page != null)
+            {
+                // Access
+                Node node = new Node();
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Header"].Value = page.Header;
+                node["ModuleSettings"]["Content"].Value = page.Body;
+                node["ModuleSettings"]["HideHeader"].Value = page.HideFromHeader;
+
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "CMSModules.NormalContent",
+                    "dynMid",
+                    node);
+            }
+        }
+
         [ActiveEvent(Name = "CMSCreateNewLink")]
         protected void CMSCreateNewLink(object sender, ActiveEventArgs e)
         {

@@ -61,10 +61,16 @@ namespace InitializeController
             return strHash.ToString();
         }
 
+        [ActiveEvent(Name = "Page_Init")]
+        protected void Page_Init(object sender, ActiveEventArgs e)
+        {
+            if (!(HttpContext.Current.Handler as Page).IsPostBack)
+                TryToAutoLoginUserFromCookie();
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
-            TryToAutoLoginUserFromCookie();
             if (HttpContext.Current.Request.Params["message"] != null)
             {
                 string msgId = HttpContext.Current.Request.Params["message"];

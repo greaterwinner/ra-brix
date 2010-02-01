@@ -423,6 +423,22 @@ namespace ArticlePublisherController
             }
         }
 
+        private void ShowLandingPageHeader()
+        {
+            if (Users.LoggedInUserName != null)
+                return;
+            string header = Settings.Instance["ArticleLandingPageHeader"];
+            if (!string.IsNullOrEmpty(header))
+            {
+                Node node = new Node();
+                node["PageURL"].Value = header;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowCMSPageAtTop",
+                    node);
+            }
+        }
+
         private static void DisplayStatusAndUsersLink()
         {
             Node node = new Node();
@@ -625,7 +641,7 @@ namespace ArticlePublisherController
             }
         }
 
-        private static void ShowArticles(string userNameFilter, string filter, string tag)
+        private void ShowArticles(string userNameFilter, string filter, string tag)
         {
             int noArticlesToDisplay = int.Parse(Settings.Instance["NumberOfArticlesToDisplay"]);
             Node node = new Node();
@@ -646,6 +662,9 @@ namespace ArticlePublisherController
                 "ArticlePublisherModules.SearchArticles",
                 "dynMid",
                 node);
+
+            // Showing landing page header
+            ShowLandingPageHeader();
 
             // If user is not null, we also display the user profile...
             if (!string.IsNullOrEmpty(userNameFilter))
