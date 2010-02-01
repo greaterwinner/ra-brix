@@ -40,7 +40,9 @@ namespace CMSModules
             {
                 header.InnerHtml = node["Header"].Get<string>();
             }
-            Page.Title = node["Header"].Get<string>();
+            string tmp = node["Header"].Get<string>();
+            if (!string.IsNullOrEmpty(tmp))
+                Page.Title = node["Header"].Get<string>();
             Load +=
                 delegate
                 {
