@@ -369,6 +369,8 @@ If this is not correct, then please click the button..."],
             Node node = new Node();
             node["GiveFocus"].Value = Settings.Instance["AutoGiveLoginFocus"] == "True";
             node["AddToExistingCollection"].Value = true;
+            node["ModuleSettings"]["MaxVisibility"].Value = 
+                Settings.Instance["LoginMaxVisibility"] == "True";
             ActiveEvents.Instance.RaiseLoadControl(
                 "LoginOpenIDModules.Login",
                 "dynTop",

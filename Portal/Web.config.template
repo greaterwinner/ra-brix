@@ -44,6 +44,8 @@
 
     <add key="NumberOfArticlesToDisplay" value="50" />
 
+    <add key="LoginMaxVisibility" value="True" />
+
   </appSettings>
 
   <system.web>
