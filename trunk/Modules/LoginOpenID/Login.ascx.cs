@@ -29,6 +29,9 @@ namespace LoginOpenIDModules
         protected global::Ra.Widgets.TextBox openIdURL;
         protected global::Ra.Extensions.Widgets.ExtButton logInButton;
         protected global::Ra.Widgets.Panel openIdWrp;
+        private bool _shouldGiveTextBoxFocus;
+        private global::Ra.Behaviors.BehaviorUnveiler unveilLogin;
+        private global::Ra.Behaviors.BehaviorUnveiler unveilerLogin;
  
         private static readonly Regex REGEX_LINK = 
             new Regex(
@@ -180,11 +183,19 @@ namespace LoginOpenIDModules
             AjaxManager.Instance.Redirect(getRequest.ToString());
         }
 
-        private bool _shouldGiveTextBoxFocus;
         public void InitialLoading(Node node)
         {
             GetUserNameFromCookie();
             _shouldGiveTextBoxFocus = node["GiveFocus"].Get<bool>();
+            Load +=
+                delegate
+                {
+                    if (node["MaxVisibility"].Value != null && node["MaxVisibility"].Get<bool>())
+                    {
+                        //unveilerLogin.Visible = false;
+                        //unveilLogin.Visible = false;
+                    }
+                };
         }
 
         protected override void OnPreRender(EventArgs e)

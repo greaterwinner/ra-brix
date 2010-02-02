@@ -425,8 +425,10 @@ namespace ArticlePublisherController
 
         private void ShowLandingPageHeader()
         {
+            // We only display the header if user isn't logged in...
             if (Users.LoggedInUserName != null)
                 return;
+
             string header = Settings.Instance["ArticleLandingPageHeader"];
             if (!string.IsNullOrEmpty(header))
             {
