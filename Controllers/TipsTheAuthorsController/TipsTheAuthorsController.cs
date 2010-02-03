@@ -51,7 +51,7 @@ namespace TipsTheAuthorsController
             foreach (ArticleTip idx in ArticleTip.Select(Criteria.Sort("TipDate", false)))
             {
                 node["ModuleSettings"]["Tips"]["Tip" + idxNo]["URL"].Value = idx.URL;
-                node["ModuleSettings"]["Tips"]["Tip" + idxNo]["Date"].Value = idx.TipDate;
+                node["ModuleSettings"]["Tips"]["Tip" + idxNo]["Date"].Value = DateFormatter.FormatDate(idx.TipDate);
                 node["ModuleSettings"]["Tips"]["Tip" + idxNo]["User"].Value = idx.SubmittedBy == null ? "Anonymous Coward" : idx.SubmittedBy.Username;
                 idxNo += 1;
                 if (idxNo > 100)
