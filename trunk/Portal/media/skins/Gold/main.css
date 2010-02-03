@@ -1802,6 +1802,13 @@ a.bookmarks
 	overflow:auto;
 }
 
+.articleMainBody
+{
+	text-align:justify;
+	line-height:24px;
+	font-size:14px;
+	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+}
 
 
 

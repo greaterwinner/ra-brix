@@ -48,6 +48,7 @@ namespace RolesController
             }
 
             // Settings default language values for module...
+            Language.Instance.SetDefaultValue("ButtonRoles", "Roles");
             Language.Instance.SetDefaultValue("ButtonViewAllRoles", "View All Roles");
             Language.Instance.SetDefaultValue("ButtonCreateRole", "Create Role");
             Language.Instance.SetDefaultValue("ButtonAccessControl", "Access Control");
@@ -56,7 +57,6 @@ namespace RolesController
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            Language.Instance.SetDefaultValue("ButtonRoles", "Roles");
             e.Params["ButtonAdmin"]["ButtonRoles"].Value = "Menu-AdministrateRoles";
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonViewAllRoles"].Value = "Menu-ViewAllRoles";
             e.Params["ButtonAdmin"]["ButtonRoles"]["ButtonCreateRole"].Value = "Menu-CreateRole";
