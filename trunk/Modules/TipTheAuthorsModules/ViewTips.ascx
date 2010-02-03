@@ -12,6 +12,7 @@
             <div>
                 <a 
                     target="_blank" 
+                    rel="nofollow"
                     href='<%#Eval("[URL].Value") %>'>
                     <%#Eval("[URL].Value") %> - 
                     <%#Eval("[Date].Value") %> - 
