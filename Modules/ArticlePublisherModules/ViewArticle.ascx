@@ -30,6 +30,7 @@
 
     <div 
         runat="server" 
+        class="articleMainBody"
         id="content" />
 
     <a 
