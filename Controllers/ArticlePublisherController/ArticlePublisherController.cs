@@ -25,6 +25,9 @@ using UserRecords;
 using Ra;
 using System.Text;
 using System.Security.Cryptography;
+using System.Net;
+using System.IO;
+using System.Web.UI;
 
 namespace ArticlePublisherController
 {
@@ -145,6 +148,7 @@ namespace ArticlePublisherController
 
             // Creating actual article and saving it...
             Article a;
+            bool shouldTweet = false;
             if (id == -1)
             {
                 // NEW article...!
@@ -157,6 +161,7 @@ namespace ArticlePublisherController
                     this,
                     "UserCreatedNewArticle",
                     node);
+                shouldTweet = true;
             }
             else
             {
@@ -187,8 +192,32 @@ namespace ArticlePublisherController
                 a.Tags.Add(tag);
             }
 
+            // Saving article...
             a.Save();
+
+            // Signaling that article is saved
+            Node nodeSignal = new Node();
+            nodeSignal["URL"].Value = a.URL;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "HandleArticleFirstTimePublished",
+                nodeSignal);
+
+            // Redirecting to article...
             AjaxManager.Instance.Redirect("~/" + a.URL + ".aspx");
+        }
+
+        public static string GetBase64Encoded(string inString)
+        {
+            byte[] inData;
+            char[] charArr;
+            charArr = inString.ToCharArray();
+            inData = new byte[charArr.Length];
+            for (int i = 0; i < charArr.Length; i++)
+            {
+                inData[i] = (byte)charArr[i];
+            }
+            return System.Convert.ToBase64String(inData, 0, inData.Length);
         }
 
         [ActiveEvent(Name = "EditArticle")]
@@ -227,7 +256,7 @@ namespace ArticlePublisherController
             {
                 User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
                 Article article = Article.SelectByID(e.Params["ArticleID"].Get<int>());
-                e.Params["ShouldShow"].Value = article.Author == user || 
+                e.Params["ShouldShow"].Value = article.Author == user ||
                     user.InRole("Administrator");
             }
         }
@@ -246,11 +275,11 @@ namespace ArticlePublisherController
             int commentId = e.Params["CommentID"].Get<int>();
             int score = e.Params["Score"].Get<int>();
             ForumPost post = ForumPost.SelectByID(commentId);
-            if (post.RegisteredUser != null && 
+            if (post.RegisteredUser != null &&
                 post.RegisteredUser.Username == Users.LoggedInUserName)
             {
                 Node nodeMessage = new Node();
-                nodeMessage["Message"].Value = 
+                nodeMessage["Message"].Value =
                     Language.Instance["YouCannotVoteForOwnComments", null, "You cannot vote for your own comments"];
                 nodeMessage["Duration"].Value = 2000;
                 ActiveEvents.Instance.RaiseActiveEvent(
@@ -341,7 +370,7 @@ namespace ArticlePublisherController
                     return;
 
                 // Setting title of page
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Settings.Instance["ArticleMainLandingPageTitle"];
 
                 // Showing all articles...
@@ -354,7 +383,7 @@ namespace ArticlePublisherController
             {
                 Node nu = new Node();
                 int idxNo = 0;
-                nu["ModuleSettings"]["Header"].Value = 
+                nu["ModuleSettings"]["Header"].Value =
                     Language.Instance["The100MostActiveAuthors", null, "The 100 most active authors"];
                 foreach (User idx in User.Select(Criteria.Sort("Score", false)))
                 {
@@ -378,10 +407,10 @@ namespace ArticlePublisherController
             {
                 // Showing articles from specific authors...
                 string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
-                        "ShowingArticleFromAuthor", 
-                        null, 
+                        "ShowingArticleFromAuthor",
+                        null,
                         "Articles written by "] + author;
 
                 // Showing articles from author
@@ -396,10 +425,10 @@ namespace ArticlePublisherController
                 string tag = HttpContext.Current.Server.UrlDecode(
                     contentId.Substring(contentId.LastIndexOf("/") + 1)
                         .Replace(".aspx", ""));
-                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
-                        "ShowingArticleTags", 
-                        null, 
+                        "ShowingArticleTags",
+                        null,
                         "Articles tagged with "] + tag;
 
                 // Showing articles from author
@@ -441,8 +470,11 @@ namespace ArticlePublisherController
             }
         }
 
-        private static void DisplayStatusAndUsersLink()
+        private void DisplayStatusAndUsersLink()
         {
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "JustBeforeLoadingArticleBottom");
             Node node = new Node();
             node["ModuleSettings"]["UserCount"].Value = User.Count;
             node["ModuleSettings"]["ArticleCount"].Value = Article.Count;
@@ -543,7 +575,7 @@ namespace ArticlePublisherController
             {
                 node["ModuleSettings"]["Bookmarked"].Value = false;
             }
-            node["ModuleSettings"]["BookmarkedBy"].Value = 
+            node["ModuleSettings"]["BookmarkedBy"].Value =
                 Bookmark.CountWhere(
                     Criteria.Eq("Article.URL", a.URL));
             ActiveEvents.Instance.RaiseLoadControl(
@@ -557,7 +589,7 @@ namespace ArticlePublisherController
             foreach (Tag idx in a.Tags)
             {
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
-                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" + 
+                node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
                     HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
                 idxNo += 1;
             }
@@ -581,7 +613,7 @@ namespace ArticlePublisherController
                     forum.Save();
                 }
                 node["ModuleSettings"]["Forum"].Value = forum;
-                node["ModuleSettings"]["AllowVoting"].Value = 
+                node["ModuleSettings"]["AllowVoting"].Value =
                     !string.IsNullOrEmpty(Users.LoggedInUserName);
                 node["AddToExistingCollection"].Value = true;
                 ActiveEvents.Instance.RaiseLoadControl(
@@ -611,8 +643,8 @@ namespace ArticlePublisherController
                 // Showing message
                 Node nodeMessage = new Node();
                 nodeMessage["Message"].Value = Language.Instance[
-                    "ArticleWasBookmarked", 
-                    null, 
+                    "ArticleWasBookmarked",
+                    null,
                     "Article was bookmarked and will appear in your bookmarks"];
                 nodeMessage["Duration"].Value = 2000;
 
@@ -629,10 +661,10 @@ namespace ArticlePublisherController
 
                 // Showing message
                 Node nodeMessage = new Node();
-                nodeMessage["Message"].Value = 
+                nodeMessage["Message"].Value =
                     Language.Instance[
-                        "BookmarkedWasDeleted", 
-                        null, 
+                        "BookmarkedWasDeleted",
+                        null,
                         "Bookmark was deleted and article will no longer appear in your bookmarks"];
                 nodeMessage["Duration"].Value = 2000;
 
@@ -700,7 +732,7 @@ namespace ArticlePublisherController
             if (!string.IsNullOrEmpty(userNameFilter))
             {
                 criteria.Add(Criteria.Eq("Author.Username", userNameFilter));
-                node["ModuleSettings"]["Header"].Value = 
+                node["ModuleSettings"]["Header"].Value =
                     string.Format(Language.Instance["WrittenByAuthor", null, "Written by {0}"],
                         userNameFilter);
             }

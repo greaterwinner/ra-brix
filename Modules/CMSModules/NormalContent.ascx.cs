@@ -40,9 +40,12 @@ namespace CMSModules
             {
                 header.InnerHtml = node["Header"].Get<string>();
             }
-            string tmp = node["Header"].Get<string>();
-            if (!string.IsNullOrEmpty(tmp))
-                Page.Title = node["Header"].Get<string>();
+            if (node["HideTitle"].Value == null || !node["HideTitle"].Get<bool>())
+            {
+                string tmp = node["Header"].Get<string>();
+                if (!string.IsNullOrEmpty(tmp))
+                    Page.Title = node["Header"].Get<string>();
+            }
             Load +=
                 delegate
                 {
