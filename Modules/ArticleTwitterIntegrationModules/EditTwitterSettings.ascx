@@ -8,6 +8,19 @@
 
 <ra:Panel 
     runat="server" 
+    id="pnl2" 
+    Visible="false"
+    style="padding:5px;">
+    <h1>
+        <%=LanguageRecords.Language.Instance["TwitterHeaderAfterSetting", null, "Your Twitter username and password has been saved"] %>
+    </h1>
+    <p>
+        <%=LanguageRecords.Language.Instance["ThankYouForAddingTwitterIntegration", null, "Thank you for adding twitter integration to your articles :)"] %>
+    </p>
+</ra:Panel>
+
+<ra:Panel 
+    runat="server" 
     id="pnl" 
     DefaultWidget="submit"
     style="padding:5px;">

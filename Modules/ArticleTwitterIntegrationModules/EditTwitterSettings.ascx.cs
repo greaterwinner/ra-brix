@@ -11,12 +11,16 @@
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using System;
+using Ra.Effects;
+using Ra.Widgets;
 
 namespace ArticleTwitterIntegrationModules
 {
     [ActiveModule]
     public class EditTwitterSettings : System.Web.UI.UserControl, IModule
     {
+        protected global::Ra.Widgets.Panel pnl2;
+        protected global::Ra.Widgets.Panel pnl;
         protected global::Ra.Widgets.TextBox username;
         protected global::Ra.Widgets.TextBox password;
         protected global::Ra.Extensions.Widgets.ExtButton submit;
@@ -43,6 +47,12 @@ namespace ArticleTwitterIntegrationModules
                 this,
                 "SaveTwitterUsernameAndPassword",
                 node);
+            pnl2.Visible = true;
+            pnl2.Style[Styles.display] = "none";
+            new EffectFadeOut(pnl, 500)
+                .ChainThese(
+                    new EffectFadeIn(pnl2, 500))
+                .Render();
         }
     }
 }
