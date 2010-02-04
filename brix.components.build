@@ -464,6 +464,34 @@
       </references>
     </csc>
 
+    <!-- ArticleRssProviderController -->
+    <csc
+        target="library"
+        optimize="${not debug}"
+        noconfig="true"
+        filealign="512"
+        output="${output.dir}/${library.dir}/ArticlePublishing/ArticleRssProviderController.dll"
+        debug="${debug}">
+      <sources>
+        <include name="Controllers/ArticleRssProviderController/**/*.cs" />
+      </sources>
+      <references>
+        <include name="${framework.dir}/System.dll" />
+        <include name="${framework.dir}/System.Xml.dll" />
+        <include name="${framework.dir}/System.Web.dll" />
+        <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
+        <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
+        <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Commons.dll" />
+        <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
+        <include name="${output.dir}/${library.dir}/ArticlePublishing/ArticlePublisherRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
+      </references>
+    </csc>
+
     <!-- ArticlePingbackController -->
     <csc
         target="library"

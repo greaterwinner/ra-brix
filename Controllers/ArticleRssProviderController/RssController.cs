@@ -103,8 +103,11 @@ namespace ArticleRssProviderController
             generator.AppendChild(generatorContent);
             channel.AppendChild(generator);
 
+            int idxNo = 0;
             foreach (Article idx in Article.Select(Criteria.Sort("Published", false)))
             {
+                if (++idxNo > 10)
+                    break;
                 // Item
                 XmlNode item = doc.CreateNode(XmlNodeType.Element, "item", "");
 
