@@ -457,6 +457,8 @@
         <include name="${output.dir}/${library.dir}/${brix.loader.name}.dll" />
         <include name="${output.dir}/${library.dir}/LanguageRecords.dll" />
         <include name="${output.dir}/${library.dir}/SettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/UserSettingsRecords.dll" />
+        <include name="${output.dir}/${library.dir}/Users/UserRecords.dll" />
         <include name="${output.dir}/${library.dir}/Commons.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
       </references>
