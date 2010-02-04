@@ -148,7 +148,7 @@ namespace ArticlePublisherController
 
             // Creating actual article and saving it...
             Article a;
-            bool shouldTweet = false;
+            bool isNewArticle = false;
             if (id == -1)
             {
                 // NEW article...!
@@ -161,7 +161,7 @@ namespace ArticlePublisherController
                     this,
                     "UserCreatedNewArticle",
                     node);
-                shouldTweet = true;
+                isNewArticle = true;
             }
             else
             {
@@ -195,10 +195,11 @@ namespace ArticlePublisherController
             // Saving article...
             a.Save();
 
-            // Signaling that article is saved
+            // Signaling that a *NEWLY* created article was saved
             Node nodeSignal = new Node();
             nodeSignal["URL"].Value = a.URL;
             nodeSignal["Header"].Value = a.Header;
+            nodeSignal["Body"].Value = a.Body;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "HandleArticleFirstTimePublished",
