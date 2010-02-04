@@ -198,6 +198,7 @@ namespace ArticlePublisherController
             // Signaling that article is saved
             Node nodeSignal = new Node();
             nodeSignal["URL"].Value = a.URL;
+            nodeSignal["Header"].Value = a.Header;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "HandleArticleFirstTimePublished",
