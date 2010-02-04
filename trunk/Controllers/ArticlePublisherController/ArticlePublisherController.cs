@@ -221,6 +221,15 @@ namespace ArticlePublisherController
             return System.Convert.ToBase64String(inData, 0, inData.Length);
         }
 
+        [ActiveEvent(Name = "DeleteArticle")]
+        protected void DeleteArticle(object sender, ActiveEventArgs e)
+        {
+            int articleID = e.Params["ArticleID"].Get<int>();
+            Article a = Article.SelectByID(articleID);
+            a.Delete();
+            AjaxManager.Instance.Redirect("~/");
+        }
+
         [ActiveEvent(Name = "EditArticle")]
         protected void EditArticle(object sender, ActiveEventArgs e)
         {
@@ -252,12 +261,15 @@ namespace ArticlePublisherController
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
                 e.Params["ShouldShow"].Value = false;
+                e.Params["ShouldShowDelete"].Value = false;
             }
             else
             {
                 User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
                 Article article = Article.SelectByID(e.Params["ArticleID"].Get<int>());
                 e.Params["ShouldShow"].Value = article.Author == user ||
+                    user.InRole("Administrator");
+                e.Params["ShouldShowDelete"].Value = article.Author == user ||
                     user.InRole("Administrator");
             }
         }

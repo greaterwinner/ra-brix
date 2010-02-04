@@ -26,6 +26,7 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlImage image;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
         protected global::Ra.Extensions.Widgets.ExtButton edit;
+        protected global::Ra.Extensions.Widgets.ExtButton delete;
         protected global::Ra.Widgets.LinkButton bookmark;
 
         private int ArticleID
@@ -40,6 +41,7 @@ namespace ArticlePublisherModules
                 delegate
                 {
                     edit.DataBind();
+                    delete.DataBind();
                     Node n2 = new Node();
                     ArticleID = node["ArticleID"].Get<int>();
                     n2["ArticleID"].Value = ArticleID;
@@ -48,6 +50,7 @@ namespace ArticlePublisherModules
                         "ShouldAllowArticleEditing",
                         n2);
                     edit.Visible = n2["ShouldShow"].Get<bool>();
+                    delete.Visible = n2["ShouldShowDelete"].Get<bool>();
                 };
             header.InnerHtml = node["Header"].Get<string>();
             ingress.InnerHtml = node["Ingress"].Get<string>();
@@ -84,6 +87,16 @@ namespace ArticlePublisherModules
             {
                 bookmark.CssClass = "bookmark";
             }
+        }
+
+        protected void delete_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ArticleID"].Value = ArticleID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DeleteArticle",
+                node);
         }
 
         protected void edit_Click(object sender, EventArgs e)

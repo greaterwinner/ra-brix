@@ -51,6 +51,13 @@
         OnClick="edit_Click"
         Text='<%#LanguageRecords.Language.Instance["Edit", null, "Edit"] %>' />
 
+    <ra:ExtButton 
+        runat="server" 
+        id="delete" 
+        style="position:absolute;bottom:0px;right:80px;"
+        OnClick="delete_Click"
+        Text='<%#LanguageRecords.Language.Instance["Delete", null, "Delete"] %>' />
+
     <br style="clear:both;" />
     <hr style="margin-top:35px;margin-bottom:15px;" />
 
