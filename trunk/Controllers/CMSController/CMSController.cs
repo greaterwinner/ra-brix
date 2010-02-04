@@ -99,6 +99,7 @@ namespace CMSController
                 node["ModuleSettings"]["Header"].Value = page.Header;
                 node["ModuleSettings"]["Content"].Value = page.Body;
                 node["ModuleSettings"]["HideHeader"].Value = page.HideFromHeader;
+                node["ModuleSettings"]["HideTitle"].Value = true;
 
                 ActiveEvents.Instance.RaiseLoadControl(
                     "CMSModules.NormalContent",

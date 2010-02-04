@@ -1810,6 +1810,15 @@ a.bookmarks
 	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
 }
 
+.twitterUrl
+{
+	display:block;
+	width:150px;
+	float:left;
+	margin:25px 15px 0px 0px;
+}
+
+
 
 
 
