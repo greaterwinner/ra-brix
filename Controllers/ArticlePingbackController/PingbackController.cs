@@ -81,6 +81,8 @@ namespace ArticlePingbackController
                                 .Replace("&lt;", "<")
                                 .Replace("&gt;", ">")
                                 .Replace("&quot;", "\"");
+
+                            // Doing the actual Pingback...!
                             IPingback proxy = XmlRpcProxyGen.Create<IPingback>();
                             proxy.Url = pingBackServerUrl;
                             proxy.Pingback(linkToSelf, urlToLink);
@@ -95,6 +97,7 @@ namespace ArticlePingbackController
             if (!string.IsNullOrEmpty(urlErrors))
             {
                 // TODO: Log these URL's or something...?
+                // urlErrors that is...
             }
         }
     }
