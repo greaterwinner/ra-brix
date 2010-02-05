@@ -187,7 +187,7 @@ namespace Ra.Brix.Loader
                     continue;
                 foreach (ActiveEventAttribute idxAttr in attr)
                 {
-                    ActiveEvents.Instance.AddListener(objectInstance, idx, idxAttr.Name);
+                    ActiveEvents.Instance.AddListener(objectInstance, idx, idxAttr.Name, idxAttr.Async);
                 }
             }
         }
