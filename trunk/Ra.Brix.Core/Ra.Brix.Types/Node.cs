@@ -88,6 +88,7 @@ namespace Ra.Brix.Types
                 // Opening new object...
                 Node next = new Node();
                 node._children.Add(next);
+                next._parent = node;
                 idxToken += 1;
                 while (tokens[idxToken] != "}")
                 {

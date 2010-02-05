@@ -208,10 +208,15 @@ namespace Ra.Brix.Loader
             }
         }
 
+        private Dictionary<string, List<Tuple<MethodInfo, object>>> _nonWeb = new Dictionary<string, List<Tuple<MethodInfo, object>>>();
         private Dictionary<string, List<Tuple<MethodInfo, object>>> InstanceMethod
         {
             get
             {
+                // NON-web scenario...
+                if (HttpContext.Current == null)
+                    return _nonWeb;
+
                 Page page = (Page)HttpContext.Current.Handler;
                 if (!page.Items.Contains("__Ra.Brix.Loader.ActiveEvents._requestEventHandlers"))
                 {

@@ -241,7 +241,7 @@ namespace Ra.Brix.Data
                                     break;
                                 case "Ra.Brix.Data.MoreThen":
                                     whereAdd = string.Format(
-                                        " and exists(select q{1}.ID from {0} as q{0} where q{0}.Value>{1} and {3}=q{0}.FK_Document and q{0}.Name='{2}')",
+                                        " and exists(select * from {0} as q{0} where q{0}.Value>{1} and {3}=q{0}.FK_Document and q{0}.Name='{2}')",
                                         tableName,
                                         sqlEscapedValue,
                                         Helpers.PropertyName(propertySqlName),

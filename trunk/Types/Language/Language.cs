@@ -111,23 +111,38 @@ namespace LanguageRecords
             HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] = language;
         }
 
+        private string _language = "en";
         public string UserLanguage
         {
             get
             {
-                string defaultLanguage = HttpContext.Current.Request.UserLanguages != null &&
-                                         HttpContext.Current.Request.UserLanguages[0].Length > 0 ?
-                                                                                                     HttpContext.Current.Request.UserLanguages[0] :
-                                                                                                                                                      "en";
                 if (HttpContext.Current == null)
-                    return "en";
-                return HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] == null ? 
-                                                                                                        defaultLanguage :
-                                                                                                                            HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"].ToString();
+                {
+                    return _language;
+                }
+                else
+                {
+                    string defaultLanguage = HttpContext.Current.Request.UserLanguages != null &&
+                                             HttpContext.Current.Request.UserLanguages[0].Length > 0 ?
+                                                                                                         HttpContext.Current.Request.UserLanguages[0] :
+                                                                                                                                                          "en";
+                    if (HttpContext.Current == null)
+                        return "en";
+                    return HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] == null ?
+                                                                                                            defaultLanguage :
+                                                                                                                                HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"].ToString();
+                }
             }
             set 
             {
-                HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] = value;
+                if (HttpContext.Current == null)
+                {
+                    _language = value;
+                }
+                else
+                {
+                    HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] = value;
+                }
             }
         }
 
