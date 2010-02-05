@@ -33,7 +33,7 @@ namespace ArticlePingbackController
                 RegexOptions.IgnoreCase |
                 RegexOptions.Compiled);
 
-        [ActiveEvent(Name = "HandleArticleFirstTimePublished")]
+        [ActiveEvent(Name = "HandleArticleFirstTimePublished", Async = true)]
         protected void HandleArticleFirstTimePublished(object sender, ActiveEventArgs e)
         {
             string url = e.Params["URL"].Get<string>();
