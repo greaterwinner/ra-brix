@@ -28,6 +28,19 @@ namespace Ra.Brix.Tests.Types
         }
 
         [Test]
+        public void SerializationDeserializationVerifyParentTest()
+        {
+            Node node = new Node("SomeNode");
+            node["First"].Value = "1";
+            node["Second"].Value = "2";
+            string str = node.ToJSONString();
+            Assert.AreEqual(
+@"{""Name"":""SomeNode"",""Children"":[{""Name"":""First"",""Value"":""1""},{""Name"":""Second"",""Value"":""2""}]}", str);
+            Node tmp = Node.FromJSONString(str);
+            Assert.IsNotNull(tmp["First"].Parent);
+        }
+
+        [Test]
         public void SimpleSerializationTestNoRootName()
         {
             Node node = new Node();
@@ -96,6 +109,23 @@ namespace Ra.Brix.Tests.Types
             string str = node.ToJSONString();
             Assert.AreEqual(
 @"{""Children"":[{""Name"":""One"",""Children"":[{""Name"":""Two"",""Value"":""2""}]}]}", str);
+        }
+
+        [Test]
+        public void SerializeDeserializeThenUntie()
+        {
+            Node node = new Node("SomeNode");
+            node["First"].Value = "1";
+            node["Second"].Value = "2";
+            node["Params"]["Par1"].Value = "one";
+            node["Params"]["Par2"].Value = 2;
+            string str = node.ToJSONString();
+            Assert.AreEqual(
+@"{""Name"":""SomeNode"",""Children"":[{""Name"":""First"",""Value"":""1""},{""Name"":""Second"",""Value"":""2""},{""Name"":""Params"",""Children"":[{""Name"":""Par1"",""Value"":""one""},{""Name"":""Par2"",""Value"":""2""}]}]}", str);
+            Node result = Node.FromJSONString(str);
+            Node tmp = result["Params"].UnTie();
+            Assert.AreEqual(tmp["Par1"].Value, "one");
+            Assert.AreEqual(tmp["Par2"].Value, "2");
         }
     }
 }
