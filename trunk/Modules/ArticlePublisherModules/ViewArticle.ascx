@@ -46,10 +46,10 @@
 
     <ra:ExtButton 
         runat="server" 
-        id="edit" 
-        style="position:absolute;bottom:0px;right:0px;"
-        OnClick="edit_Click"
-        Text='<%#LanguageRecords.Language.Instance["Edit", null, "Edit"] %>' />
+        id="follow" 
+        style="position:absolute;bottom:0px;right:160px;"
+        OnClick="follow_Click"
+        Text='<%#LanguageRecords.Language.Instance["Follow", null, "Follow"] %>' />
 
     <ra:ExtButton 
         runat="server" 
@@ -57,6 +57,13 @@
         style="position:absolute;bottom:0px;right:80px;"
         OnClick="delete_Click"
         Text='<%#LanguageRecords.Language.Instance["Delete", null, "Delete"] %>' />
+
+    <ra:ExtButton 
+        runat="server" 
+        id="edit" 
+        style="position:absolute;bottom:0px;right:0px;"
+        OnClick="edit_Click"
+        Text='<%#LanguageRecords.Language.Instance["Edit", null, "Edit"] %>' />
 
     <br style="clear:both;" />
     <hr style="margin-top:35px;margin-bottom:15px;" />
