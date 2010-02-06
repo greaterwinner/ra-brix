@@ -299,45 +299,6 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
         public override void Save(object value)
         {
-            Type type = value.GetType();
-            int id = (int)type.GetProperty(
-                "ID",
-                BindingFlags.Instance |
-                BindingFlags.NonPublic |
-                BindingFlags.Public)
-                .GetGetMethod()
-                .Invoke(value, null);
-            bool isUpdate = id != 0;
-            PropertyInfo[] props =
-                    type.GetProperties(
-                        BindingFlags.Instance |
-                        BindingFlags.Public |
-                        BindingFlags.NonPublic);
-            if (isUpdate)
-            {
-                // We need to iterator through all IsOwner=false children
-                // But before we need to iterate through all LazyLists where IsOwner=false
-                // and actually *RETRIEVE* them. This can be significantly optimized by
-                // checking to see if any of the LazyLists have been retrieved, and if NOT
-                // completely avoid touvhing the Many2Many relationships...
-                foreach (PropertyInfo idxProp in props)
-                {
-                    if (idxProp.PropertyType.FullName.IndexOf("Ra.Brix.Types.LazyList") == 0)
-                    {
-                        ActiveFieldAttribute[] attrs =
-                            idxProp.GetCustomAttributes(typeof(ActiveFieldAttribute), true) as ActiveFieldAttribute[];
-                        if (attrs != null && attrs.Length > 0 && attrs[0].IsOwner == false)
-                        {
-                            object tmpLazyReference = idxProp.GetGetMethod(true).Invoke(value, null);
-                            tmpLazyReference.GetType().GetMethod(
-                                "FillList",
-                                BindingFlags.Instance |
-                                BindingFlags.NonPublic |
-                                BindingFlags.Public).Invoke(tmpLazyReference, null);
-                        }
-                    }
-                }
-            }
             using (SqlTransaction transaction = _connection.BeginTransaction())
             {
                 SaveWithTransaction(value, transaction, -1, null);
@@ -365,6 +326,9 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             {
                 if (parentId == -1)
                 {
+                    // We do NOT want to tamper with the parent parts of the object unless
+                    // we are given a valid parentId explicitly since it might be saving of
+                    // a child that belongs to another object in the first place...
                     SqlCommand cmd = new SqlCommand(
                         string.Format("update Documents set Modified=getdate() where ID={0}",
                             id), _connection, transaction);
@@ -384,10 +348,10 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             {
                 SqlCommand cmd = new SqlCommand(
                     string.Format(
-                        "insert into Documents (TypeName, Created, Modified, Parent, ParentPropertyName) values ('doc{0}', getdate(), getdate(), {1}, '{2}');select @@Identity;", 
+                        "insert into Documents (TypeName, Created, Modified, Parent, ParentPropertyName) values ('doc{0}', getdate(), getdate(), {1}, {2});select @@Identity;", 
                         type.FullName,
                         parentId == -1 ? "NULL" : parentId.ToString(),
-                        parentPropertyName ?? "null"), 
+                        parentPropertyName == null ? "null" : "'" + parentPropertyName + "'", _connection, transaction), 
                     _connection, 
                     transaction);
                 id = (int)((decimal)cmd.ExecuteScalar());
@@ -408,12 +372,6 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                     SqlCommand cmd = new SqlCommand(sql, _connection, transaction);
                     cmd.ExecuteNonQuery();
                 }
-
-                SqlCommand cmdD2D = new SqlCommand(
-                    string.Format("DELETE from Documents2Documents where Document1ID={0}", id), 
-                    _connection, 
-                    transaction);
-                cmdD2D.ExecuteNonQuery();
             }
             List<int> listOfIDsOfChildren = new List<int>();
             foreach (PropertyInfo idxProp in props)
@@ -466,6 +424,15 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                         BindingFlags.Public)
                                         .GetGetMethod()
                                         .Invoke(valueOfProperty, null);
+
+                                    SqlCommand deleteFromD2D = new SqlCommand(
+                                        string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                            id,
+                                            idxProp.Name), 
+                                        _connection, 
+                                        transaction);
+                                    deleteFromD2D.ExecuteNonQuery();
+
                                     SqlCommand cmdContains = new SqlCommand(
                                         string.Format(
                                             "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
@@ -492,7 +459,6 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                     {
                                         if (attrs[0].IsOwner)
                                         {
-                                            // List somehow...
                                             foreach (object idxChild in enumerable)
                                             {
                                                 int childId = SaveWithTransaction(idxChild, transaction, id, idxProp.Name);
@@ -501,10 +467,23 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                         }
                                         else
                                         {
-                                            // List somehow...
+                                            // Delete old relationships whith this documentid and this property name
+                                            SqlCommand sqlDeleteRelationRecords = new SqlCommand(
+                                                string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                                    id,
+                                                    idxProp.Name), _connection, transaction);
+                                            sqlDeleteRelationRecords.ExecuteNonQuery();
+
                                             foreach (object idxChild in enumerable)
                                             {
+                                                // TODO: Should we really save the related document here...?
+                                                // Or should we only save the releationship...?
+                                                // If we only save the relationship, we might get
+                                                // "dangling pointers", and if we save everything
+                                                // we overspend resources, plus that we do save something
+                                                // which is only linked, which might feel unintuitive...?
                                                 int documentId = SaveWithTransaction(idxChild, transaction, -1, idxProp.Name);
+
                                                 SqlCommand cmdContains = new SqlCommand(
                                                     string.Format(
                                                         "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
@@ -523,7 +502,6 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                     // NOT LazyList...
                                     if (attrs[0].IsOwner)
                                     {
-                                        // List somehow...
                                         foreach (object idxChild in enumerable)
                                         {
                                             int childId = SaveWithTransaction(idxChild, transaction, id, idxProp.Name);
@@ -532,10 +510,23 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                     }
                                     else
                                     {
-                                        // List somehow...
+                                        // Delete old relationships whith this documentid and this property name
+                                        SqlCommand sqlDeleteRelationRecords = new SqlCommand(
+                                            string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                                id,
+                                                idxProp.Name), _connection, transaction);
+                                        sqlDeleteRelationRecords.ExecuteNonQuery();
+
                                         foreach (object idxChild in enumerable)
                                         {
+                                            // TODO: Should we really save the related document here...?
+                                            // Or should we only save the releationship...?
+                                            // If we only save the relationship, we might get
+                                            // "dangling pointers", and if we save everything
+                                            // we overspend resources, plus that we do save something
+                                            // which is only linked, which might feel unintuitive...?
                                             int documentId = SaveWithTransaction(idxChild, transaction, -1, idxProp.Name);
+
                                             SqlCommand cmdContains = new SqlCommand(
                                                 string.Format(
                                                     "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",

@@ -29,11 +29,17 @@ namespace Ra.Brix.Loader
         /**
          * If true, method will be called asynchronous. Note that if you use Async event handlers 
          * then you **CANNOT** in ANY ways access any parts of the Page, Response, Request, HttpContext
-         * etc since these might very weel be discarded. You can also obviously NOT write to the
+         * etc since these might very well be discarded and returned back to the client when you try
+         * to access it. You can also obviously NOT write to the
          * response at all using Async event handlers. Do not LoadControls or anything else like
          * that. Async event handlers are PURELY meant for "fire and forget" event handlers, and
          * in general terms you should in fact try to avoid them all together if you can, due to
          * these problems.
+         * And in fact, due to the current implementation of the Active Type design pattern in
+         * Ra-Brix, you cannot even access the database. However, for "fire and forget" event handlers
+         * that for instance is supposed to just ping some webservice or something similar, they
+         * can be quite useful since you then can asynchronously make those calls, but still
+         * return ASAP to client with response.
          */
         public bool Async;
 

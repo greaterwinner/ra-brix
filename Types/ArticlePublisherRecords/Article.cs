@@ -22,6 +22,7 @@ namespace ArticlePublisherRecords
         public Article()
         {
             Tags = new LazyList<Tag>();
+            Followers = new LazyList<User>();
         }
 
         [ActiveField]
@@ -50,6 +51,9 @@ namespace ArticlePublisherRecords
 
         [ActiveField(IsOwner = false)]
         public LazyList<Tag> Tags { get; set; }
+
+        [ActiveField(IsOwner = false)]
+        public LazyList<User> Followers { get; set; }
 
         [ActiveField(IsOwner = false)]
         public User Author { get; set; }

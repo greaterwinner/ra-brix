@@ -346,6 +346,27 @@ namespace ArticlePublisherController
             }
         }
 
+        [ActiveEvent(Name = "ArticleFollowRequested")]
+        protected void ArticleFollowRequested(object sender, ActiveEventArgs e)
+        {
+            int articleID = e.Params["ArticleID"].Get<int>();
+            Article article = Article.SelectByID(articleID);
+            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            if(article.Followers.Exists(
+                delegate(User idx)
+                {
+                    return idx == user;
+                }))
+            {
+                article.Followers.Remove(user);
+            }
+            else
+            {
+                article.Followers.Add(user);
+            }
+            article.Save();
+        }
+
         [ActiveEvent(Name = "ArticleDeleteTag")]
         protected void ArticleDeleteTag(object sender, ActiveEventArgs e)
         {
@@ -592,6 +613,12 @@ namespace ArticlePublisherController
             node["ModuleSettings"]["BookmarkedBy"].Value =
                 Bookmark.CountWhere(
                     Criteria.Eq("Article.URL", a.URL));
+            node["ModuleSettings"]["ShowFollow"].Value = !string.IsNullOrEmpty(Users.LoggedInUserName);
+            node["ModuleSettings"]["IsFollowing"].Value = a.Followers.Exists(
+                delegate(User idxUser)
+                {
+                    return idxUser.Username == Users.LoggedInUserName;
+                });
             ActiveEvents.Instance.RaiseLoadControl(
                 "ArticlePublisherModules.ViewArticle",
                 "dynMid",

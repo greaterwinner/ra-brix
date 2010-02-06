@@ -27,6 +27,7 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
         protected global::Ra.Extensions.Widgets.ExtButton edit;
         protected global::Ra.Extensions.Widgets.ExtButton delete;
+        protected global::Ra.Extensions.Widgets.ExtButton follow;
         protected global::Ra.Widgets.LinkButton bookmark;
 
         private int ArticleID
@@ -42,6 +43,7 @@ namespace ArticlePublisherModules
                 {
                     edit.DataBind();
                     delete.DataBind();
+                    follow.DataBind();
                     Node n2 = new Node();
                     ArticleID = node["ArticleID"].Get<int>();
                     n2["ArticleID"].Value = ArticleID;
@@ -51,6 +53,10 @@ namespace ArticlePublisherModules
                         n2);
                     edit.Visible = n2["ShouldShow"].Get<bool>();
                     delete.Visible = n2["ShouldShowDelete"].Get<bool>();
+                    follow.Visible = node["ShowFollow"].Get<bool>();
+                    follow.Text = node["IsFollowing"].Get<bool>() ?
+                        Language.Instance["Unfollow", null, "Unfollow"] :
+                        Language.Instance["Follow", null, "Follow"];
                 };
             header.InnerHtml = node["Header"].Get<string>();
             ingress.InnerHtml = node["Ingress"].Get<string>();
@@ -97,6 +103,19 @@ namespace ArticlePublisherModules
                 this,
                 "DeleteArticle",
                 node);
+        }
+
+        protected void follow_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["ArticleID"].Value = ArticleID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ArticleFollowRequested",
+                node);
+            follow.Text = follow.Text == Language.Instance["Follow", null, "Follow"] ?
+                Language.Instance["Unfollow", null, "Unfollow"] :
+                Language.Instance["Follow", null, "Follow"];
         }
 
         protected void edit_Click(object sender, EventArgs e)
