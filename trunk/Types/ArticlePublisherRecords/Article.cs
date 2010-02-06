@@ -13,6 +13,7 @@ using Ra.Brix.Data;
 using UserRecords;
 using HelperGlobals;
 using Ra.Brix.Types;
+using System.Web;
 
 namespace ArticlePublisherRecords
 {
@@ -68,7 +69,7 @@ namespace ArticlePublisherRecords
 
         public override void Save()
         {
-            if (ID == 0 && string.IsNullOrEmpty(URL))
+            if (ID == 0 && string.IsNullOrEmpty(URL) && Author == null)
             {
                 // This is a newly created root page. Hence we must give it a unique URL
                 GetUniqueURL(this);
