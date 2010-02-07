@@ -180,7 +180,14 @@ namespace Ra.Brix.Loader
                                 ThreadPool.QueueUserWorkItem(
                                     delegate
                                     {
-                                        method.Invoke(context, new[]{ sender, e });
+                                        try
+                                        {
+                                            method.Invoke(context, new[] { sender, e });
+                                        }
+                                        catch (Exception err)
+                                        {
+                                            // TODO: I have no idea what to do here...
+                                        }
                                     });
                             }
                             else

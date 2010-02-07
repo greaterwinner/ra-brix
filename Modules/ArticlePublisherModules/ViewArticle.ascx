@@ -48,8 +48,8 @@
         runat="server" 
         id="follow" 
         style="position:absolute;bottom:0px;right:160px;"
-        OnClick="follow_Click"
-        Text='<%#LanguageRecords.Language.Instance["Follow", null, "Follow"] %>' />
+        Tooltip='<%#LanguageRecords.Language.Instance["FollowTooltip", null, "If you follow an article you will get emails when new comments are being written for it. Note you must have registered your email in your profile for this to work."] %>'
+        OnClick="follow_Click" />
 
     <ra:ExtButton 
         runat="server" 
