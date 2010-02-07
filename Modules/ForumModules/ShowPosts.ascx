@@ -44,7 +44,7 @@
             OnClick="submit_Click"
             Text='<%#LanguageRecords.Language.Instance["Submit", null, "Submit"] %>' />
     </ra:Panel>
-
+    <br id="comments" />
     <ra:Tree 
         runat="server" 
         UseRichAnimations="true"
