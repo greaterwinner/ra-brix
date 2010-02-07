@@ -140,9 +140,11 @@ namespace ForumModules
                 if (Users.LoggedInUserName != null)
                 {
                     p.Score = 3;
-                    p.RegisteredUser = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    p.RegisteredUser = User.SelectFirst(
+                        Criteria.Eq("Username", Users.LoggedInUserName));
                     Node node = new Node();
                     node["Username"].Value = Users.LoggedInUserName;
+                    node["ForumName"].Value = Main.Name;
                     ActiveEvents.Instance.RaiseActiveEvent(
                         this,
                         "UserCreatedAnArticleComment",
@@ -203,6 +205,7 @@ namespace ForumModules
                     n.Score = 3;
                     Node node = new Node();
                     node["Username"].Value = Users.LoggedInUserName;
+                    node["ForumName"].Value = Main.Name;
                     ActiveEvents.Instance.RaiseActiveEvent(
                         this,
                         "UserCreatedAnArticleComment",

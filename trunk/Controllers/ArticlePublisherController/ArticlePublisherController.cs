@@ -28,6 +28,7 @@ using System.Security.Cryptography;
 using System.Net;
 using System.IO;
 using System.Web.UI;
+using System.Net.Mail;
 
 namespace ArticlePublisherController
 {
@@ -77,6 +78,80 @@ namespace ArticlePublisherController
                 Criteria.Eq("Username", e.Params["Username"].Value));
             user.Score += int.Parse(Settings.Instance["PointsForNewComment"]);
             user.Save();
+        }
+
+        [ActiveEvent(Name = "UserCreatedAnArticleComment")]
+        protected void UserCreatedAnArticleCommentSendEmail(object sender, ActiveEventArgs e)
+        {
+            // Sending emails to users registered as followers of this article...
+            Article article = Article.SelectFirst(
+                Criteria.Eq("URL", e.Params["ForumName"].Get<string>()));
+            List<string> emails = new List<string>();
+            foreach (User idx in article.Followers)
+            {
+                if (!string.IsNullOrEmpty(idx.Email))
+                {
+                    if (idx.Email.IndexOf("@") > 0)
+                        emails.Add(idx.Email);
+                }
+            }
+            if (emails.Count == 0)
+                return;
+            string smtpServer = Settings.Instance["SMTPServer"];
+            string smtpServerUsername = Settings.Instance["SMTPServerUsername"];
+            string smtpServerPassword = Settings.Instance["SMTPServerPassword"];
+            string smtpServerUseSsl = Settings.Instance["SMTPServerUseSsl"];
+            if (string.IsNullOrEmpty(smtpServer))
+                return;
+            string adminEmail = Settings.Instance["AdminEmail"];
+            string subject =
+                Language.Instance[
+                    "NewCommentEmailSubject", 
+                    null, 
+                    "New Comment at TheLightBringer.org"];
+            string body = string.Format(
+                Language.Instance[
+                    "NewCommentCreatedEmailBody", 
+                    null, 
+                    @"A new comment was submitted to the article '{0}' at {1}"],
+                article.Header,
+                HttpContext.Current.Request.Url.AbsoluteUri.Substring(
+                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                    article.URL);
+            Node node = new Node();
+            node["Emails"].Value = emails;
+            node["Body"].Value = body;
+            node["Subject"].Value = subject;
+            node["SystemReplyEmail"].Value = adminEmail;
+            node["SmtpServer"].Value = smtpServer;
+            node["SmtpUsername"].Value = smtpServerUsername;
+            node["SmtpPwd"].Value = smtpServerPassword;
+            node["SmtpServer"].Value = smtpServer;
+            node["SmtpServerSSL"].Value = smtpServerUseSsl == "True";
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "SendEmailForComment",
+                node);
+        }
+
+        [ActiveEvent(Name = "SendEmailForComment", Async = true)]
+        protected void SendEmailForComment(object sender, ActiveEventArgs e)
+        {
+            MailMessage msg = new MailMessage();
+            foreach (string idxEmail in e.Params["Emails"].Get<List<string>>())
+            {
+                msg.To.Add(new MailAddress(idxEmail));
+            }
+            msg.Body = e.Params["Body"].Get<string>();
+            msg.Subject = e.Params["Subject"].Get<string>();
+            msg.From = new MailAddress(e.Params["SystemReplyEmail"].Get<string>());
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+            smtp.Host = e.Params["SmtpServer"].Get<string>();
+            smtp.Credentials = new NetworkCredential(
+                e.Params["SmtpUsername"].Get<string>(),
+                e.Params["SmtpPwd"].Get<string>());
+            smtp.EnableSsl = e.Params["SmtpServerSSL"].Get<bool>();
+            smtp.Send(msg);
         }
 
         [ActiveEvent(Name = "UserCreatedNewArticle")]
@@ -613,7 +688,15 @@ namespace ArticlePublisherController
             node["ModuleSettings"]["BookmarkedBy"].Value =
                 Bookmark.CountWhere(
                     Criteria.Eq("Article.URL", a.URL));
-            node["ModuleSettings"]["ShowFollow"].Value = !string.IsNullOrEmpty(Users.LoggedInUserName);
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                node["ModuleSettings"]["ShowFollow"].Value = !string.IsNullOrEmpty(user.Email);
+            }
+            else
+            {
+                node["ModuleSettings"]["ShowFollow"].Value = false;
+            }
             node["ModuleSettings"]["IsFollowing"].Value = a.Followers.Exists(
                 delegate(User idxUser)
                 {
