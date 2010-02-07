@@ -113,7 +113,9 @@ namespace ArticlePublisherController
                 Language.Instance[
                     "NewCommentCreatedEmailBody", 
                     null, 
-                    @"A new comment was submitted to the article '{0}' at {1}"],
+                    @"A new comment was submitted to the article '{0}' at {1}
+If you do not want to get future notification emails for this subject, make sure 
+you click the 'Unfollow' button."],
                 article.Header,
                 HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                     0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
