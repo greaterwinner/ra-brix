@@ -117,7 +117,7 @@ namespace ArticlePublisherController
                 article.Header,
                 HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                     0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
-                    article.URL);
+                    article.URL) + ".aspx#comments";
             Node node = new Node();
             node["Emails"].Value = emails;
             node["Body"].Value = body;
