@@ -109,17 +109,20 @@ namespace ArticlePublisherController
                     "NewCommentEmailSubject", 
                     null, 
                     "New Comment at TheLightBringer.org"];
+            string comment = e.Params["Comment"].Get<string>();
             string body = string.Format(
                 Language.Instance[
-                    "NewCommentCreatedEmailBody", 
+                    "NewCommentCreatedEmailBody3", 
                     null, 
                     @"A new comment was submitted to the article '{0}' at {1}
 If you do not want to get future notification emails for this subject, make sure 
-you click the 'Unfollow' button."],
+you click the 'Unfollow' button.
+The comment was;
+"],
                 article.Header,
                 HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                     0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
-                    article.URL) + ".aspx#comments";
+                    article.URL + ".aspx#comments") + comment;
             Node node = new Node();
             node["Emails"].Value = emails;
             node["Body"].Value = body;
@@ -130,6 +133,10 @@ you click the 'Unfollow' button."],
             node["SmtpPwd"].Value = smtpServerPassword;
             node["SmtpServer"].Value = smtpServer;
             node["SmtpServerSSL"].Value = smtpServerUseSsl == "True";
+
+            // Since we want to execute the actual sending of the emails on another
+            // thread to not stall UI, we just Raise a new event here which is handled below
+            // in an Async event handler...
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "SendEmailForComment",
