@@ -46,6 +46,8 @@
 
     <add key="LoginMaxVisibility" value="True" />
 
+    <add key="UseChromeFrame" value="true" />
+
   </appSettings>
 
   <system.web>
