@@ -19,7 +19,7 @@
     <body>
         <form id="form1" runat="server" enctype="multipart/form-data" />
 
-        <!--[if IE]>        
+        <!--[if IE]>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
         <div id="placeholder"></div>
         <script>

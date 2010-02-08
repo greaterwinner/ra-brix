@@ -145,6 +145,7 @@ namespace ForumModules
                     Node node = new Node();
                     node["Username"].Value = Users.LoggedInUserName;
                     node["ForumName"].Value = Main.Name;
+                    node["Comment"].Value = p.Header + "\r\n" + p.Body;
                     ActiveEvents.Instance.RaiseActiveEvent(
                         this,
                         "UserCreatedAnArticleComment",
@@ -206,6 +207,7 @@ namespace ForumModules
                     Node node = new Node();
                     node["Username"].Value = Users.LoggedInUserName;
                     node["ForumName"].Value = Main.Name;
+                    node["Comment"].Value = n.Header + "\r\n" + n.Body;
                     ActiveEvents.Instance.RaiseActiveEvent(
                         this,
                         "UserCreatedAnArticleComment",
