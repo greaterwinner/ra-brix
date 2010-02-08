@@ -22,6 +22,7 @@ namespace Ra.Brix.Portal
     {
         protected void Page_Init(object sender, EventArgs e)
         {
+            InitializeChromeFrame();
             InitializeViewport();
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
@@ -34,6 +35,26 @@ namespace Ra.Brix.Portal
             }
             LoadComplete += MainWebPage_LoadComplete;
             baseElement.DataBind();
+        }
+
+        private void InitializeChromeFrame()
+        {
+            if (Settings.Instance["UseChromeFrame"] == "True")
+            {
+                LiteralControl lit = new LiteralControl();
+                lit.Text = string.Format(@"
+        <!--[if IE]>
+        <script type=""text/javascript"" src=""http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js""></script>
+        <div id=""placeholder""></div>
+        <script>
+            CFInstall.check({{
+                node: ""placeholder"",
+                destination: ""{0}""
+            }});
+        </script>
+        <![endif]-->", GetRedirectUrl());
+                Form.Controls.Add(lit);
+            }
         }
 
         void MainWebPage_LoadComplete(object sender, EventArgs e)
