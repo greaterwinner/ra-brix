@@ -24,6 +24,7 @@ using LanguageRecords;
 using HelperGlobals;
 using UserRecords;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace ForumModules
 {
@@ -163,6 +164,17 @@ namespace ForumModules
                 }
                 Main.Posts.Add(p);
                 Main.Save();
+                Node node2 = new Node();
+                node2["Comment"].Value = p.Header + "\r\n" + p.Body;
+                node2["URL"].Value = HttpContext.Current.Request.Url.OriginalString.Replace(":80", "")
+                                    .Replace("Default.aspx", "")
+                                    .Replace("default.aspx", "")
+                                    + p.URL +
+                                    ".aspx";
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "UserCreatedCommentWasSaved",
+                    node2);
 
                 root.Controls.Clear();
                 InitializeForum(p.ID);

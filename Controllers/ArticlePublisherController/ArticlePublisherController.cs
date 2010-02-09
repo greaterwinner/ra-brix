@@ -281,7 +281,11 @@ The comment was;
 
             // Signaling that a *NEWLY* created article was saved
             Node nodeSignal = new Node();
-            nodeSignal["URL"].Value = a.URL;
+            nodeSignal["URL"].Value = HttpContext.Current.Request.Url.OriginalString.Replace(":80", "")
+                                    .Replace("Default.aspx", "")
+                                    .Replace("default.aspx", "")
+                                    + a.URL +
+                                    ".aspx";
             nodeSignal["Header"].Value = a.Header;
             nodeSignal["Body"].Value = a.Body;
             ActiveEvents.Instance.RaiseActiveEvent(
