@@ -166,11 +166,9 @@ namespace ForumModules
                 Main.Save();
                 Node node2 = new Node();
                 node2["Comment"].Value = p.Header + "\r\n" + p.Body;
-                node2["URL"].Value = HttpContext.Current.Request.Url.OriginalString.Replace(":80", "")
-                                    .Replace("Default.aspx", "")
-                                    .Replace("default.aspx", "")
-                                    + p.URL +
-                                    ".aspx";
+                node2["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
+                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                    p.URL;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
                     "UserCreatedCommentWasSaved",
@@ -237,6 +235,15 @@ namespace ForumModules
                 }
                 parent.Replies.Add(n);
                 parent.Save();
+                Node node2 = new Node();
+                node2["Comment"].Value = n.Header + "\r\n" + n.Body;
+                node2["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
+                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                    n.URL;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "UserCreatedCommentWasSaved",
+                    node2);
                 root.Controls.Clear();
                 InitializeForum(n.ID);
                 root.ReRender();
