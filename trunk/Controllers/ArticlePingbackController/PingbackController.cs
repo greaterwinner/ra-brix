@@ -33,6 +33,30 @@ namespace ArticlePingbackController
                 RegexOptions.IgnoreCase |
                 RegexOptions.Compiled);
 
+        private static readonly Regex PINGBACK_URL =
+            new Regex(
+                @"http://(?<server>\S*)",
+                RegexOptions.IgnoreCase |
+                RegexOptions.Compiled);
+
+        [ActiveEvent(Name = "UserCreatedCommentWasSaved", Async = true)]
+        protected void UserCreatedAnArticleCommentPingURLs(object sender, ActiveEventArgs e)
+        {
+            string urlErrors = "";
+            string comment = e.Params["Comment"].Get<string>();
+            string url = e.Params["URL"].Get<string>();
+            foreach (Match match in PINGBACK_URL.Matches(comment))
+            {
+                string urlToLink = "http://" + match.Groups["server"].Value;
+                urlErrors = DoPingback(url, urlErrors, urlToLink);
+            }
+            if (!string.IsNullOrEmpty(urlErrors))
+            {
+                // TODO: Log these URL's or something...?
+                // urlErrors that is...
+            }
+        }
+
         [ActiveEvent(Name = "HandleArticleFirstTimePublished", Async = true)]
         protected void HandleArticleFirstTimePublished(object sender, ActiveEventArgs e)
         {
@@ -44,61 +68,62 @@ namespace ArticlePingbackController
             foreach (Match match in REGEX_LINK.Matches(body))
             {
                 string urlToLink = "http://" + match.Groups["server"].Value;
-                try
-                {
-                    HttpWebRequest webRequest = WebRequest.Create(urlToLink) as HttpWebRequest;
-                    using (HttpWebResponse response = webRequest.GetResponse() as HttpWebResponse)
-                    {
-                        string pingBackServerUrl = null;
-                        if (!string.IsNullOrEmpty(response.Headers["X-Pingback"]))
-                        {
-                            // Pingback header existed...
-                            pingBackServerUrl = response.Headers["X-Pingback"];
-                        }
-                        else
-                        {
-                            // No pingback header, parsing document for <link...!
-                            using (TextReader reader = new StreamReader(response.GetResponseStream()))
-                            {
-                                string htmlOfLink = reader.ReadToEnd();
-                                foreach (Match mPBServer in PINGBACK_LINK.Matches(htmlOfLink))
-                                {
-                                    pingBackServerUrl = "http://" + match.Groups["server"].Value;
-                                    break;
-                                }
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(pingBackServerUrl))
-                        {
-                            // We've got a pingback link ...! :)
-                            string linkToSelf =
-                                    HttpContext.Current.Request.Url.OriginalString.Replace(":80", "")
-                                        .Replace("Default.aspx", "")
-                                        .Replace("default.aspx", "")
-                                        + url +
-                                        ".aspx";
-                            pingBackServerUrl = pingBackServerUrl.Replace("&amp;", "&")
-                                .Replace("&lt;", "<")
-                                .Replace("&gt;", ">")
-                                .Replace("&quot;", "\"");
-
-                            // Doing the actual Pingback...!
-                            IPingback proxy = XmlRpcProxyGen.Create<IPingback>();
-                            proxy.Url = pingBackServerUrl;
-                            proxy.Pingback(linkToSelf, urlToLink);
-                        }
-                    }
-                }
-                catch (Exception err)
-                {
-                    urlErrors += urlToLink + "<br/>";
-                }
+                urlErrors = DoPingback(url, urlErrors, urlToLink);
             }
             if (!string.IsNullOrEmpty(urlErrors))
             {
                 // TODO: Log these URL's or something...?
                 // urlErrors that is...
             }
+        }
+
+        private static string DoPingback(string url, string urlErrors, string urlToLink)
+        {
+            try
+            {
+                HttpWebRequest webRequest = WebRequest.Create(urlToLink) as HttpWebRequest;
+                using (HttpWebResponse response = webRequest.GetResponse() as HttpWebResponse)
+                {
+                    string pingBackServerUrl = null;
+                    if (!string.IsNullOrEmpty(response.Headers["X-Pingback"]))
+                    {
+                        // Pingback header existed...
+                        pingBackServerUrl = response.Headers["X-Pingback"];
+                    }
+                    else
+                    {
+                        // No pingback header, parsing document for <link...!
+                        using (TextReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            string htmlOfLink = reader.ReadToEnd();
+                            foreach (Match mPBServer in PINGBACK_LINK.Matches(htmlOfLink))
+                            {
+                                pingBackServerUrl = "http://" + mPBServer.Groups["server"].Value;
+                                break;
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(pingBackServerUrl))
+                    {
+                        // We've got a pingback link ...! :)
+                        string linkToSelf = url;
+                        pingBackServerUrl = pingBackServerUrl.Replace("&amp;", "&")
+                            .Replace("&lt;", "<")
+                            .Replace("&gt;", ">")
+                            .Replace("&quot;", "\"");
+
+                        // Doing the actual Pingback...!
+                        IPingback proxy = XmlRpcProxyGen.Create<IPingback>();
+                        proxy.Url = pingBackServerUrl;
+                        proxy.Pingback(linkToSelf, urlToLink);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                urlErrors += urlToLink + "\r\n";
+            }
+            return urlErrors;
         }
     }
 }
