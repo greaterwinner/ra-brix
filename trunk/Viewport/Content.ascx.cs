@@ -38,10 +38,15 @@ namespace Viewport
         protected global::Ra.Widgets.Dynamic dynTop;
         protected global::Ra.Widgets.Dynamic dynLeft;
         protected global::Ra.Widgets.Dynamic dynMid;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerBackground;
         private Node _initializingParameter;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                headerBackground.Attributes.Add("class", Settings.Instance["HeaderBackgroundCssClass"]);
+            }
             zoomImage.DataBind();
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
             informationPanel.DataBind();
