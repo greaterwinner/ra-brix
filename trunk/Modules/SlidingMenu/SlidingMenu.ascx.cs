@@ -36,16 +36,8 @@ namespace SlidingMenuModules
         // Menu items retrieved from static module event handlers...
         readonly Node _items = new Node("Root Menu");
 
-        private string _breadCrumbID;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (_breadCrumbID != null)
-                BreadCrumbID = _breadCrumbID;
-            if (!string.IsNullOrEmpty(BreadCrumbID))
-            {
-                menu.BreadCrumbControl = Selector.FindControl<RaWebControl>(Page, BreadCrumbID);
-            }
             search.Visible = Settings.Instance.Get("PortalGlobalSearch", true);
             BuildRootMenu();
         }
@@ -60,19 +52,16 @@ namespace SlidingMenuModules
             }
             string idOfControl = "node" + node.DNA.Replace("-", "x");
             SlidingMenuItem item = Selector.FindControl<SlidingMenuItem>(root, idOfControl);
-            SlidingMenuLevel level;
-            if (item.Controls.Count > 0)
+            string level = "";
+            Control idxCtrl = item;
+            while (!(idxCtrl is SlidingMenu))
             {
-                level = Selector.SelectFirst<SlidingMenuLevel>(item);
+                if (idxCtrl is SlidingMenuItem)
+                    level = idxCtrl.ID + "/" + level;
+                idxCtrl = idxCtrl.Parent;
             }
-            else
-            {
-                level = item.Parent as SlidingMenuLevel;
-            }
+            level = level.Trim('/');
             menu.ExpandTo(level);
-            menu.Style[Styles.opacity] = "0.0";
-            new EffectFadeIn(menu, 500)
-                .Render();
         }
 
         private static Node FindNode(Node node, string whatToFind)
@@ -253,6 +242,7 @@ would have had to done in other similar applications.
 
             if (node.Get<string>().IndexOf("url:") == 0)
             {
+                item.NoClick = true;
                 HtmlGenericControl btn = new HtmlGenericControl("span");
                 btn.Attributes.Add("class", Settings.Instance["UseFlatMenu"] == "True" ?
                     "buttonFlat menuBtn" :
@@ -435,22 +425,18 @@ would have had to done in other similar applications.
             PreviouslySelectedButton = btn;
         }
 
-        private string BreadCrumbID
-        {
-            get { return ViewState["BreadCrumbID"] as string; }
-            set { ViewState["BreadCrumbID"] = value; }
-        }
-
         public void InitialLoading(Node node)
         {
-            if (node["CustomBreadCrumb"].Value != null)
-            {
-                _breadCrumbID = ((RaWebControl)node["CustomBreadCrumb"].Value).ID;
-            }
-            Load +=
+            Page.InitComplete +=
+                delegate
+                {
+                    if (node["CustomBreadCrumb"].Value != null)
+                        menu.CustomBreadCrumbControl = ((RaWebControl)node["CustomBreadCrumb"].Value).ID;
+                };
+            string id = Request.Params["ContentID"];
+            Page.LoadComplete +=
                 delegate
                     {
-                        string id = Request.Params["ContentID"];
                         if (id != null)
                         {
                             SetActiveLevel(id);
