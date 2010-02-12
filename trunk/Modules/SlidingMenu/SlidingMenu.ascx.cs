@@ -61,7 +61,7 @@ namespace SlidingMenuModules
                 idxCtrl = idxCtrl.Parent;
             }
             level = level.Trim('/');
-            menu.ExpandTo(level);
+            menu.SlideTo(level);
         }
 
         private static Node FindNode(Node node, string whatToFind)
