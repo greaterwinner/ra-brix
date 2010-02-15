@@ -372,7 +372,7 @@ If this is not correct, then please click the button..."],
             node["ModuleSettings"]["MaxVisibility"].Value = 
                 Settings.Instance["LoginMaxVisibility"] == "True";
             ActiveEvents.Instance.RaiseLoadControl(
-                "LoginOpenIDModules.Login",
+                "Login",
                 "dynTop",
                 node);
             if (Settings.Instance["HideLogin"] == "True")
