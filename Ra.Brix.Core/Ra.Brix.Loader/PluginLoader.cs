@@ -135,29 +135,16 @@ namespace Ra.Brix.Loader
                 InstantiateAllControllers();
             }
 
-            Tuple<string, Type> pluginType;
+            // Looking through configuration mappings to see if Module Key is overloaded...
+            string mapping = ConfigurationManager.AppSettings["mapping-" + fullTypeName];
+            if (!string.IsNullOrEmpty(mapping))
+                fullTypeName = mapping;
             if (!_loadedPlugins.ContainsKey(fullTypeName))
             {
-                // Note that there might still exist an Alias in the mappings
-                // for the application pool, so we try to read the web.config
-                // settings to search for mappings here...
-                bool found = false;
-                string mapping = ConfigurationManager.AppSettings["mapping-" + fullTypeName];
-                if (!string.IsNullOrEmpty(mapping))
-                {
-                    if (_loadedPlugins.ContainsKey(mapping))
-                    {
-                        fullTypeName = mapping;
-                        found = true;
-                    }
-                }
-
-                // If we didn't in any ways find our Module, we throw an exception ...!
-                if (!found)
-                    throw new ArgumentException(
-                        "Couldn't find the plugin with the name of; '" + fullTypeName + "'");
+                throw new ArgumentException(
+                    "Couldn't find the plugin with the name of; '" + fullTypeName + "'");
             }
-            pluginType = _loadedPlugins[fullTypeName];
+            Tuple<string, Type> pluginType = _loadedPlugins[fullTypeName];
             if (string.IsNullOrEmpty(pluginType.Left))
             {
                 // Non-UserControl plugin...
