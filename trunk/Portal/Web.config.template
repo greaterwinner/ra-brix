@@ -48,6 +48,8 @@
 
     <add key="UseChromeFrame" value="true" />
 
+    <add key="mapping-Login" value="LoginOpenIDModules.Login" />
+
   </appSettings>
 
   <system.web>
