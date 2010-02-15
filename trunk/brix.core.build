@@ -76,6 +76,7 @@
         <include name="${framework.dir}/System.Xml.dll" />
         <include name="${framework.dir}/System.Web.dll" />
         <include name="${framework.dir}/System.Data.dll" />
+        <include name="${framework.dir}/System.Configuration.dll" />
         <include name="${output.dir}/${library.dir}/${brix.data.name}.dll" />
         <include name="${output.dir}/${library.dir}/${brix.types.name}.dll" />
       </references>
