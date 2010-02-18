@@ -207,7 +207,7 @@ namespace Viewport
                 else
                 {
                     // Need to loop through all keys...
-                    string[] keys = key.Split('|');
+                    string[] keys = key.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string idxKey in keys)
                     {
                         LoadOneControl(e, dynamic, idxKey);
