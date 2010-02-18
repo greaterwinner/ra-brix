@@ -224,7 +224,7 @@ This is a global setting though and will make those changes for all users of the
             {
                 // Need to create our user
                 user = new User {Username = username};
-                if (ActiveType<User>.Count == 0)
+                if (User.Count == 0)
                 {
                     user.Roles.Add(ActiveType<Role>.SelectFirst(
                         Criteria.Eq("Name", "Administrator")));
@@ -232,8 +232,10 @@ This is a global setting though and will make those changes for all users of the
                 }
                 else
                 {
-                    user.Roles.Add(ActiveType<Role>.SelectFirst(
-                        Criteria.Eq("Name", Settings.Instance["DefaultRoleForUsers"])));
+                    string defaultRoleForUser = Settings.Instance["DefaultRoleForUsers"];
+                    if (!string.IsNullOrEmpty(defaultRoleForUser))
+                        user.Roles.Add(ActiveType<Role>.SelectFirst(
+                            Criteria.Eq("Name", defaultRoleForUser)));
                 }
                 user.Save();
             }
