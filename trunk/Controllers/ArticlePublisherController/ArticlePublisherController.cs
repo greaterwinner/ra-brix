@@ -486,7 +486,7 @@ The comment was;
             {
                 if (defaultArticleLandingPage == contentId)
                     contentId = null;
-                else
+                else if(string.IsNullOrEmpty(contentId))
                     return;
             }
 
@@ -822,7 +822,11 @@ The comment was;
 
         private void ShowArticles(string userNameFilter, string filter, string tag)
         {
-            int noArticlesToDisplay = int.Parse(Settings.Instance["NumberOfArticlesToDisplay"]);
+            string number = Settings.Instance["NumberOfArticlesToDisplay"];
+            if (string.IsNullOrEmpty(number))
+                number = "100";
+            int noArticlesToDisplay = 
+                int.Parse(number);
             Node node = new Node();
 
             // Showing bookmarks module
