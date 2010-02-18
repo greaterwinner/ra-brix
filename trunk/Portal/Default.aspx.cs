@@ -22,8 +22,12 @@ namespace Ra.Brix.Portal
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            InitializeChromeFrame();
+            // ORDER COUNTS HERE....!
+            // Since all DLL's are loaded into the AppDomain by the plugin loader
+            // we are unfortunately stuck in a logic where order counts (for now)
+            // TODO: Fix cohesion here ...!
             InitializeViewport();
+            InitializeChromeFrame();
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "Page_Init");
