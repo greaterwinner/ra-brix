@@ -48,6 +48,8 @@
 
     <add key="UseChromeFrame" value="true" />
 
+    <add key="RememberUsersAcrossSession" value="True" />
+
     <add key="mapping-Login" value="LoginOpenIDModules.Login" />
 
   </appSettings>
