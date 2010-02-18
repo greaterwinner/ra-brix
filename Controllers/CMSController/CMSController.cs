@@ -399,6 +399,7 @@ namespace CMSController
             Page p = ActiveType<Page>.SelectFirst(Criteria.Eq("URL", e.Params["URL"].Get<string>()));
             e.Params["Body"].Value = p.Body;
             e.Params["HideFromMenu"].Value = p.HideFromMenu;
+            e.Params["HideFromHeader"].Value = p.HideFromHeader;
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
