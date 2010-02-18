@@ -575,11 +575,12 @@ The comment was;
 
         private void ShowLandingPageHeader()
         {
-            // We only display the header if user isn't logged in...
-            if (Users.LoggedInUserName != null)
-                return;
+            string header = "";
+            if (Users.LoggedInUserName == null)
+                header = Settings.Instance["ArticleLandingPageHeaderDefault"];
+            else
+                header = Settings.Instance["ArticleLandingPageHeaderLoggedIn"];
 
-            string header = Settings.Instance["ArticleLandingPageHeader"];
             if (!string.IsNullOrEmpty(header))
             {
                 Node node = new Node();

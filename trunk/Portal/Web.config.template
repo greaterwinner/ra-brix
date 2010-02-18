@@ -52,6 +52,10 @@
 
     <add key="mapping-Login" value="LoginOpenIDModules.Login" />
 
+    <add key="ArticleLandingPageHeaderDefault" value="home" />
+
+    <add key="ArticleLandingPageHeaderLoggedIn" value="home" />
+
   </appSettings>
 
   <system.web>
