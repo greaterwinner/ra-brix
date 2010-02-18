@@ -481,6 +481,15 @@ The comment was;
                 contentId = contentId.Trim('/');
             }
 
+            string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
+            if (defaultArticleLandingPage != null)
+            {
+                if (defaultArticleLandingPage == contentId)
+                    contentId = null;
+                else
+                    return;
+            }
+
             // Showing sticky tags at the top...
             ShowLandingPageTags();
 
