@@ -102,6 +102,10 @@ namespace InitializeController
 
         private static void TryToAutoLoginUserFromCookie()
         {
+            // We only try to autologin users if settings allows it ...
+            if (Settings.Instance["RememberUsersAcrossSession"] != "True")
+                return;
+
             // Checking to see if user has logged in before, if he has we "auto login" him...
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
