@@ -63,7 +63,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         public override int CountWhere(Type type, params Criteria[] args)
         {
             string where = CreateCriteriasForDocument(type, null, args);
-            SqlCommand cmd = new SqlCommand("select count(*) from Documents as d" + where, _connection);
+            SqlCommand cmd = new SqlCommand("select count(*) from dbo.Documents as d" + where, _connection);
             return (int)cmd.ExecuteScalar();
         }
 
@@ -71,7 +71,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         {
             // Checking to see if object exists...
             SqlCommand cmdExists = new SqlCommand(
-                string.Format("select count(*) from Documents where ID={0}", id),
+                string.Format("select count(*) from dbo.Documents where ID={0}", id),
                 _connection);
             if ((int)cmdExists.ExecuteScalar() == 0)
                 return null;
@@ -104,22 +104,22 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                     switch (idxProp.PropertyType.FullName)
                     {
                         case "System.Boolean":
-                            tableName = "PropertyBools";
+                            tableName = "dbo.PropertyBools";
                             break;
                         case "System.DateTime":
-                            tableName = "PropertyDates";
+                            tableName = "dbo.PropertyDates";
                             break;
                         case "System.Decimal":
-                            tableName = "PropertyDecimals";
+                            tableName = "dbo.PropertyDecimals";
                             break;
                         case "System.Int32":
-                            tableName = "PropertyInts";
+                            tableName = "dbo.PropertyInts";
                             break;
                         case "System.String":
-                            tableName = "PropertyStrings";
+                            tableName = "dbo.PropertyStrings";
                             break;
                         case "System.Byte[]":
-                            tableName = "PropertyBLOBS";
+                            tableName = "dbo.PropertyBLOBS";
                             break;
                         default:
                             if (idxProp.PropertyType.FullName.IndexOf("Ra.Brix.Types.LazyList") == 0)
@@ -204,7 +204,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
         public override IEnumerable<object> Select()
         {
-            SqlCommand cmd = new SqlCommand("select ID, TypeName from Documents as d", _connection);
+            SqlCommand cmd = new SqlCommand("select ID, TypeName from dbo.Documents as d", _connection);
             List<Tuple<int, Type>> retValIDs = new List<Tuple<int, Type>>();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -258,7 +258,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             DeleteChildren(id, transaction);
             DeleteComposition(id, transaction);
             SqlCommand cmd = new SqlCommand(
-                string.Format("delete from Documents where ID=" + id),
+                string.Format("delete from dbo.Documents where ID=" + id),
                 _connection,
                 transaction);
             cmd.ExecuteNonQuery();
@@ -267,7 +267,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         private void DeleteComposition(int id, SqlTransaction transaction)
         {
             SqlCommand cmdChild = new SqlCommand(
-                string.Format("delete from Documents2Documents where Document1ID={0} or Document2ID={0}", id),
+                string.Format("delete from dbo.Documents2Documents where Document1ID={0} or Document2ID={0}", id),
                 _connection,
                 transaction);
             cmdChild.ExecuteNonQuery();
@@ -277,7 +277,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         {
             List<int> childDocuments = new List<int>();
             SqlCommand cmdChild = new SqlCommand(
-                string.Format("select ID from Documents where Parent={0}", id),
+                string.Format("select ID from dbo.Documents where Parent={0}", id),
                 _connection,
                 transaction);
             using (SqlDataReader reader = cmdChild.ExecuteReader())
@@ -330,14 +330,14 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                     // we are given a valid parentId explicitly since it might be saving of
                     // a child that belongs to another object in the first place...
                     SqlCommand cmd = new SqlCommand(
-                        string.Format("update Documents set Modified=getdate() where ID={0}",
+                        string.Format("update dbo.Documents set Modified=getdate() where ID={0}",
                             id), _connection, transaction);
                     cmd.ExecuteNonQuery();
                 }
                 else
                 {
                     SqlCommand cmd = new SqlCommand(
-                        string.Format("update Documents set Modified=getdate(), Parent={1}, ParentPropertyName='{2}' where ID={0}",
+                        string.Format("update dbo.Documents set Modified=getdate(), Parent={1}, ParentPropertyName='{2}' where ID={0}",
                             id,
                             parentId,
                             parentPropertyName), _connection, transaction);
@@ -348,7 +348,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             {
                 SqlCommand cmd = new SqlCommand(
                     string.Format(
-                        "insert into Documents (TypeName, Created, Modified, Parent, ParentPropertyName) values ('doc{0}', getdate(), getdate(), {1}, {2});select @@Identity;", 
+                        "insert into dbo.Documents (TypeName, Created, Modified, Parent, ParentPropertyName) values ('doc{0}', getdate(), getdate(), {1}, {2});select @@Identity;", 
                         type.FullName,
                         parentId == -1 ? "NULL" : parentId.ToString(),
                         parentPropertyName == null ? "null" : "'" + parentPropertyName + "'", _connection, transaction), 
@@ -426,7 +426,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                         .Invoke(valueOfProperty, null);
 
                                     SqlCommand deleteFromD2D = new SqlCommand(
-                                        string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                        string.Format("delete from dbo.Documents2Documents where Document1ID={0} and PropertyName='{1}'",
                                             id,
                                             idxProp.Name), 
                                         _connection, 
@@ -435,7 +435,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
                                     SqlCommand cmdContains = new SqlCommand(
                                         string.Format(
-                                            "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
+                                            "insert into dbo.Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
                                             id,
                                             childId,
                                             idxProp.Name),
@@ -469,7 +469,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                         {
                                             // Delete old relationships whith this documentid and this property name
                                             SqlCommand sqlDeleteRelationRecords = new SqlCommand(
-                                                string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                                string.Format("delete from dbo.Documents2Documents where Document1ID={0} and PropertyName='{1}'",
                                                     id,
                                                     idxProp.Name), _connection, transaction);
                                             sqlDeleteRelationRecords.ExecuteNonQuery();
@@ -486,7 +486,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
                                                 SqlCommand cmdContains = new SqlCommand(
                                                     string.Format(
-                                                        "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
+                                                        "insert into dbo.Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
                                                         id,
                                                         documentId,
                                                         idxProp.Name),
@@ -512,7 +512,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                     {
                                         // Delete old relationships whith this documentid and this property name
                                         SqlCommand sqlDeleteRelationRecords = new SqlCommand(
-                                            string.Format("delete from Documents2Documents where Document1ID={0} and PropertyName='{1}'",
+                                            string.Format("delete from dbo.Documents2Documents where Document1ID={0} and PropertyName='{1}'",
                                                 id,
                                                 idxProp.Name), _connection, transaction);
                                         sqlDeleteRelationRecords.ExecuteNonQuery();
@@ -529,7 +529,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
 
                                             SqlCommand cmdContains = new SqlCommand(
                                                 string.Format(
-                                                    "insert into Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
+                                                    "insert into dbo.Documents2Documents (Document1ID, Document2ID, PropertyName) values ({0}, {1}, '{2}')",
                                                     id,
                                                     documentId,
                                                     idxProp.Name),
@@ -563,7 +563,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             }
             string andNotIn = string.IsNullOrEmpty(whereDelete) ? "" : string.Format(" and ID not in({0})", whereDelete);
             SqlCommand cmdDeleteAllInfants = new SqlCommand(
-                string.Format("select ID from Documents where Parent={0}{1}", id, andNotIn),
+                string.Format("select ID from dbo.Documents where Parent={0}{1}", id, andNotIn),
                 _connection,
                 transaction);
             List<int> idsToDelete = new List<int>();
