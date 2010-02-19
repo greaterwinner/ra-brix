@@ -86,7 +86,7 @@ namespace Ra.Brix.Data
                         order += " order by prop.Value " + (ascending ? "asc" : "desc");
                     }
                 }
-                retVal += "select d.ID from Documents as d";
+                retVal += "select d.ID from dbo.Documents as d";
                 retVal += join;
                 retVal += CreateCriteriasForDocument(type, propertyName, args);
                 retVal += where;
@@ -127,7 +127,7 @@ namespace Ra.Brix.Data
                         }
                         else if (idx is HasChildId)
                         {
-                            where += " and exists(select * from Documents d2 where d2.Parent=d.ID)";
+                            where += " and exists(select * from dbo.Documents d2 where d2.Parent=d.ID)";
                         }
                         else if (idx is ExistsInEquals)
                         {
@@ -137,7 +137,7 @@ namespace Ra.Brix.Data
                                 parentType = string.Format(" and PropertyName='{0}'", propertyName);
                             }
                             where += string.Format(
-                                " and exists(select * from Documents2Documents d2 where ((d2.Document1ID={0} and d2.Document2ID=d.ID) or (d2.Document2ID={0} and d2.Document1ID=d.ID)){1})", idx.Value, parentType);
+                                " and exists(select * from dbo.Documents2Documents d2 where ((d2.Document1ID={0} and d2.Document2ID=d.ID) or (d2.Document2ID={0} and d2.Document1ID=d.ID)){1})", idx.Value, parentType);
                         }
                         else
                         {
@@ -253,9 +253,9 @@ namespace Ra.Brix.Data
                             if (isInnerJoin)
                             {
                                 string whereInner = string.Format(@"
-and ((exists(select d2.ID from Documents as d2 where ParentPropertyName='{1}' and Parent=d.ID {0}))
+and ((exists(select d2.ID from dbo.Documents as d2 where ParentPropertyName='{1}' and Parent=d.ID {0}))
 or exists(
-    select d3.Document1ID from Documents2Documents as d3 where PropertyName='{1}' and Document1ID=d.id {2}))
+    select d3.Document1ID from dbo.Documents2Documents as d3 where PropertyName='{1}' and Document1ID=d.id {2}))
 
 ",
                                     whereAdd,
