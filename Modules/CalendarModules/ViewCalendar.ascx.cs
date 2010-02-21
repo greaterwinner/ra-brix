@@ -394,6 +394,13 @@ namespace CalendarModules
             if (dateStart.Style[Styles.display] == "none")
             {
                 new EffectFadeIn(dateStart, 500)
+                    .JoinThese(new EffectRollDown())
+                    .Render();
+            }
+            else
+            {
+                new EffectFadeOut(dateStart, 500)
+                    .JoinThese(new EffectRollUp())
                     .Render();
             }
         }
@@ -403,6 +410,13 @@ namespace CalendarModules
             if (dateEnd.Style[Styles.display] == "none")
             {
                 new EffectFadeIn(dateEnd, 500)
+                    .JoinThese(new EffectRollDown())
+                    .Render();
+            }
+            else
+            {
+                new EffectFadeOut(dateEnd, 500)
+                    .JoinThese(new EffectRollUp())
                     .Render();
             }
         }
@@ -452,6 +466,7 @@ namespace CalendarModules
                 a.Save();
                 lblStart.Text = a.Start.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
                 new EffectFadeOut(dateStart, 500)
+                    .JoinThese(new EffectRollUp())
                     .Render();
                 actWrp.Controls.Clear();
                 BuildActivities();
@@ -468,6 +483,7 @@ namespace CalendarModules
                 dateStart.Value = a.Start;
                 dateEnd.Value = a.End;
                 new EffectFadeOut(dateStart, 500)
+                    .JoinThese(new EffectRollUp())
                     .Render();
                 actWrp.Controls.Clear();
                 BuildActivities();
@@ -487,6 +503,7 @@ namespace CalendarModules
                 a.Save();
                 lblEnd.Text = a.End.ToString("d MMM", System.Globalization.CultureInfo.InvariantCulture);
                 new EffectFadeOut(dateEnd, 500)
+                    .JoinThese(new EffectRollUp())
                     .Render();
                 actWrp.Controls.Clear();
                 BuildActivities();
