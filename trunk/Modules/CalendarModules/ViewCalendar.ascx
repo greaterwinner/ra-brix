@@ -45,7 +45,7 @@
                 <ra:Calendar 
                     runat="server" 
                     OnDateClicked="dateStart_DateClicked"
-                    style="display:none;position:absolute;z-index:1000;"
+                    style="display:none;width:170px;"
                     id="dateStart" />
                 <br />
                 <%=Language.Instance["End", null, "End: "] %><ra:LinkButton 
@@ -61,7 +61,7 @@
                 <ra:Calendar 
                     runat="server" 
                     OnDateClicked="dateEnd_DateClicked"
-                    style="display:none;position:absolute;z-index:1000;"
+                    style="display:none;width:170px;"
                     id="dateEnd" />
                 <br />
                 <div style="padding:5px;">
@@ -106,7 +106,7 @@
                         Text='<%#Language.Instance["Delete", null, "Delete"] %>' />
                     <ra:ExtButton 
                         runat="server" 
-                        Text='<%#Language.Instance["OK",null,"OK"] %>'
+                        Text='<%#Language.Instance["Close", null, "Close"] %>'
                         OnClick="closeAct_Click"
                         id="closeAct" />
                 </div>
