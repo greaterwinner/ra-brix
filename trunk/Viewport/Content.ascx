@@ -81,7 +81,7 @@
             OnClick="handleInformationEvt_Click" />
     </ra:Window>
 
-    <div runat="server" id="headerBackground">
+    <div runat="server" id="headerBackground" class="headerLogoBg">
         <ra:Panel 
             runat="server" 
             id="pnlLogo" 
