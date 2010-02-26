@@ -118,7 +118,7 @@
             <ra:Dynamic 
                 runat="server" 
                 CssClass="dynamic-content dynamic-content-no-overflow"
-                style="width:160px;height:320px;"
+                style="width:160px;"
                 OnReload="dynamic_LoadControls"
                 ID="dynLeft" />
         </ra:Window>
@@ -139,9 +139,7 @@
         </div>
     </div>
     <p class="copyright">
-        Copyright 2009 - <a href="mailto:thomas@ra-ajax.org">Ra-Software, Inc.</a>
-        <br />
-        <a href="http://ra-brix.org">Ra-Brix</a> is <a href="http://www.gnu.org/licenses/gpl.html">Free and Open Source Software</a>.
+        <a href="http://ra-brix.org">Created by Ra-Software, Inc.</a>
     </p>
 </div>
 

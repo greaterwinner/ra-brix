@@ -144,7 +144,8 @@ namespace SettingsRecords
 
                 // Checking against application configuration settings to look for defaults
                 string tmp = ConfigurationManager.AppSettings[key];
-                this[key] = tmp;
+                if (!string.IsNullOrEmpty(tmp))
+                    this[key] = tmp;
                 return tmp;
             }
             set
