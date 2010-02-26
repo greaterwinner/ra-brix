@@ -11,12 +11,30 @@
     <head runat="server">
         <base id="baseElement" runat="server" href='<%#GetBaseURL()%>' />
         <title>Ra.Brix - a Modular and Extensible Application Framework</title>
-        <link runat="server" id="css1" href='<%# "media/skins/" + GetCssRootFolder() + "/steel/steel.css" %>' rel="stylesheet" type="text/css" />
-        <link runat="server" id="css2" href='<%# "media/skins/" + GetCssRootFolder() + "/portalSkins/portalSkins.css" %>' rel="stylesheet" type="text/css" />
-        <link runat="server" id="css3" href='<%# "media/skins/" + GetCssRootFolder() + "/main.css" %>' rel="stylesheet" type="text/css" />
+        <link 
+            runat="server" 
+            id="css1" 
+            href='<%# "media/skins/" + GetCssRootFolder() + "/steel/steel.css" %>' 
+            rel="stylesheet" 
+            type="text/css" />
+        <link 
+            runat="server" 
+            id="css2" 
+            href='<%# "media/skins/" + GetCssRootFolder() + "/portalSkins/portalSkins.css" %>' 
+            rel="stylesheet" 
+            type="text/css" />
+        <link 
+            runat="server" 
+            id="css3" 
+            href='<%# "media/skins/" + GetCssRootFolder() + "/main.css" %>' 
+            rel="stylesheet" 
+            type="text/css" />
         <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     </head>
     <body>
-        <form id="form1" runat="server" enctype="multipart/form-data" />
+        <form 
+            id="form1" 
+            runat="server" 
+            enctype="multipart/form-data" />
     </body>
 </html>
