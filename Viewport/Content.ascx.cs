@@ -43,10 +43,6 @@ namespace Viewport
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                headerBackground.Attributes.Add("class", Settings.Instance["HeaderBackgroundCssClass"]);
-            }
             zoomImage.DataBind();
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
             informationPanel.DataBind();

@@ -30,8 +30,6 @@
 
     <add key="ArticleMainLandingPageTitle" value="Welcome to Ra-Brix Magazine" />
 
-    <add key="HeaderBackgroundCssClass" value="headerLogoBg" />
-
     <add key="UseNotificationSounds" value="True" />
 
     <add key="UseForumsForArticles" value="True" />
