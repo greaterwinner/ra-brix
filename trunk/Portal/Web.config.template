@@ -22,6 +22,8 @@
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
 
+    <add key="CustomCssFiles" value="," />
+
     <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
 
     <add key="MostWantedResponseTooltip" value="Download Ra-Brix" />
