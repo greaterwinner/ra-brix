@@ -41,6 +41,7 @@ namespace ArticlePublisherController
             Language.Instance.SetDefaultValue("ButtonArticles", "Articles");
             Language.Instance.SetDefaultValue("ButtonCreateArticle", "Create Article");
             Language.Instance.SetDefaultValue("ButtonAdministrateTags", "Edit Tags");
+            Language.Instance.SetDefaultValue("ButtonNews", "News");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -49,6 +50,11 @@ namespace ArticlePublisherController
             e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
             e.Params["ButtonCreateArticle"].Value = "Menu-CreateArticle";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonAdministrateTags"].Value = "Menu-EditArticleTags";
+            string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
+            if (!string.IsNullOrEmpty(defaultArticleLandingPage))
+            {
+                e.Params["ButtonNews"].Value = "url:~/" + defaultArticleLandingPage + ".aspx";
+            }
         }
 
         [ActiveEvent(Name = "Menu-EditArticleTags")]
