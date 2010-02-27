@@ -490,9 +490,6 @@ The comment was;
                     return;
             }
 
-            // Showing sticky tags at the top...
-            ShowLandingPageTags();
-
             if (contentId == null)
             {
                 // Showing all articles, but ONLY if Article system is NOT turned off in settings...
@@ -503,6 +500,9 @@ The comment was;
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Settings.Instance["ArticleMainLandingPageTitle"];
 
+                // Showing sticky tags at the top...
+                ShowLandingPageTags();
+
                 // Showing all articles...
                 ShowArticles(null, null, null);
 
@@ -511,6 +511,9 @@ The comment was;
             }
             else if (contentId != null && contentId == "authors/all")
             {
+                // Showing sticky tags at the top...
+                ShowLandingPageTags();
+
                 Node nu = new Node();
                 int idxNo = 0;
                 nu["ModuleSettings"]["Header"].Value =
@@ -543,6 +546,9 @@ The comment was;
                         null,
                         "Articles written by "] + author;
 
+                // Showing sticky tags at the top...
+                ShowLandingPageTags();
+
                 // Showing articles from author
                 ShowArticles(author, null, null);
 
@@ -561,6 +567,9 @@ The comment was;
                         null,
                         "Articles tagged with "] + tag;
 
+                // Showing sticky tags at the top...
+                ShowLandingPageTags();
+
                 // Showing articles from author
                 ShowArticles(null, null, tag);
 
@@ -569,16 +578,15 @@ The comment was;
             }
             else
             {
-                // Showing search
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.SearchArticles",
-                    "dynMid");
-
                 // Showing specific article
-                ShowSpecificArticle(contentId);
+                if (ShowSpecificArticle(contentId))
+                {
+                    // Showing sticky tags at the top...
+                    ShowLandingPageTags();
 
-                // Display status bar, link to users...
-                DisplayStatusAndUsersLink();
+                    // Display status bar, link to users...
+                    DisplayStatusAndUsersLink();
+                }
             }
         }
 
@@ -652,7 +660,7 @@ The comment was;
                 node);
         }
 
-        private static void ShowSpecificArticle(string contentId)
+        private static bool ShowSpecificArticle(string contentId)
         {
             Node node = new Node();
 
@@ -674,7 +682,7 @@ The comment was;
             // Loading actual Article...
             Article a = Article.FindArticle(contentId);
             if (a == null)
-                return;
+                return false;
 
             // Incrementing view count
             a.ViewCount += 1;
@@ -766,6 +774,7 @@ The comment was;
                     "dynMid",
                     node);
             }
+            return false;
         }
 
         [ActiveEvent(Name = "ToggleArticleBookmark")]
@@ -825,8 +834,7 @@ The comment was;
             string number = Settings.Instance["NumberOfArticlesToDisplay"];
             if (string.IsNullOrEmpty(number))
                 number = "100";
-            int noArticlesToDisplay = 
-                int.Parse(number);
+            int noArticlesToDisplay = int.Parse(number);
             Node node = new Node();
 
             // Showing bookmarks module
