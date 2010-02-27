@@ -10,6 +10,9 @@
 
 using LanguageRecords;
 using Ra.Brix.Loader;
+using System.Net.Mail;
+using SettingsRecords;
+using System.Net;
 
 namespace CMSCommonPlugins
 {
@@ -21,6 +24,31 @@ namespace CMSCommonPlugins
         {
             e.Params["ContactUs"]["Name"].Value = Language.Instance["ContactUs", null, "Contact us"];
             e.Params["ContactUs"]["Value"].Value = "CMSCommonPluginModules.ContactUs";
+        }
+
+        [ActiveEvent(Name = "CMSCommonPluginsSendEmail")]
+        protected void CMSCommonPluginsSendEmail(object sender, ActiveEventArgs e)
+        {
+            string smtpServer = Settings.Instance["SMTPServer"];
+            string smtpServerUsername = Settings.Instance["SMTPServerUsername"];
+            string smtpServerPassword = Settings.Instance["SMTPServerPassword"];
+            string smtpServerUseSsl = Settings.Instance["SMTPServerUseSsl"];
+            string adminEmail = Settings.Instance["AdminEmail"];
+            MailMessage msg = new MailMessage();
+            msg.To.Add(adminEmail);
+            msg.From = new MailAddress("noreply@noreply.com");
+            msg.Subject = Language.Instance["EmailDefaultSubjectLine", null, "Comment from: "] + e.Params["Name"].Get<string>();
+            msg.Body = 
+                Language.Instance["ContactCredentials", null, "Contact credentials: "] + 
+                e.Params["Email"].Get<string>() + 
+                ". " + 
+                e.Params["Comment"].Get<string>();
+            msg.IsBodyHtml = false;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = smtpServer;
+            smtp.Credentials = new NetworkCredential(smtpServerUsername, smtpServerPassword);
+            smtp.EnableSsl = smtpServerUseSsl == "True";
+            smtp.Send(msg);
         }
     }
 }
