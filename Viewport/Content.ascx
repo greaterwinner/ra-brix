@@ -139,7 +139,7 @@
         </div>
     </div>
     <p class="copyright">
-        <a href="http://ra-brix.org">Created by Ra-Software, Inc.</a>
+        <%=LanguageRecords.Language.Instance["CopyrightFooter", null, @"<a href=""http://ra-brix.org"">Created by Ra-Software, Inc.</a>"] %>
     </p>
 </div>
 

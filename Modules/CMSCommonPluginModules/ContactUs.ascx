@@ -16,7 +16,7 @@
     <table class="spacedTable">
         <tr>
             <td style="text-align:right;">
-                <%=Language.Instance["YourEmail", null, "Your Email:"] %>
+                <%=Language.Instance["EmailOrPhone", null, "Your Email or Phone:"] %>
             </td>
             <td style="width:450px;">
                 <ra:TextBox 
@@ -26,17 +26,19 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align:right;"><%=Language.Instance["Header", null, "Header:"] %></td>
-            <td>
+            <td style="text-align:right;">
+                <%=Language.Instance["Your name", null, "Your name:"] %>
+            </td>
+            <td style="width:450px;">
                 <ra:TextBox 
                     runat="server" 
                     style="width:100%;border:1px solid #76B4E0;"
-                    id="header" />
+                    id="name" />
             </td>
         </tr>
         <tr>
             <td style="vertical-align:top;text-align:right;">
-                <%=Language.Instance["Body", null, "Body:"] %>
+                <%=Language.Instance["Comment", null, "Comment:"] %>
             </td>
             <td>
                 <ra:TextArea 

@@ -87,6 +87,20 @@ namespace CMSModules
                     try
                     {
                         Control ctrl = PluginLoader.Instance.LoadControl(idx);
+                        if (!IsPostBack)
+                        {
+                            ctrl.Init +=
+                                delegate
+                                {
+                                    IModule module = ctrl as IModule;
+                                    if (module != null)
+                                    {
+                                        Node nodeTmp = new Node();
+                                        nodeTmp["PageText"].Value = text;
+                                        module.InitialLoading(nodeTmp);
+                                    }
+                                };
+                        }
                         ctrl.ID = "lblCont" + idxNo;
                         content.Controls.Add(ctrl);
                     }

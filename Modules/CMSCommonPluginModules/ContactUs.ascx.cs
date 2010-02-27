@@ -26,7 +26,7 @@ namespace CMSCommonPluginModules
         protected global::Ra.Widgets.Panel wrp;
         protected global::Ra.Widgets.Panel wrp2;
         protected global::Ra.Widgets.TextBox email;
-        protected global::Ra.Widgets.TextBox header;
+        protected global::Ra.Widgets.TextBox name;
         protected global::Ra.Widgets.TextArea body;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -52,7 +52,7 @@ Email was successfully sent, thank you for your feedback. Your email will be ans
             {
                 Node node = new Node();
                 node["Message"].Value = string.Format(@"
-Something went wrong while trying to send email, message from server was: {0}", err.Message);
+Something went wrong while trying to send email, message from server was: {0}", err.InnerException.Message);
                 node["Duration"].Value = 5000;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
@@ -63,23 +63,16 @@ Something went wrong while trying to send email, message from server was: {0}", 
 
         private void SendEmail()
         {
-            string smtpServer = Settings.Instance["SMTPServer"];
-            string smtpServerUsername = Settings.Instance["SMTPServerUsername"];
-            string smtpServerPassword = Settings.Instance["SMTPServerPassword"];
-            string smtpServerUseSsl = Settings.Instance["SMTPServerUseSsl"];
-            string adminEmail = Settings.Instance["AdminEmail"];
-            MailMessage msg = new MailMessage();
-            msg.To.Add(adminEmail);
-            msg.From = new MailAddress(email.Text);
-            msg.Subject = email.Text + ": " + header.Text;
-            msg.Body = body.Text;
-            msg.IsBodyHtml = false;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtpServer;
-            smtp.Credentials = new NetworkCredential(smtpServerUsername, smtpServerPassword);
-            smtp.EnableSsl = smtpServerUseSsl == "True";
-            smtp.Send(msg);
+            Node node = new Node();
+            node["Comment"].Value = body.Text;
+            node["Email"].Value = email.Text;
+            node["Name"].Value = name.Text;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "CMSCommonPluginsSendEmail",
+                node);
 
+            // Animating contact field...
             new EffectRollUp(wrp, 200)
                 .ChainThese(
                     new EffectRollDown(wrp2, 200))
@@ -88,6 +81,16 @@ Something went wrong while trying to send email, message from server was: {0}", 
 
         public void InitialLoading(Node node)
         {
+            Load +=
+                delegate
+                {
+                    body.Text = Language.Instance["SendEmailTemplate", null,
+@"My phone number; (xxx)-xxx-xxxx
+My name; John Doe
+Contact me on phone please [x]
+Comment;
+"];
+                };
         }
     }
 }
