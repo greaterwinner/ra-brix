@@ -7,3 +7,21 @@
 	position:relative;
 }
 
+.openIDTextBoxWrapper
+{
+	position:absolute;
+	float:right;
+	bottom:59px;
+	right:45px;
+	top:auto;
+}
+
+.logoutLinkButton
+{
+	bottom:70px;
+	top:auto;
+	right:50px;
+	position:absolute;
+}
+
+
