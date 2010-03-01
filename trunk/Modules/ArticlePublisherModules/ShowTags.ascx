@@ -18,10 +18,18 @@
                 runat="server"
                 CssClass="tagLink"
                 style="opacity:0.3;">
-                <a 
-                    href='<%#Eval("[URL].Value") %>'>
-                    <%#Eval("[Name].Value") %>
-                </a>
+                <span class="button">
+                    <span class="bRight">
+                        <span class="bLeft">
+                            <span class="bCenter">
+                                <a 
+                                    href='<%#Eval("[URL].Value") %>'>
+                                    <%#Eval("[Name].Value") %>
+                                </a>
+                            </span>
+                        </span>
+                    </span>
+                </span>
                 <ra:BehaviorUnveiler 
                     runat="server" />
             </ra:Panel>

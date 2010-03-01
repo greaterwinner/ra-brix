@@ -780,7 +780,7 @@ The comment was;
                     "dynMid",
                     node);
             }
-            return false;
+            return true;
         }
 
         [ActiveEvent(Name = "ToggleArticleBookmark")]
