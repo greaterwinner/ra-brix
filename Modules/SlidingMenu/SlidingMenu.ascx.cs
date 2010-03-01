@@ -40,6 +40,11 @@ namespace SlidingMenuModules
         {
             search.Visible = Settings.Instance.Get("PortalGlobalSearch", true);
             BuildRootMenu();
+            if (!IsPostBack)
+            {
+                new EffectFadeIn(menu, 500)
+                    .Render();
+            }
         }
 
         private void SetActiveLevel(string id)
@@ -272,6 +277,7 @@ would have had to done in other similar applications.
                 center.Controls.Add(a);
 
                 item.Content.Controls.Add(btn);
+                item.CssClass += " linkButton";
 
                 if (node.Count > 0)
                 {
