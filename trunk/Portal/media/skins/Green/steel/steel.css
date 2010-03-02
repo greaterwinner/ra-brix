@@ -173,6 +173,131 @@ http://ra-ajax.org
 
 
 
+.bread-crumb-parent
+{
+	width:1000%;
+	background: transparent url(window-h-sprite.png) repeat 0 0;
+	height:35px;
+	overflow:hidden;
+	margin-top:-2px;
+}
+
+.bread-crumb
+{
+	width:100%;
+	height:35px;
+	overflow:auto;
+	margin-top:-3px;
+}
+
+.bread-crumb .bread-item-left
+{
+	height:25px;
+	margin-bottom:5px;
+	margin-left:-16px;
+	margin-top:5px;
+	padding-left:16px;
+	float:left;
+	display:block;
+	font-size:11px;
+	background:url('bread-crumb.png') no-repeat 0 -75px;
+}
+
+.bread-crumb .bread-item-right
+{
+	height:25px;
+	display:block;
+	padding-right:16px;
+	background:url('bread-crumb.png') no-repeat right -50px;
+}
+
+.bread-crumb .bread-item-center
+{
+	height:14px;
+	display:block;
+	background:url('bread-crumb.png') repeat-x 0 -25px;
+	padding:6px 4px 5px 4px;
+}
+
+.bread-crumb .bread-item-first
+{
+	padding-left:16px;
+	margin-bottom:5px;
+	margin-left:16px;
+	margin-top:5px;
+	background:url('bread-crumb.png') no-repeat 0 0;
+	position:relative;
+}
+
+.bread-crumb .bread-item-first .bread-item-center
+{
+	width:3px;
+}
+
+.bread-crumb .bread-item-first .sliding-bread-home
+{
+	background:url('tree-sprites.png') no-repeat -160px 0;
+	width:16px;
+	height:22px;
+	display:block;
+	position:absolute;
+	top:5px;
+	left:12px;
+}
+
+.bread-crumb a.bread-item-first:hover .sliding-bread-home
+{
+}
+
+.bread-crumb .bread-item-last .bread-item-right
+{
+	background:url('bread-crumb.png') no-repeat right -100px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Hovering */
+.bread-crumb a.bread-item-left:hover
+{
+	background-position:left -250px;
+}
+
+.bread-crumb a.bread-item-left:hover + .bread-item-left
+{
+	background-position:left -200px;
+}
+
+.bread-crumb a.bread-item-first:hover
+{
+	background-position:left -125px;
+}
+
+.bread-crumb a.bread-item-left:hover .bread-item-center
+{
+	background-position:left -150px;
+}
+
+.bread-crumb a.bread-item-first:hover .bread-item-right
+{
+	background-position:right -175px;
+}
+
+
+
+
+
+
+
+
+
+
 .sliding-menu .sliding-level
 {
 	width:100%;

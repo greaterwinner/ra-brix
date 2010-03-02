@@ -58,6 +58,12 @@
 
     <add key="ArticleLandingPageHeaderLoggedIn" value="home" />
 
+    <add key="CMSHideLandingPage" value="False" />
+
+    <add key="ArticleLandingPageHeaderDefault" value="False" />
+
+    <add key="DefaultArticleLandingPage" value="qqqqq" />
+
   </appSettings>
 
   <system.web>
