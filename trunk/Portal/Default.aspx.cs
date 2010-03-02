@@ -72,7 +72,7 @@ namespace Ra.Brix.Portal
             string url = Request.Url.ToString();
             if (url.Contains("ContentID"))
             {
-                string endsWith = Request.Params["ContentID"].Trim('/') + ".aspx";
+                string endsWith = Request.Params["ContentID"].Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 Form.Action = endsWith;
             }
         }

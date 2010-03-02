@@ -20,6 +20,8 @@ using Ra.Brix.Types;
 using Ra;
 using Ra.Widgets;
 using System.Globalization;
+using SettingsRecords;
+using System.Configuration;
 
 namespace LoginOpenIDModules
 {
@@ -78,7 +80,7 @@ namespace LoginOpenIDModules
                     }
                     if (!string.IsNullOrEmpty(Request.Params["ContentID"]))
                     {
-                        url += Request.Params["ContentID"].Trim('/') + ".aspx";
+                        url += Request.Params["ContentID"].Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
                     }
                     Response.Redirect(url, true);
                 }
@@ -162,7 +164,7 @@ namespace LoginOpenIDModules
 
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["ContentID"]))
             {
-                string page = HttpContext.Current.Request.Params["ContentID"].Trim('/') + ".aspx";
+                string page = HttpContext.Current.Request.Params["ContentID"].Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 currentURL = currentURL.Substring(0, currentURL.IndexOf("?"));
                 currentURL = currentURL.Replace("default.aspx", "");
                 currentURL = currentURL.Replace("Default.aspx", "");

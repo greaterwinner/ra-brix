@@ -16,6 +16,7 @@ using Ra.Brix.Data;
 using System.Web;
 using Ra;
 using SettingsRecords;
+using System.Configuration;
 
 namespace CMSController
 {
@@ -140,7 +141,7 @@ namespace CMSController
                 }
                 else
                 {
-                    node["ModuleSettings"]["Pages"]["Page" + idxNo]["URL"].Value = idx.URL + ".aspx";
+                    node["ModuleSettings"]["Pages"]["Page" + idxNo]["URL"].Value = idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 }
                 idxNo += 1;
             }
@@ -253,7 +254,7 @@ namespace CMSController
             }
             else
             {
-                url += ".aspx";
+                url += ConfigurationManager.AppSettings["DefaultPageExtension"];
             }
             url = "~/" + url;
 
@@ -419,7 +420,7 @@ namespace CMSController
             
             if (page != null)
             {
-                string pageUrl = page.URL == "home" ? "" : (page.URL + ".aspx");
+                string pageUrl = page.URL == "home" ? "" : (page.URL + ConfigurationManager.AppSettings["DefaultPageExtension"]);
                 string urlOfPage = "url:~/" + pageUrl;
                 Node access = new Node();
                 access["MenuValue"].Value = urlOfPage;

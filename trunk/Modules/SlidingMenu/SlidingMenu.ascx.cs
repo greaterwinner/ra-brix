@@ -21,6 +21,7 @@ using Ra.Effects;
 using System.Web.UI.HtmlControls;
 using Ra;
 using SettingsRecords;
+using System.Configuration;
 
 namespace SlidingMenuModules
 {
@@ -49,7 +50,7 @@ namespace SlidingMenuModules
 
         private void SetActiveLevel(string id)
         {
-            string whatToFind = "url:~" + id + ".aspx";
+            string whatToFind = "url:~" + id + ConfigurationManager.AppSettings["DefaultPageExtension"];
             Node node = FindNode(_items, whatToFind);
             if (node == null)
             {

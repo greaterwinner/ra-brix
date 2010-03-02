@@ -8,6 +8,7 @@
     <add
       key="LegoDatabaseAdapter"
       value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
+
     <add
       key="LegoConnectionString"
       value="Data Source=.\MSSQL;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
@@ -21,6 +22,8 @@
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
+
+    <add key="DefaultPageExtension" value=".aspx" />
 
     <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
 

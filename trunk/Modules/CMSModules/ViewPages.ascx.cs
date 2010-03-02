@@ -16,6 +16,8 @@ using Ra.Extensions.Widgets;
 using Ra.Widgets;
 using Ra.Selector;
 using Ra.Effects;
+using SettingsRecords;
+using System.Configuration;
 
 namespace CMSModules
 {
@@ -230,7 +232,7 @@ namespace CMSModules
             string urlString = "~/";
             if (SelectedPageID != "home")
             {
-                urlString += SelectedPageID + ".aspx";
+                urlString += SelectedPageID + ConfigurationManager.AppSettings["DefaultPageExtension"];
             }
             hyperlink.Attributes.Add("href", urlString);
             hyperlink.InnerHtml = SelectedPageID;

@@ -32,11 +32,12 @@
 
     void Application_AuthorizeRequest(object sender, EventArgs e)
     {
-        if (!System.IO.File.Exists(Request.PhysicalPath) && Request.PhysicalPath.Contains(".aspx"))
+        if (!System.IO.File.Exists(Request.PhysicalPath) && Request.PhysicalPath.Contains(ConfigurationManager.AppSettings["DefaultPageExtension"]))
         {
             string sRequestedURL = Request.AppRelativeCurrentExecutionFilePath
-                .Replace(".aspx", "")
                 .Replace("~", "");
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultPageExtension"]))
+                sRequestedURL = sRequestedURL.Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
             string sTargetURL = "~/Default.aspx?ContentID=" +
                 HttpUtility.UrlEncode(sRequestedURL);
             string url = Request.Url.ToString();

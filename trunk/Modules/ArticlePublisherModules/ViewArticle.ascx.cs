@@ -13,6 +13,8 @@ using Ra.Brix.Types;
 using HelperGlobals;
 using System;
 using LanguageRecords;
+using SettingsRecords;
+using System.Configuration;
 
 namespace ArticlePublisherModules
 {
@@ -71,7 +73,7 @@ namespace ArticlePublisherModules
                     Language.Instance["BookmarkedBy", null, "bookmarked {0} times"], node["BookmarkedBy"].Value);
             image.Src = node["MainImage"].Get<string>();
             image.Alt = node["Header"].Get<string>() + " - " + node["Ingress"].Get<string>();
-            author.HRef = "~/authors/" + node["Author"].Get<string>() + ".aspx";
+            author.HRef = "~/authors/" + node["Author"].Get<string>() + ConfigurationManager.AppSettings["DefaultPageExtension"];
             author.InnerHtml = "/.~ " + node["Author"].Get<string>();
             bookmark.Visible = Users.LoggedInUserName != null;
             bookmark.CssClass = node["Bookmarked"].Get<bool>() ? "bookmarked" : "bookmark";
