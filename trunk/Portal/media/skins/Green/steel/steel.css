@@ -127,7 +127,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 .window_content
 {
-	background-color:#DDE693;
+	background-color:#cfecff;
 	margin-left:-20px;
 	margin-right:-20px;
 	margin-bottom:-20px;
@@ -161,17 +161,12 @@ http://ra-ajax.org
 
 .sliding-menu
 {
-    position: relative;
-    overflow: hidden;
-    border-left: solid 1px #999;
-    border-right: solid 1px #999;
-    border-bottom: solid 1px #999;
+	position:relative;
+	overflow:hidden;
+	border-left:solid 1px #999;
+	border-right:solid 1px #999;
+	border-bottom:solid 1px #999;
 }
-
-
-
-
-
 
 .bread-crumb-parent
 {
@@ -310,6 +305,7 @@ http://ra-ajax.org
 {
 	margin-top:10px;
 	margin-left:0;
+	position:relative;
 }
 
 .sliding-menu .sliding-level .sliding-item
@@ -938,24 +934,22 @@ http://ra-ajax.org
 
 
 /* Extended Button */
-.button
-{
+.button {
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 3px;
-	background:Transparent url('wheel32.JPG') no-repeat 0 0;
 }
+
 
 .button .bLeft
 {
-    margin-left:27px;
- 	background:Transparent url('button.png') no-repeat 0 0;
+	background:Transparent url('button.png') no-repeat 0 0;
 	padding-left:13px;
 	display:block;
 	*display:inline-block;
 }
- 
+
 .button .bCenter
 {
 	background:Transparent url('button.png') repeat-x 0 -50px;
@@ -980,11 +974,7 @@ http://ra-ajax.org
 	*display:inline-block;
 }
 
-.button:hover 
-{
- 	color:Black;
-  
-}
+.button:hover { }
 
 .button:hover .bLeft
 {
@@ -999,14 +989,6 @@ http://ra-ajax.org
 .button:hover .bRight
 {
 	background:Transparent url('button.png') no-repeat right -100px;
-}
-
-.button-selected
-{
- 	color:Navy;
- 	background-image: url('wheel32.JPG');
-
-  
 }
 
 .button-selected .bLeft
