@@ -22,8 +22,6 @@
     <add key="LegoConnectionString" value="~/data.xml" />
     -->
 
-    <add key="CustomCssFiles" value="," />
-
     <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
 
     <add key="MostWantedResponseTooltip" value="Download Ra-Brix" />
@@ -48,7 +46,7 @@
 
     <add key="LoginMaxVisibility" value="True" />
 
-    <add key="UseChromeFrame" value="true" />
+    <add key="UseChromeFrame" value="True" />
 
     <add key="RememberUsersAcrossSession" value="True" />
 
@@ -61,8 +59,6 @@
     <add key="CMSHideLandingPage" value="False" />
 
     <add key="ArticleLandingPageHeaderDefault" value="False" />
-
-    <add key="DefaultArticleLandingPage" value="qqqqq" />
 
   </appSettings>
 
