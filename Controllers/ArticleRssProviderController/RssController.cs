@@ -18,6 +18,7 @@ using System.Globalization;
 using Ra.Brix.Types;
 using System.Web.UI.HtmlControls;
 using System.Web.UI;
+using System.Configuration;
 
 namespace ArticleRssProviderController
 {
@@ -125,7 +126,7 @@ namespace ArticleRssProviderController
                     HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                         0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
                         idx.URL +
-                        ".aspx";
+                        ConfigurationManager.AppSettings["DefaultPageExtension"];
                 linkR.AppendChild(linkRContent);
                 item.AppendChild(linkR);
 
@@ -144,7 +145,7 @@ namespace ArticleRssProviderController
 ",
                         HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                         0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
-                        "authors/" + idx.Author.Username + ".aspx",
+                        "authors/" + idx.Author.Username + ConfigurationManager.AppSettings["DefaultPageExtension"],
                         idx.Author.Username);
                 descriptionRContent.Value = wholeBody;
                 descriptionR.AppendChild(descriptionRContent);

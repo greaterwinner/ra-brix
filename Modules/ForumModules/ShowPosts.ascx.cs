@@ -25,6 +25,8 @@ using HelperGlobals;
 using UserRecords;
 using System.Text.RegularExpressions;
 using System.Web;
+using SettingsRecords;
+using System.Configuration;
 
 namespace ForumModules
 {
@@ -136,7 +138,7 @@ namespace ForumModules
                 p.Header = header.Text.Replace("<", "&lt;").Replace(">", "&gt;");
                 p.Body = body.Text;
                 p.When = DateTime.Now;
-                p.URL = Main.Name + ".aspx";
+                p.URL = Main.Name + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 p.Name = anonTxt.Text;
                 if (Users.LoggedInUserName != null)
                 {

@@ -29,6 +29,7 @@ using System.Net;
 using System.IO;
 using System.Web.UI;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace ArticlePublisherController
 {
@@ -53,7 +54,7 @@ namespace ArticlePublisherController
             string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
             if (!string.IsNullOrEmpty(defaultArticleLandingPage))
             {
-                e.Params["ButtonNews"].Value = "url:~/" + defaultArticleLandingPage + ".aspx";
+                e.Params["ButtonNews"].Value = "url:~/" + defaultArticleLandingPage + ConfigurationManager.AppSettings["DefaultPageExtension"];
             }
         }
 
@@ -68,7 +69,7 @@ namespace ArticlePublisherController
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Sticky"].Value = idx.ShowInLandingPage;
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
-                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 idxNo += 1;
             }
             ActiveEvents.Instance.RaiseLoadControl(
@@ -289,7 +290,7 @@ The comment was;
             Node nodeSignal = new Node();
             nodeSignal["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
                     0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
-                    a.URL + ".aspx";
+                    a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
             nodeSignal["Header"].Value = a.Header;
             nodeSignal["Body"].Value = a.Body;
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -298,7 +299,7 @@ The comment was;
                 nodeSignal);
 
             // Redirecting to article...
-            AjaxManager.Instance.Redirect("~/" + a.URL + ".aspx");
+            AjaxManager.Instance.Redirect("~/" + a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"]);
         }
 
         public static string GetBase64Encoded(string inString)
@@ -432,7 +433,7 @@ The comment was;
             {
                 e.Params["Grid"]["Rows"]["Row" + idxNo]["ID"].Value = idx.ID;
                 e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"].Value = idx.Article.Header;
-                e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"]["href"].Value = idx.Article.URL + ".aspx";
+                e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"]["href"].Value = idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 e.Params["Grid"]["Rows"]["Row" + idxNo]["Bookmarks"]["target"].Value = "same";
                 idxNo += 1;
             }
@@ -473,7 +474,7 @@ The comment was;
                 e.Params["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
                 e.Params["Tags"]["Tag" + idxNo]["Sticky"].Value = idx.ShowInLandingPage;
                 e.Params["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
-                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 idxNo += 1;
             }
         }
@@ -530,7 +531,7 @@ The comment was;
                         break;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Name"].Value = idx.Username;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Score"].Value = idx.Score;
-                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username + ".aspx";
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username + ConfigurationManager.AppSettings["DefaultPageExtension"];
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["ImageSrc"].Value =
                         string.Format(
                             "http://www.gravatar.com/avatar/{0}?s=64&d=identicon",
@@ -545,7 +546,7 @@ The comment was;
             else if (contentId != null && contentId.Contains("authors/"))
             {
                 // Showing articles from specific authors...
-                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(".aspx", "");
+                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
                         "ShowingArticleFromAuthor",
@@ -566,7 +567,7 @@ The comment was;
                 // Showing articles from specific authors...
                 string tag = HttpContext.Current.Server.UrlDecode(
                     contentId.Substring(contentId.LastIndexOf("/") + 1)
-                        .Replace(".aspx", ""));
+                        .Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], ""));
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
                         "ShowingArticleTags",
@@ -656,7 +657,7 @@ The comment was;
             {
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
-                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 idxNo += 1;
             }
             node["ModuleSettings"]["AlignBottomRight"].Value = true;
@@ -749,7 +750,7 @@ The comment was;
             {
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["Name"].Value = idx.Name;
                 node["ModuleSettings"]["Tags"]["Tag" + idxNo]["URL"].Value = "tags/" +
-                    HttpContext.Current.Server.UrlEncode(idx.Name) + ".aspx";
+                    HttpContext.Current.Server.UrlEncode(idx.Name) + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 idxNo += 1;
             }
             node["AddToExistingCollection"].Value = true;
@@ -921,8 +922,8 @@ The comment was;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
-                node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
-                node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
 
                 // Making sure we only show the x latest articles...
                 if (++idxNo == noArticlesToDisplay)
@@ -945,7 +946,7 @@ The comment was;
                         if (node["ModuleSettings"]["Articles"].Exists(
                             delegate(Node idxNode)
                             {
-                                return idxNode["URL"].Get<string>() == "~/" + idx.URL + ".aspx";
+                                return idxNode["URL"].Get<string>() == "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                             }, true))
                             continue;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
@@ -955,8 +956,8 @@ The comment was;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
-                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ".aspx";
-                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ".aspx")).ToString();
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
 
                         // Making sure we only show the x latest articles...
                         if (++idxNo == noArticlesToDisplay)
@@ -984,8 +985,8 @@ The comment was;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.Article.MainImage;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Article.Author == null ? "unknown" : idx.Article.Author.Username;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Article.Published;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.Article.URL + ".aspx";
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.Article.URL + ".aspx")).ToString();
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
                     idxNo += 1;
                 }
                 node["ModuleSettings"]["Header"].Value =

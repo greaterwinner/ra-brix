@@ -23,6 +23,7 @@ using SettingsRecords;
 using UserRecords;
 using System.Text;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace InitializeController
 {
@@ -356,7 +357,7 @@ If this is not correct, then please click the button..."],
             string url = "~/";
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["ContentID"]))
             {
-                url += HttpContext.Current.Request.Params["ContentID"].Trim('/') + ".aspx";
+                url += HttpContext.Current.Request.Params["ContentID"].Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
             }
             AjaxManager.Instance.Redirect(url);
         }
