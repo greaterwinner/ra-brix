@@ -139,13 +139,12 @@ namespace SettingsRecords
                         {
                             return idx.Name == key;
                         });
-                if (retVal != null)
+                if (retVal != null && !string.IsNullOrEmpty(retVal.Value))
                     return retVal.Value;
 
                 // Checking against application configuration settings to look for defaults
                 string tmp = ConfigurationManager.AppSettings[key];
-                if (!string.IsNullOrEmpty(tmp))
-                    this[key] = tmp;
+                this[key] = tmp;
                 return tmp;
             }
             set
