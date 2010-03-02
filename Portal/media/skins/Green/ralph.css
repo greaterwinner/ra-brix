@@ -1,0 +1,172 @@
+﻿
+ 
+
+.openIDTextBoxWrapper
+{
+	position:absolute;
+	float:right;
+	bottom:59px;
+	right:45px;
+	top:auto;
+}
+
+.logoutLinkButton
+{
+	bottom:70px;
+	top:auto;
+	right:50px;
+	position:absolute;
+}
+
+
+#paper
+{
+    background-color: #DDE693;
+	width:1056px;
+	margin:0 auto 0 auto;
+	overflow:auto;
+	padding:0 16px 0 16px;
+	min-height:720px;
+	position:relative;
+}
+
+
+.headerLogoBg
+{
+	height:200px;
+	background:url('sun_background.png') no-repeat 0 0;
+	width:1024px;
+	position:relative;
+}
+
+form
+{
+	overflow:auto;
+	height:100%;
+}
+	
+body
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    margin: 0;
+    overflow: auto;
+    background-color: #7D7D7D;
+}
+
+html
+{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	overflow:auto;
+}
+	
+
+/* Window "light" */
+.light-window
+{
+	display:block;
+}
+
+.light-window_nw
+{
+	padding-left:10px;
+	position:relative;
+}
+
+.light-window_ne
+{
+	padding-right:10px;
+}
+
+.light-window_n
+{
+	overflow:hidden;
+	height:10px;
+}
+
+.light-window_body
+{
+	overflow:hidden;
+	position:relative;
+}
+
+.light-window_w
+{
+	padding-left:40px;
+}
+
+.light-window_e
+{
+	padding-right:40px;
+}
+
+.light-window_title
+{
+	display:none;
+}
+
+.light-window_content
+{
+	bottom: auto;
+	display: block;
+	margin-left: -20px;
+	margin-right: -20px;
+	background-color: #DDE693;
+}
+
+.no-background .light-window_content
+{
+	background-image:none !important;
+}
+
+.light-window_sw
+{
+	padding-left:40px;
+}
+
+.light-window_se
+{
+ 	padding-right:40px;
+}
+
+.light-window_s
+{
+	height:40px;
+}
+
+ 	
+.window_content
+{
+	background-color:#DDE693;
+	margin-left:-20px;
+	margin-right:-20px;
+	margin-bottom:-20px;
+}
+
+
+/* Extended Button */
+.button
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: 0;
+	width: auto;
+	background-color: Transparent;
+		margin-bottom: 3px;
+	background:url('wheel32.JPG') no-repeat 0 0;
+}
+
+.button:hover 
+{
+ 	color:Black;
+}
+
+.button-selected
+{
+ 	color:Navy;
+ 	background-image: url('wheel32.JPG');
+}
+	
