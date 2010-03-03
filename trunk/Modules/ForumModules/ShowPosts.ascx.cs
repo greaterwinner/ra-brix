@@ -168,8 +168,7 @@ namespace ForumModules
                 Main.Save();
                 Node node2 = new Node();
                 node2["Comment"].Value = p.Header + "\r\n" + p.Body;
-                node2["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                node2["URL"].Value = ApplicationRoot.Root +
                     p.URL;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,
@@ -239,8 +238,7 @@ namespace ForumModules
                 parent.Save();
                 Node node2 = new Node();
                 node2["Comment"].Value = n.Header + "\r\n" + n.Body;
-                node2["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                node2["URL"].Value = ApplicationRoot.Root +
                     n.URL;
                 ActiveEvents.Instance.RaiseActiveEvent(
                     this,

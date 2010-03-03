@@ -54,7 +54,7 @@
             AlternateText="Zoom here"
             CssClass="zoomImage"
             Text="&nbsp;"
-            ImageUrl='<%# "media/skins/" + GetCssRootFolder() + "/Images/zoom.png" %>'
+            ImageUrl='<%# GetCssRootFolder() + "/Images/zoom.png" %>'
             id="zoomImage" />
     </div>
 </ra:Window>

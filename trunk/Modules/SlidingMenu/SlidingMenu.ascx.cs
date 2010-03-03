@@ -22,6 +22,7 @@ using System.Web.UI.HtmlControls;
 using Ra;
 using SettingsRecords;
 using System.Configuration;
+using HelperGlobals;
 
 namespace SlidingMenuModules
 {
@@ -50,7 +51,7 @@ namespace SlidingMenuModules
 
         private void SetActiveLevel(string id)
         {
-            string whatToFind = "url:~/" + id + ConfigurationManager.AppSettings["DefaultPageExtension"];
+            string whatToFind = "url:~/" + id.Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
             Node node = FindNode(_items, whatToFind);
             if (node == null)
             {
@@ -271,7 +272,7 @@ would have had to done in other similar applications.
 
                 HtmlAnchor a = new HtmlAnchor
                 {
-                    HRef = node.Get<string>().Replace("url:", ""),
+                    HRef = node.Get<string>().Replace("url:~/", ApplicationRoot.Root),
                     InnerHtml = Language.Instance[node.Name]
                 };
                 a.Attributes.Add("class", "menuLink");

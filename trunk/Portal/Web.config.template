@@ -1,29 +1,48 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="HardCodeFriendlyUrls" stopProcessing="true">
+          <match url="^Default\.aspx$" />
+          <conditions>
+            <add input="{REQUEST_METHOD}" negate="true" pattern="^POST$" />
+            <add input="{QUERY_STRING}" pattern="^ContentID=([^=&amp;]+)$" />
+          </conditions>
+          <action type="Redirect" url="{C:1}" appendQueryString="false" redirectType="Permanent" />
+        </rule>
+        <rule name="FriendlyUrlsRewrite" stopProcessing="true">
+          <!-- Can contain / in path, but *NOT* at the end. Must not contain any extensions -->
+          <match url="^([^\.]+[a-z-A-Z-0-9]+)$" />
+          <!--
+          In case you want to use .html as the file extension for your files...
+          Remember to also change the "DefaultPageExtension" setting below if so...
+          <match url="^([^\.]+[a-z-A-Z-0-9]+)\.html$" />
+          -->
+          <conditions>
+            <!-- Make sure it's not registered by IIS as a "folder" even though it has no extensions -->
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <!-- Output URL. Internally used and mapped to ... -->
+          <action type="Rewrite" url="Default.aspx?ContentID={R:1}" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+
   <appSettings>
+
     <!-- Portal plugin, our "viewport driver"... -->
     <add key="PortalViewDriver" value="Viewport.Content" />
 
     <!-- MSSQL -->
-    <add
-      key="LegoDatabaseAdapter"
-      value="Ra.Brix.Data.Adapters.MSSQL.MSSQL"/>
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL" />
 
-    <add
-      key="LegoConnectionString"
-      value="Data Source=.\MSSQL;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
+    <add key="LegoConnectionString" value="Data Source=.;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
 
-    <!-- MySQL connection string (doesn't work) 
-    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MySQL.MySQL"/>
-    <add key="LegoConnectionString" value="SERVER=localhost;DATABASE=Lego;UID=root;PASSWORD=8pr4ms" />
-    -->
-
-    <!-- XML connection string (doesn't work) 
-    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.XML.XML"/>
-    <add key="LegoConnectionString" value="~/data.xml" />
-    -->
-
-    <add key="DefaultPageExtension" value=".aspx" />
+    <!-- Notice that to change this one, you also need to change the rewriting rules above to match -->
+    <add key="DefaultPageExtension" value="" />
 
     <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
 
@@ -35,7 +54,7 @@
 
     <add key="UseForumsForArticles" value="True" />
 
-    <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
+    <add key="DefaultRoleForUsers" value="User" />
 
     <add key="PointsForNewComment" value="5" />
 
@@ -49,23 +68,35 @@
 
     <add key="LoginMaxVisibility" value="True" />
 
+    <add key="TwitterUsername" value="LightBringerOrg" />
+
+    <add key="TwitterPassword" value="8pr4ms" />
+
     <add key="UseChromeFrame" value="True" />
+
+    <add key="RSSTitleText" value="RSS Feed from TheLightBringer.org" />
+
+    <add key="RSSDescriptionText" value="Latest news from TheLightBringer.Org - YOUR news provider" />
+
+    <add key="mapping-Login" value="LoginOpenIDModules.Login" />
 
     <add key="RememberUsersAcrossSession" value="True" />
 
-    <add key="mapping-Login" value="LoginOpenIDModules.Login" />
+    <add key="FlickrAPIKey" value="8a5e1c1056d9f7a3b041066501e535c1" />
+    <add key="FlickrAPISecret" value="b064504effb5de00" />
+
+    <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
 
     <add key="ArticleLandingPageHeaderDefault" value="home" />
 
     <add key="ArticleLandingPageHeaderLoggedIn" value="home" />
 
-    <add key="CMSHideLandingPage" value="False" />
-
-    <add key="ArticleLandingPageHeaderDefault" value="False" />
+    <add key="DefaultArticleLandingPage" value="news" />
 
   </appSettings>
 
   <system.web>
+    <customErrors mode="Off" />
     <pages>
       <controls>
         <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra" />
@@ -74,7 +105,7 @@
         <add assembly="Components" namespace="Components" tagPrefix="ext" />
       </controls>
     </pages>
-    <compilation debug="false" />
+    <compilation debug="true" />
     <authentication mode="Windows" />
   </system.web>
 </configuration>

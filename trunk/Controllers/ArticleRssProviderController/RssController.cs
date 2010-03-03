@@ -19,6 +19,7 @@ using Ra.Brix.Types;
 using System.Web.UI.HtmlControls;
 using System.Web.UI;
 using System.Configuration;
+using HelperGlobals;
 
 namespace ArticleRssProviderController
 {
@@ -50,8 +51,7 @@ namespace ArticleRssProviderController
             c.Attributes.Add("type", "application/rss+xml");
             c.Attributes.Add("title", Settings.Instance["RSSTitleText"]);
             c.Attributes.Add("href",
-                HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                        0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) + "rss.aspx");
+                ApplicationRoot.Root + "rss.aspx");
             (HttpContext.Current.Handler as Page).Header.Controls.Add(c);
         }
 
@@ -84,9 +84,7 @@ namespace ArticleRssProviderController
             // link node
             XmlNode link = doc.CreateNode(XmlNodeType.Element, "link", "");
             XmlNode linkContent = doc.CreateNode(XmlNodeType.Text, "", "");
-            linkContent.Value =
-                HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                        0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1);
+            linkContent.Value = ApplicationRoot.Root;
             link.AppendChild(linkContent);
             channel.AppendChild(link);
 
@@ -123,8 +121,7 @@ namespace ArticleRssProviderController
                 XmlNode linkR = doc.CreateNode(XmlNodeType.Element, "link", "");
                 XmlNode linkRContent = doc.CreateNode(XmlNodeType.Text, "", "");
                 linkRContent.Value =
-                    HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                        0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                    ApplicationRoot.Root +
                         idx.URL +
                         ConfigurationManager.AppSettings["DefaultPageExtension"];
                 linkR.AppendChild(linkRContent);
@@ -135,16 +132,14 @@ namespace ArticleRssProviderController
                 XmlNode descriptionRContent = doc.CreateNode(XmlNodeType.Text, "", "");
                 string wholeBody =
                     string.Format(@"<img src=""{0}"" alt=""{1}"" style=""float:right;margin-left:15px;"" />",
-                    HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                        0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                    ApplicationRoot.Root +
                         idx.MainImage,
                     idx.Header);
                 wholeBody += idx.Body;
                 wholeBody += string.Format(@"
 <p>Copyright 2010 - <a href=""{0}"">{1}</a>. Licensed as <a href=""http://creativecommons.org/licenses/by-sa/3.0/"" />Creative Commons Attribution-Share Alike 3.0</a>.</p>
 ",
-                        HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                        0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+                        ApplicationRoot.Root +
                         "authors/" + idx.Author.Username + ConfigurationManager.AppSettings["DefaultPageExtension"],
                         idx.Author.Username);
                 descriptionRContent.Value = wholeBody;
