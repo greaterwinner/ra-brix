@@ -42,11 +42,6 @@ namespace SlidingMenuModules
         {
             search.Visible = Settings.Instance.Get("PortalGlobalSearch", true);
             BuildRootMenu();
-            if (!IsPostBack)
-            {
-                new EffectFadeIn(menu, 500)
-                    .Render();
-            }
         }
 
         private void SetActiveLevel(string id)
@@ -68,7 +63,7 @@ namespace SlidingMenuModules
                 idxCtrl = idxCtrl.Parent;
             }
             level = level.Trim('/');
-            menu.SlideTo(level);
+            menu.SlideTo(level, false);
         }
 
         private static Node FindNode(Node node, string whatToFind)
