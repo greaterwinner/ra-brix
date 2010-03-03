@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppInstaller.cs" />
+    <Compile Include="ApplicationRoot.cs" />
     <Compile Include="DataHelper.cs" />
     <Compile Include="DateFormatter.cs" />
     <Compile Include="Users.cs" />

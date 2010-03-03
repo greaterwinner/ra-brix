@@ -64,10 +64,11 @@
     <ra:Window 
         runat="server" 
         CssClass="light-window informationPanel"
-        Visible="false"
+        Visible="true"
         id="informationPanel">
         <audio 
-            src='<%# "media/skins/" + GetCssRootFolder() + "/Sounds/ping.wav" %>'
+            src='<%# GetCssRootFolder() + "/Sounds/ping.wav" %>'
+            runat="server"
             id="pingSound">
         </audio>
         <ra:Label 

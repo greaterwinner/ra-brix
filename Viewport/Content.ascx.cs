@@ -56,17 +56,22 @@ namespace Viewport
 
         protected string GetCssRootFolder()
         {
+            string retVal = ApplicationRoot.Root + "media/skins/";
             string portalDefault = Settings.Instance.Get(
                 "CssRootFolder",
                 "Gold");
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
-                return portalDefault;
+                retVal += portalDefault;
             }
-            return UserSettings.Instance.Get(
-                "CssRootFolder",
-                Users.LoggedInUserName,
-                portalDefault);
+            else
+            {
+                retVal += UserSettings.Instance.Get(
+                    "CssRootFolder",
+                    Users.LoggedInUserName,
+                    portalDefault);
+            }
+            return retVal;
         }
 
         protected void popupWindow_Closed(object sender, EventArgs e)
@@ -105,9 +110,9 @@ namespace Viewport
                 zoomImage.Style[Styles.zIndex] = "100";
                 new EffectSize(popupWindow2, 200, -1, 90)
                     .ChainThese(
-                    new EffectSize(dynPopup2, 200, 50, -1),
-                    new EffectFadeOut(dynPopup2, 50),
-                    new EffectFadeIn(zoomImage, 50))
+                        new EffectSize(dynPopup2, 200, 50, -1),
+                        new EffectFadeOut(dynPopup2, 50),
+                        new EffectFadeIn(zoomImage, 50))
                     .Render();
             }
         }

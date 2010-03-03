@@ -23,7 +23,6 @@
     void Application_Error(object sender, EventArgs e) 
     { 
         // Code that runs when an unhandled error occurs
-
     }
 
     void Application_BeginRequest(object sender, EventArgs e)
@@ -32,21 +31,6 @@
 
     void Application_AuthorizeRequest(object sender, EventArgs e)
     {
-        if (!System.IO.File.Exists(Request.PhysicalPath) && Request.PhysicalPath.Contains(ConfigurationManager.AppSettings["DefaultPageExtension"]))
-        {
-            string sRequestedURL = Request.AppRelativeCurrentExecutionFilePath
-                .Replace("~", "");
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultPageExtension"]))
-                sRequestedURL = sRequestedURL.Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
-            string sTargetURL = "~/Default.aspx?ContentID=" +
-                HttpUtility.UrlEncode(sRequestedURL);
-            string url = Request.Url.ToString();
-            if (url.Contains("?"))
-            {
-                sTargetURL += "&" + url.Substring(url.IndexOf("?") + 1);
-            }
-            Context.RewritePath(sTargetURL);
-        }
     }
 
     void Application_EndRequest(object sender, EventArgs e)
