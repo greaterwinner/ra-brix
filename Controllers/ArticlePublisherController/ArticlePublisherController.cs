@@ -495,7 +495,7 @@ The comment was;
                     return;
             }
 
-            if (contentId == null)
+            if (string.IsNullOrEmpty(contentId) || contentId == "/")
             {
                 // Showing all articles, but ONLY if Article system is NOT turned off in settings...
                 if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
@@ -529,7 +529,7 @@ The comment was;
                         break;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Name"].Value = idx.Username;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Score"].Value = idx.Score;
-                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username.Replace(".", "-") + ConfigurationManager.AppSettings["DefaultPageExtension"];
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["ImageSrc"].Value =
                         string.Format(
                             "http://www.gravatar.com/avatar/{0}?s=64&d=identicon",
@@ -544,7 +544,10 @@ The comment was;
             else if (contentId != null && contentId.Contains("authors/"))
             {
                 // Showing articles from specific authors...
-                string author = contentId.Substring(contentId.LastIndexOf("/") + 1).Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
+                string author = contentId.Substring(contentId.LastIndexOf("/") + 1);
+                if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultPageExtension"]))
+                    author = author.Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
+                author = author.Replace("-", ".");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
                         "ShowingArticleFromAuthor",
@@ -563,9 +566,9 @@ The comment was;
             else if (contentId != null && contentId.Contains("tags/"))
             {
                 // Showing articles from specific authors...
-                string tag = HttpContext.Current.Server.UrlDecode(
-                    contentId.Substring(contentId.LastIndexOf("/") + 1)
-                        .Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], ""));
+                string tag = HttpContext.Current.Server.UrlDecode(contentId.Substring(contentId.LastIndexOf("/") + 1));
+                if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultPageExtension"]))
+                    tag = tag.Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
                         "ShowingArticleTags",
