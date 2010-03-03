@@ -51,7 +51,7 @@ namespace ArticleRssProviderController
             c.Attributes.Add("type", "application/rss+xml");
             c.Attributes.Add("title", Settings.Instance["RSSTitleText"]);
             c.Attributes.Add("href",
-                ApplicationRoot.Root + "rss.aspx");
+                ApplicationRoot.Root + "rss" + ConfigurationManager.AppSettings["DefaultPageExtension"]);
             (HttpContext.Current.Handler as Page).Header.Controls.Add(c);
         }
 
@@ -140,7 +140,7 @@ namespace ArticleRssProviderController
 <p>Copyright 2010 - <a href=""{0}"">{1}</a>. Licensed as <a href=""http://creativecommons.org/licenses/by-sa/3.0/"" />Creative Commons Attribution-Share Alike 3.0</a>.</p>
 ",
                         ApplicationRoot.Root +
-                        "authors/" + idx.Author.Username + ConfigurationManager.AppSettings["DefaultPageExtension"],
+                        "authors/" + idx.Author.Username.Replace(".", "-") + ConfigurationManager.AppSettings["DefaultPageExtension"],
                         idx.Author.Username);
                 descriptionRContent.Value = wholeBody;
                 descriptionR.AppendChild(descriptionRContent);

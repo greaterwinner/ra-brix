@@ -13,7 +13,7 @@
 
     <a 
         runat="server" 
-        href="~/authors/all.aspx" 
+        href="~/authors/all" 
         id="linkToUsers" />
 
     <ra:Label 
