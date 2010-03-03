@@ -1824,8 +1824,149 @@ a.bookmarks
 	display:none !important;
 }
 
+/* Syntax highlighting */
+.cpp-inline 
+{
+	color: #990000;
+	font-family: ""Courier New"", Courier, mono;
+}
 
+.cpp-pre 
+{
+	background-color: #FBEDBB;
+	padding: 7pt;
+	font: 9pt ""Courier New"", Courier, mono;
+	white-space: pre;
+}
 
+.cpp-comment  
+{
+	color: #006633;
+}
+
+.cpp-literal  
+{
+	color: #CC0000;
+}
+
+.cpp-keyword  
+{
+	color:#0000FF;
+}
+
+.cpp-klass
+{
+	color:#0088ff;
+}
+
+.cpp-preprocessor
+{
+	color:#0000FF;
+}
+
+.xml-tag  
+{
+	color:#AA4400
+}
+
+.xml-bracket  
+{
+	color:#0000FF;
+}
+
+.xml-comment 
+{ 
+	color:#008800;
+}
+
+.xml-cdata  
+{
+	color:#AA0088;
+}
+
+.xml-attribute-name 
+{
+	color:#FF0000;
+}
+
+.xml-attribute-value
+{
+	color:#0000FF;
+}
+
+.yellow-code
+{
+	background-color:#fafa00;
+}
+
+.yellow-code h3
+{
+	margin:15px 0px 5px 0px;
+}
+
+.docsList
+{
+	margin:15px 0px 15px 15px;
+}
+
+.docsList li.xx_event,
+.docsList li.xx_ctor,
+.docsList li.xx_function,
+.docsList li.xx_property,
+.docsList li.xx_enum
+{
+	list-style-type:none;
+	background-image:url(code-icons.png);
+	background-repeat:no-repeat;
+	padding-left:20px;
+	margin-left:5px;
+}
+
+.docsList li a
+{
+	display:block;
+	width:99%;
+}
+
+.docsList li a:hover
+{
+	background-color:#d5f2FF;
+}
+
+.docsList li.xx_event
+{
+	background-position:-32px -16px;
+}
+
+.docsList li.xx_ctor,
+.docsList li.xx_function
+{
+	background-position:-16px -32px;
+}
+
+.docsList li.xx_property
+{
+	background-position:-48px 0px;
+}
+
+.docsList li.xx_enum
+{
+	background-position:0px -48px;
+}
+
+.property
+{
+	display:block;
+}
+
+.property span
+{
+	padding:15px;
+	display:block;
+	padding:15px;
+	border:dashed 1px #ddd;
+	background-color:#d5f2FF;
+}
 
 
 
