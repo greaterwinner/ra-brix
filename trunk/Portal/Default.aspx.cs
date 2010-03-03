@@ -22,6 +22,10 @@ namespace Ra.Brix.Portal
     {
         protected void Page_Init(object sender, EventArgs e)
         {
+            // Changing the URL to un-escaped to get rid of the ContentID parameter and
+            // make the URL for the form "beautiful"...
+            Form.Action = Request.RawUrl.Replace("default.aspx", "");
+
             // ORDER COUNTS HERE....!
             // Since all DLL's are loaded into the AppDomain by the plugin loader
             // we are unfortunately stuck in a logic where order counts (for now)
@@ -38,7 +42,6 @@ namespace Ra.Brix.Portal
                     "Page_Init_InitialLoading");
             }
             LoadComplete += MainWebPage_LoadComplete;
-            baseElement.DataBind();
         }
 
         private void InitializeChromeFrame()
@@ -66,26 +69,6 @@ namespace Ra.Brix.Portal
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "LoadComplete");
-
-            // Changing the URL to un-escaped to get rid of the ContentID parameter and
-            // make the URL for the form "beautiful"...
-            string url = Request.Url.ToString();
-            if (url.Contains("ContentID"))
-            {
-                string endsWith = Request.Params["ContentID"].Trim('/') + ConfigurationManager.AppSettings["DefaultPageExtension"];
-                Form.Action = endsWith;
-            }
-        }
-
-        protected string GetBaseURL()
-        {
-            string retVal = Request.Url.GetComponents(
-                UriComponents.HostAndPort | 
-                UriComponents.Scheme | 
-                UriComponents.Path, 
-                UriFormat.SafeUnescaped);
-            retVal = retVal.Substring(0, retVal.LastIndexOf("/") + 1);
-            return retVal;
         }
 
         protected override void OnPreRenderComplete(EventArgs e)
@@ -113,7 +96,7 @@ namespace Ra.Brix.Portal
         
         protected string GetRedirectUrl()
         {
-            return Request.Url.ToString();
+            return Request.Url.ToString().Replace("default.aspx", "");
         }
 
         private void InitializeViewport()

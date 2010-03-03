@@ -50,7 +50,7 @@ namespace SlidingMenuModules
 
         private void SetActiveLevel(string id)
         {
-            string whatToFind = "url:~" + id + ConfigurationManager.AppSettings["DefaultPageExtension"];
+            string whatToFind = "url:~/" + id + ConfigurationManager.AppSettings["DefaultPageExtension"];
             Node node = FindNode(_items, whatToFind);
             if (node == null)
             {
