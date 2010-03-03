@@ -9,23 +9,24 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
+        <base runat="server" id="baseElement" />
         <title>Ra.Brix - a Modular and Extensible Application Framework</title>
         <link 
             runat="server" 
             id="css1" 
-            href='<%# "~/media/skins/" + GetCssRootFolder() + "/steel/steel.css" %>' 
+            href='<%# GetCssRootFolder() + "/steel/steel.css" %>' 
             rel="stylesheet" 
             type="text/css" />
         <link 
             runat="server" 
             id="css2" 
-            href='<%# "~/media/skins/" + GetCssRootFolder() + "/portalSkins/portalSkins.css" %>' 
+            href='<%# GetCssRootFolder() + "/portalSkins/portalSkins.css" %>' 
             rel="stylesheet" 
             type="text/css" />
         <link 
             runat="server" 
             id="css3" 
-            href='<%# "~/media/skins/" + GetCssRootFolder() + "/main.css" %>' 
+            href='<%# GetCssRootFolder() + "/main.css" %>' 
             rel="stylesheet" 
             type="text/css" />
         <meta http-equiv="X-UA-Compatible" content="chrome=1" />

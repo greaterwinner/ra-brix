@@ -132,12 +132,7 @@ namespace ArticleTwitterIntegration
             request.ServicePoint.Expect100Continue = false;
             request.Headers.Add("Authorization", "Basic " + user);
             request.ContentType = "application/x-www-form-urlencoded";
-            string status =
-                    HttpContext.Current.Request.Url.OriginalString.Replace(":80", "")
-                        .Replace("Default.aspx", "")
-                        .Replace("default.aspx", "")
-                        + url +
-                        ConfigurationManager.AppSettings["DefaultPageExtension"];
+            string status = url;
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Url.Query))
                 status = status.Replace(HttpContext.Current.Request.Url.Query, "");
             status += " - ";

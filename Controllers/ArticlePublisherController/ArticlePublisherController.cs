@@ -127,9 +127,8 @@ you click the 'Unfollow' button.
 The comment was;
 "],
                 article.Header,
-                HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
-                    article.URL + ".aspx#comments") + comment;
+                ApplicationRoot.Root + article.URL + 
+                ConfigurationManager.AppSettings["DefaultPageExtension"] + "#comments") + comment;
             Node node = new Node();
             node["Emails"].Value = emails;
             node["Body"].Value = body;
@@ -288,8 +287,7 @@ The comment was;
 
             // Signaling that a *NEWLY* created article was saved
             Node nodeSignal = new Node();
-            nodeSignal["URL"].Value = HttpContext.Current.Request.Url.AbsoluteUri.Substring(
-                    0, HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1) +
+            nodeSignal["URL"].Value = ApplicationRoot.Root +
                     a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
             nodeSignal["Header"].Value = a.Header;
             nodeSignal["Body"].Value = a.Body;

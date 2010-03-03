@@ -26,6 +26,9 @@ namespace Ra.Brix.Portal
             // make the URL for the form "beautiful"...
             Form.Action = Request.RawUrl.Replace("default.aspx", "");
 
+            // Setting the base for the page to get correct path to images and such
+            baseElement.Attributes.Add("href", ApplicationRoot.Root);
+
             // ORDER COUNTS HERE....!
             // Since all DLL's are loaded into the AppDomain by the plugin loader
             // we are unfortunately stuck in a logic where order counts (for now)
@@ -84,19 +87,24 @@ namespace Ra.Brix.Portal
             string portalDefault = Settings.Instance.Get(
                 "CssRootFolder",
                 "Gold");
+            string retVal = ApplicationRoot.Root + "media/skins/";
             if (string.IsNullOrEmpty(Users.LoggedInUserName))
             {
-                return portalDefault;
+                retVal += portalDefault;
             }
-            return UserSettings.Instance.Get(
-                "CssRootFolder", 
-                Users.LoggedInUserName, 
-                portalDefault);
+            else
+            {
+                retVal += UserSettings.Instance.Get(
+                    "CssRootFolder",
+                    Users.LoggedInUserName,
+                    portalDefault);
+            }
+            return retVal;
         }
         
         protected string GetRedirectUrl()
         {
-            return Request.Url.ToString().Replace("default.aspx", "");
+            return ApplicationRoot.Root;
         }
 
         private void InitializeViewport()
