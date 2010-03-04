@@ -218,21 +218,27 @@ The comment was;
             using (Image original = Image.FromFile(imagePath))
             {
                 double ratio = (double)original.Height / (double)original.Width;
-                using (Image icon = new Bitmap(100, (int)(100 * ratio)))
+                if (!File.Exists(resourceFolder + "Images\\Small\\" + fileName + ".png"))
                 {
-                    using (Graphics g = Graphics.FromImage(icon))
+                    using (Image icon = new Bitmap(100, (int)(100 * ratio)))
                     {
-                        g.DrawImage(original, new Rectangle(0, 0, icon.Width, icon.Height));
+                        using (Graphics g = Graphics.FromImage(icon))
+                        {
+                            g.DrawImage(original, new Rectangle(0, 0, icon.Width, icon.Height));
+                        }
+                        icon.Save(resourceFolder + "Images\\Small\\" + fileName + ".png", ImageFormat.Png);
                     }
-                    icon.Save(resourceFolder + "Images\\Small\\" + fileName + ".png", ImageFormat.Png);
                 }
-                using (Image main = new Bitmap(350, (int)(350 * ratio)))
+                if (!File.Exists(resourceFolder + "Images\\Medium\\" + fileName + ".png"))
                 {
-                    using (Graphics g = Graphics.FromImage(main))
+                    using (Image main = new Bitmap(350, (int)(350 * ratio)))
                     {
-                        g.DrawImage(original, new Rectangle(0, 0, main.Width, main.Height));
+                        using (Graphics g = Graphics.FromImage(main))
+                        {
+                            g.DrawImage(original, new Rectangle(0, 0, main.Width, main.Height));
+                        }
+                        main.Save(resourceFolder + "Images\\Medium\\" + fileName + ".png", ImageFormat.Png);
                     }
-                    main.Save(resourceFolder + "Images\\Medium\\" + fileName + ".png", ImageFormat.Png);
                 }
             }
 
@@ -485,6 +491,12 @@ The comment was;
             {
                 contentId = contentId.Trim('/');
             }
+            else
+            {
+                // Showing all articles, but ONLY if Article system is NOT turned off in settings...
+                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
+                    return;
+            }
 
             string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
             if (defaultArticleLandingPage != null)
@@ -497,10 +509,6 @@ The comment was;
 
             if (string.IsNullOrEmpty(contentId) || contentId == "/")
             {
-                // Showing all articles, but ONLY if Article system is NOT turned off in settings...
-                if (Settings.Instance["ArticlePublisherHideLandingPage"] == "True")
-                    return;
-
                 // Setting title of page
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Settings.Instance["ArticleMainLandingPageTitle"];

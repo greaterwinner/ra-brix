@@ -64,6 +64,8 @@ namespace ArticleTwitterIntegration
         [ActiveEvent(Name = "JustBeforeLoadingArticleBottom")]
         protected void JustBeforeLoadingArticleBottom(object sender, ActiveEventArgs e)
         {
+            if (string.IsNullOrEmpty(Settings.Instance["TwitterUsername"]))
+                return;
             Node node = new Node();
             node["ModuleSettings"]["URL"].Value = "http://twitter.com/" +
                 Settings.Instance["TwitterUsername"];

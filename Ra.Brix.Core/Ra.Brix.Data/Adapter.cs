@@ -94,14 +94,21 @@ namespace Ra.Brix.Data
                 string adapterType = ConfigurationManager.AppSettings["LegoDatabaseAdapter"];
                 foreach (Assembly idxAsm in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    if(idxAsm.GlobalAssemblyCache)
+                    if (idxAsm.GlobalAssemblyCache)
                         continue;
-                    foreach (Type idxType in idxAsm.GetTypes())
+                    try
                     {
-                        if (adapterType == idxType.FullName)
+                        foreach (Type idxType in idxAsm.GetTypes())
                         {
-                            return idxType.GetConstructor(new Type[] { });
+                            if (adapterType == idxType.FullName)
+                            {
+                                return idxType.GetConstructor(new Type[] { });
+                            }
                         }
+                    }
+                    catch
+                    {
+                        ; // Intentionally do nothing...
                     }
                 }
                 return null;
