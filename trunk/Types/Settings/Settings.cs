@@ -141,7 +141,7 @@ namespace SettingsRecords
                         });
                 if (retVal != null)
                 {
-                    if (string.IsNullOrEmpty(retVal.Value))
+                    if (retVal.Value == null)
                     {
                         string tmp = ConfigurationManager.AppSettings[key];
                         return tmp;
@@ -155,6 +155,8 @@ namespace SettingsRecords
                 {
                     // Checking against application configuration settings to look for defaults
                     string tmp = ConfigurationManager.AppSettings[key];
+                    if (tmp == string.Empty)
+                        tmp = null;
                     this[key] = tmp;
                     return tmp;
                 }

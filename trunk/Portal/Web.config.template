@@ -113,6 +113,11 @@
 
   </appSettings>
 
+  <ColorizerLibrary>
+    <param name="syntax" value="~/highlight.xml"/>
+    <param name="style" value="~/highlight.xsl"/>
+  </ColorizerLibrary>
+
   <system.web>
     <!-- 
     Intelligencia URL rewriter continued ...
@@ -131,7 +136,7 @@
         <add assembly="Components" namespace="Components" tagPrefix="ext" />
       </controls>
     </pages>
-    <compilation debug="true" />
+    <compilation debug="false" />
     <authentication mode="Windows" />
   </system.web>
 </configuration>

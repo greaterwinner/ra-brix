@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B346303F-7568-4FC8-A48B-27058C02A204}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RaAjaxSamples</RootNamespace>
+    <AssemblyName>RaAjaxSamples</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Builder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Builder.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Ra.Selector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeFileRetrieverController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Docs_Controls_BehaviorDraggable.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorDraggable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_BehaviorDroppable.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorDroppable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_BehaviorObscurable.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorObscurable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_BehaviorUnveiler.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorUnveiler.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_BehaviorUpdater.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorUpdater.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectBorder.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectBorder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectFadeIn.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectFadeIn.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectFadeOut.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectFadeOut.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectFocusAndSelect.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectFocusAndSelect.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectHighlight.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectHighlight.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectHighlightText.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectHighlightText.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectMove.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectMove.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectRollDown.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectRollDown.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectRollUp.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectRollUp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectSize.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectSize.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_EffectTimeout.ascx.cs">
+      <DependentUpon>Docs_Controls_EffectTimeout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Accordion.ascx.cs">
+      <DependentUpon>Docs_Controls_Accordion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Calendar.ascx.cs">
+      <DependentUpon>Docs_Controls_Calendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_DateTimePicker.ascx.cs">
+      <DependentUpon>Docs_Controls_DateTimePicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_ExtButton.ascx.cs">
+      <DependentUpon>Docs_Controls_ExtButton.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_GlobalUpdater.ascx.cs">
+      <DependentUpon>Docs_Controls_GlobalUpdater.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_InPlaceEdit.ascx.cs">
+      <DependentUpon>Docs_Controls_InPlaceEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Menu.ascx.cs">
+      <DependentUpon>Docs_Controls_Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_MessageBox.ascx.cs">
+      <DependentUpon>Docs_Controls_MessageBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_ResizeHandler.ascx.cs">
+      <DependentUpon>Docs_Controls_ResizeHandler.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_RichEdit.ascx.cs">
+      <DependentUpon>Docs_Controls_RichEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_SlidingMenu.ascx.cs">
+      <DependentUpon>Docs_Controls_SlidingMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_TabControl.ascx.cs">
+      <DependentUpon>Docs_Controls_TabControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Timer.ascx.cs">
+      <DependentUpon>Docs_Controls_Timer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Tree.ascx.cs">
+      <DependentUpon>Docs_Controls_Tree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Window.ascx.cs">
+      <DependentUpon>Docs_Controls_Window.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_WebMethod.ascx.cs">
+      <DependentUpon>Docs_Controls_WebMethod.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Button.ascx.cs">
+      <DependentUpon>Docs_Controls_Button.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_CheckBox.ascx.cs">
+      <DependentUpon>Docs_Controls_CheckBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Dynamic.ascx.cs">
+      <DependentUpon>Docs_Controls_Dynamic.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_HiddenField.ascx.cs">
+      <DependentUpon>Docs_Controls_HiddenField.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Image.ascx.cs">
+      <DependentUpon>Docs_Controls_Image.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_ImageButton.ascx.cs">
+      <DependentUpon>Docs_Controls_ImageButton.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Label.ascx.cs">
+      <DependentUpon>Docs_Controls_Label.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_LinkButton.ascx.cs">
+      <DependentUpon>Docs_Controls_LinkButton.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_Panel.ascx.cs">
+      <DependentUpon>Docs_Controls_Panel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_RadioButton.ascx.cs">
+      <DependentUpon>Docs_Controls_RadioButton.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_SelectList.ascx.cs">
+      <DependentUpon>Docs_Controls_SelectList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_TextArea.ascx.cs">
+      <DependentUpon>Docs_Controls_TextArea.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docs_Controls_TextBox.ascx.cs">
+      <DependentUpon>Docs_Controls_TextBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Docs_Controls_BehaviorDraggable.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_BehaviorDroppable.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_BehaviorObscurable.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_BehaviorUnveiler.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_BehaviorUpdater.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectBorder.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectFadeIn.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectFadeOut.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectFocusAndSelect.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectHighlight.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectHighlightText.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectMove.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectRollDown.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectRollUp.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectSize.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_EffectTimeout.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Accordion.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Calendar.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_DateTimePicker.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_ExtButton.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_GlobalUpdater.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_InPlaceEdit.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Menu.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_MessageBox.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_ResizeHandler.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_RichEdit.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_SlidingMenu.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_TabControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Timer.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Tree.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Window.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_WebMethod.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Button.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_CheckBox.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Dynamic.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_HiddenField.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Image.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_ImageButton.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Label.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_LinkButton.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_Panel.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_RadioButton.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_SelectList.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_TextArea.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docs_Controls_TextBox.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
+      <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
+      <Name>Ra.Brix.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Types\Ra.Brix.Types.csproj">
+      <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
+      <Name>Ra.Brix.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\DoxygenDotNetViewDocs"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\DoxygenDotNetViewDocs"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

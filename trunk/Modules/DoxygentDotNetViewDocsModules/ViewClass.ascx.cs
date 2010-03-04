@@ -20,6 +20,7 @@ using System.IO;
 using Ra.Widgets;
 using Ra.Selector;
 using Ra.Effects;
+using ColorizerLibrary;
 
 namespace DoxygentDotNetViewDocsModules
 {
@@ -29,6 +30,10 @@ namespace DoxygentDotNetViewDocsModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl info;
         protected global::System.Web.UI.WebControls.Repeater repProperties;
+        protected global::Ra.Widgets.Dynamic sampleDyn;
+        protected global::Ra.Extensions.Widgets.TabControl tab;
+        protected global::Ra.Widgets.Label code;
+        protected global::Ra.Widgets.Label aspx;
 
         private Docs RaDocs
         {
@@ -42,22 +47,68 @@ namespace DoxygentDotNetViewDocsModules
 
         public void InitialLoading(Node node)
         {
-            // Class name, inheritance and description
             Class cls = node["Class"].Get<Class>();
-            header.InnerHtml = cls.FullName;
-            if (cls.BaseTypes.Count > 0 && !string.IsNullOrEmpty(cls.BaseTypes[0]))
-            {
-                header.InnerHtml += " : " + RaDocs.GetTypeByID(cls.BaseTypes[0]).FullName;
-            }
-            info.InnerHtml = cls.Description;
+            Load +=
+                delegate
+                {
+                    SetDescriptionAndHeader(cls);
+                    SetMembers(cls);
+                    LoadCodeFile(cls);
+                };
+            sampleDyn.Load +=
+                delegate
+                {
+                    LoadSample(cls);
+                };
+        }
 
+        private void LoadCodeFile(Class cls)
+        {
+            Node node = new Node();
+            node["ClassName"].Value = cls.Name;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DoxygenDotNetGetClassCodeFile",
+                node);
+            CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+            aspx.Text = 
+                colorizer.ProcessAndHighlightText(
+                    "<pre lang=\"xml\">" + 
+                    node["Markup"].Get<string>() + 
+                    "</pre>")
+                    .Replace("%@", "<span class=\"yellow-code\">%@</span>")
+                    .Replace(" %", " <span class=\"yellow-code\">%</span>");
+        }
+
+        private void LoadSample(Class cls)
+        {
+            string className = "RaAjaxSamples.Docs_Controls_" + cls.Name;
+            if (true)
+            {
+                tab.Visible = true;
+                sampleDyn.LoadControls(className);
+            }
+            else
+            {
+                tab.Visible = false;
+            }
+        }
+
+        protected void sampleDyn_Reload(object sender, Dynamic.ReloadEventArgs e)
+        {
+            System.Web.UI.Control ctrl = PluginLoader.Instance.LoadControl(e.Key);
+            sampleDyn.Controls.Add(ctrl);
+        }
+
+        private void SetMembers(Class cls)
+        {
             // Class members
-            List<string> showOnly = 
+            List<string> showOnly =
                 new List<string>(new string[] { "function", "ctor", "property", "event" });
             List<Member> membersToShow = cls.Members.FindAll(delegate(Member m)
             {
-                return showOnly.Contains(m.Kind) && 
-                    m.AccessModifier == "public" && 
+                return showOnly.Contains(m.Kind) &&
+                    m.AccessModifier == "public" &&
                     !string.IsNullOrEmpty(m.Description);
             });
             List<DocsItem> tmp = new List<DocsItem>();
@@ -81,6 +132,17 @@ namespace DoxygentDotNetViewDocsModules
                 });
             repProperties.DataSource = tmp;
             repProperties.DataBind();
+        }
+
+        private void SetDescriptionAndHeader(Class cls)
+        {
+            // Class name, inheritance and description
+            header.InnerHtml = cls.FullName;
+            if (cls.BaseTypes.Count > 0 && !string.IsNullOrEmpty(cls.BaseTypes[0]))
+            {
+                header.InnerHtml += " : " + RaDocs.GetTypeByID(cls.BaseTypes[0]).FullName;
+            }
+            info.InnerHtml = cls.Description;
         }
 
         protected void PropertyChosen(object sender, EventArgs e)

@@ -45,3 +45,39 @@
         </li>
     </ItemTemplate>
 </asp:Repeater>
+<ra:TabControl 
+    runat="server" 
+    id="tab">
+    <ra:TabView 
+        runat="server" 
+        Caption="Sample"
+        id="tabSample">
+        <div style="margin:50px;">
+            <ra:Dynamic
+                runat="server"
+                OnReload="sampleDyn_Reload"
+                id="sampleDyn" />
+        </div>
+    </ra:TabView>
+    <ra:TabView 
+        runat="server" 
+        Caption="C# code"
+        id="tabCode">
+        <div style="margin:50px;">
+            <ra:Label 
+                runat="server" 
+                CssClass="yellow-code"
+                id="code" />
+        </div>
+    </ra:TabView>
+    <ra:TabView 
+        runat="server" 
+        Caption=".ASPX syntax"
+        id="tabASPX">
+        <div style="margin:50px;">
+            <ra:Label 
+                runat="server" 
+                id="aspx" />
+        </div>
+    </ra:TabView>
+</ra:TabControl>
