@@ -68,25 +68,45 @@ namespace DoxygentDotNetViewDocsModules
             node["ClassName"].Value = cls.Name;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
-                "DoxygenDotNetGetClassCodeFile",
+                "DoxygenDotNetGetClassCodeFiles",
                 node);
             CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
-            aspx.Text = 
-                colorizer.ProcessAndHighlightText(
-                    "<pre lang=\"xml\">" + 
-                    node["Markup"].Get<string>() + 
-                    "</pre>")
-                    .Replace("%@", "<span class=\"yellow-code\">%@</span>")
-                    .Replace(" %", " <span class=\"yellow-code\">%</span>");
+            if (node["Markup"].Value == null)
+                aspx.Text = "";
+            else
+            {
+                aspx.Text =
+                    colorizer.ProcessAndHighlightText(
+                        "<pre lang=\"xml\">" +
+                        node["Markup"].Get<string>() +
+                        "</pre>")
+                        .Replace("%@", "<span class=\"yellow-code\">%@</span>")
+                        .Replace(" %", " <span class=\"yellow-code\">%</span>");
+            }
+            if (node["Code"].Value == null)
+                code.Text = "";
+            else
+            {
+                code.Text =
+                    colorizer.ProcessAndHighlightText(
+                        "<pre lang=\"cs\">" +
+                        node["Code"].Get<string>() +
+                        "</pre>");
+            }
         }
 
         private void LoadSample(Class cls)
         {
-            string className = "RaAjaxSamples.Docs_Controls_" + cls.Name;
-            if (true)
+            Node node = new Node();
+            node["ClassOriginalName"].Value = cls.Name;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DoxygenDotNetGetClassNameForSample",
+                node);
+            if (node["ClassName"].Value != null)
             {
                 tab.Visible = true;
-                sampleDyn.LoadControls(className);
+                sampleDyn.LoadControls(node["ClassName"].Get<string>());
             }
             else
             {

@@ -19,7 +19,7 @@ namespace RaAjaxSamples
     {
         protected global::Ra.Widgets.Panel pnl2;
         protected global::Ra.Widgets.Label lblInfo;
-        protected global::Ra.Widgets.Button btn2;
+        protected global::Ra.Extensions.Widgets.ExtButton btn2;
 
         protected void btn_Click(object sender, EventArgs e)
         {

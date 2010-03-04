@@ -18,7 +18,7 @@ namespace RaAjaxSamples
     [ActiveModule]
     public class Docs_Controls_EffectFadeOut : System.Web.UI.UserControl
     {
-        protected global::Ra.Widgets.Label lbl;
+        protected global::Ra.Widgets.Panel lbl;
 
         protected void btn_Click(object sender, EventArgs e)
         {

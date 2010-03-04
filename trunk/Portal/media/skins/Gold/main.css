@@ -1968,6 +1968,16 @@ a.bookmarks
 	background-color:#d5f2FF;
 }
 
+.tree .hasSample .icon
+{
+	background:url(steel/tree-sprites.png) no-repeat -208px 0px;
+}
+
+.tree .noSample .icon
+{
+	background:url(steel/tree-sprites.png) no-repeat -192px 0px;
+}
+
 
 
 

@@ -24,7 +24,7 @@ namespace DoxygentDotNetViewDocsModules
     [ActiveModule]
     public class ViewDocs : System.Web.UI.UserControl, IModule
     {
-        protected global::Ra.Extensions.Widgets.TreeNodes root;
+        protected global::Ra.Extensions.Widgets.TreeNodes rootClasses;
         protected global::Ra.Extensions.Widgets.TreeNodes rootTutorials;
         protected global::Ra.Extensions.Widgets.Tree tree;
         protected global::Ra.Widgets.TextBox filter;
@@ -61,7 +61,13 @@ namespace DoxygentDotNetViewDocsModules
                             {
                                 TreeNode n = new TreeNode();
                                 n.ID = idx.FullName;
-                                if (File.Exists(Server.MapPath("~/Docs-Controls/" + idx.FullName + ".ascx")))
+                                Node tmpNode = new Node();
+                                tmpNode["ClassName"].Value = idx.Name;
+                                ActiveEvents.Instance.RaiseActiveEvent(
+                                    this,
+                                    "DoxygenDotNetCheckIfSample",
+                                    tmpNode);
+                                if (tmpNode["HasSample"].Value != null && tmpNode["HasSample"].Get<bool>())
                                 {
                                     n.CssClass += " hasSample";
                                     n.Tooltip = "Have sample code";
@@ -81,7 +87,7 @@ namespace DoxygentDotNetViewDocsModules
                 });
             foreach (TreeNode idx in l)
             {
-                root.Controls.Add(idx);
+                rootClasses.Controls.Add(idx);
             }
         }
 
@@ -124,10 +130,10 @@ namespace DoxygentDotNetViewDocsModules
             Filter = filter.Text;
 
             // Classes...
-            root.Controls.Clear();
+            rootClasses.Controls.Clear();
             BuildRoot();
-            if (root.Controls.Count > 0)
-                root.RollDown();
+            if (rootClasses.Controls.Count > 0)
+                rootClasses.RollDown();
             tree.ReRender();
 
             // Tutorials...
@@ -143,7 +149,7 @@ namespace DoxygentDotNetViewDocsModules
         protected void tree_SelectedNodeChanged(object sender, EventArgs e)
         {
             string itemToLookAt = tree.SelectedNodes[0].ID;
-            if (itemToLookAt == "rootNode" || itemToLookAt == "tutorials")
+            if (itemToLookAt == "rootNodeClasses" || itemToLookAt == "tutorials")
                 return;
             if (itemToLookAt.Contains("tutorial_"))
             {
