@@ -83,7 +83,7 @@ namespace ArticlePublisherController
         {
             User user = User.SelectFirst(
                 Criteria.Eq("Username", e.Params["Username"].Value));
-            user.Score += int.Parse(Settings.Instance["PointsForNewComment"]);
+            user.Score += Settings.Instance.Get<int>("PointsForNewComment", 1);
             user.Save();
         }
 
@@ -174,7 +174,7 @@ The comment was;
         {
             User user = User.SelectFirst(
                 Criteria.Eq("Username", e.Params["Username"].Value));
-            user.Score += int.Parse(Settings.Instance["PointsForNewArticle"]);
+            user.Score += Settings.Instance.Get<int>("PointsForNewArticle", 5);
             user.Save();
         }
 
@@ -871,7 +871,8 @@ The comment was;
                 node);
 
             // Showing landing page header
-            ShowLandingPageHeader();
+            if (string.IsNullOrEmpty(userNameFilter))
+                ShowLandingPageHeader();
 
             // If user is not null, we also display the user profile...
             if (!string.IsNullOrEmpty(userNameFilter))

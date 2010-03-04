@@ -13,8 +13,8 @@
     runat="server" 
     id="pnlWrp" 
     DefaultWidget="submit"
-    style="position:relative;width:100%;height:100%;">
-    <table style="margin:5px;">
+    style="position:relative;width:100%;height:100%;padding:5px;">
+    <table>
         <tr>
             <td><%#Language.Instance["CMSCreateNewPage", null, "Create new page: "]%></td>
             <td>

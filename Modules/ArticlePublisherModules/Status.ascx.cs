@@ -15,6 +15,7 @@ using System;
 using LanguageRecords;
 using System.Text;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace ArticlePublisherModules
 {
@@ -33,6 +34,7 @@ There are {0} articles, {1} comments and {2} "],
                   node["CommentCount"].Value,
                   node["UserCount"].Value);
             linkToUsers.InnerHtml = Language.Instance["RegisteredUsers", null, "registered users"];
+            linkToUsers.HRef = ApplicationRoot.Root + "authors/all" + ConfigurationManager.AppSettings["DefaultPageExtension"];
             status2.Text = Language.Instance["StatusInfoText2", null, " around here"];
         }
     }
