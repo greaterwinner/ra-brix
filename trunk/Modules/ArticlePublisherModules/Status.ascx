@@ -13,7 +13,6 @@
 
     <a 
         runat="server" 
-        href="~/authors/all" 
         id="linkToUsers" />
 
     <ra:Label 
