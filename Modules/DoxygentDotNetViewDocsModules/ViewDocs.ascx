@@ -46,11 +46,11 @@
             </ra:TreeNode>
             <ra:TreeNode 
                 runat="server" 
-                ID="rootNode" 
+                ID="rootNodeClasses" 
                 Text="Classes Reference Documentation">
                 <ra:TreeNodes 
                     runat="server" 
-                    ID="root" />
+                    ID="rootClasses" />
             </ra:TreeNode>
         </ra:TreeNodes>
     </ra:Tree>

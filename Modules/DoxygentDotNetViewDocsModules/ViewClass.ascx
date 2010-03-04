@@ -66,7 +66,6 @@
         <div style="margin:50px;">
             <ra:Label 
                 runat="server" 
-                CssClass="yellow-code"
                 id="code" />
         </div>
     </ra:TabView>
