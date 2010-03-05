@@ -10,11 +10,12 @@ using System;
 using Ra.Extensions;
 using Ra;
 using Ra.Brix.Loader;
+using Ra.Brix.Types;
 
 namespace RaAjaxSamples
 {
     [ActiveModule]
-    public class Docs_Controls_WebMethod : System.Web.UI.UserControl
+    public class Docs_Controls_WebMethod : System.Web.UI.UserControl, IModule
     {
         [WebMethod]
         private string foo(string name)
@@ -24,6 +25,15 @@ namespace RaAjaxSamples
                 "' on the server it's " +
                 DateTime.Now.ToString("HH:mm") +
                 " now...";
+        }
+
+        public void InitialLoading(Node node)
+        {
+            Load +=
+                delegate
+                {
+                    AjaxManager.Instance.WriterAtBack.Write("window.userControlName = '" + this.ID + "';");
+                };
         }
     }
 }
