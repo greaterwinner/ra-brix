@@ -7,9 +7,10 @@
     Inherits="RaAjaxSamples.Docs_Controls_WebMethod" %>
 
 <script type="text/javascript">
-
-function foo() {
-  Ra.Control.callServerMethod('DocsUserControl.foo', {
+/* Will contain the ID of the UserControl the ServerMethod is within */
+window.userControlName = '';
+window.foo = function() {
+  Ra.Control.callServerMethod(window.userControlName + '.foo', {
     onSuccess: function(retVal) {
       alert(retVal);
     },
@@ -24,9 +25,9 @@ function foo() {
 <input 
     type="text" 
     id="txt" 
-    value="Your name please" />
+    value="John Doe" />
 
 <input 
     type="button" 
     value="Go server side..." 
-    onclick="foo();" />
+    onclick="window.foo();" />

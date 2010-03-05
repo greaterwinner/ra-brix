@@ -117,6 +117,19 @@ namespace DoxygentDotNetViewDocsModules
         protected void sampleDyn_Reload(object sender, Dynamic.ReloadEventArgs e)
         {
             System.Web.UI.Control ctrl = PluginLoader.Instance.LoadControl(e.Key);
+            ctrl.ID = "smpl" + e.Key.GetHashCode().ToString().Replace("-", "");
+            if (e.FirstReload)
+            {
+                ctrl.Init +=
+                    delegate
+                    {
+                        IModule module = ctrl as IModule;
+                        if (module != null)
+                        {
+                            module.InitialLoading(new Node());
+                        }
+                    };
+            }
             sampleDyn.Controls.Add(ctrl);
         }
 
