@@ -705,9 +705,7 @@ The comment was;
             a.Save();
 
             // Setting title of page
-            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
-                Language.Instance["RaBrixMagazine", null, "Ra-Brix Magazine - "] +
-                a.Header;
+            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = a.Header;
 
             node = new Node();
             node["AddToExistingCollection"].Value = true;
@@ -790,7 +788,129 @@ The comment was;
                     "dynMid",
                     node);
             }
+            if (Settings.Instance.Get<string>("ShowRelatedArticles", "True") == "True")
+            {
+                ShowArticlesFromSameUser(a, a.Author, false,
+                    Language.Instance["RelatedNewerArticlesFromUser", null, "Newer Articles from same user"]);
+                ShowArticlesFromSameUser(a, a.Author, true,
+                    Language.Instance["RelatedOlderArticlesFromUser", null, "Older Articles from same user"]);
+                ShowRelatedArticles(a, false, Language.Instance["RelatedNewerArticles", null, "Related Newer Articles"]);
+                ShowRelatedArticles(a, true, Language.Instance["RelatedOlderArticles", null, "Related Older Articles"]);
+            }
             return true;
+        }
+
+        private static void ShowArticlesFromSameUser(Article a, User user, bool older, string header)
+        {
+            List<Criteria> criteria = new List<Criteria>();
+            criteria.Add(Criteria.Eq("Author.Username", user.Username));
+            if (older)
+            {
+                criteria.Add(Criteria.Lt("Published", a.Published));
+                criteria.Add(Criteria.Sort("Published", false));
+            }
+            else
+            {
+                criteria.Add(Criteria.Mt("Published", a.Published.AddSeconds(1)));
+                criteria.Add(Criteria.Sort("Published", true));
+            }
+            int idxNoA = 0;
+            List<Article> articles = new List<Article>();
+            foreach (Article tmp in Article.Select(criteria.ToArray()))
+            {
+                articles.Add(tmp);
+                if (++idxNoA > 3)
+                    break;
+            }
+            if (articles.Count > 0)
+            {
+                Node node = new Node();
+                int idxNo = 0;
+                foreach (Article idx in articles)
+                {
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
+                    idxNo += 1;
+                }
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Header"].Value = header;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.LandingPage",
+                    "dynMid",
+                    node);
+            }
+        }
+
+        private static void ShowRelatedArticles(Article a, bool older, string header)
+        {
+            List<Tag> tags = new List<Tag>(a.Tags);
+            tags.Sort(
+                delegate(Tag left, Tag right)
+                {
+                    return right.ShowInLandingPage.CompareTo(left.ShowInLandingPage);
+                });
+            List<Article> articles = new List<Article>();
+            foreach (Tag idx in tags)
+            {
+                List<Criteria> criteria = new List<Criteria>();
+                criteria.Add(Criteria.ExistsIn(idx.ID));
+                criteria.Add(Criteria.Ne("Author.Username", a.Author.Username));
+                if (older)
+                {
+                    criteria.Add(Criteria.Lt("Published", a.Published));
+                    criteria.Add(Criteria.Sort("Published", false));
+                }
+                else
+                {
+                    criteria.Add(Criteria.Mt("Published", a.Published.AddSeconds(1)));
+                    criteria.Add(Criteria.Sort("Published", true));
+                }
+                int idxNoA = 0;
+                foreach (Article tmp in Article.Select(criteria.ToArray()))
+                {
+                    if (!articles.Exists(
+                        delegate(Article idxA)
+                        {
+                            return tmp.ID == idxA.ID;
+                        }))
+                    {
+                        articles.Add(tmp);
+                        if (++idxNoA > 3)
+                            break;
+                    }
+                }
+            }
+            if (articles.Count > 0)
+            {
+                Node node = new Node();
+                int idxNo = 0;
+                foreach (Article idx in articles)
+                {
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
+                    idxNo += 1;
+                }
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Header"].Value = header;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.LandingPage",
+                    "dynMid",
+                    node);
+            }
         }
 
         [ActiveEvent(Name = "ToggleArticleBookmark")]

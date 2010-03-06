@@ -1811,6 +1811,14 @@ a.bookmarks
 	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
 }
 
+.cmsMainBody
+{
+	text-align:justify;
+	line-height:20px;
+	font-size:14px;
+	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+}
+
 .twitterUrl
 {
 	display:block;
