@@ -172,7 +172,13 @@ namespace Ra.Brix.Data
 
     /**
      * A criteria that makes sure your object must exist within the object with the
-     * given ID in order to be true.
+     * given ID in order to be true. Notice that this one becomes true BOTH ways for
+     * a IsOwner=false relationship since logically if it's not an owner there is an
+     * "exists in" relationship between both of the objects both ways.
+     * So if you have a LazyList which the object containing the list is not the 
+     * owner of any child elements, then you can run ExistIn Criteria both ways
+     * from either the "parent object" or the "child object" and they will both
+     * return as true.
      */
     public class ExistsInEquals : Criteria
     {

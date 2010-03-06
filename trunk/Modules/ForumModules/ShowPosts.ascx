@@ -100,5 +100,6 @@
             id="obs" />
     </ra:Window>
 </div>
+<hr style="margin-top:25px;margin-bottom:25px;" />
 
 
