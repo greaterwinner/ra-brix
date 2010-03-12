@@ -312,7 +312,7 @@ namespace ForumModules
                 if (idx.IsRegisteredPosting)
                 {
                     lblUser.Text = string.Format("<a href=\"authors/{0}{2}\">{1}</a>",
-                        idx.GetNameOfPoster().Replace(".", "-"),
+                        idx.GetNameOfPoster().Replace(".", "--"),
                         idx.GetNameOfPoster(),
                         ConfigurationManager.AppSettings["DefaultPageExtension"]);
                 }

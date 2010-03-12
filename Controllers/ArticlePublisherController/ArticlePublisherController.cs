@@ -291,16 +291,19 @@ The comment was;
             // Saving article...
             a.Save();
 
-            // Signaling that a *NEWLY* created article was saved
-            Node nodeSignal = new Node();
-            nodeSignal["URL"].Value = ApplicationRoot.Root +
-                    a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
-            nodeSignal["Header"].Value = a.Header;
-            nodeSignal["Body"].Value = a.Body;
-            ActiveEvents.Instance.RaiseActiveEvent(
-                this,
-                "HandleArticleFirstTimePublished",
-                nodeSignal);
+            if (isNewArticle)
+            {
+                // Signaling that a *NEWLY* created article was saved
+                Node nodeSignal = new Node();
+                nodeSignal["URL"].Value = ApplicationRoot.Root +
+                        a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                nodeSignal["Header"].Value = a.Header;
+                nodeSignal["Body"].Value = a.Body;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "HandleArticleFirstTimePublished",
+                    nodeSignal);
+            }
 
             // Redirecting to article...
             AjaxManager.Instance.Redirect("~/" + a.URL + ConfigurationManager.AppSettings["DefaultPageExtension"]);
@@ -537,7 +540,7 @@ The comment was;
                         break;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Name"].Value = idx.Username;
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["Score"].Value = idx.Score;
-                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username.Replace(".", "-") + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    nu["ModuleSettings"]["Users"]["User" + idxNo]["URL"].Value = "authors/" + idx.Username.Replace(".", "--") + ConfigurationManager.AppSettings["DefaultPageExtension"];
                     nu["ModuleSettings"]["Users"]["User" + idxNo]["ImageSrc"].Value =
                         string.Format(
                             "http://www.gravatar.com/avatar/{0}?s=64&d=identicon",
@@ -555,7 +558,7 @@ The comment was;
                 string author = contentId.Substring(contentId.LastIndexOf("/") + 1);
                 if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultPageExtension"]))
                     author = author.Replace(ConfigurationManager.AppSettings["DefaultPageExtension"], "");
-                author = author.Replace("-", ".");
+                author = author.Replace("--", ".");
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance[
                         "ShowingArticleFromAuthor",
@@ -1048,11 +1051,11 @@ The comment was;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
-                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
-                node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = ApplicationRoot.Root + idx.IconImage;
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = ApplicationRoot.Root + idx.MainImage;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
-                node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = ApplicationRoot.Root + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
 
                 // Making sure we only show the x latest articles...

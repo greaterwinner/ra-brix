@@ -10,6 +10,7 @@
   </configSections>
   <rewriter>
     <rewrite url="^([^\.]+[a-zA-Z0-9-_]+)$" to="/Default.aspx?ContentID=$1" />
+    <rewrite url="^([^\.]+[a-zA-Z0-9-_]+)\?{1}(.+)$" to="/Default.aspx?ContentID=$1&amp;$2" />
   </rewriter>
   -->
   <system.webServer>
