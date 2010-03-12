@@ -39,9 +39,9 @@ namespace Viewport
             {
                 module.InitialLoading(e.Params["Parameters"]);
             }
-            dyn.Style[Styles.opacity] = "0";
+            /*dyn.Style[Styles.opacity] = "0";
             new EffectFadeIn(dyn, 400)
-                .Render();
+                .Render();*/
         }
 
         [ActiveEvent(Name = "ClearControls")]

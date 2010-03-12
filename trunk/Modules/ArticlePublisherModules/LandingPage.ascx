@@ -53,7 +53,7 @@
                 </span>
                 <a 
                     runat="server" 
-                    href='<%#"~/authors/" + Eval("[Author].Value").ToString().Replace(".", "-") + ConfigurationManager.AppSettings["DefaultPageExtension"] %>'
+                    href='<%#"~/authors/" + Eval("[Author].Value").ToString().Replace(".", "--") + ConfigurationManager.AppSettings["DefaultPageExtension"] %>'
                     style="position:absolute;bottom:5px;right:5px;font-size:10px;">
                     <%#Eval("[Author].Value") %>
                 </a>

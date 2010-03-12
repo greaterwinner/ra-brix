@@ -93,7 +93,7 @@ namespace LoginController
                     {
                         searchResult = dirSearcher.FindOne();
                     }
-                    catch (Exception)
+                    catch (Exception err)
                     {
                         //The domain is not available or the client do not have permission to do the search.
                         //Check userName and/or passWord.

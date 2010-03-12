@@ -221,7 +221,7 @@ This is a global setting though and will make those changes for all users of the
         [ActiveEvent(Name = "UserLoggedIn")]
         protected void UserLoggedIn(object sender, ActiveEventArgs e)
         {
-            string username = e.Params.Value.ToString();
+            string username = e.Params.Value.ToString().Trim('/');
             User user = ActiveType<User>.SelectFirst(Criteria.Eq("Username", username));
             
             // Need to check if user exists from before
