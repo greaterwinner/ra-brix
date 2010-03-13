@@ -6,7 +6,7 @@
     AutoEventWireup="true" 
     Inherits="ArticlePublisherModules.ViewArticle" %>
 
-<div style="position:relative;">
+<div style="position:relative;margin-top:15px;">
 
     <h1 
         runat="server" 
@@ -36,11 +36,12 @@
     <a 
         runat="server" 
         id="author" 
-        style="position:absolute;top:5px;right:25px;font-style:italic;" />
+        style="position:absolute;top:5px;right:25px;font-style:italic;margin-top:-25px;" />
 
     <ra:LinkButton 
         runat="server" 
         id="bookmark" 
+        style="margin-top:-25px;"
         OnClick="bookmark_Click"
         CssClass="bookmark" />
 

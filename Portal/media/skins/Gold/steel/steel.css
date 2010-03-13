@@ -626,6 +626,11 @@ http://ra-ajax.org
 	border-bottom:solid 1px #c9ac07;
 }
 
+/* TODO: Remove this one if you're using close tab-control functionality ... */
+.tab .tab-header ul li span.right a
+{
+	display:none;
+}
 
 
 

@@ -35,6 +35,7 @@ namespace DoxygenDotNetViewDocsController
         [ActiveEvent(Name = "Menu-ViewDocumentation")]
         protected void ViewDocumentation(object sender, ActiveEventArgs e)
         {
+            // Loading Documentation Browser
             Node node = new Node();
             node["TabCaption"].Value = 
                 Language.Instance["ReferenceDocumentation", null, "Reference documentation"];
@@ -44,6 +45,19 @@ namespace DoxygenDotNetViewDocsController
                 "DoxygentDotNetViewDocsModules.ViewDocs",
                 "dynPopup2",
                 node);
+
+            // Showing a message to inform user about usage
+            Node nodeMessage = new Node();
+            nodeMessage["Message"].Value = 
+                Language.Instance[
+                    "UseWindowToTopeRight", 
+                    null, 
+                    "Use the window at the top right corner to select classes or articles to read..."];
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
         }
 
         [ActiveEvent(Name = "DoxygentDotNetShowTutorial")]

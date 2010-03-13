@@ -75,12 +75,12 @@ namespace ArticlePublisherRecords
                 GetUniqueURL(this);
                 Author = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             }
+            if (string.IsNullOrEmpty(Body))
+            {
+                throw new Exception("Cannot have an article without a body");
+            }
             if (string.IsNullOrEmpty(Ingress))
             {
-                if (string.IsNullOrEmpty(Body))
-                {
-                    throw new Exception("Cannot have both an empty body and an empty ingress");
-                }
                 Ingress = Body;
                 if (Ingress.Length > 50)
                 {

@@ -1,0 +1,22 @@
+﻿
+.headerLogoBg
+{
+	height:280px;
+	background:url('ajax.png') no-repeat 0 0;
+	width:1024px;
+	position:relative;
+	margin-bottom:12px;
+}
+
+.logoRaBrix
+{
+	width:200px;
+	height:200px;
+	left:15px;
+	top:15px;
+}
+
+.logoRaBrix a
+{
+	background-image:url(logo.png);
+}

@@ -1564,7 +1564,7 @@ span.buttonFlat
 	display:block;
 	border:dashed 1px #999;
 	width:220px;
-	height:180px;
+	height:220px;
 	margin:5px;
 	padding:10px;
 	float:left;
@@ -1576,7 +1576,7 @@ span.buttonFlat
 .article a.mainLink
 {
 	color:Black;
-	height:150px;
+	height:190px;
 	display:block;
 	margin-left:5px;
 	overflow:hidden;

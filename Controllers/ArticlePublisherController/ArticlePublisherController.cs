@@ -30,6 +30,9 @@ using System.IO;
 using System.Web.UI;
 using System.Net.Mail;
 using System.Configuration;
+using System.Xml;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ArticlePublisherController
 {
@@ -42,20 +45,33 @@ namespace ArticlePublisherController
             Language.Instance.SetDefaultValue("ButtonArticles", "Articles");
             Language.Instance.SetDefaultValue("ButtonCreateArticle", "Create Article");
             Language.Instance.SetDefaultValue("ButtonAdministrateTags", "Edit Tags");
+            Language.Instance.SetDefaultValue("ButtonImportRSS", "Import RSS");
             Language.Instance.SetDefaultValue("ButtonNews", "News");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
             e.Params["ButtonCreateArticle"].Value = "Menu-CreateArticle";
+            e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonAdministrateTags"].Value = "Menu-EditArticleTags";
+            e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonImportRSS"].Value = "Menu-ImportRSSIntoArticles";
             string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
             if (!string.IsNullOrEmpty(defaultArticleLandingPage))
             {
                 e.Params["ButtonNews"].Value = "url:~/" + defaultArticleLandingPage + ConfigurationManager.AppSettings["DefaultPageExtension"];
             }
+        }
+
+        [ActiveEvent(Name = "Menu-ImportRSSIntoArticles")]
+        protected void ImportRSSIntoArticles(object sender, ActiveEventArgs e)
+        {
+            Node node = new Node();
+            node["Caption"].Value = Language.Instance["ImportRSS", null, "Import RSS"];
+            ActiveEvents.Instance.RaiseLoadControl(
+                "ArticlePublisherModules.ImportRSS",
+                "dynPopup",
+                node);
         }
 
         [ActiveEvent(Name = "Menu-EditArticleTags")]
@@ -76,6 +92,166 @@ namespace ArticlePublisherController
                 "ArticlePublisherModules.EditTags",
                 "dynMid",
                 node);
+        }
+
+        [ActiveEvent(Name = "ArticleRSSImport")]
+        protected void ArticleRSSImport(object sender, ActiveEventArgs e)
+        {
+            string url = e.Params["URL"].Get<string>();
+            if (url.IndexOf("http") != 0)
+                url = "http://" + url;
+            if (string.IsNullOrEmpty(url))
+            {
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value =
+                    Language.Instance[
+                        "EmptyRSS",
+                        null,
+                        "You need to supply a valid URL to an RSS feed"];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+            else
+            {
+                // We've got ourselves an apprently valid RSS feed...
+                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(response.GetResponseStream());
+                    User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    Regex imgRegEx =
+                                new Regex(
+                                    @"<img[^>]*src=""(?<src>[^""]*)""[^>]*/?>+",
+                                    RegexOptions.IgnoreCase |
+                                    RegexOptions.Compiled);
+                    Regex htmlRegEx =
+                                new Regex(
+                                    @"(?<tag><[^>]*>+)",
+                                    RegexOptions.IgnoreCase |
+                                    RegexOptions.Compiled);
+                    foreach (XmlNode idxNode in doc.SelectNodes("/rss/channel/item"))
+                    {
+                        string title = idxNode.SelectNodes("title")[0].FirstChild.Value;
+                        string content = idxNode.SelectNodes("description")[0].FirstChild.Value;
+                        string dateStr = idxNode.SelectNodes("pubDate")[0].FirstChild.Value;
+                        string artUrl = idxNode.SelectNodes("link")[0].FirstChild.Value;
+                        string ingress = htmlRegEx.Replace(content, "");
+                        artUrl = artUrl.Substring(artUrl.LastIndexOf('/') + 1);
+                        if (artUrl.IndexOf(".") != -1)
+                            artUrl = artUrl.Substring(0, artUrl.IndexOf('.'));
+                        artUrl += ConfigurationManager.AppSettings["DefaultPageExtension"];
+                        DateTime date = 
+                            DateTime.ParseExact(
+                                dateStr.Substring(5), 
+                                "dd MMM yyyy HH:mm:ss", 
+                                CultureInfo.InvariantCulture);
+
+                        Article art = new Article();
+                        art.Header = title;
+                        art.Ingress = ingress.Substring(0, 100) + "...";
+                        bool foundImg = false;
+                        foreach (Match idxMatch in imgRegEx.Matches(content))
+                        {
+                            if (foundImg)
+                            {
+                                // Any other [non-first] image...
+                                string imgSrc = idxMatch.Groups["src"].Value;
+                                string imgFileName = imgSrc.Substring(imgSrc.LastIndexOf('/') + 1);
+                                imgFileName = imgFileName.Substring(0, imgFileName.IndexOf('.'));
+                                HttpWebRequest reqImg = WebRequest.Create(imgSrc) as HttpWebRequest;
+                                using (HttpWebResponse imgResp = reqImg.GetResponse() as HttpWebResponse)
+                                {
+                                    Image img = Image.FromStream(imgResp.GetResponseStream());
+                                    string origPath = HttpContext.Current.Server.MapPath(
+                                        "~/Resources/Images/" + imgFileName + ".png");
+                                    img.Save(origPath);
+                                }
+                                content = content.Replace(imgSrc, "Resources/Images/" + imgFileName + ".png");
+                            }
+                            else
+                            {
+                                // First Image, being used as "Article Main Image"...
+                                content = imgRegEx.Replace(content, "", 1);
+                                foundImg = true;
+                                string imgSrc = idxMatch.Groups["src"].Value;
+                                string imgFileName = imgSrc.Substring(imgSrc.LastIndexOf('/') + 1);
+                                imgFileName = imgFileName.Substring(0, imgFileName.IndexOf('.'));
+                                HttpWebRequest reqImg = WebRequest.Create(imgSrc) as HttpWebRequest;
+                                using (HttpWebResponse imgResp = reqImg.GetResponse() as HttpWebResponse)
+                                {
+                                    Image img = Image.FromStream(imgResp.GetResponseStream());
+                                    string origPath = HttpContext.Current.Server.MapPath(
+                                        "~/Resources/Images/" + imgFileName + ".png");
+                                    string iconPath = HttpContext.Current.Server.MapPath(
+                                        "~/Resources/Images/Small/" + imgFileName + ".png");
+                                    string mainPath = HttpContext.Current.Server.MapPath(
+                                        "~/Resources/Images/Medium/" + imgFileName + ".png");
+                                    art.OriginalImage = "Resources/Images/" + imgFileName + ".png";
+                                    art.IconImage = "Resources/Images/Small/" + imgFileName + ".png";
+                                    art.MainImage = "Resources/Images/Medium/" + imgFileName + ".png";
+
+                                    // Saving original...
+                                    img.Save(origPath, ImageFormat.Png);
+
+                                    double ratio = (double)img.Height / (double)img.Width;
+
+                                    // Saving icon
+                                    if (img.Width > 100 || img.Height > 100)
+                                    {
+                                        using (Image icon = new Bitmap(100, (int)(100 * ratio)))
+                                        {
+                                            using (Graphics g = Graphics.FromImage(icon))
+                                            {
+                                                g.DrawImage(img, new Rectangle(0, 0, icon.Width, icon.Height));
+                                            }
+                                            icon.Save(iconPath, ImageFormat.Png);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        img.Save(iconPath, ImageFormat.Png);
+                                    }
+
+                                    // Saving main image
+                                    if (img.Width > 350 || img.Height > 350)
+                                    {
+                                        using (Image main = new Bitmap(350, (int)(350 * ratio)))
+                                        {
+                                            using (Graphics g = Graphics.FromImage(main))
+                                            {
+                                                g.DrawImage(img, new Rectangle(0, 0, main.Width, main.Height));
+                                            }
+                                            main.Save(mainPath, ImageFormat.Png);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        img.Save(mainPath, ImageFormat.Png);
+                                    }
+                                }
+                            }
+                        }
+                        if (!foundImg)
+                        {
+                            art.OriginalImage = "media/empty-article-image.png";
+                            art.IconImage = "Resources/Images/Small/empty-article-image.png";
+                            art.MainImage = "Resources/Images/Medium/empty-article-image.png";
+                        }
+                        art.Body = content;
+                        art.URL = artUrl;
+                        art.Published = date;
+                        art.Author = user;
+                        art.Save();
+                    }
+                }
+
+                // Closing window if success
+                ActiveEvents.Instance.RaiseClearControls("dynPopup");
+            }
         }
 
         [ActiveEvent(Name = "UserCreatedAnArticleComment")]
@@ -681,6 +857,11 @@ The comment was;
 
         private static bool ShowSpecificArticle(string contentId)
         {
+            // Loading actual Article...
+            Article a = Article.FindArticle(contentId);
+            if (a == null)
+                return false;
+
             Node node = new Node();
 
             // Showing bookmarks module
@@ -697,11 +878,6 @@ The comment was;
                 "ArticlePublisherModules.SearchArticles",
                 "dynMid",
                 node);
-
-            // Loading actual Article...
-            Article a = Article.FindArticle(contentId);
-            if (a == null)
-                return false;
 
             // Incrementing view count
             a.ViewCount += 1;
