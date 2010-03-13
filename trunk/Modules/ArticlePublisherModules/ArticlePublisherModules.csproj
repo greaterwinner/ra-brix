@@ -57,6 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportRSS.ascx.cs">
+      <DependentUpon>ImportRSS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ViewUsers.ascx.cs">
       <DependentUpon>ViewUsers.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -176,6 +180,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewUsers.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImportRSS.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

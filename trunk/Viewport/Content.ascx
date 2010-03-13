@@ -35,7 +35,7 @@
 
 <ra:Window 
     runat="server" 
-    style="z-index:1000;position:absolute;right:50px;top:10px;overflow:hidden;"
+    style="z-index:1000;position:fixed;right:50px;top:10px;overflow:hidden;"
     Visible="false"
     CssClass="window"
     Caption="&nbsp;"
