@@ -14,6 +14,8 @@ using Ra.Brix.Types;
 using System.IO;
 using ColorizerLibrary;
 using Doxygen.NET;
+using System.Web;
+using System.Configuration;
 
 namespace DoxygenDotNetViewDocsController
 {
@@ -24,12 +26,61 @@ namespace DoxygenDotNetViewDocsController
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonDocumentation", "Documentation");
+            Language.Instance.SetDefaultValue("ButtonTutorials", "Tutorials");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
             e.Params["ButtonDocumentation"].Value = "Menu-ViewDocumentation";
+            string root = HttpContext.Current.Server.MapPath("~/");
+            if (Directory.Exists(root + "tutorials"))
+            {
+                e.Params["ButtonTutorials"].Value = "tutorials";
+                foreach (string fileName in Directory.GetFiles(root + "tutorials/", "*.txt"))
+                {
+                    string[] tmpSplits = fileName.Split('-');
+                    string tutorialName = tmpSplits[tmpSplits.Length - 1].Replace(".txt", "").Trim();
+                    string tutorialUrl = tutorialName.Replace(" ", "-");
+                    e.Params["ButtonTutorials"][tutorialName].Value = "url:~/tutorials/" + 
+                        tutorialUrl.ToLower() +
+                        ConfigurationManager.AppSettings["DefaultPageExtension"];
+                }
+            }
+        }
+
+        [ActiveEvent(Name = "Page_Init_InitialLoading")]
+        protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
+        {
+            string contentId = HttpContext.Current.Request.Params["ContentID"];
+            if (contentId != null)
+            {
+                contentId = contentId.Trim('/');
+            }
+            if (string.IsNullOrEmpty(contentId))
+                return;
+            else if (contentId.IndexOf("tutorials/") == 0)
+            {
+                // We have a tutorial link...
+                string tutorialFileName = " - " + contentId.Replace("tutorials/", "").Replace("-", " ") + ".txt";
+                string root = HttpContext.Current.Server.MapPath("~/tutorials/");
+                string fileName = Directory.GetFiles(root, "*" + tutorialFileName)[0];
+                Node node = new Node();
+                using (TextReader reader = new StreamReader(fileName))
+                {
+                    CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+                    string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
+                    node["ModuleSettings"]["Text"].Value = tutorialSyntaxed;
+                    node["ModuleSettings"]["Header"].Value = fileName.Substring(fileName.LastIndexOf("\\") + 1).Replace(".txt", "");
+                    ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
+                        Language.Instance["Tutorial:", null, "Tutorials: "] + 
+                        node["ModuleSettings"]["Header"].Value;
+                }
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "DoxygentDotNetViewDocsModules.ViewTutorial",
+                    "dynMid",
+                    node);
+            }
         }
 
         [ActiveEvent(Name = "Menu-ViewDocumentation")]
