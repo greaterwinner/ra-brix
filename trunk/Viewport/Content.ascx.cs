@@ -20,6 +20,7 @@ using Ra;
 using Ra.Brix.Types;
 using SettingsRecords;
 using UserSettingsRecords;
+using Ra.Extensions.Widgets;
 
 namespace Viewport
 {
@@ -46,6 +47,26 @@ namespace Viewport
             zoomImage.DataBind();
             handleInformationEvt.Text = Language.Instance["InfoHandleButton", null, "Handle..."];
             informationPanel.DataBind();
+        }
+
+        private LinkButton _pinButton;
+
+        protected void popupWindow2_CreateTitleBarControls(object sender, Window.CreateTitleBarControlsEventArgs e)
+        {
+            LinkButton btn = new LinkButton();
+            btn.ID = "pinWnd";
+            btn.CssClass = "window_pin";
+            btn.Text = "&nbsp;";
+            btn.Click +=
+                delegate(object sender2, EventArgs e2)
+                {
+                    LinkButton b = sender2 as LinkButton;
+                    b.CssClass = b.CssClass == "window_pin" ? "window_pinned" : "window_pin";
+                    if (b.CssClass == "window_pinned")
+                        PinPopupWindow();
+                };
+            e.Caption.Controls.Add(btn);
+            _pinButton = btn;
         }
 
         protected void timer_Tick(object sender, EventArgs e)
@@ -81,6 +102,13 @@ namespace Viewport
 
         protected void zoomImage_MouseOver(object sender, EventArgs e)
         {
+            PinPopupWindow();
+        }
+
+        private void PinPopupWindow()
+        {
+            if (popupWindow2.CssClass == "window")
+                return;
             popupWindow2.CssClass = "window";
             dynPopup2.Style[Styles.display] = "none";
             int width = int.Parse(popupWindow2.Xtra.Split('x')[0]);
@@ -100,6 +128,13 @@ namespace Viewport
         }
 
         protected void popupWindow2_MouseOut(object sender, EventArgs e)
+        {
+            if (_pinButton.CssClass == "window_pinned")
+                return;
+            UnPinPopupWindow();
+        }
+
+        private void UnPinPopupWindow()
         {
             if (dynPopup2.Style["display"] != "none")
             {

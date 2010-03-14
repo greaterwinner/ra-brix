@@ -235,6 +235,8 @@ would have had to done in other similar applications.
             Node node,
             Control parent)
         {
+            if (node.Name == "Params")
+                return;
             SlidingMenuItem item = new SlidingMenuItem {ID = "node" + node.DNA.Replace("-", "x")};
 
             if (Settings.Instance["UseFlatMenu"] == "True")
@@ -315,8 +317,11 @@ would have had to done in other similar applications.
                         };
                         item.Controls.Add(l);
                         l.Xtra = node.DNA;
-                        l.GetChildNodes += l_GetChildNodes;
                         item.Xtra = node.DNA;
+                        foreach (Node idx in node)
+                        {
+                            CreateSingleMenuItem(idx, l);
+                        }
                     }
                     else
                         hasTrigger = true;

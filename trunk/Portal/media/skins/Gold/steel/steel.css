@@ -101,6 +101,38 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	right:23px;
 }
 
+.window_pin
+{
+	width:12px;
+	height:12px;
+	display:block;
+	background:transparent url(window-sprite-icons.png) no-repeat -23px -13px;
+	position:absolute;
+	top:4px;
+	right:40px;
+}
+
+.window_pin:hover
+{
+	background:transparent url(window-sprite-icons.png) no-repeat -35px -13px;
+}
+
+.window_pinned
+{
+	width:12px;
+	height:12px;
+	display:block;
+	background:transparent url(window-sprite-icons.png) no-repeat -24px 0;
+	position:absolute;
+	top:4px;
+	right:40px;
+}
+
+.window_pinned:hover
+{
+	background:transparent url(window-sprite-icons.png) no-repeat -36px 0;
+}
+
 .window_close:hover
 {
 	background-color:transparent;

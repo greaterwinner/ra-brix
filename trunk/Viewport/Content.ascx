@@ -41,6 +41,7 @@
     Caption="&nbsp;"
     OnMouseOut="popupWindow2_MouseOut"
     OnClosed="popupWindow2_Closed"
+    OnCreateTitleBarControls="popupWindow2_CreateTitleBarControls"
     id="popupWindow2">
     <div style="position:relative;">
         <ra:Dynamic 

@@ -59,7 +59,7 @@
 
     <ra:SlidingMenu 
         runat="server" 
-        style="width:100%;" 
+        style="width:100%;min-height:300px;" 
         OnItemClicked="menu_ItemClicked"
         ID="menu">
 
