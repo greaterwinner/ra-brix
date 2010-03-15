@@ -15,7 +15,7 @@
 <ra:GlobalUpdater 
     runat="server" 
     MaxOpacity="0.7" 
-    Delay="500"
+    Delay="5000"
     CssClass="wait-gif"
     ID="updater">
     <div class="text"><%=LanguageRecords.Language.Instance["PleaseWaitMarvinIsThinking", null, "Please wait while Marvin is thinking..."] %></div>
