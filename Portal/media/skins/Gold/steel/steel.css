@@ -70,7 +70,7 @@ http://ra-ajax.org
 
 .window_n
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	background: transparent url(sprites.png) repeat-x 0 -896px;
 	overflow:hidden;
 	height:40px;
 }
@@ -109,7 +109,7 @@ http://ra-ajax.org
 
 .window_s
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 -40px;
+	background: transparent url(sprites.png) repeat-x 0 -936px;
 	height:40px;
 }
 
@@ -195,7 +195,7 @@ http://ra-ajax.org
 .bread-crumb-parent
 {
 	width:1000%;
-	background: transparent url(window-h-sprite.png) repeat 0 0;
+	background: transparent url(sprites.png) repeat 0 -896;
 	height:35px;
 	overflow:hidden;
 	margin-top:-2px;
@@ -358,7 +358,7 @@ http://ra-ajax.org
 .webpart .header
 {
 	border-bottom:solid 1px #666;
-	background:transparent url(window-h-sprite.png) repeat-x 0 -1px;
+	background:transparent url(sprites.png) repeat-x 0 -896px;
 	position:relative;
 }
 
@@ -476,7 +476,7 @@ http://ra-ajax.org
 
 .calendar_n
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	background: transparent url(sprites.png) repeat-x 0 -896px;
 	overflow:hidden;
 	height:40px;
 }
@@ -531,7 +531,7 @@ http://ra-ajax.org
 
 .calendar_s
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 -55px;
+	background: transparent url(sprites.png) repeat-x 0 -951px;
 	height:25px;
 }
 
@@ -790,7 +790,7 @@ http://ra-ajax.org
 
 .accordion .accordion-header
 {
-	background:transparent url(window-h-sprite.png) repeat-x 0 0;
+	background:transparent url(sprites.png) repeat-x 0 -896px;
 }
 
 .accordion .accordion-header a
@@ -804,7 +804,7 @@ http://ra-ajax.org
 
 .accordion .accordion-header a:hover
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	background: transparent url(sprites.png) repeat-x 0 -896px;
 	color:#00f;
 }
 
@@ -922,7 +922,7 @@ http://ra-ajax.org
 /* Menu */
 .menu
 {
-	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	background: transparent url(sprites.png) repeat-x 0 -896px;
 	width:100%;
 	position:relative;
 	height:29px;
@@ -1160,21 +1160,21 @@ http://ra-ajax.org
 
 .editor .strip .right
 {
-	background:transparent url(sprite-toolbar.png) no-repeat right -50px;
+	background:transparent url(sprites.png) no-repeat right -871px;
 	padding-right: 2px;
 	display: block;
 }
 
 .editor .strip .left
 {
-	background:transparent url(sprite-toolbar.png) no-repeat 0 0;
+	background:transparent url(sprites.png) no-repeat 0 -821px;
 	padding-left: 2px;
 	display: block;
 }
 
 .editor .strip .center
 {
-	background: url(sprite-toolbar.png) repeat-x 0 -25px;
+	background: url(sprites.png) repeat-x 0 -846px;
 	display: block;
 	height: 25px;
 }
