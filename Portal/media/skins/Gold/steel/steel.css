@@ -951,11 +951,6 @@ http://ra-ajax.org
 	margin-left:10px;
 }
 
-.menu .has-children
-{
-	background:transparent url(menu.png) no-repeat -2px 11px;
-}
-
 .menu .item:hover
 {
 	color:#00f;
