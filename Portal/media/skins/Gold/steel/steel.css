@@ -7,11 +7,7 @@ version: 2.5.2
 
 /* Reset CSS */
 html{color:#000;background:#FFF;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
-	margin: 0;
-	padding: 0;
-	font-family:Helvetica;
-}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin: 0;padding: 0;font-family:Helvetica;}
 table{border-collapse:collapse;border-spacing:0;}
 fieldset,img{border:0;}
 address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
@@ -31,7 +27,6 @@ pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
 
 
 /* Base CSS */
-
 h1{font-size:138.5%;}
 h2{font-size:123.1%;}
 h3{font-size:108%;}
@@ -45,12 +40,16 @@ th{font-weight:bold;text-align:center;}
 caption{margin-bottom:.5em;text-align:center;}
 p,fieldset,table,pre{margin-bottom:1em;}
 input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
-
 input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 
+/*
+Copyright (c) 2008, Thomas Hansen
+Code licensed under GPL3
+http://ra-ajax.org
+*/
 
-
+/* Window CSS */
 .window
 {
 	display:block;
@@ -73,6 +72,44 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 {
 	background: transparent url(window-h-sprite.png) repeat-x 0 0;
 	overflow:hidden;
+	height:40px;
+}
+
+.window_w
+{
+	background: transparent url(window-v-sprite.png) repeat-y 0 0;
+	padding-left:40px;
+}
+
+.window_e
+{
+	background: transparent url(window-v-sprite.png) repeat-y right 0;
+	padding-right:40px;
+}
+
+.window_content
+{
+	background-color:#cfecff;
+	margin-left:-20px;
+	margin-right:-20px;
+	margin-bottom:-20px;
+}
+
+.window_sw
+{
+	background: transparent url(window-sprite.png) no-repeat 0 -40px;
+	padding-left:40px;
+}
+
+.window_se
+{
+	background: transparent url(window-sprite.png) no-repeat right -40px;
+	padding-right:40px;
+}
+
+.window_s
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 -40px;
 	height:40px;
 }
 
@@ -117,6 +154,11 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	background:transparent url(sprites.png) no-repeat -2px -810px;
 }
 
+.window_pinned:hover
+{
+	background:transparent url(sprites.png) no-repeat -2px -785px;
+}
+
 .window_pinned
 {
 	width:12px;
@@ -126,11 +168,6 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	position:absolute;
 	top:4px;
 	right:40px;
-}
-
-.window_pinned:hover
-{
-	background:transparent url(sprites.png) no-repeat -2px -785px;
 }
 
 .window_close:hover
@@ -145,52 +182,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	position:relative;
 }
 
-.window_w
-{
-	background: transparent url(window-v-sprite.png) repeat-y 0 0;
-	padding-left:40px;
-}
-
-.window_e
-{
-	background: transparent url(window-v-sprite.png) repeat-y right 0;
-	padding-right:40px;
-}
-
-.window_content
-{
-	background-color:#cfecff;
-	margin-left:-20px;
-	margin-right:-20px;
-	margin-bottom:-20px;
-}
-
-.window_sw
-{
-	background: transparent url(window-sprite.png) no-repeat 0 -40px;
-	padding-left:40px;
-}
-
-.window_se
-{
-	background: transparent url(window-sprite.png) no-repeat right -40px;
-	padding-right:40px;
-}
-
-.window_s
-{
-	background: transparent url(window-h-sprite.png) repeat-x 0 -40px;
-	height:40px;
-}
-
-
-/*
-Copyright (c) 2008, Thomas Hansen
-Code licensed under LGPL3
-http://ra-ajax.org
-*/
-
-
+/* Sliding Menu */
 .sliding-menu
 {
 	position:relative;
@@ -281,16 +273,6 @@ http://ra-ajax.org
 	background:url('sprites.png') no-repeat right -100px;
 }
 
-
-
-
-
-
-
-
-
-
-/* Hovering */
 .bread-crumb a.bread-item-left:hover
 {
 	background-position:left -250px;
@@ -315,15 +297,6 @@ http://ra-ajax.org
 {
 	background-position:right -175px;
 }
-
-
-
-
-
-
-
-
-
 
 .sliding-menu .sliding-level
 {
@@ -375,10 +348,25 @@ http://ra-ajax.org
 }
 
 /* WebPart specific CSS */
+.webpart
+{
+	border:solid 1px #666;
+	max-height:100%;
+	overflow:hidden;
+}
 
-.webpart { border:solid 1px #666; max-height:100%; overflow:hidden; }
-.webpart .header { border-bottom:solid 1px #666; background:transparent url(window-h-sprite.png) repeat-x 0 -1px; position:relative; }
-.webpart .header .caption { padding:3px; line-height:23px; }
+.webpart .header
+{
+	border-bottom:solid 1px #666;
+	background:transparent url(window-h-sprite.png) repeat-x 0 -1px;
+	position:relative;
+}
+
+.webpart .header .caption
+{
+	padding:3px;
+	line-height:23px;
+}
 
 .webpart .header .toggle,
 .webpart .header .toggled,
@@ -396,28 +384,78 @@ http://ra-ajax.org
 	user-select:none;
 }
 
-.webpart .header .toggle { right:33px;  background-position:-16px -64px; }
-.webpart .header .toggle:hover { right:33px; background-position:-16px -128px; }
-.webpart .header .toggled { right:33px; background-position:-16px -80px; }
-.webpart .header .toggled:hover { right:33px; background-position:-16px -144px; }
-.webpart .header .maximize { right:17px; background-position:-16px -96px; }
-.webpart .header .maximize:hover { right:17px; background-position:-16px -160px; }
-.webpart .header .maximized { right:17px; background-position:-16px -112px; }
-.webpart .header .maximized:hover { right:17px; background-position:-16px -176px; }
-.webpart .header .close { right:1px; background-position:-15px -1px; }
-.webpart .header .close:hover { right:1px; background-position:-15px -17px; }
+.webpart .header .toggle
+{
+	right:33px;
+	background-position:-16px -64px;
+}
 
-.webpart .content { padding:0; overflow:hidden; }
-.webpart .content div { padding:5px; }
+.webpart .header .toggle:hover
+{
+	right:33px;
+	background-position:-16px -128px;
+}
 
+.webpart .header .toggled
+{
+	right:33px;
+	background-position:-16px -80px;
+}
 
+.webpart .header .toggled:hover
+{
+	right:33px;
+	background-position:-16px -144px;
+}
 
+.webpart .header .maximize
+{
+	right:17px;
+	background-position:-16px -96px;
+}
 
+.webpart .header .maximize:hover
+{
+	right:17px;
+	background-position:-16px -160px;
+}
 
+.webpart .header .maximized
+{
+	right:17px;
+	background-position:-16px -112px;
+}
 
+.webpart .header .maximized:hover
+{
+	right:17px;
+	background-position:-16px -176px;
+}
+
+.webpart .header .close
+{
+	right:1px;
+	background-position:-15px -1px;
+}
+
+.webpart .header .close:hover
+{
+	right:1px;
+	background-position:-15px -17px;
+}
+
+.webpart .content
+{
+	padding:0;
+	overflow:hidden;
+}
+
+.webpart .content div
+{
+	padding:5px;
+}
 
 /* Calendar specific CSS */
-
 .calendar
 {
 	display:block;
@@ -574,15 +612,6 @@ http://ra-ajax.org
 	width:20px;
 }
 
-
-
-
-
-
-
-
-
-
 /* TabControl styles */
 .tab
 {
@@ -641,25 +670,22 @@ http://ra-ajax.org
 	height:17px;
 }
 
-
-
-
 .tab .tab-header ul li span.left
 {
-	background:url('sprites.png') no-repeat 0 -500px;
+	background:transparent url('sprites.png') no-repeat 0 -500px;
 	width:9px;
 	border-bottom:solid 1px #c9ac07;
 }
 
 .tab .tab-header ul li span.center
 {
-	background:url('sprites.png') repeat-x 0 -550px;
+	background:transparent url('sprites.png') repeat-x 0 -550px;
 	border-bottom:solid 1px #c9ac07;
 }
 
 .tab .tab-header ul li span.right
 {
-	background:url('sprites.png') no-repeat right -525px;
+	background:transparent url('sprites.png') no-repeat right -525px;
 	width:9px;
 	border-bottom:solid 1px #c9ac07;
 }
@@ -670,64 +696,53 @@ http://ra-ajax.org
 	display:none;
 }
 
-
-
 .tab .tab-header ul li:hover span.left
 {
-	background:url('sprites.png') no-repeat 0 -575px;
+	background:transparent url('sprites.png') no-repeat 0 -575px;
 }
 
 .tab .tab-header ul li:hover span.center
 {
-	background:url('sprites.png') repeat-x 0 -625px;
+	background:transparent url('sprites.png') repeat-x 0 -625px;
 }
 
 .tab .tab-header ul li:hover span.right
 {
-	background:url('sprites.png') no-repeat right -600px;
+	background:transparent url('sprites.png') no-repeat right -600px;
 }
-
-
-
 
 .tab .tab-header ul li.tab-disabled:hover span.left
 {
-	background:url('sprites.png') no-repeat 0 -500;
+	background:transparent url('sprites.png') no-repeat 0 -500;
 }
 
 .tab .tab-header ul li.tab-disabled:hover span.center
 {
-	background:url('sprites.png') repeat-x 0 -550px;
+	background:transparent url('sprites.png') repeat-x 0 -550px;
 }
 
 .tab .tab-header ul li.tab-disabled:hover span.right
 {
-	background:url('sprites.png') no-repeat right -525px;
+	background:transparent url('sprites.png') no-repeat right -525px;
 }
-
-
-
 
 .tab .tab-header ul li.active span.left
 {
-	background:url('sprites.png') no-repeat 0 -650px;
+	background:transparent url('sprites.png') no-repeat 0 -650px;
 	border-bottom:solid 1px #cfecff;
 }
 
 .tab .tab-header ul li.active span.center
 {
-	background:url('sprites.png') repeat-x 0 -700px;
+	background:transparent url('sprites.png') repeat-x 0 -700px;
 	border-bottom:solid 1px #cfecff;
 }
 
 .tab .tab-header ul li.active span.right
 {
-	background:url('sprites.png') no-repeat right -675px;
+	background:transparent url('sprites.png') no-repeat right -675px;
 	border-bottom:solid 1px #cfecff;
 }
-
-
-
 
 .tab .tab-header ul li.active a
 {
@@ -756,29 +771,49 @@ http://ra-ajax.org
 	border:solid 1px #c9ac07;
 }
 
-
-
-
-
-
-
 /* Accordion */
+.accordion { }
+.accordion .body
+{
+	overflow:hidden;
+	background-color:#fdfdfd;
+	font-size:small;
+}
 
-.accordion {}
-.accordion .body { overflow:hidden; background-color:#fdfdfd; font-size:small; }
-.accordion .body-content { padding:5px; border-left:solid 1px #CCD1FF; border-right:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; }
-.accordion .accordion-header { background: transparent url(window-h-sprite.png) repeat-x 0 0; }
-.accordion .accordion-header a { text-decoration:none; padding:5px; display:block; color:#333; font-size:0.8em; }
-.accordion .accordion-header a:hover { background: transparent url(window-h-sprite.png) repeat-x 0 0; color:#00f; }
+.accordion .body-content
+{
+	padding:5px;
+	border-left:solid 1px #CCD1FF;
+	border-right:solid 1px #CCD1FF;
+	border-bottom:solid 1px #CCD1FF;
+}
 
+.accordion .accordion-header
+{
+	background:transparent url(window-h-sprite.png) repeat-x 0 0;
+}
 
-/* TreeView */
+.accordion .accordion-header a
+{
+	text-decoration:none;
+	padding:5px;
+	display:block;
+	color:#333;
+	font-size:0.8em;
+}
+
+.accordion .accordion-header a:hover
+{
+	background: transparent url(window-h-sprite.png) repeat-x 0 0;
+	color:#00f;
+}
 
 /* The TreeView control uses some images from YUI which are BSD 
  * licensed and we distribute them just like Yahoo under the BSD 
- * license terms... :)
+ * license terms...
  */
 
+/* TreeView */
 .tree
 {
 	padding:5px;
@@ -826,7 +861,7 @@ http://ra-ajax.org
 
 .tree .icon
 {
-	background:url(tree-sprites.png) no-repeat;
+	background:transparent url(tree-sprites.png) no-repeat;
 }
 
 .tree .expanded .icon
@@ -883,9 +918,6 @@ http://ra-ajax.org
 {
 	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
 }
-
-
-
 
 /* Menu */
 .menu
@@ -962,27 +994,52 @@ http://ra-ajax.org
 	margin-top:-24px;
 }
 
-
-
-
-
 /* AutoCompleter CSS class */
+.auto
+{
+	background-color:#fff;
+	border:solid 1px #CCD1FF;
+	padding:5px;
+	height:20px;
+	width:200px;
+	overflow:visible;
+}
 
-.auto { background-color:#fff; border:solid 1px #CCD1FF; padding:5px; height:20px; width:200px; overflow:visible; }
-.auto-text { display:block; }
-.auto-items { position:absolute; border:solid 1px #CCD1FF; background-color:#fff; width:170px; padding:5px; }
-.auto-item { border:solid 1px Transparent; cursor:pointer; }
-.auto-item:hover { border-top:solid 1px #CCD1FF; border-bottom:solid 1px #CCD1FF; background-color:#fafaff; }
+.auto-text
+{
+	display:block;
+}
 
+.auto-items
+{
+	position:absolute;
+	border:solid 1px #CCD1FF;
+	background-color:#fff;
+	width:170px;
+	padding:5px;
+}
+
+.auto-item
+{
+	border:solid 1px Transparent;
+	cursor:pointer;
+}
+
+.auto-item:hover
+{
+	border-top:solid 1px #CCD1FF;
+	border-bottom:solid 1px #CCD1FF;
+	background-color:#fafaff;
+}
 
 /* Extended Button */
-.button {
+.button
+{
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
 	margin-bottom: 3px;
 }
-
 
 .button .bLeft
 {
@@ -1016,7 +1073,8 @@ http://ra-ajax.org
 	*display:inline-block;
 }
 
-.button:hover { }
+.button:hover
+{ }
 
 .button:hover .bLeft
 {
@@ -1061,6 +1119,237 @@ http://ra-ajax.org
 .button-selected:hover .bRight
 {
 	background:Transparent url('sprites.png') no-repeat right -450px;
+}
+
+/* WYSIWYG Editor */
+.editor
+{
+	position:relative;
+	overflow:hidden;
+}
+
+.editor .toolbar
+{
+	padding:25px 2px 2px 2px;
+	width: 100%;
+	overflow:auto;
+}
+
+.editor .toolbar br
+{
+	clear:both;
+}
+
+.editor .editorMain
+{
+	width:100%;
+	overflow: auto;
+	background-color: White;
+	height:350px;
+	margin-top:5px;
+}
+
+.editor .strip
+{
+	height: 25px;
+	width: auto;
+	display: block;
+	float:left;
+	margin: 5px 0 0 5px;
+}
+
+.editor .strip .right
+{
+	background:transparent url(sprite-toolbar.png) no-repeat right -50px;
+	padding-right: 2px;
+	display: block;
+}
+
+.editor .strip .left
+{
+	background:transparent url(sprite-toolbar.png) no-repeat 0 0;
+	padding-left: 2px;
+	display: block;
+}
+
+.editor .strip .center
+{
+	background: url(sprite-toolbar.png) repeat-x 0 -25px;
+	display: block;
+	height: 25px;
+}
+
+.editor .strip .stripContent
+{
+	display: block;
+	text-align: left;
+	white-space: nowrap;
+	padding: 3px;
+}
+
+.editor .strip .stripContent select
+{
+}
+
+.editor .editorBtn
+{
+	display: inline-block;
+	width: 22px;
+	height: 20px;
+	background-image: url(sprite-buttons.png);
+	background-repeat: no-repeat;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	border: solid 1px Transparent;
+}
+
+.editor .editorBtn:hover
+{
+	border: solid 1px #316ac5;
+	background-color: #c1d2ee;
+	opacity:0.5;
+}
+
+.editor .design
+{
+	background-position: -127px -40px;
+}
+
+.editor .html
+{
+	background-position: -148px -40px;
+}
+
+.editor .bold
+{
+	background-position: -63px 0;
+}
+
+.editor .italic
+{
+	background-position: 0 -20px;
+}
+
+.editor .underline
+{
+	background-position: -42px 0;
+}
+
+.editor .justifyleft
+{
+	background-position: -42px -20px;
+}
+
+.editor .justifyright
+{
+	background-position: -126px -20px;
+}
+
+.editor .justifycenter
+{
+	background-position: -84px 0;
+}
+
+.editor .justifyfull
+{
+	background-position: -21px -20px;
+}
+
+.insertunorderedlist
+{
+	background-position: 0 0;
+}
+
+.insertorderedlist
+{
+	background-position: -84px -20px;
+}
+
+.indent
+{
+	background-position: -147px 0;
+}
+
+.outdent
+{
+	background-position: -105px -20px;
+}
+
+.image
+{
+	background-position: -126px 0;
+}
+
+.resources
+{
+	background-position: -108px -40px;
+}
+
+.hyperlink
+{
+	background-position: -63px -20px;
+}
+
+.delete
+{
+	background-position: -84px -40px;
+}
+
+.save
+{
+	background-position: -63px -40px;
+}
+
+.bottomBar
+{
+	height: 28px;
+}
+
+.designButton
+{
+	background-color: #CCD1FF;
+	padding: 5px;
+	border: none 0;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.designButton:hover
+{
+	background-color: #dCe1FF;
+}
+
+.htmlButton
+{
+	background-color: #CCD1FF;
+	padding: 5px;
+	border: none 0;
+	cursor: pointer;
+}
+
+.htmlButton:hover
+{
+	background-color: #dCe1FF;
+}
+
+.activeTypeButton
+{
+	background-color: #9Cb1cF;
+	cursor: default;
+}
+
+.activeTypeButton:hover
+{
+	background-color: #9Cb1cF;
+}
+
+.editorSelect
+{
+	background-color: White;
+	border: none 0;
+	font-size: 8pt;
+	padding: 0;
+	margin: 2px 2px 0 2px;
 }
 
 
