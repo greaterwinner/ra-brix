@@ -95,7 +95,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	width:12px;
 	height:12px;
 	display:block;
-	background:transparent url(window-sprite-icons.png) no-repeat 0 0;
+	background:transparent url(sprites.png) no-repeat -2px -725px;
 	position:absolute;
 	top:4px;
 	right:23px;
@@ -106,7 +106,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	width:12px;
 	height:12px;
 	display:block;
-	background:transparent url(window-sprite-icons.png) no-repeat -23px -13px;
+	background:transparent url(sprites.png) no-repeat -2px -798px;
 	position:absolute;
 	top:4px;
 	right:40px;
@@ -114,7 +114,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 .window_pin:hover
 {
-	background:transparent url(window-sprite-icons.png) no-repeat -35px -13px;
+	background:transparent url(sprites.png) no-repeat -2px -810px;
 }
 
 .window_pinned
@@ -122,7 +122,7 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 	width:12px;
 	height:12px;
 	display:block;
-	background:transparent url(window-sprite-icons.png) no-repeat -24px 0;
+	background:transparent url(sprites.png) no-repeat -2px -773px;
 	position:absolute;
 	top:4px;
 	right:40px;
@@ -130,13 +130,13 @@ input[type=checkbox]{margin-right:3px;vertical-align:sub;}
 
 .window_pinned:hover
 {
-	background:transparent url(window-sprite-icons.png) no-repeat -36px 0;
+	background:transparent url(sprites.png) no-repeat -2px -785px;
 }
 
 .window_close:hover
 {
 	background-color:transparent;
-	background-position:0 -13px;
+	background-position:-2px -737px;
 }
 
 .window_body
@@ -227,7 +227,7 @@ http://ra-ajax.org
 	float:left;
 	display:block;
 	font-size:11px;
-	background:url('bread-crumb.png') no-repeat 0 -75px;
+	background:url('sprites.png') no-repeat 0 -75px;
 }
 
 .bread-crumb .bread-item-right
@@ -235,14 +235,14 @@ http://ra-ajax.org
 	height:25px;
 	display:block;
 	padding-right:16px;
-	background:url('bread-crumb.png') no-repeat right -50px;
+	background:url('sprites.png') no-repeat right -50px;
 }
 
 .bread-crumb .bread-item-center
 {
 	height:14px;
 	display:block;
-	background:url('bread-crumb.png') repeat-x 0 -25px;
+	background:url('sprites.png') repeat-x 0 -25px;
 	padding:6px 4px 5px 4px;
 }
 
@@ -252,7 +252,7 @@ http://ra-ajax.org
 	margin-bottom:5px;
 	margin-left:16px;
 	margin-top:5px;
-	background:url('bread-crumb.png') no-repeat 0 0;
+	background:url('sprites.png') no-repeat 0 0;
 	position:relative;
 }
 
@@ -278,7 +278,7 @@ http://ra-ajax.org
 
 .bread-crumb .bread-item-last .bread-item-right
 {
-	background:url('bread-crumb.png') no-repeat right -100px;
+	background:url('sprites.png') no-repeat right -100px;
 }
 
 
@@ -646,20 +646,20 @@ http://ra-ajax.org
 
 .tab .tab-header ul li span.left
 {
-	background:url('tab-sprite.png') no-repeat 0 0;
+	background:url('sprites.png') no-repeat 0 -500px;
 	width:9px;
 	border-bottom:solid 1px #c9ac07;
 }
 
 .tab .tab-header ul li span.center
 {
-	background:url('tab-sprite.png') repeat-x 0 -50px;
+	background:url('sprites.png') repeat-x 0 -550px;
 	border-bottom:solid 1px #c9ac07;
 }
 
 .tab .tab-header ul li span.right
 {
-	background:url('tab-sprite.png') no-repeat 0 -25px;
+	background:url('sprites.png') no-repeat right -525px;
 	width:9px;
 	border-bottom:solid 1px #c9ac07;
 }
@@ -674,17 +674,17 @@ http://ra-ajax.org
 
 .tab .tab-header ul li:hover span.left
 {
-	background:url('tab-sprite.png') no-repeat 0 -75px;
+	background:url('sprites.png') no-repeat 0 -575px;
 }
 
 .tab .tab-header ul li:hover span.center
 {
-	background:url('tab-sprite.png') repeat-x 0 -125px;
+	background:url('sprites.png') repeat-x 0 -625px;
 }
 
 .tab .tab-header ul li:hover span.right
 {
-	background:url('tab-sprite.png') no-repeat 0 -100px;
+	background:url('sprites.png') no-repeat right -600px;
 }
 
 
@@ -692,17 +692,17 @@ http://ra-ajax.org
 
 .tab .tab-header ul li.tab-disabled:hover span.left
 {
-	background:url('tab-sprite.png') no-repeat 0 0;
+	background:url('sprites.png') no-repeat 0 -500;
 }
 
 .tab .tab-header ul li.tab-disabled:hover span.center
 {
-	background:url('tab-sprite.png') repeat-x 0 -50px;
+	background:url('sprites.png') repeat-x 0 -550px;
 }
 
 .tab .tab-header ul li.tab-disabled:hover span.right
 {
-	background:url('tab-sprite.png') no-repeat 0 -25px;
+	background:url('sprites.png') no-repeat right -525px;
 }
 
 
@@ -710,19 +710,19 @@ http://ra-ajax.org
 
 .tab .tab-header ul li.active span.left
 {
-	background:url('tab-sprite.png') no-repeat 0 -150px;
+	background:url('sprites.png') no-repeat 0 -650px;
 	border-bottom:solid 1px #cfecff;
 }
 
 .tab .tab-header ul li.active span.center
 {
-	background:url('tab-sprite.png') repeat-x 0 -200px;
+	background:url('sprites.png') repeat-x 0 -700px;
 	border-bottom:solid 1px #cfecff;
 }
 
 .tab .tab-header ul li.active span.right
 {
-	background:url('tab-sprite.png') no-repeat 0 -175px;
+	background:url('sprites.png') no-repeat right -675px;
 	border-bottom:solid 1px #cfecff;
 }
 
@@ -986,7 +986,7 @@ http://ra-ajax.org
 
 .button .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 0;
+	background:Transparent url('sprites.png') no-repeat 0 -275px;
 	padding-left:13px;
 	display:block;
 	*display:inline-block;
@@ -994,7 +994,7 @@ http://ra-ajax.org
 
 .button .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -50px;
+	background:Transparent url('sprites.png') repeat-x 0 -325px;
 	display:block;
 	height:20px;
 	padding-top:5px;
@@ -1010,7 +1010,7 @@ http://ra-ajax.org
 
 .button .bRight
 {
-	background:Transparent url('button.png') no-repeat right -25px;
+	background:Transparent url('sprites.png') no-repeat right -300px;
 	padding-right:13px;
 	display:block;
 	*display:inline-block;
@@ -1020,47 +1020,47 @@ http://ra-ajax.org
 
 .button:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -75px;
+	background:Transparent url('sprites.png') no-repeat 0 -350px;
 }
 
 .button:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -125px;
+	background:Transparent url('sprites.png') repeat-x 0 -400px;
 }
 
 .button:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -100px;
+	background:Transparent url('sprites.png') no-repeat right -375px;
 }
 
 .button-selected .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -150px;
+	background:Transparent url('sprites.png') no-repeat 0 -425px;
 }
 
 .button-selected .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -200px;
+	background:Transparent url('sprites.png') repeat-x 0 -475px;
 }
 
 .button-selected .bRight
 {
-	background:Transparent url('button.png') no-repeat right -175px;
+	background:Transparent url('sprites.png') no-repeat right -450px;
 }
 
 .button-selected:hover .bLeft
 {
-	background:Transparent url('button.png') no-repeat 0 -150px;
+	background:Transparent url('sprites.png') no-repeat 0 -425px;
 }
 
 .button-selected:hover .bCenter
 {
-	background:Transparent url('button.png') repeat-x 0 -200px;
+	background:Transparent url('sprites.png') repeat-x 0 -475px;
 }
 
 .button-selected:hover .bRight
 {
-	background:Transparent url('button.png') no-repeat right -175px;
+	background:Transparent url('sprites.png') no-repeat right -450px;
 }
 
 

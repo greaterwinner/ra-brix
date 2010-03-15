@@ -546,14 +546,16 @@ h3.edit textarea
 
 .clicked .bCenter span
 {
-	background: url('steel/window-sprite-icons.png') no-repeat -12px 0;
-	padding-left: 12px;
+	background: url('steel/sprites.png') no-repeat -3px -750px;
+	padding-left: 17px;
+	height:12px;
 }
 
 .clicked-backwards .bCenter span
 {
-	background: url('steel/window-sprite-icons.png') no-repeat -12px -12px;
-	padding-left: 12px;
+	background: url('steel/sprites.png') no-repeat -3px -761px;
+	padding-left: 17px;
+	height:12px;
 }
 
 .deleteBtn
