@@ -144,7 +144,7 @@ a.noHoverLink:hover
 
 .topHeader
 {
-	background: url( 'Images/PortalToolbar.png' ) repeat-x 0 0;
+	background: url(Images/PortalToolbar.png) repeat-x 0 0;
 	height: 89px;
 	width: 100%;
 	padding: 5px 0 5px 0;
@@ -295,7 +295,7 @@ a.disabled
 
 .newRow
 {
-	background: url( 'Images/light_bulb.png' ) no-repeat 0 0;
+	background: url(Images/light_bulb.png) no-repeat 0 0;
 	padding-left: 18px;
 }
 
@@ -463,7 +463,7 @@ h3.edit
 	color: Blue;
 	cursor: pointer;
 	padding-left: 20px;
-	background: Transparent url( 'editable.png' ) no-repeat 0 0;
+	background: Transparent url(editable.png) no-repeat 0 0;
 }
 
 div.edit:hover,
@@ -546,14 +546,14 @@ h3.edit textarea
 
 .clicked .bCenter span
 {
-	background: url('steel/sprites.png') no-repeat -3px -750px;
+	background: url(steel/sprites.png) no-repeat -3px -750px;
 	padding-left: 17px;
 	height:12px;
 }
 
 .clicked-backwards .bCenter span
 {
-	background: url('steel/sprites.png') no-repeat -3px -761px;
+	background: url(steel/sprites.png) no-repeat -3px -761px;
 	padding-left: 17px;
 	height:12px;
 }
@@ -561,7 +561,7 @@ h3.edit textarea
 .deleteBtn
 {
 	display: block;
-	background:Transparent url('steel/sprites.png') no-repeat 0 -1248px;
+	background:Transparent url(steel/sprites.png) no-repeat 0 -1248px;
 	width: 16px;
 	height: 16px;
 	margin-right:3px;
@@ -569,7 +569,7 @@ h3.edit textarea
 
 a.deleteBtn:hover
 {
-	background:Transparent url('steel/sprites.png') no-repeat 0 -1264px;
+	background:Transparent url(steel/sprites.png) no-repeat 0 -1264px;
 	text-decoration:none !important;
 }
 
@@ -1140,7 +1140,7 @@ span.buttonFlat
 .headerLogoBg
 {
 	height:300px;
-	background:url('sun_background.jpg') no-repeat 0 0;
+	background:url(sun_background.jpg) no-repeat 0 0;
 	width:1024px;
 	position:relative;
 }
@@ -1206,7 +1206,7 @@ span.buttonFlat
 	display:inline-block;
 	width:48px;
 	height:48px;
-	background:Transparent url('resource-icons.png') no-repeat 0 0;
+	background:Transparent url(resource-icons.png) no-repeat 0 0;
 }
 
 .specificResource-mp3
@@ -1268,18 +1268,18 @@ span.buttonFlat
 	width:48px;
 	height:48px;
 	margin-left:39px;
-	background:Transparent url('Images/icons.png') no-repeat 0 0;
+	background:Transparent url(Images/icons.png) no-repeat 0 0;
 	cursor:pointer;
 }
 
 .file-class-dll
 {
-	background:Transparent url('Images/icons.png') no-repeat -48px 0;
+	background:Transparent url(Images/icons.png) no-repeat -48px 0;
 }
 
 .file-class-pdb
 {
-	background:Transparent url('Images/icons.png') no-repeat -96px 0;
+	background:Transparent url(Images/icons.png) no-repeat -96px 0;
 }
 
 .extraInformation
@@ -1764,20 +1764,20 @@ a.bookmarks
 
 .light-window_nw
 {
-	background: transparent url(light-window.png) no-repeat 0 0;
+	background: transparent url(Images/light-window.png) no-repeat 0 0;
 	padding-left:40px;
 	position:relative;
 }
 
 .light-window_ne
 {
-	background: transparent url(light-window.png) no-repeat right 0;
+	background: transparent url(Images/light-window.png) no-repeat right 0;
 	padding-right:40px;
 }
 
 .light-window_n
 {
-	background: transparent url(light-window-vert.png) repeat-x 0 0;
+	background: transparent url(Images/light-window-vert.png) repeat-x 0 0;
 	overflow:hidden;
 	height:40px;
 }
@@ -1790,13 +1790,13 @@ a.bookmarks
 
 .light-window_w
 {
-	background: transparent url(light-window-horz.png) repeat-y 0 0;
+	background: transparent url(Images/light-window-horz.png) repeat-y 0 0;
 	padding-left:40px;
 }
 
 .light-window_e
 {
-	background: transparent url(light-window-horz.png) repeat-y right 0;
+	background: transparent url(Images/light-window-horz.png) repeat-y right 0;
 	padding-right:40px;
 }
 
@@ -1821,19 +1821,19 @@ a.bookmarks
 
 .light-window_sw
 {
-	background: transparent url(light-window.png) no-repeat 0 -40px;
+	background: transparent url(Images/light-window.png) no-repeat 0 -40px;
 	padding-left:40px;
 }
 
 .light-window_se
 {
-	background: transparent url(light-window.png) no-repeat right -40px;
+	background: transparent url(Images/light-window.png) no-repeat right -40px;
 	padding-right:40px;
 }
 
 .light-window_s
 {
-	background: transparent url(light-window-vert.png) repeat-x 0 -40px;
+	background: transparent url(Images/light-window-vert.png) repeat-x 0 -40px;
 	height:40px;
 }
 
