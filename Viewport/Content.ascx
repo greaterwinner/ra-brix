@@ -12,6 +12,16 @@
     Duration="600000"
     OnTick="timer_Tick" />
 
+<ra:GlobalUpdater 
+    runat="server" 
+    MaxOpacity="0.7" 
+    Delay="500"
+    CssClass="wait-gif"
+    ID="updater">
+    <div class="text"><%=LanguageRecords.Language.Instance["PleaseWaitMarvinIsThinking", null, "Please wait while Marvin is thinking..."] %></div>
+    <div class="image">&nbsp;</div>
+</ra:GlobalUpdater>
+
 <ra:Window 
     runat="server" 
     style="z-index:2000;position:fixed;left:200px;top:50px;width:350px;"
