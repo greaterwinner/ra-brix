@@ -594,11 +594,15 @@ http://ra-ajax.org
 }
 
 .tab .tab-header ul
-{ }
+{
+	height:25px;
+}
 
 .tab .tab-header ul li
 {
-	display:inline;
+	display:block;
+	float:left;
+	height:100%;
 	padding-right:2px;
 }
 
@@ -631,8 +635,10 @@ http://ra-ajax.org
 
 .tab .tab-header ul li span
 {
-	display:inline-block;
-	padding-top:5px;
+	display:block;
+	float:left;
+	padding-top:7px;
+	height:17px;
 }
 
 
@@ -730,7 +736,6 @@ http://ra-ajax.org
 
 .tab .tab-header ul li a:hover
 {
-	color:inherit;
 	background-color:Transparent;
 }
 
