@@ -255,9 +255,9 @@ http://ra-ajax.org
 
 .bread-crumb .bread-item-first .sliding-bread-home
 {
-	background:url('tree-sprites.png') no-repeat -160px 0;
+	background:url('sprites.png') no-repeat 0 -1152px;
 	width:16px;
-	height:22px;
+	height:16px;
 	display:block;
 	position:absolute;
 	top:5px;
@@ -333,7 +333,7 @@ http://ra-ajax.org
 
 .sliding-menu .sliding-level .sliding-item .sliding-leaf
 {
-	background:url('tree-sprites.png') no-repeat -144px -1px;
+	background:url('sprites.png') no-repeat -1px -1120px;
 	position:absolute;
 	right:7px;
 	top:-1px;
@@ -344,7 +344,7 @@ http://ra-ajax.org
 
 .sliding-menu .sliding-level .sliding-item .sliding-leaf:hover
 {
-	background:url('tree-sprites.png') no-repeat -224px -1px;
+	background:url('sprites.png') no-repeat -1px -1200px;
 }
 
 /* WebPart specific CSS */
@@ -861,62 +861,62 @@ http://ra-ajax.org
 
 .tree .icon
 {
-	background:transparent url(tree-sprites.png) no-repeat;
+	background:transparent url(sprites.png) no-repeat;
 }
 
 .tree .expanded .icon
 {
-	background-position: 0px 0px;
+	background-position: 0 -976px;
 }
 
 .tree .collapsed .icon
 {
-	background-position: -16px 0px;
+	background-position: 0 -992px;
 }
 
 .tree .no-childs .icon
 {
-	background-position: -16px 0px;
+	background-position: 0 -992px;
 }
 
 .tree .lines
 {
-	background:Transparent url(tree-sprites.png) no-repeat -96px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1072px;
 }
 
 .tree .linesElbow
 {
-	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1056px;
 }
 
 .tree .expanded .leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -48px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1024px;
 }
 
 .tree .expanded .no-leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -128px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1104px;
 }
 
 .tree .collapsed .leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -32px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1008px;
 }
 
 .tree .collapsed .no-leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -112px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1088px;
 }
 
 .tree .no-childs .leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -64px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1040px;
 }
 
 .tree .no-childs .no-leaf
 {
-	background:Transparent url(tree-sprites.png) no-repeat -80px 0px;
+	background:Transparent url(sprites.png) no-repeat 0 -1056px;
 }
 
 /* Menu */
