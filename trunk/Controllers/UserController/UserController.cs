@@ -303,7 +303,7 @@ any roles might be overridden by the Active Directory groups if user is an Activ
         {
             Node init = new Node();
             init["TabCaption"].Value = Language.Instance["UserViewAllCaption", null, "All Users"];
-            init["ModuleSettings"]["Grid"]["Columns"]["Username"]["Caption"].Value = Language.Instance["Username"];
+            init["ModuleSettings"]["Grid"]["Columns"]["Username"]["Caption"].Value = Language.Instance["Username", null, "Username"];
             init["ModuleSettings"]["Grid"]["Columns"]["Username"]["ControlType"].Value = "LinkButton";
             init["ModuleSettings"]["Grid"]["Columns"]["LastLoggedIn"]["Caption"].Value = Language.Instance["LastLoggedIn", null, "Last Activity"];
             init["ModuleSettings"]["Grid"]["Columns"]["LastLoggedIn"]["ControlType"].Value = "Label";

@@ -146,32 +146,6 @@ namespace LanguageRecords
             }
         }
 
-        public string this[string key]
-        {
-            get
-            {
-                LanguageEntity retVal = Entities.Find(
-                    delegate(LanguageEntity idx)
-                    {
-                        return idx.Key == key && idx.Language == UserLanguage;
-                    });
-                if (retVal != null)
-                {
-                    return retVal.Value;
-                }
-                retVal = Entities.Find(
-                    delegate(LanguageEntity idx)
-                    {
-                        return idx.Key == key && idx.Language == "en";
-                    });
-                if (retVal != null)
-                {
-                    return retVal.Value;
-                }
-                return key;
-            }
-        }
-
         public string this[string key, string lang]
         {
             get
@@ -204,6 +178,32 @@ namespace LanguageRecords
             };
             Entities.Add(le);
             Save();
+        }
+
+        public string this[string key]
+        {
+            get
+            {
+                LanguageEntity retVal = Entities.Find(
+                    delegate(LanguageEntity idx)
+                    {
+                        return idx.Key == key && idx.Language == UserLanguage;
+                    });
+                if (retVal != null)
+                {
+                    return retVal.Value;
+                }
+                retVal = Entities.Find(
+                    delegate(LanguageEntity idx)
+                    {
+                        return idx.Key == key && idx.Language == "en";
+                    });
+                if (retVal != null)
+                {
+                    return retVal.Value;
+                }
+                return key;
+            }
         }
 
         public string this[string key, string language, string defaultValue]
