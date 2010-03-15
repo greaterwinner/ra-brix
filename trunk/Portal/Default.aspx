@@ -19,12 +19,6 @@
             type="text/css" />
         <link 
             runat="server" 
-            id="css2" 
-            href='<%# GetCssRootFolder() + "/portalSkins/portalSkins.css" %>' 
-            rel="stylesheet" 
-            type="text/css" />
-        <link 
-            runat="server" 
             id="css3" 
             href='<%# GetCssRootFolder() + "/main.css" %>' 
             rel="stylesheet" 
