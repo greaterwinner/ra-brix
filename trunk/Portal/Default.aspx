@@ -14,7 +14,7 @@
         <link 
             runat="server" 
             id="css1" 
-            href='<%# GetCssRootFolder() + "/steel/steel.css" %>' 
+            href='<%# GetCssRootFolder() + "/Gold/Gold.css" %>' 
             rel="stylesheet" 
             type="text/css" />
         <link 
