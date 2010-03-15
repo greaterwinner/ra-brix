@@ -97,7 +97,7 @@ namespace RolesController
                 hasAccess = current.InRole("Administrator") || _accessEntities.Exists(
                     delegate(AccessEntity idx)
                         {
-                            return current.InRole(idx.RoleName);
+                            return idx.RoleName == "Everyone" || current.InRole(idx.RoleName);
                         });
             }
 
