@@ -561,7 +561,7 @@ h3.edit textarea
 .deleteBtn
 {
 	display: block;
-	background:Transparent url('steel/tree-sprites.png') no-repeat -272px 0;
+	background:Transparent url('steel/sprites.png') no-repeat 0 -1248px;
 	width: 16px;
 	height: 16px;
 	margin-right:3px;
@@ -569,7 +569,7 @@ h3.edit textarea
 
 a.deleteBtn:hover
 {
-	background:Transparent url('steel/tree-sprites.png') no-repeat -288px 0;
+	background:Transparent url('steel/sprites.png') no-repeat 0 -1264px;
 	text-decoration:none !important;
 }
 
@@ -1749,12 +1749,12 @@ a.bookmarks
 
 .tree .hasSample .icon
 {
-	background:url(steel/tree-sprites.png) no-repeat -208px 0px;
+	background:url(steel/sprites.png) no-repeat 0 -1184px;
 }
 
 .tree .noSample .icon
 {
-	background:url(steel/tree-sprites.png) no-repeat -192px 0px;
+	background:url(steel/sprites.png) no-repeat 0 -1168px;
 }
 
 

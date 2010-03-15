@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Users.ascx">
-      <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -158,7 +158,7 @@ http://ra-ajax.org
 
 .bread-crumb .bread-item-first .sliding-bread-home
 {
-	background:url('tree-sprites.png') no-repeat -160px 0;
+	background:url('sprites.png') no-repeat 0 -1136px;
 	width:16px;
 	height:16px;
 	display:block;
@@ -169,7 +169,7 @@ http://ra-ajax.org
 
 .bread-crumb a.bread-item-first:hover .sliding-bread-home
 {
-	background:url('tree-sprites.png') no-repeat -176px 0;
+	background:url('sprites.png') no-repeat 0 -1152px;
 }
 
 .bread-crumb .bread-item-left .sliding-bread-home:hover
@@ -223,7 +223,7 @@ http://ra-ajax.org
 
 .sliding-menu .sliding-level .sliding-item .sliding-leaf
 {
-	background:url('tree-sprites.png') no-repeat -144px 0;
+	background:url('sprites.png') no-repeat 0 -1120px;
 	position:absolute;
 	right:5px;
 	top:4px;
