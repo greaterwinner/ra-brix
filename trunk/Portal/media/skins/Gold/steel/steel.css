@@ -1195,8 +1195,8 @@ http://ra-ajax.org
 {
 	display: inline-block;
 	width: 22px;
-	height: 20px;
-	background-image: url(sprite-buttons.png);
+	height: 16px;
+	background-image: url(sprites.png);
 	background-repeat: no-repeat;
 	background-color: Transparent;
 	background-repeat: no-repeat;
@@ -1212,92 +1212,92 @@ http://ra-ajax.org
 
 .editor .design
 {
-	background-position: -127px -40px;
+	background-position: 0 -1648px;
 }
 
 .editor .html
 {
-	background-position: -148px -40px;
+	background-position: 0 -1664px;
 }
 
 .editor .bold
 {
-	background-position: -63px 0;
+	background-position: 0 -1344px;
 }
 
 .editor .italic
 {
-	background-position: 0 -20px;
+	background-position: 0 -1424px;
 }
 
 .editor .underline
 {
-	background-position: -42px 0;
+	background-position: 0 -1328px;
 }
 
 .editor .justifyleft
 {
-	background-position: -42px -20px;
+	background-position: 0 -1456px;
 }
 
 .editor .justifyright
 {
-	background-position: -126px -20px;
+	background-position: 0 -1522px;
 }
 
 .editor .justifycenter
 {
-	background-position: -84px 0;
+	background-position: 0 -1358px;
 }
 
 .editor .justifyfull
 {
-	background-position: -21px -20px;
+	background-position: 0 -1440px;
 }
 
 .insertunorderedlist
 {
-	background-position: 0 0;
+	background-position: 0 -1296px;
 }
 
 .insertorderedlist
 {
-	background-position: -84px -20px;
+	background-position: 0 -1488px;
 }
 
 .indent
 {
-	background-position: -147px 0;
+	background-position: 0 -1408px;
 }
 
 .outdent
 {
-	background-position: -105px -20px;
+	background-position: 0 -1504px;
 }
 
 .image
 {
-	background-position: -126px 0;
+	background-position: 0 -1392px;
 }
 
 .resources
 {
-	background-position: -108px -40px;
+	background-position: 0 -1634px;
 }
 
 .hyperlink
 {
-	background-position: -63px -20px;
+	background-position: 0 -1472px;
 }
 
 .delete
 {
-	background-position: -84px -40px;
+	background-position: 0 -1616px;
 }
 
 .save
 {
-	background-position: -63px -40px;
+	background-position: 0 -1601px;
 }
 
 .bottomBar
