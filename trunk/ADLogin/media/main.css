@@ -175,18 +175,6 @@ div.editable
 	background-color:inherit;
 }
 
-.previous
-{
-	background:url('arrows.png') no-repeat 0 0;
-	left:10px;
-}
-
-.next
-{
-	background:url('arrows.png') no-repeat -33px 0;
-	right:10px;
-}
-
 .activityFilter
 {
 	margin-left:5px;

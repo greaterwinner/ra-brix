@@ -200,7 +200,7 @@ a.disabled
 {
 	padding-left: 23px;
 	padding-top: 2px;
-	background: White url(Images/logo_openid.png) no-repeat 0 0;
+	background: White url(Images/star.png) no-repeat -54px 0;
 	height: 19px;
 	font-size: 15px;
 	font-weight: bold;
@@ -211,7 +211,7 @@ a.disabled
 	right: 15px;
 	width: 80px !important;
 	margin-bottom: 5px;
-	background: White url(Images/filter-icon.png) no-repeat 0 0;
+	background: White url(Gold/sprites.png) no-repeat 0 -1696px;
 	border: solid 1px #99e;
 	padding-left: 15px;
 }
@@ -283,12 +283,6 @@ a.disabled
 {
 	font-weight: bold;
 	color: #a80;
-}
-
-.newRow
-{
-	background: url(Images/light_bulb.png) no-repeat 0 0;
-	padding-left: 18px;
 }
 
 .treeLinkButton
@@ -455,7 +449,7 @@ h3.edit
 	color: Blue;
 	cursor: pointer;
 	padding-left: 20px;
-	background: Transparent url(Images/editable.png) no-repeat 0 0;
+	background: Transparent url(Gold/sprites.png) no-repeat 0 -1680px;
 }
 
 div.edit:hover,
@@ -489,7 +483,7 @@ h3.edit textarea
 .filter
 {
 	width: 80px !important;
-	background: White url(Images/filter-icon.png) no-repeat 0 0;
+	background: White url(Gold/sprites.png) no-repeat 0 -1696px;
 	border: solid 1px #99e;
 	padding-left: 15px;
 	color: #777;
@@ -786,8 +780,7 @@ tr.strike td
 
 .days .now
 {
-	background-image:url(Images/calendar-now.png);
-	background-repeat:no-repeat;
+	background:#C9E6F9 url(Gold/sprites.png) no-repeat 0 -725px;
 }
 
 
@@ -1219,7 +1212,7 @@ span.buttonFlat
 	display:inline-block;
 	width:48px;
 	height:48px;
-	background:Transparent url(Images/resource-icons.png) no-repeat 0 0;
+	background:Transparent url(Images/resource-icons.png) no-repeat -192px 0;
 }
 
 .specificResource-mp3
@@ -1281,18 +1274,18 @@ span.buttonFlat
 	width:48px;
 	height:48px;
 	margin-left:39px;
-	background:Transparent url(Images/icons.png) no-repeat 0 0;
+	background:Transparent url(Images/resource-icons.png) no-repeat -192px 0;
 	cursor:pointer;
 }
 
 .file-class-dll
 {
-	background:Transparent url(Images/icons.png) no-repeat -48px 0;
+	background:Transparent url(Images/resource-icons.png) no-repeat -240px 0;
 }
 
 .file-class-pdb
 {
-	background:Transparent url(Images/icons.png) no-repeat -96px 0;
+	background:Transparent url(Images/resource-icons.png) no-repeat -286px 0;
 }
 
 .extraInformation
