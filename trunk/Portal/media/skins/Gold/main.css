@@ -1,4 +1,9 @@
-﻿
+﻿/*
+Copyright (c) 2008 - 2010, Thomas Hansen
+Code licensed under GPL3
+http://ra-brix.org
+*/
+
 html
 {
 	height: 100%;
@@ -290,7 +295,14 @@ a.disabled
 	padding-left: 2px;
 }
 
-.flags-arabian, .flags-norwegian, .flags-britain, .flags-german, .flags-france, .flags-spain, .flags-sweden, .flags-USA
+.flags-arabian,
+.flags-norwegian,
+.flags-britain,
+.flags-german,
+.flags-france,
+.flags-spain,
+.flags-sweden,
+.flags-USA
 {
 	width: 120px;
 	height: 75px;
@@ -299,7 +311,14 @@ a.disabled
 	margin: 5px;
 }
 
-.flags-arabian:hover, .flags-norwegian:hover, .flags-britain:hover, .flags-german:hover, .flags-france:hover, .flags-spain:hover, .flags-sweden:hover, .flags-USA:hover
+.flags-arabian:hover,
+.flags-norwegian:hover,
+.flags-britain:hover,
+.flags-german:hover,
+.flags-france:hover,
+.flags-spain:hover,
+.flags-sweden:hover,
+.flags-USA:hover
 {
 	text-decoration: none;
 	background-color: Transparent;
@@ -363,12 +382,6 @@ a.disabled
 {
 	background-color: Transparent;
 }
-
-
-
-
-
-
 
 .grid
 {
@@ -559,10 +572,6 @@ a.deleteBtn:hover
 	text-decoration:none !important;
 }
 
-
-
-
-
 .colorLabel
 {
 	background: Transparent url(Images/colors.png) no-repeat 0 0;
@@ -711,17 +720,6 @@ tr.strike td
 	text-decoration: line-through;
 }
 
-
-
-
-
-
-
-
-
-
-
-/* Activities */
 .days
 {
 	position: relative;
@@ -782,7 +780,6 @@ tr.strike td
 {
 	background:#C9E6F9 url(Gold/sprites.png) no-repeat 0 -725px;
 }
-
 
 .activityFilter
 {
@@ -848,18 +845,6 @@ tr.strike td
 	z-index: 1000;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* Tree Menu */
 .treeMenu
 {
 	border: none 0;
@@ -872,18 +857,22 @@ tr.strike td
 {
 	background-color: #ddf;
 }
+
 .treeMenu .item:hover ul
 {
 	background-color: #E6F4FF;
 }
+
 .treeMenu .selected
 {
 	background-color: #bbf;
 }
+
 .treeMenu .selected ul
 {
 	background-color: #E6F4FF;
 }
+
 .treeMenu .selected:hover
 {
 	background-color: #d0d0f0;
@@ -952,12 +941,6 @@ tr.strike td
 	height:19px;
 }
 
-
-
-
-
-/* CMS parts */
-
 span.button
 {
 	width: auto;
@@ -990,26 +973,6 @@ span.button
 	position: relative;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .resourceExplorerFiles
 {
 	float: left;
@@ -1033,32 +996,25 @@ span.button
 	padding: 2px;
 }
 
-
-
-
-
-
-
-
-
-
-/* CMS Flat Type Button */
 .buttonFlat
 {
 	width: auto;
 	border: none 0;
 	background-color: Transparent;
 }
+
 .buttonFlat .bLeft
 {
 	padding-left: 10px;
 	display: block;
 }
+
 .buttonFlat .bCenter
 {
 	display: block;
 	height: 21px;
 }
+
 .buttonFlat .bCenter span
 {
 	display: block;
@@ -1071,33 +1027,43 @@ span.button
 	padding-right: 10px;
 	display: block;
 }
+
 .buttonFlat:hover
 {
 }
+
 .buttonFlat:hover .bLeft
 {
 }
+
 .buttonFlat:hover .bCenter
 {
 }
+
 .buttonFlat:hover .bRight
 {
 }
+
 .buttonFlat-selected .bLeft
 {
 }
+
 .buttonFlat-selected .bCenter
 {
 }
+
 .buttonFlat-selected .bRight
 {
 }
+
 .buttonFlat-selected:hover .bLeft
 {
 }
+
 .buttonFlat-selected:hover .bCenter
 {
 }
+
 .buttonFlat-selected:hover .bRight
 {
 }
@@ -1422,8 +1388,7 @@ span.buttonFlat
 }
 
 .tree .bodyOfCommentWrp
-{
-}
+{ }
 
 .tree .bodyOfComment
 {
@@ -1842,7 +1807,3 @@ a.bookmarks
 	background: transparent url(Images/light-window-vert.png) repeat-x 0 -40px;
 	height:40px;
 }
-
-
-
-
