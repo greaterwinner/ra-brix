@@ -379,6 +379,26 @@ would have had to done in other similar applications.
             }
         }
 
+        protected void menu_Navigate(object sender, EventArgs e)
+        {
+            AnimateMenuContainerHeight();
+        }
+
+        private void AnimateMenuContainerHeight()
+        {
+            // Making sure our container Window is being animated to the right size...
+            SlidingMenuLevel level = root;
+            if (!string.IsNullOrEmpty(menu.ActiveLevel))
+                level = Selector.FindControl<SlidingMenuLevel>(menu, menu.ActiveLevel);
+            int newHeight = (level.Controls.Count * 31) + 15;
+            Node nodeResize = new Node();
+            nodeResize["Height"].Value = newHeight;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "AnimateLeftWindowContainer",
+                nodeResize);
+        }
+
         protected void menu_ItemClicked(object sender, EventArgs e)
         {
             SlidingMenuItem item = sender as SlidingMenuItem;
@@ -448,6 +468,7 @@ would have had to done in other similar applications.
                         if (id != null)
                         {
                             SetActiveLevel(id);
+                            AnimateMenuContainerHeight();
                         }
                     };
         }

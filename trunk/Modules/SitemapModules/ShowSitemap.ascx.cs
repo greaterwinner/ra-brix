@@ -19,15 +19,43 @@ namespace SitemapModules
     public class ShowSitemap : System.Web.UI.UserControl, IModule
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
+        protected global::Ra.Widgets.Panel pnlWrp;
+        protected global::Ra.Widgets.TextBox filter;
+
+        private Node FilteredItems
+        {
+            get { return ViewState["Items"] as Node; }
+            set { ViewState["Items"] = value; }
+        }
+
+        protected void search_Click(object sender, EventArgs e)
+        {
+            DataBindGrid();
+            pnlWrp.ReRender();
+            filter.Select();
+            filter.Focus();
+        }
 
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
                 {
-                    rep.DataSource = node["Items"];
-                    rep.DataBind();
+                    FilteredItems = node["Items"];
+                    DataBindGrid();
                 };
+        }
+
+        private void DataBindGrid()
+        {
+            Node tmp = new Node();
+            foreach (Node idx in FilteredItems)
+            {
+                if (idx["Name"].Get<string>().ToLower().Contains(filter.Text.ToLower()))
+                    tmp.Add(idx);
+            }
+            rep.DataSource = tmp;
+            rep.DataBind();
         }
     }
 }

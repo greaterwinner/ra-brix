@@ -9,7 +9,7 @@
 <%@ Import 
     Namespace="LanguageRecords"%>
 
-<div style="position:relative;">
+<div style="position:relative;height:100%;">
 
     <ra:Panel 
         runat="server" 
@@ -59,8 +59,9 @@
 
     <ra:SlidingMenu 
         runat="server" 
-        style="width:100%;min-height:300px;" 
+        style="width:100%;height:100%;" 
         OnItemClicked="menu_ItemClicked"
+        OnNavigate="menu_Navigate"
         ID="menu">
 
         <ra:SlidingMenuLevel 

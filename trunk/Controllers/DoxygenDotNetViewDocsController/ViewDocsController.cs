@@ -27,11 +27,13 @@ namespace DoxygenDotNetViewDocsController
         {
             Language.Instance.SetDefaultValue("ButtonDocumentation", "Documentation");
             Language.Instance.SetDefaultValue("ButtonTutorials", "Tutorials");
+            Language.Instance.SetDefaultValue("ButtonClassesReferences", "Classes");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
+            GetClassesMenuItems(e);
             e.Params["ButtonDocumentation"].Value = "Menu-ViewDocumentation";
             string root = HttpContext.Current.Server.MapPath("~/");
             if (Directory.Exists(root + "tutorials"))
@@ -49,6 +51,46 @@ namespace DoxygenDotNetViewDocsController
             }
         }
 
+        private static Docs RaDocs
+        {
+            get
+            {
+                if (HttpContext.Current.Application["RaDocs"] == null)
+                {
+                    HttpContext.Current.Application["RaDocs"] =
+                        new Docs(HttpContext.Current.Server.MapPath("~/docs-xml"));
+                }
+                return (Docs)HttpContext.Current.Application["RaDocs"];
+            }
+        }
+
+        private static void GetClassesMenuItems(ActiveEventArgs e)
+        {
+            e.Params["ButtonClassesReferences"].Value = "Menu-ViewClassesReferences";
+            foreach (Class idx in RaDocs.GetAllClasses())
+            {
+                switch (idx.FullName)
+                {
+                    // removing the classes we don't really NEED documentation for...
+                    case "Ra.Extensions.Helpers.CometQueue":
+                    case "Ra.Core.CallbackFilter":
+                    case "Ra.Extensions.Widgets.AccordionView.EffectChange":
+                    case "Ra.Extensions.Widgets.AutoCompleter.RetrieveAutoCompleterItemsEventArgs":
+                    case "Ra.Core.PostbackFilter":
+                    case "Ra.Widgets.ListItemCollection":
+                    case "Ra.Widgets.StyleCollection":
+                    case "Ra.Widgets.StyleCollection.StyleValue":
+                    case "Ra.Widgets.ListItem":
+                        break;
+                    default:
+                        {
+                            e.Params["ButtonClassesReferences"][idx.Name].Value = 
+                                "url:~/class/" + idx.FullName.Replace(".", "-");
+                        } break;
+                }
+            }
+        }
+
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
         protected void InitialLoadingOfPage(object sender, ActiveEventArgs e)
         {
@@ -61,26 +103,47 @@ namespace DoxygenDotNetViewDocsController
                 return;
             else if (contentId.IndexOf("tutorials/") == 0)
             {
-                // We have a tutorial link...
-                string tutorialFileName = " - " + contentId.Replace("tutorials/", "").Replace("-", " ") + ".txt";
-                string root = HttpContext.Current.Server.MapPath("~/tutorials/");
-                string fileName = Directory.GetFiles(root, "*" + tutorialFileName)[0];
-                Node node = new Node();
-                using (TextReader reader = new StreamReader(fileName))
-                {
-                    CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
-                    string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
-                    node["ModuleSettings"]["Text"].Value = tutorialSyntaxed;
-                    node["ModuleSettings"]["Header"].Value = fileName.Substring(fileName.LastIndexOf("\\") + 1).Replace(".txt", "");
-                    ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title = 
-                        Language.Instance["Tutorial:", null, "Tutorials: "] + 
-                        node["ModuleSettings"]["Header"].Value;
-                }
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "DoxygentDotNetViewDocsModules.ViewTutorial",
-                    "dynMid",
-                    node);
+                LoadTutorial(contentId);
             }
+            else if (contentId.IndexOf("class/") == 0)
+            {
+                LoadClass(contentId);
+            }
+        }
+
+        private void LoadClass(string contentId)
+        {
+            string className = contentId.Replace("class/", "").Replace("-", ".");
+            Class c = RaDocs.GetTypeByName(className) as Class;
+            Node node = new Node();
+            node["Class"].Value = c;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DoxygentDotNetShowClass",
+                node);
+        }
+
+        private static void LoadTutorial(string contentId)
+        {
+            // We have a tutorial link...
+            string tutorialFileName = " - " + contentId.Replace("tutorials/", "").Replace("-", " ") + ".txt";
+            string root = HttpContext.Current.Server.MapPath("~/tutorials/");
+            string fileName = Directory.GetFiles(root, "*" + tutorialFileName)[0];
+            Node node = new Node();
+            using (TextReader reader = new StreamReader(fileName))
+            {
+                CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+                string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
+                node["ModuleSettings"]["Text"].Value = tutorialSyntaxed;
+                node["ModuleSettings"]["Header"].Value = fileName.Substring(fileName.LastIndexOf("\\") + 1).Replace(".txt", "");
+                ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
+                    Language.Instance["Tutorial:", null, "Tutorials: "] +
+                    node["ModuleSettings"]["Header"].Value;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "DoxygentDotNetViewDocsModules.ViewTutorial",
+                "dynMid",
+                node);
         }
 
         [ActiveEvent(Name = "Menu-ViewDocumentation")]
