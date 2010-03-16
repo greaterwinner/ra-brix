@@ -77,7 +77,7 @@ namespace SitemapController
             {
                 string name = node.Name;
                 string url = node.Get<string>().Replace("url:", "");
-                url = url.Replace("~", ApplicationRoot.Root);
+                url = url.Replace("~/", ApplicationRoot.Root);
                 Tuple<string, string> tmp = new Tuple<string, string>(name, url);
                 list.Add(tmp);
             }

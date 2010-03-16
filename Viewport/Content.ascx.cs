@@ -163,6 +163,14 @@ namespace Viewport
             customBreadParent.ReRender();
         }
 
+        [ActiveEvent(Name = "AnimateLeftWindowContainer")]
+        protected void AnimateLeftWindowContainer(object sender, ActiveEventArgs e)
+        {
+            int height = e.Params["Height"].Get<int>();
+            new EffectSize(dynLeft, 250, height, -1)
+                .Render();
+        }
+
         [ActiveEvent(Name = "LoadControl")]
         protected void LoadControl(object sender, ActiveEventArgs e)
         {
