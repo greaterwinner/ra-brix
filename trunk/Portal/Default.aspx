@@ -20,7 +20,7 @@
         <link 
             runat="server" 
             id="css3" 
-            href='<%# GetCssRootFolder() + "/main.css" %>' 
+            href='<%# GetCssRootFolder() + "/Gold.css" %>' 
             rel="stylesheet" 
             type="text/css" />
         <meta http-equiv="X-UA-Compatible" content="chrome=1" />
