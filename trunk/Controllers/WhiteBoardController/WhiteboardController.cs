@@ -34,28 +34,27 @@ namespace WhiteBoardController
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonAppl"]["ButtonWhiteboards"].Value = "Menu-Whiteboards";
-            e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonCreateWhiteboard"].Value = "Menu-CreateWhiteboard";
+            e.Params["ButtonAppl"]["ButtonLists"].Value = "Menu-Whiteboards";
+            e.Params["ButtonAppl"]["ButtonLists"]["ButtonCreateNewList"].Value = "Menu-CreateWhiteboard";
 
             List<Whiteboard> whiteboards = new List<Whiteboard>(ActiveType<Whiteboard>.Select());
             if (whiteboards.Count > 0)
             {
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewAllWhiteboards"].Value =
-                    "Menu-ViewAllWhiteboards";
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"].Value = "Menu-EditWhiteboard";
-                e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"].Value = "Menu-ViewWhiteboard";
+                e.Params["ButtonAppl"]["ButtonLists"]["ButtonViewAllLists"].Value = "Menu-ViewAllWhiteboards";
+                e.Params["ButtonAppl"]["ButtonLists"]["ButtonEditList"].Value = "Menu-EditWhiteboard";
+                e.Params["ButtonAppl"]["ButtonLists"]["ButtonViewList"].Value = "Menu-ViewWhiteboard";
                 foreach (Whiteboard idx in whiteboards)
                 {
                     // First the edit parts...
-                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
+                    e.Params["ButtonAppl"]["ButtonLists"]["ButtonEditList"]
                         [Language.Instance["Edit", null, "Edit"] + " " + idx.Name].Value = "Menu-EditSpecificWhiteboard";
-                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonEditWhiteboard"]
+                    e.Params["ButtonAppl"]["ButtonLists"]["ButtonEditList"]
                         [Language.Instance["Edit", null, "Edit"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
 
                     // Then the "view" parts
-                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
+                    e.Params["ButtonAppl"]["ButtonLists"]["ButtonViewList"]
                         [Language.Instance["View", null, "View"] + " " + idx.Name].Value = "Menu-ViewSpecificWhiteboard";
-                    e.Params["ButtonAppl"]["ButtonWhiteboards"]["ButtonViewWhiteboard"]
+                    e.Params["ButtonAppl"]["ButtonLists"]["ButtonViewList"]
                         [Language.Instance["View", null, "View"] + " " + idx.Name]["Params"].Value = idx.ID.ToString();
                 }
             }

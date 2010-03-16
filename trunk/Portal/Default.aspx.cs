@@ -24,7 +24,7 @@ namespace Ra.Brix.Portal
         {
             // Changing the URL to un-escaped to get rid of the ContentID parameter and
             // make the URL for the form "beautiful"...
-            Form.Action = Request.RawUrl.Replace("default.aspx", "");
+            Form.Action = Request.RawUrl.Replace("default.aspx", "").Replace("Default.aspx", "");
 
             // Setting the base for the page to get correct path to images and such
             baseElement.Attributes.Add("href", ApplicationRoot.Root);
