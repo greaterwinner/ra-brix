@@ -545,7 +545,7 @@ h3.edit textarea
 
 .clicked-backwards .bCenter span
 {
-	background: url(steel/sprites.png) no-repeat -3px -761px;
+	background:transparent url(steel/sprites.png) no-repeat -3px -761px;
 	padding-left: 17px;
 	height:12px;
 }
@@ -571,7 +571,7 @@ a.deleteBtn:hover
 
 .colorLabel
 {
-	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+	background: Transparent url(Images/colors.png) no-repeat 0 0;
 	display: block;
 	width: 25px;
 	height: 25px;
@@ -583,27 +583,27 @@ a.deleteBtn:hover
 
 .Red
 {
-	background: Transparent url(Images/Red.png) no-repeat 0 0;
+	background-position:-25px 0;
 }
 
 .Blue
 {
-	background: Transparent url(Images/Blue.png) no-repeat 0 0;
+	background-position:-50px 0;
 }
 
 .Green
 {
-	background: Transparent url(Images/Green.png) no-repeat 0 0;
+	background-position:-75px 0;
 }
 
 .Gray
 {
-	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+	background-position:0 0;
 }
 
 .Yellow
 {
-	background: Transparent url(Images/Yellow.png) no-repeat 0 0;
+	background-position:-100px 0;
 }
 
 .colorPanel
@@ -618,6 +618,7 @@ a.deleteBtn:hover
 
 .colorPanel .colorButton
 {
+	background: Transparent url(Images/colors.png) no-repeat 0 0;
 	width: 25px;
 	height: 25px;
 	float: left;
@@ -627,27 +628,27 @@ a.deleteBtn:hover
 
 .colorPanel .Gray
 {
-	background: Transparent url(Images/Gray.png) no-repeat 0 0;
+	background-position:0 0;
 }
 
 .colorPanel .Red
 {
-	background: Transparent url(Images/Red.png) no-repeat 0 0;
+	background-position:-25px 0;
 }
 
 .colorPanel .Blue
 {
-	background: Transparent url(Images/Blue.png) no-repeat 0 0;
+	background-position:-50px 0;
 }
 
 .colorPanel .Green
 {
-	background: Transparent url(Images/Green.png) no-repeat 0 0;
+	background-position:-75px 0;
 }
 
 .colorPanel .Yellow
 {
-	background: Transparent url(Images/Yellow.png) no-repeat 0 0;
+	background-position:-100px 0;
 }
 
 .candy
@@ -939,23 +940,23 @@ tr.strike td
 	font-size:32px;
 }
 
-.wait-gif .image
-{
-	background: Transparent url(Images/wait.gif) no-repeat 0 0;
-	display:table;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:25px;
-	width:220px;
-	height:19px;
-}
-
 .wait-gif .text
 {
 	display:table;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:25px;
+}
+
+.wait-gif .image
+{
+	background: Transparent url(Images/wait.gif) no-repeat 0 0;
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:15px;
+	width:220px;
+	height:19px;
 }
 
 
