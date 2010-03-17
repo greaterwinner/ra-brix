@@ -153,6 +153,7 @@ namespace ArticlePublisherModules
             Load +=
                 delegate
                 {
+                    header.DataBind();
                     if (node["IsEditing"].Value != null && node["IsEditing"].Get<bool>())
                     {
                         ArticleID = node["ID"].Get<int>();
