@@ -15,6 +15,8 @@ using System.Web;
 using Ra.Brix.Types;
 using StackedRecords;
 using Ra.Brix.Data;
+using UserRecords;
+using HelperGlobals;
 
 namespace StackedController
 {
@@ -51,14 +53,91 @@ namespace StackedController
             }
         }
 
+        [ActiveEvent(Name = "RequestSavingOfStackedAnswer")]
+        protected void RequestSavingOfStackedAnswer(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["QuestionID"].Get<int>();
+            Question q = Question.SelectByID(id);
+            Answer a = new Answer();
+            a.Body = e.Params["Body"].Get<string>();
+            a.Asked = DateTime.Now;
+            a.Author = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            q.Answers.Add(a);
+            q.Save();
+
+            // Updating answers on form
+            Node node = new Node();
+            node["QuestionID"].Value = id;
+            foreach (Answer idx in q.Answers)
+            {
+                node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
+                node["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+            }
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "UpdateStackedAnswers",
+                node);
+
+            // Showing info message
+            Node nodeMessage = new Node();
+            nodeMessage["Message"].Value = Language.Instance["ThankYouForAnswer", null, @"
+Thank you for your answer"];
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
+            e.Params["Success"].Value = true;
+        }
+
         private void ShowQuestion(string contentId)
         {
             Question q = Question.FindArticle(contentId);
+            ShowQuestion(q);
+            ShowAnswers(q);
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                ShowAnswerForm(q);
+        }
+
+        private static void ShowQuestion(Question q)
+        {
             Node node = new Node();
             node["ModuleSettings"]["Header"].Value = q.Header;
             node["ModuleSettings"]["Body"].Value = q.Body;
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewQuestion",
+                "dynMid",
+                node);
+        }
+
+        private void ShowAnswers(Question q)
+        {
+            if (q.Answers.Count == 0)
+                return;
+            Node node = new Node();
+            node["AddToExistingCollection"].Value = true;
+            foreach (Answer idx in q.Answers)
+            {
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "StackedModules.ViewAnswers",
+                "dynMid",
+                node);
+        }
+
+        private void ShowAnswerForm(Question q)
+        {
+            Node node = new Node();
+            node["ModuleSettings"]["QuestionID"].Value = q.ID;
+            node["AddToExistingCollection"].Value = true;
+            ActiveEvents.Instance.RaiseLoadControl(
+                "StackedModules.AnswerQuestion",
                 "dynMid",
                 node);
         }
