@@ -48,6 +48,7 @@
       <HintPath>..\..\References\Ra.Selector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -55,6 +56,14 @@
   <ItemGroup>
     <Compile Include="AskQuestion.ascx.cs">
       <DependentUpon>AskQuestion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnswerQuestion.ascx.cs">
+      <DependentUpon>AnswerQuestion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAnswers.ascx.cs">
+      <DependentUpon>ViewAnswers.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewQuestion.ascx.cs">
@@ -101,6 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewQuestion.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewAnswers.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AnswerQuestion.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

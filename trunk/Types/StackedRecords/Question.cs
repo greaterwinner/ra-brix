@@ -12,6 +12,7 @@ using System;
 using Ra.Brix.Data;
 using UserRecords;
 using HelperGlobals;
+using Ra.Brix.Types;
 
 namespace StackedRecords
 {
@@ -30,8 +31,11 @@ namespace StackedRecords
         [ActiveField]
         public DateTime Asked { get; set; }
 
-        [ActiveField(IsOwner=false)]
+        [ActiveField(IsOwner = false)]
         public User Author { get; set; }
+
+        [ActiveField(IsOwner = false)]
+        public LazyList<Answer> Answers { get; set; }
 
         public static Question FindArticle(string contentId)
         {
