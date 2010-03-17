@@ -12,7 +12,7 @@
         id="header" 
         Tag="h3"
         CssClass="edit"
-        Text="Header of article" />
+        Text='<%#LanguageRecords.Language.Instance["HeaderOfArticle", null, "Header of article"] %>' />
 
     <div style="margin:5px;">
         <h3>Tags</h3>
