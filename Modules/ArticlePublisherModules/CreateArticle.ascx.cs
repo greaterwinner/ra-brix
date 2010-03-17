@@ -165,6 +165,11 @@ namespace ArticlePublisherModules
                     else
                     {
                         ArticleID = -1;
+                        editor.Text = "<p>" + 
+                            LanguageRecords.Language.Instance[
+                                "DefaultArticleText", 
+                                null, 
+                                "Default article text..."] + "</p>";
                     }
                 };
         }
