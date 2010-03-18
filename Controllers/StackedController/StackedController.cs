@@ -116,6 +116,12 @@ namespace StackedController
                 node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
                 node["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                Answer.Vote xVote = idx.Voters.Find(
+                    delegate(Answer.Vote idxVote)
+                    {
+                        return idxVote.User == user;
+                    });
+                node["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
                 node["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -151,6 +157,7 @@ namespace StackedController
                 {
                     return right.Votes.CompareTo(left.Votes);
                 });
+            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             foreach (Answer idx in answers)
             {
                 node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
@@ -159,6 +166,12 @@ namespace StackedController
                 node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
                 node["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                Answer.Vote xVote = idx.Voters.Find(
+                    delegate(Answer.Vote idxVote)
+                    {
+                        return idxVote.User == user;
+                    });
+                node["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
                 node["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -212,6 +225,7 @@ Thank you for your answer"];
                 {
                     return right.Votes.CompareTo(left.Votes);
                 });
+            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             foreach (Answer idx in answers)
             {
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
@@ -220,6 +234,12 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                Answer.Vote xVote = idx.Voters.Find(
+                    delegate(Answer.Vote idxVote)
+                    {
+                        return idxVote.User == user;
+                    });
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseLoadControl(
