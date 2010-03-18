@@ -1553,6 +1553,14 @@ a.bookmarks
 	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
 }
 
+.forumMainBody
+{
+	text-align:justify;
+	line-height:24px;
+	font-size:14px;
+	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+}
+
 .cmsMainBody
 {
 	text-align:justify;

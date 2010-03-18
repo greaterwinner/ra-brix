@@ -31,6 +31,9 @@ namespace StackedRecords
         [ActiveField]
         public DateTime Asked { get; set; }
 
+        [ActiveField]
+        public DateTime LastAnswer { get; set; }
+
         [ActiveField(IsOwner = false)]
         public User Author { get; set; }
 
@@ -49,7 +52,8 @@ namespace StackedRecords
                 // This is a newly created root page. Hence we must give it a unique URL
                 GetUniqueURL(this);
                 Author = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-                this.Asked = DateTime.Now;
+                Asked = DateTime.Now;
+                LastAnswer = Asked;
             }
             if (string.IsNullOrEmpty(Body))
             {

@@ -12,6 +12,10 @@ using LanguageRecords;
 using Ra.Brix.Loader;
 using Ra.Brix.Types;
 using System;
+using System.Text;
+using System.Security.Cryptography;
+using HelperGlobals;
+using System.Configuration;
 
 namespace StackedModules
 {
@@ -30,6 +34,30 @@ namespace StackedModules
                     rep.DataBind();
                     ask.DataBind();
                 };
+        }
+
+        protected string GetGravatar(object emailObj)
+        {
+            string email = emailObj as string;
+            email = email == null ? "" : email;
+
+            StringBuilder emailHash = new StringBuilder();
+            MD5 md5 = MD5.Create();
+            byte[] emailBuffer = Encoding.ASCII.GetBytes(email);
+            byte[] hash = md5.ComputeHash(emailBuffer);
+
+            foreach (byte hashByte in hash)
+                emailHash.Append(hashByte.ToString("x2"));
+
+            return string.Format("http://www.gravatar.com/avatar/{0}?s=32&d=identicon", emailHash.ToString());
+        }
+
+        protected string GetUsernameLink(object usernameObj)
+        {
+            string username = usernameObj as string;
+            return ApplicationRoot.Root +
+                "authors/" + username.Replace(".", "--") +
+                ConfigurationManager.AppSettings["DefaultPageExtension"];
         }
 
         protected void ask_Click(object sender, EventArgs e)

@@ -63,6 +63,7 @@ namespace StackedController
             a.Asked = DateTime.Now;
             a.Author = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             q.Answers.Add(a);
+            q.LastAnswer = a.Asked;
             q.Save();
 
             // Updating answers on form
@@ -106,6 +107,8 @@ Thank you for your answer"];
             Node node = new Node();
             node["ModuleSettings"]["Header"].Value = q.Header;
             node["ModuleSettings"]["Body"].Value = q.Body;
+            node["ModuleSettings"]["Username"].Value = q.Author.Username;
+            node["ModuleSettings"]["Email"].Value = q.Author.Email;
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewQuestion",
                 "dynMid",
@@ -114,8 +117,6 @@ Thank you for your answer"];
 
         private void ShowAnswers(Question q)
         {
-            if (q.Answers.Count == 0)
-                return;
             Node node = new Node();
             node["AddToExistingCollection"].Value = true;
             foreach (Answer idx in q.Answers)
@@ -146,13 +147,15 @@ Thank you for your answer"];
         {
             // Viewing all questions...
             Node node = new Node();
-            foreach (Question idx in Question.Select(Criteria.Sort("Asked", false)))
+            foreach (Question idx in Question.Select(Criteria.Sort("LastAnswer", false)))
             {
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Header"].Value = idx.Header;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Body"].Value = idx.Body;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["URL"].Value = idx.URL;
-                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["User"].Value = idx.Author;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Email"].Value = idx.Author.Email;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
                 if (node.Count >= 50)
                     break;
             }

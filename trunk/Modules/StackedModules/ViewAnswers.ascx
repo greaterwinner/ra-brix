@@ -10,7 +10,7 @@
 .answer
 {
     margin:35px 5px 5px 0;
-    padding:35px 10px 10px 10px;
+    padding:35px 10px 15px 10px;
     border:dashed 1px #999;
 	background-color:#d6f4ff;
 	position:relative;
