@@ -69,7 +69,7 @@ namespace StackedController
             q.Save();
 
             // Adding points to users score
-            a.Author.Score += Settings.Instance.Get<int>("UserScoreForNewAnswer", 3);
+            a.Author.Score += Settings.Instance.Get<int>("UserScoreForNewAnswer", 2);
             a.Author.Save();
 
             // Updating answers on form
@@ -165,6 +165,7 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Email"].Value = idx.Author.Email;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
                 if (node.Count >= 50)
                     break;
@@ -194,7 +195,7 @@ Thank you for your answer"];
 
             // Updating User's score with points for question
             User u = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
-            u.Score += Settings.Instance.Get<int>("UserScoreForNewQuestion", 15);
+            u.Score += Settings.Instance.Get<int>("UserScoreForNewQuestion", 6);
             u.Save();
             ShowQuestionsLandingPage();
         }
