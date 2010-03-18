@@ -43,8 +43,8 @@
 	float:left;
 }
 
-.answerVotePlus,
-.answerVoteMinus
+.answerVote .answerVotePlus,
+.answerVote .answerVoteMinus
 {
 	background:transparent url(media/skins/Gold/Images/resource-icons.png) no-repeat 0 0;
 	display:block;
@@ -53,20 +53,30 @@
 	border:solid 1px #d0edff;
 }
 
-.answerVotePlus:hover,
-.answerVoteMinus:hover
+.answerVote .answerVotePlus:hover,
+.answerVote .answerVoteMinus:hover
 {
 	border:solid 1px #999;
 }
 
-.answerVotePlus
+.answerVote .answerVotePlus
 {
 	background-position:-336px 0;
 }
 
-.answerVoteMinus
+.answerVote .answerVoteMinus
 {
 	background-position:-336px -24px;
+}
+
+.answerVote .activePlus
+{
+	background-position:-360px 0;
+}
+
+.answerVote .activeMinus
+{
+	background-position:-360px -24px;
 }
 
 .votes
@@ -126,13 +136,13 @@
                 <div class="answerVote">
                     <ra:LinkButton 
                         runat="server" 
-                        CssClass="answerVotePlus"
+                        CssClass='<%#GetCssClassForVoteIcon("answerVotePlus", Eval("[CurrentVote].Value")) %>'
                         Xtra='<%#Eval("[ID].Value") %>'
                         OnClick="VoteUp"
                         id="plus" />
                     <ra:LinkButton 
                         runat="server" 
-                        CssClass="answerVoteMinus"
+                        CssClass='<%#GetCssClassForVoteIcon("answerVoteMinus", Eval("[CurrentVote].Value")) %>'
                         Xtra='<%#Eval("[ID].Value") %>'
                         OnClick="VoteDown"
                         id="minus" />

@@ -65,6 +65,25 @@ namespace StackedModules
             return string.Format("http://www.gravatar.com/avatar/{0}?s=32&d=identicon", emailHash.ToString());
         }
 
+        protected string GetCssClassForVoteIcon(object firstObj, object secondObj)
+        {
+            string first = firstObj as string;
+            int second = (int)secondObj;
+            string retVal = first;
+            switch (second)
+            {
+                case -1:
+                    if (first == "answerVoteMinus")
+                        retVal += " activeMinus";
+                    break;
+                case 1:
+                    if (first == "answerVotePlus")
+                        retVal += " activePlus";
+                    break;
+            }
+            return retVal;
+        }
+
         protected string GetCssClassForVotes(object scoreObj)
         {
             int score = (int)scoreObj;
