@@ -50,21 +50,22 @@ namespace StackedModules
                 ConfigurationManager.AppSettings["DefaultPageExtension"];
         }
 
-        protected string GetUsername()
-        {
-            return Username;
-        }
-
-        private string Username
+        protected string Username
         {
             get { return ViewState["Username"] as string; }
             set { ViewState["Username"] = value; }
         }
 
-        private string Email
+        protected string Email
         {
             get { return ViewState["Email"] as string; }
             set { ViewState["Email"] = value; }
+        }
+
+        protected string Score
+        {
+            get { return ViewState["Score"] as string; }
+            set { ViewState["Score"] = value; }
         }
 
         public void InitialLoading(Node node)
@@ -74,6 +75,7 @@ namespace StackedModules
                 {
                     Username = node["Username"].Get<string>();
                     Email = node["Email"].Get<string>();
+                    Score = node["Score"].Get<int>().ToString();
                     header.InnerHtml = node["Header"].Get<string>();
                     body.InnerHtml = node["Body"].Get<string>();
                 };

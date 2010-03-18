@@ -61,6 +61,10 @@
       <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
       <Name>LanguageRecords</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Types\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Types\StackedRecords\StackedRecords.csproj">
       <Project>{63E2A334-5CAD-49F6-9BE9-54D4733E904D}</Project>
       <Name>StackedRecords</Name>

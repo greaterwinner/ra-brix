@@ -49,6 +49,8 @@
                         src='<%#GetGravatar(Eval("[Email].Value")) %>'
                         style="float:left;margin-right:15px;width:32px;height:32px;overflow:hidden;" />
                     <%#Eval("[Username].Value") %>
+                    <br />
+                    <%#LanguageRecords.Language.Instance["Score", null, "Score"] %>: <%#Eval("[Score].Value") %>
                 </a>
                 <%#Eval("[Body].Value") %>
             </div>
