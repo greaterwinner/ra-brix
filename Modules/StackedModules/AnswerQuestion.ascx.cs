@@ -118,7 +118,8 @@ namespace StackedModules
             if (node["Success"].Get<bool>())
             {
                 new EffectRollUp(allWrp, 250)
-                    .ChainThese(new EffectRollDown(allWrp, 250))
+                    .ChainThese(
+                        new EffectRollDown(answerBtnWrp, 250))
                     .Render();
                 editor.Text =
                     "<p>" +
