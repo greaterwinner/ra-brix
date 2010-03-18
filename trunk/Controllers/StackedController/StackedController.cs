@@ -17,6 +17,7 @@ using StackedRecords;
 using Ra.Brix.Data;
 using UserRecords;
 using HelperGlobals;
+using SettingsRecords;
 
 namespace StackedController
 {
@@ -56,6 +57,7 @@ namespace StackedController
         [ActiveEvent(Name = "RequestSavingOfStackedAnswer")]
         protected void RequestSavingOfStackedAnswer(object sender, ActiveEventArgs e)
         {
+            // Saving Answer...
             int id = e.Params["QuestionID"].Get<int>();
             Question q = Question.SelectByID(id);
             Answer a = new Answer();
@@ -66,6 +68,10 @@ namespace StackedController
             q.LastAnswer = a.Asked;
             q.Save();
 
+            // Adding points to users score
+            a.Author.Score += Settings.Instance.Get<int>("UserScoreForNewAnswer", 3);
+            a.Author.Save();
+
             // Updating answers on form
             Node node = new Node();
             node["QuestionID"].Value = id;
@@ -74,6 +80,7 @@ namespace StackedController
                 node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
                 node["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
                 node["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
             }
             ActiveEvents.Instance.RaiseActiveEvent(
@@ -109,6 +116,7 @@ Thank you for your answer"];
             node["ModuleSettings"]["Body"].Value = q.Body;
             node["ModuleSettings"]["Username"].Value = q.Author.Username;
             node["ModuleSettings"]["Email"].Value = q.Author.Email;
+            node["ModuleSettings"]["Score"].Value = q.Author.Score;
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewQuestion",
                 "dynMid",
@@ -124,6 +132,7 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
             }
             ActiveEvents.Instance.RaiseLoadControl(
@@ -154,6 +163,7 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["URL"].Value = idx.URL;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Username"].Value = idx.Author.Username;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
                 if (node.Count >= 50)
@@ -176,10 +186,16 @@ Thank you for your answer"];
         [ActiveEvent(Name = "RequestSavingOfStackedQuestion")]
         protected void RequestSavingOfStackedQuestion(object sender, ActiveEventArgs e)
         {
+            // Saving new question...
             Question q = new Question();
             q.Body = e.Params["Body"].Get<string>();
             q.Header = e.Params["Header"].Get<string>();
             q.Save();
+
+            // Updating User's score with points for question
+            User u = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            u.Score += Settings.Instance.Get<int>("UserScoreForNewQuestion", 15);
+            u.Save();
             ShowQuestionsLandingPage();
         }
     }

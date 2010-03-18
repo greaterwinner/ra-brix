@@ -28,7 +28,9 @@
         <img 
             src='<%=GetGravatar() %>'
             style="float:left;margin-right:15px;width:48px;height:48px;overflow:hidden;" />
-        <%=GetUsername() %>
+        <%=Username %>
+        <br />
+        <%=LanguageRecords.Language.Instance["Score", null, "Score"] %>: <%=Score %>
     </a>
     <h1 runat="server" id="header" />
     <div runat="server" id="body" />

@@ -96,7 +96,11 @@
                             id="gravatar" 
                             src='<%#GetGravatar(Eval("[Email].Value")) %>'
                             style="float:left;margin-right:15px;width:32px;height:32px;overflow:hidden;" />
-                        <%#Eval("[Username].Value") %>
+                        <div style="float:right;">
+                            <%#Eval("[Username].Value") %>
+                            <br />
+                            <%#LanguageRecords.Language.Instance["Score", null, "Score"] %>: <%#Eval("[Score].Value") %>
+                        </div>
                     </a>
                 </ra:Panel>
             </ItemTemplate>
