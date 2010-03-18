@@ -34,8 +34,19 @@ namespace StackedModules
             rep.DataSource = e.Params["Answers"];
             rep.DataBind();
             repWrp.ReRender();
-            new EffectHighlight(repWrp, 500)
-                .Render();
+            if (e.Params["IsVote"].Value != null && e.Params["IsVote"].Get<bool>())
+            {
+                // This is a "voting update", which means we can run 
+                // some fancy animations to make it all look better ...
+                new EffectRollUp(repWrp, 250)
+                    .ChainThese(new EffectRollDown(repWrp, 750))
+                    .Render();
+            }
+            else
+            {
+                new EffectHighlight(repWrp, 500)
+                    .Render();
+            }
         }
 
         protected string GetGravatar(object emailObj)
@@ -54,6 +65,57 @@ namespace StackedModules
             return string.Format("http://www.gravatar.com/avatar/{0}?s=32&d=identicon", emailHash.ToString());
         }
 
+        protected string GetCssClassForVotes(object scoreObj)
+        {
+            int score = (int)scoreObj;
+            if (score < 0)
+            {
+                return "votes bad";
+            }
+            if (score == 0)
+            {
+                return "votes neutral";
+            }
+            else
+            {
+                return "votes good";
+            }
+        }
+
+        private int QuestionID
+        {
+            get { return (int)ViewState["QuestionID"]; }
+            set { ViewState["QuestionID"] = value; }
+        }
+
+        protected void VoteUp(object sender, EventArgs e)
+        {
+            LinkButton btn = sender as LinkButton;
+            int id = int.Parse(btn.Xtra);
+            Node node = new Node();
+            node["ID"].Value = id;
+            node["Points"].Value = 1;
+            node["QuestionID"].Value = QuestionID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "VoteStackedAnswer",
+                node);
+        }
+
+        protected void VoteDown(object sender, EventArgs e)
+        {
+            LinkButton btn = sender as LinkButton;
+            int id = int.Parse(btn.Xtra);
+            Node node = new Node();
+            node["ID"].Value = id;
+            node["Points"].Value = -1;
+            node["QuestionID"].Value = QuestionID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "VoteStackedAnswer",
+                node);
+        }
+
         protected string GetUsernameLink(object usernameObj)
         {
             string username = usernameObj as string;
@@ -67,6 +129,7 @@ namespace StackedModules
             Load +=
                 delegate
                 {
+                    QuestionID = node["QuestionID"].Get<int>();
                     rep.DataSource = node["Answers"];
                     rep.DataBind();
                 };

@@ -18,6 +18,7 @@ using Ra.Brix.Data;
 using UserRecords;
 using HelperGlobals;
 using SettingsRecords;
+using System.Collections.Generic;
 
 namespace StackedController
 {
@@ -54,6 +55,73 @@ namespace StackedController
             }
         }
 
+        [ActiveEvent(Name = "VoteStackedAnswer")]
+        protected void VoteStackedAnswer(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["ID"].Get<int>();
+            int points = e.Params["Points"].Get<int>();
+            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            if(user == null)
+            {
+                Node nodeMessage = new Node();
+                nodeMessage["Message"].Value = Language.Instance[
+                    "CannotVoteUnlessLoggedIn", 
+                    null, 
+                    "You cannot vote unless you're logged in. Please login first..."];
+                nodeMessage["Duration"].Value = 2000;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowInformationMessage",
+                    nodeMessage);
+            }
+            else
+            {
+                Answer a = Answer.SelectByID(id);
+                Answer.Vote old = a.Voters.Find(
+                    delegate(Answer.Vote idx)
+                    {
+                        return user == idx.User;
+                    });
+                if (old != null)
+                {
+                    a.Votes -= old.Points;
+                }
+                else
+                {
+                    old = new Answer.Vote();
+                    old.User = user;
+                    a.Voters.Add(old);
+                }
+                old.Points = points;
+                a.Votes += points;
+                a.Save();
+            }
+            Question q = Question.SelectByID(e.Params["QuestionID"].Get<int>());
+            Node node = new Node();
+            node["QuestionID"].Value = id;
+            node["IsVote"].Value = true;
+            List<Answer> answers = new List<Answer>(q.Answers);
+            answers.Sort(
+                delegate(Answer left, Answer right)
+                {
+                    return right.Votes.CompareTo(left.Votes);
+                });
+            foreach (Answer idx in answers)
+            {
+                node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
+                node["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
+                node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+                node["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                node["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
+            }
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "UpdateStackedAnswers",
+                node);
+        }
+
         [ActiveEvent(Name = "RequestSavingOfStackedAnswer")]
         protected void RequestSavingOfStackedAnswer(object sender, ActiveEventArgs e)
         {
@@ -75,13 +143,21 @@ namespace StackedController
             // Updating answers on form
             Node node = new Node();
             node["QuestionID"].Value = id;
-            foreach (Answer idx in q.Answers)
+            List<Answer> answers = new List<Answer>(q.Answers);
+            answers.Sort(
+                delegate(Answer left, Answer right)
+                {
+                    return right.Votes.CompareTo(left.Votes);
+                });
+            foreach (Answer idx in answers)
             {
                 node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
                 node["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
                 node["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
                 node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+                node["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                node["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
@@ -127,13 +203,22 @@ Thank you for your answer"];
         {
             Node node = new Node();
             node["AddToExistingCollection"].Value = true;
-            foreach (Answer idx in q.Answers)
+            node["ModuleSettings"]["QuestionID"].Value = q.ID;
+            List<Answer> answers = new List<Answer>(q.Answers);
+            answers.Sort(
+                delegate(Answer left, Answer right)
+                {
+                    return right.Votes.CompareTo(left.Votes);
+                });
+            foreach (Answer idx in answers)
             {
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewAnswers",
