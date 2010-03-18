@@ -29,11 +29,23 @@
 	background-color:#c8e6f7;
 }
 
+span.question:hover
+{
+	background-color:#d6f4ff;
+}
+
+.qNoAnswers
+{
+	display:block;
+	float:left;
+	width:70px;
+}
+
 .qDate
 {
 	display:block;
 	float:left;
-	width:120px;
+	width:110px;
 }
 
 .qHeader
@@ -41,6 +53,12 @@
 	display:block;
 	float:left;
 	width:350px;
+	font-weight:bold;
+}
+
+.headerStacked
+{
+	font-weight:bold;
 }
 
 .user
@@ -76,6 +94,23 @@
         <asp:Repeater 
             runat="server" 
             ID="rep">
+            <HeaderTemplate>
+                <span 
+                    class="question">
+                    <span class="qNoAnswers headerStacked">
+                        <%=LanguageRecords.Language.Instance["Answers", null, "Answers"]%>
+                    </span>
+                    <span class="qDate headerStacked">
+                        <%=LanguageRecords.Language.Instance["Started", null, "Started"]%>
+                    </span>
+                    <span class="qDate headerStacked">
+                        <%=LanguageRecords.Language.Instance["Activity", null, "Activity"]%>
+                    </span>
+                    <span class="qHeader headerStacked">
+                        <%=LanguageRecords.Language.Instance["Header", null, "Header"]%>
+                    </span>
+                </span>
+            </HeaderTemplate>
             <ItemTemplate>
                 <ra:Panel 
                     style="clear:both;position:relative;"
@@ -83,8 +118,14 @@
                     <a 
                         class="question" 
                         href='<%#Eval("[URL].Value") %>'>
+                        <span class="qNoAnswers">
+                            <strong><%#Eval("[Answers].Value")%></strong>
+                        </span>
                         <span class="qDate">
-                            <%#HelperGlobals.DateFormatter.FormatDate((DateTime)Eval("[Asked].Value")) %>
+                            <%#HelperGlobals.DateFormatter.FormatDate((DateTime)Eval("[Asked].Value"))%>
+                        </span>
+                        <span class="qDate">
+                            <%#HelperGlobals.DateFormatter.FormatDate((DateTime)Eval("[LastAnswer].Value"))%>
                         </span>
                         <span class="qHeader">
                             <%#Eval("[Header].Value") %>
