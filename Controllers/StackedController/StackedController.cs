@@ -94,6 +94,8 @@ namespace StackedController
                 }
                 old.Points = points;
                 a.Votes += points;
+                a.Author.Score += (points * 2);
+                a.Author.Save();
                 a.Save();
             }
             Question q = Question.SelectByID(e.Params["QuestionID"].Get<int>());
