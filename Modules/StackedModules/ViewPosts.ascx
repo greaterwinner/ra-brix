@@ -79,14 +79,25 @@ span.question:hover
 }
 </style>
 
-<div style="padding:5px;position:relative;">
+<ra:Panel
+    runat="server" 
+    DefaultWidget="searchBtn"
+    style="padding:5px;position:relative;margin-bottom:45px;">
     <h1><%=LanguageRecords.Language.Instance["QuestionsAndAnswer", null, "Questions and Answers"] %></h1>
-    <ra:ExtButton 
+    <ra:TextBox 
         runat="server" 
-        id="ask" 
-        style="position:absolute;top:5px;right:5px;"
-        OnClick="ask_Click"
-        Text='<%#LanguageRecords.Language.Instance["Ask", null, "Ask..."] %>' />
+        CssClass="filter"
+        AccessKey="F"
+        style="opacity:0.3;top:5px;right:5px;position:absolute;"
+        id="filter">
+        <ra:BehaviorUnveiler 
+            runat="server" />
+    </ra:TextBox>
+    <ra:Button 
+        runat="server" 
+        OnClick="searchBtn_Click"
+        style="margin-left:-2000px;position:absolute;top:1px;"
+        id="searchBtn" />
     <ra:Panel 
         runat="server" 
         CssClass="questions"
@@ -147,4 +158,11 @@ span.question:hover
             </ItemTemplate>
         </asp:Repeater>
     </ra:Panel>
-</div>
+    <ra:ExtButton 
+        runat="server" 
+        id="ask" 
+        style="position:absolute;bottom:5px;right:5px;margin-bottom:-45px;"
+        OnClick="ask_Click"
+        Text='<%#LanguageRecords.Language.Instance["Ask", null, "Ask..."] %>' />
+</ra:Panel>
+
