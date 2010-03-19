@@ -130,6 +130,31 @@ namespace StackedController
                 node);
         }
 
+        [ActiveEvent(Name = "FilterStackedQuestions")]
+        protected void FilterStackedQuestions(object sender, ActiveEventArgs e)
+        {
+            // Viewing all questions...
+            string filter = e.Params["Filter"].Get<string>();
+            filter = "%" + filter + "%";
+            foreach (Question idx in 
+                Question.Select(
+                    Criteria.Sort("LastAnswer", false),
+                    Criteria.Like("Header", filter)))
+            {
+                e.Params["Questions"]["Q" + idx.ID]["Header"].Value = idx.Header;
+                e.Params["Questions"]["Q" + idx.ID]["Body"].Value = idx.Body;
+                e.Params["Questions"]["Q" + idx.ID]["URL"].Value = idx.URL;
+                e.Params["Questions"]["Q" + idx.ID]["Username"].Value = idx.Author.Username;
+                e.Params["Questions"]["Q" + idx.ID]["Email"].Value = idx.Author.Email;
+                e.Params["Questions"]["Q" + idx.ID]["Score"].Value = idx.Author.Score;
+                e.Params["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
+                e.Params["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
+                e.Params["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                if (e.Params["Questions"].Count >= 50)
+                    break;
+            }
+        }
+
         [ActiveEvent(Name = "RequestSavingOfStackedAnswer")]
         protected void RequestSavingOfStackedAnswer(object sender, ActiveEventArgs e)
         {

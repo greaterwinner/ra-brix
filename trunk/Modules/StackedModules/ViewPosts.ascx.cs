@@ -16,6 +16,7 @@ using System.Text;
 using System.Security.Cryptography;
 using HelperGlobals;
 using System.Configuration;
+using Ra.Effects;
 
 namespace StackedModules
 {
@@ -24,6 +25,8 @@ namespace StackedModules
     {
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::Ra.Extensions.Widgets.ExtButton ask;
+        protected global::Ra.Widgets.TextBox filter;
+        protected global::Ra.Widgets.Panel repWrp;
 
         public void InitialLoading(Node node)
         {
@@ -58,6 +61,23 @@ namespace StackedModules
             return ApplicationRoot.Root +
                 "authors/" + username.Replace(".", "--") +
                 ConfigurationManager.AppSettings["DefaultPageExtension"];
+        }
+
+        protected void searchBtn_Click(object sender, EventArgs e)
+        {
+            Node node = new Node();
+            node["Filter"].Value = filter.Text;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "FilterStackedQuestions",
+                node);
+            rep.DataSource = node["Questions"];
+            rep.DataBind();
+            repWrp.ReRender();
+            filter.Focus();
+            filter.Select();
+            new EffectHighlight(repWrp, 500)
+                .Render();
         }
 
         protected void ask_Click(object sender, EventArgs e)

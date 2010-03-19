@@ -29,6 +29,11 @@ namespace StackedRecords
             public int Points { get; set; }
         }
 
+        public Answer()
+        {
+            Voters = new LazyList<Vote>();
+        }
+
         [ActiveField]
         public string Body { get; set; }
 
