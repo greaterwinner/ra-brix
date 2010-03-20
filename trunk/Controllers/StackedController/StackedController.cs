@@ -363,6 +363,7 @@ Thank you for your answer"];
                 if (node.Count >= 50)
                     break;
             }
+            node["ModuleSettings"]["HideAskButton"].Value = Users.LoggedInUserName == null;
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewPosts",
                 "dynMid",
