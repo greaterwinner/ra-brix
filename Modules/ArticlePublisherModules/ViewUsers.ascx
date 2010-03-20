@@ -6,6 +6,24 @@
     AutoEventWireup="true" 
     Inherits="ArticlePublisherModules.ViewUsers" %>
 
+<style type="text/css">
+.user
+{
+	border:solid 1px #999;
+	padding:5px;
+	background-color:#d0edff;
+	display:block;
+	float:left;
+	margin:10px;
+	overflow:auto;
+}
+
+.user:hover
+{
+	background-color:#c8e6f7;
+}
+</style>
+
 <ra:Label 
     runat="server" 
     Tag="h1"
@@ -15,23 +33,20 @@
     runat="server" 
     ID="rep">
     <ItemTemplate>
-        <div class="userDiv">
+        <a href='<%#Eval("[URL].Value") %>' class="user">
             <img 
-                style="width:64px;height:64px;float:left;margin-right:5px;overflow:hidden;"
-                src='<%#Eval("[ImageSrc].Value") %>' 
-                alt='<%#Eval("[Name].Value") %>' />
-            <strong style="display:block;">
+                runat="server" 
+                id="gravatar" 
+                src='<%#Eval("[ImageSrc].Value") %>'
+                alt='<%#Eval("[Name].Value") %>'
+                style="float:left;margin-right:15px;width:64px;height:64px;overflow:hidden;" />
+            <div style="float:right;">
                 <%#Eval("[Name].Value") %>
-            </strong>
-            <em style="display:block;">
+                <br />
                 <%#LanguageRecords.Language.Instance["Score", null, "Score"] %>: 
                 <%#Eval("[Score].Value") %>
-            </em>
-            <a 
-                href='<%#Eval("[URL].Value") %>'>
-                <%#LanguageRecords.Language.Instance["ReadArticles", null, "Read articles..."] %>
-            </a>
-        </div>
+            </div>
+        </a>
     </ItemTemplate>
 </asp:Repeater>
 <br style="clear:both;" />

@@ -1153,21 +1153,27 @@ The comment was;
             Node node = new Node();
 
             // Showing bookmarks module
-            if (Users.LoggedInUserName != null)
+            if (string.IsNullOrEmpty(userNameFilter))
             {
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.Favorites",
-                    "dynMid");
-                node["AddToExistingCollection"].Value = true;
+                if (Users.LoggedInUserName != null)
+                {
+                    ActiveEvents.Instance.RaiseLoadControl(
+                        "ArticlePublisherModules.Favorites",
+                        "dynMid");
+                    node["AddToExistingCollection"].Value = true;
+                }
             }
 
             // Showing search
-            if (filter != null)
-                node["ModuleSettings"]["Filter"].Value = filter;
-            ActiveEvents.Instance.RaiseLoadControl(
-                "ArticlePublisherModules.SearchArticles",
-                "dynMid",
-                node);
+            if (string.IsNullOrEmpty(userNameFilter))
+            {
+                if (filter != null)
+                    node["ModuleSettings"]["Filter"].Value = filter;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.SearchArticles",
+                    "dynMid",
+                    node);
+            }
 
             // Showing landing page header
             if (string.IsNullOrEmpty(userNameFilter))
@@ -1274,11 +1280,14 @@ The comment was;
                     }
                 }
             }
-            node["AddToExistingCollection"].Value = true;
-            ActiveEvents.Instance.RaiseLoadControl(
-                "ArticlePublisherModules.LandingPage",
-                "dynMid",
-                node);
+            if (node["ModuleSettings"]["Articles"].Count > 0)
+            {
+                node["AddToExistingCollection"].Value = true;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "ArticlePublisherModules.LandingPage",
+                    "dynMid",
+                    node);
+            }
 
             // Then getting the articles bookmarked by user (if user is not null)
             if (!string.IsNullOrEmpty(userNameFilter))
@@ -1290,39 +1299,59 @@ The comment was;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Article.Header;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Article.Ingress;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Article.Body;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.Article.IconImage;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.Article.MainImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = ApplicationRoot.Root + idx.Article.IconImage;
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = ApplicationRoot.Root + idx.Article.MainImage;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Article.Author == null ? "unknown" : idx.Article.Author.Username;
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Article.Published;
-                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = ApplicationRoot.Root + idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                     node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.Article.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
                     idxNo += 1;
                 }
-                node["ModuleSettings"]["Header"].Value =
-                    string.Format(Language.Instance["BookmarkedByUser", null, "Bookmarked by {0}"],
-                        userNameFilter);
-                node["AddToExistingCollection"].Value = true;
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ArticlePublisherModules.LandingPage",
-                    "dynMid",
-                    node);
+                if (node["ModuleSettings"]["Articles"].Count > 0)
+                {
+                    node["ModuleSettings"]["Header"].Value =
+                        string.Format(Language.Instance["BookmarkedByUser", null, "Bookmarked by {0}"],
+                            userNameFilter);
+                    node["AddToExistingCollection"].Value = true;
+                    ActiveEvents.Instance.RaiseLoadControl(
+                        "ArticlePublisherModules.LandingPage",
+                        "dynMid",
+                        node);
+                }
             }
-
 
             // Then showing latest comments...
             if (Settings.Instance["UseForumsForArticles"] == "True")
             {
+                bool shouldShow = true;
                 node = new Node();
                 if (!string.IsNullOrEmpty(userNameFilter))
                 {
                     node["ModuleSettings"]["Username"].Value = userNameFilter;
+                    shouldShow = ForumPost.CountWhere(Criteria.Eq("RegisteredUser.Username", userNameFilter)) > 0;
                 }
-                node["AddToExistingCollection"].Value = true;
-                if (filter != null)
-                    node["ModuleSettings"]["Filter"].Value = filter;
-                ActiveEvents.Instance.RaiseLoadControl(
-                    "ForumModules.ShowPostsFromUser",
-                    "dynMid",
+                else
+                {
+                    shouldShow = ForumPost.CountWhere() > 0;
+                }
+                if (shouldShow)
+                {
+                    node["AddToExistingCollection"].Value = true;
+                    if (filter != null)
+                        node["ModuleSettings"]["Filter"].Value = filter;
+                    ActiveEvents.Instance.RaiseLoadControl(
+                        "ForumModules.ShowPostsFromUser",
+                        "dynMid",
+                        node);
+                }
+            }
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                node = new Node();
+                node["Username"].Value = userNameFilter;
+                ActiveEvents.Instance.RaiseActiveEvent(
+                    this,
+                    "ShowArticlesUserDetailsFooter",
                     node);
             }
         }

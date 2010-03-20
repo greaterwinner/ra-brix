@@ -88,10 +88,6 @@
 
     <add key="LoginMaxVisibility" value="True" />
 
-    <add key="TwitterUsername" value="LightBringerOrg" />
-
-    <add key="TwitterPassword" value="8pr4ms" />
-
     <add key="UseChromeFrame" value="True" />
 
     <add key="RSSTitleText" value="RSS Feed from TheLightBringer.org" />
