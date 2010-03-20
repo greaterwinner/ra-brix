@@ -37,7 +37,7 @@ namespace StackedModules
                     rep.DataSource = node["Questions"];
                     rep.DataBind();
                     ask.DataBind();
-                    if (node["Header"] == null)
+                    if (node["Header"].Value == null)
                     {
                         header.InnerHtml = Language.Instance["QuestionsAndAnswer", null, "Questions and Answers"];
                     }
