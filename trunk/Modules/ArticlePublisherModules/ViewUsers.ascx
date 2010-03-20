@@ -16,6 +16,7 @@
 	float:left;
 	margin:10px;
 	overflow:auto;
+	min-width:250px;
 }
 
 .user:hover
@@ -27,11 +28,18 @@
 <ra:Label 
     runat="server" 
     Tag="h1"
+    style="display:table;margin-left:auto;margin-right:auto;"
     id="header" />
 
 <asp:Repeater 
     runat="server" 
     ID="rep">
+    <HeaderTemplate>
+        <div style="display:table;margin-left:auto;margin-right:auto;">
+    </HeaderTemplate>
+    <FooterTemplate>
+        </div>
+    </FooterTemplate>
     <ItemTemplate>
         <a href='<%#Eval("[URL].Value") %>' class="user">
             <img 
@@ -40,7 +48,7 @@
                 src='<%#Eval("[ImageSrc].Value") %>'
                 alt='<%#Eval("[Name].Value") %>'
                 style="float:left;margin-right:15px;width:64px;height:64px;overflow:hidden;" />
-            <div style="float:right;">
+            <div style="float:left;">
                 <%#Eval("[Name].Value") %>
                 <br />
                 <%#LanguageRecords.Language.Instance["Score", null, "Score"] %>: 

@@ -151,11 +151,10 @@ namespace StackedController
         protected void FilterStackedQuestions(object sender, ActiveEventArgs e)
         {
             // Viewing all questions...
-            string filter = e.Params["Filter"].Get<string>();
-            filter = "%" + filter + "%";
             List<Criteria> crits = new List<Criteria>(new Criteria[] {
-                Criteria.Sort("LastAnswer", false),
-                Criteria.Like("Header", filter)});
+                Criteria.Sort("LastAnswer", false)});
+            crits.AddRange(DataHelper.CreateSearchFilter("Header", e.Params["Filter"].Get<string>()));
+
             if (e.Params["Username"].Value != null)
                 crits.Add(Criteria.Eq("Author.Username", e.Params["Username"].Get<string>()));
             foreach (Question idx in 
