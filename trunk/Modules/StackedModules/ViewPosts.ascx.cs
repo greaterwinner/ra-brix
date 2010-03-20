@@ -23,6 +23,7 @@ namespace StackedModules
     [ActiveModule]
     public class ViewPosts : System.Web.UI.UserControl, IModule
     {
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::Ra.Extensions.Widgets.ExtButton ask;
         protected global::Ra.Widgets.TextBox filter;
@@ -36,7 +37,26 @@ namespace StackedModules
                     rep.DataSource = node["Questions"];
                     rep.DataBind();
                     ask.DataBind();
+                    if (node["Header"] == null)
+                    {
+                        header.InnerHtml = Language.Instance["QuestionsAndAnswer", null, "Questions and Answers"];
+                    }
+                    else
+                    {
+                        header.InnerHtml = node["Header"].Get<string>();
+                    }
+                    if (node["HideAskButton"].Value != null && node["HideAskButton"].Get<bool>())
+                    {
+                        ask.Visible = false;
+                    }
+                    UsernameFilter = node["Username"].Value as string;
                 };
+        }
+
+        private string UsernameFilter
+        {
+            get { return ViewState["UsernameFilter"] as string; }
+            set { ViewState["UsernameFilter"] = value; }
         }
 
         protected string GetGravatar(object emailObj)
@@ -67,6 +87,7 @@ namespace StackedModules
         {
             Node node = new Node();
             node["Filter"].Value = filter.Text;
+            node["Username"].Value = UsernameFilter;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "FilterStackedQuestions",

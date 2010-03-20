@@ -77,13 +77,19 @@ span.question:hover
 {
 	background-color:#c8e6f7;
 }
+
+.questionsHeader
+{
+	margin-top:-15px;
+	padding:10px 25px 15px 25px;
+}
 </style>
 
 <ra:Panel
     runat="server" 
     DefaultWidget="searchBtn"
     style="padding:5px;position:relative;margin-bottom:45px;">
-    <h1><%=LanguageRecords.Language.Instance["QuestionsAndAnswer", null, "Questions and Answers"] %></h1>
+    <h1 runat="server" id="header" />
     <ra:TextBox 
         runat="server" 
         CssClass="filter"
@@ -107,7 +113,7 @@ span.question:hover
             ID="rep">
             <HeaderTemplate>
                 <span 
-                    class="question">
+                    class="question questionsHeader">
                     <span class="qNoAnswers headerStacked">
                         <%=LanguageRecords.Language.Instance["Answers", null, "Answers"]%>
                     </span>

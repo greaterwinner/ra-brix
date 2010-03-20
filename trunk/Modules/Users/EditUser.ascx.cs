@@ -44,7 +44,14 @@ namespace UsersModules
             GetGravatar();
             phone.Text = node["Phone"].Get<string>();
             roleEditing.Visible = node["AllowRoleEditing"].Get<bool>();
-            editor.Text = node["Biography"].Get<string>();
+            if (node["Biography"].Value == null)
+            {
+                editor.Text = Language.Instance["TypeInYourProfileHere", null, "<p>Type in your biography here...</p>"];
+            }
+            else
+            {
+                editor.Text = node["Biography"].Get<string>();
+            }
 
             // Bindig roles
             Session["UsersModules.EditUser.Roles"] = node["Roles"];

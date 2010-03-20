@@ -60,7 +60,9 @@ namespace StackedController
         {
             int id = e.Params["ID"].Get<int>();
             int points = e.Params["Points"].Get<int>();
-            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            User user = null;
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             if(user == null)
             {
                 Node nodeMessage = new Node();
@@ -73,10 +75,25 @@ namespace StackedController
                     this,
                     "ShowInformationMessage",
                     nodeMessage);
+                return;
             }
             else
             {
                 Answer a = Answer.SelectByID(id);
+                if (a.Author == user)
+                {
+                    Node nodeMessage = new Node();
+                    nodeMessage["Message"].Value = Language.Instance[
+                        "CannotVoteOwnAnswers",
+                        null,
+                        "You cannot vote for your own answers..."];
+                    nodeMessage["Duration"].Value = 2000;
+                    ActiveEvents.Instance.RaiseActiveEvent(
+                        this,
+                        "ShowInformationMessage",
+                        nodeMessage);
+                    return;
+                }
                 Answer.Vote old = a.Voters.Find(
                     delegate(Answer.Vote idx)
                     {
@@ -136,10 +153,13 @@ namespace StackedController
             // Viewing all questions...
             string filter = e.Params["Filter"].Get<string>();
             filter = "%" + filter + "%";
+            List<Criteria> crits = new List<Criteria>(new Criteria[] {
+                Criteria.Sort("LastAnswer", false),
+                Criteria.Like("Header", filter)});
+            if (e.Params["Username"].Value != null)
+                crits.Add(Criteria.Eq("Author.Username", e.Params["Username"].Get<string>()));
             foreach (Question idx in 
-                Question.Select(
-                    Criteria.Sort("LastAnswer", false),
-                    Criteria.Like("Header", filter)))
+                Question.Select(crits.ToArray()))
             {
                 e.Params["Questions"]["Q" + idx.ID]["Header"].Value = idx.Header;
                 e.Params["Questions"]["Q" + idx.ID]["Body"].Value = idx.Body;
@@ -152,6 +172,41 @@ namespace StackedController
                 e.Params["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
                 if (e.Params["Questions"].Count >= 50)
                     break;
+            }
+        }
+
+        [ActiveEvent(Name = "ShowArticlesUserDetailsFooter")]
+        protected void ShowArticlesUserDetailsFooter(object sender, ActiveEventArgs e)
+        {
+            string username = e.Params["Username"].Get<string>();
+            Node node = new Node();
+            foreach (Question idx in Question.Select(
+                Criteria.Sort("LastAnswer", false),
+                Criteria.Eq("Author.Username", username)))
+            {
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Header"].Value = idx.Header;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Body"].Value = idx.Body;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["URL"].Value = idx.URL;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Score"].Value = idx.Author.Score;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                if (node.Count >= 50)
+                    break;
+            }
+            if (node["ModuleSettings"]["Questions"].Count > 0)
+            {
+                node["AddToExistingCollection"].Value = true;
+                node["ModuleSettings"]["Header"].Value =
+                    Language.Instance["QeustionsFrom", null, "Questions from "] + username;
+                node["ModuleSettings"]["HideAskButton"].Value = true;
+                node["ModuleSettings"]["Username"].Value = username;
+                ActiveEvents.Instance.RaiseLoadControl(
+                    "StackedModules.ViewPosts",
+                    "dynMid",
+                    node);
             }
         }
 
@@ -250,7 +305,9 @@ Thank you for your answer"];
                 {
                     return right.Votes.CompareTo(left.Votes);
                 });
-            User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+            User user = null;
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
             foreach (Answer idx in answers)
             {
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
@@ -259,12 +316,17 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
-                Answer.Vote xVote = idx.Voters.Find(
-                    delegate(Answer.Vote idxVote)
-                    {
-                        return idxVote.User == user;
-                    });
-                node["ModuleSettings"]["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
+                if (user != null)
+                {
+                    Answer.Vote xVote = idx.Voters.Find(
+                        delegate(Answer.Vote idxVote)
+                        {
+                            return idxVote.User == user;
+                        });
+                    node["ModuleSettings"]["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
+                }
+                else
+                    node["ModuleSettings"]["Answers"]["A" + idx.ID]["CurrentVote"].Value = 0;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
             }
             ActiveEvents.Instance.RaiseLoadControl(
