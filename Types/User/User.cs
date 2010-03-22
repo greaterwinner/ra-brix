@@ -76,6 +76,13 @@ namespace UserRecords
                     throw new ApplicationException("Username; " + Username + " is already taken by another user...");
                 }
             }
+            if (Score <= -1000)
+            {
+                if (!InRole("Blocked"))
+                {
+                    Roles.Add(Role.SelectFirst(Criteria.Eq("Name", "Blocked")));
+                }
+            }
             base.Save();
         }
     }

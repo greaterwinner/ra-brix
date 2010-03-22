@@ -28,13 +28,33 @@ namespace StackedModules
         protected global::System.Web.UI.WebControls.Repeater rep;
         protected global::Ra.Widgets.Panel repWrp;
 
+        protected bool CanDelete
+        {
+            get { return (bool)ViewState["CanDelete"]; }
+            set { ViewState["CanDelete"] = value; }
+        }
+
+        protected void DeletePost(object sender, EventArgs e)
+        {
+            LinkButton lb = sender as LinkButton;
+            int id = int.Parse(lb.Xtra);
+            Node node = new Node();
+            node["ID"].Value = id;
+            node["QuestionID"].Value = QuestionID;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DeleteStackedAnswer",
+                node);
+        }
+
         [ActiveEvent(Name = "UpdateStackedAnswers")]
         protected void UpdateStackedAnswers(object sender, ActiveEventArgs e)
         {
             rep.DataSource = e.Params["Answers"];
             rep.DataBind();
             repWrp.ReRender();
-            if (e.Params["IsVote"].Value != null && e.Params["IsVote"].Get<bool>())
+            if (e.Params["IsVote"].Value != null && 
+                e.Params["IsVote"].Get<bool>())
             {
                 // This is a "voting update", which means we can run 
                 // some fancy animations to make it all look better ...
@@ -148,6 +168,7 @@ namespace StackedModules
             Load +=
                 delegate
                 {
+                    CanDelete = node["CanDelete"].Get<bool>();
                     QuestionID = node["QuestionID"].Get<int>();
                     rep.DataSource = node["Answers"];
                     rep.DataBind();

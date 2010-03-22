@@ -22,6 +22,12 @@
 	position:relative;
 	overflow:auto;
 	display:block;
+	font-weight:bold;
+}
+
+.question:visited
+{
+	font-weight:normal;
 }
 
 .question:hover
@@ -53,7 +59,6 @@ span.question:hover
 	display:block;
 	float:left;
 	width:350px;
-	font-weight:bold;
 }
 
 .headerStacked
@@ -67,7 +72,7 @@ span.question:hover
 	position:absolute;
 	margin-top:-25px;
 	top:5px;
-	right:15px;
+	right:25px;
 	border:solid 1px #999;
 	padding:5px;
 	background-color:#d0edff;
@@ -82,6 +87,24 @@ span.question:hover
 {
 	margin-top:-15px;
 	padding:10px 25px 15px 25px;
+}
+
+.deleteQuestionBtn
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	margin-top:-12px;
+	margin-right:-6px;
+	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1248px;
+	width:16px;
+	height:16px;
+	z-index:500;
+}
+
+.deleteQuestionBtn:hover
+{
+	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1264px;
 }
 </style>
 
@@ -132,6 +155,14 @@ span.question:hover
                 <ra:Panel 
                     style="clear:both;position:relative;"
                     runat="server">
+                    <ra:LinkButton 
+                        runat="server" 
+                        OnClick="DeletePost"
+                        Text="&nbsp;"
+                        Xtra='<%#Eval("[ID].Value")%>'
+                        ToolTip='<%#LanguageRecords.Language.Instance["DeleteQuestion", null, "Delete question"] %>'
+                        CssClass="deleteQuestionBtn"
+                        Visible='<%#CanDelete %>' />
                     <a 
                         class="question" 
                         href='<%#Eval("[URL].Value") %>'>

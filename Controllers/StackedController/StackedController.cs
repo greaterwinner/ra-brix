@@ -151,14 +151,18 @@ namespace StackedController
         protected void FilterStackedQuestions(object sender, ActiveEventArgs e)
         {
             // Viewing all questions...
-            List<Criteria> crits = new List<Criteria>(new Criteria[] {
-                Criteria.Sort("LastAnswer", false)});
+            List<Criteria> crits = new List<Criteria>();
+            crits.Add(Criteria.Sort("LastAnswer", false));
             crits.AddRange(DataHelper.CreateSearchFilter("Header", e.Params["Filter"].Get<string>()));
 
             if (e.Params["Username"].Value != null)
                 crits.Add(Criteria.Eq("Author.Username", e.Params["Username"].Get<string>()));
-            foreach (Question idx in 
-                Question.Select(crits.ToArray()))
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                e.Params["CanDelete"].Value = user.InRole("Administrator");
+            }
+            foreach (Question idx in Question.Select(crits.ToArray()))
             {
                 e.Params["Questions"]["Q" + idx.ID]["Header"].Value = idx.Header;
                 e.Params["Questions"]["Q" + idx.ID]["Body"].Value = idx.Body;
@@ -169,6 +173,7 @@ namespace StackedController
                 e.Params["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 e.Params["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 e.Params["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                e.Params["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (e.Params["Questions"].Count >= 50)
                     break;
             }
@@ -192,14 +197,20 @@ namespace StackedController
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (node.Count >= 50)
                     break;
             }
             if (node["ModuleSettings"]["Questions"].Count > 0)
             {
+                if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                {
+                    User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                    e.Params["ModuleSettings"]["CanDelete"].Value = user.InRole("Administrator");
+                }
                 node["AddToExistingCollection"].Value = true;
                 node["ModuleSettings"]["Header"].Value =
-                    Language.Instance["QeustionsFrom", null, "Questions from "] + username;
+                    Language.Instance["QuestionsFrom", null, "Questions from "] + username;
                 node["ModuleSettings"]["HideAskButton"].Value = true;
                 node["ModuleSettings"]["Username"].Value = username;
                 ActiveEvents.Instance.RaiseLoadControl(
@@ -315,6 +326,7 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                node["ModuleSettings"]["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
                 if (user != null)
                 {
                     Answer.Vote xVote = idx.Voters.Find(
@@ -327,6 +339,17 @@ Thank you for your answer"];
                 else
                     node["ModuleSettings"]["Answers"]["A" + idx.ID]["CurrentVote"].Value = 0;
                 node["ModuleSettings"]["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
+            }
+
+            // Defaulting to false on deletion...
+            node["ModuleSettings"]["CanDelete"].Value = false;
+            if (user != null)
+            {
+                if (user.InRole("Administrator"))
+                {
+                    // User *can* delete answers...
+                    node["ModuleSettings"]["CanDelete"].Value = true;
+                }
             }
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewAnswers",
@@ -360,13 +383,109 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (node.Count >= 50)
                     break;
+            }
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+            {
+                User user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+                node["ModuleSettings"]["CanDelete"].Value = user.InRole("Administrator");
             }
             node["ModuleSettings"]["HideAskButton"].Value = Users.LoggedInUserName == null;
             ActiveEvents.Instance.RaiseLoadControl(
                 "StackedModules.ViewPosts",
                 "dynMid",
+                node);
+        }
+
+        [ActiveEvent(Name = "DeleteStackedQuestion")]
+        protected void DeleteStackedQuestion(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["ID"].Get<int>();
+            Question q = Question.SelectByID(id);
+
+            // Penaltizing author of question...
+            q.Author.Score -= 50;
+            q.Author.Save();
+
+            // Deleting question
+            q.Delete();
+
+            // Showing information message...
+            Node nodeMessage = new Node();
+            nodeMessage["Message"].Value = Language.Instance[
+                "StackedQuestionWasDeleted",
+                null,
+                "The question was deleted. Notice that user posting questions was penaltized with -50 points."];
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
+
+            // For simplicity, we're just reloading the questions...
+            ShowQuestionsLandingPage();
+        }
+
+        [ActiveEvent(Name = "DeleteStackedAnswer")]
+        protected void DeleteStackedAnswer(object sender, ActiveEventArgs e)
+        {
+            int id = e.Params["ID"].Get<int>();
+            Answer a = Answer.SelectByID(id);
+
+            // Penaltizing author of answer...
+            a.Author.Score -= 50;
+            a.Author.Save();
+
+            // Deleting answer
+            a.Delete();
+
+            // Showing information message...
+            Node nodeMessage = new Node();
+            nodeMessage["Message"].Value = Language.Instance[
+                "StackedAnswerWasDeleted",
+                null,
+                "The answer was deleted. Notice that user posting the answer was penaltized with -50 points."];
+            nodeMessage["Duration"].Value = 2000;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "ShowInformationMessage",
+                nodeMessage);
+
+            User user = null;
+            if (!string.IsNullOrEmpty(Users.LoggedInUserName))
+                user = User.SelectFirst(Criteria.Eq("Username", Users.LoggedInUserName));
+
+            Question q = Question.SelectByID(e.Params["QuestionID"].Get<int>());
+            Node node = new Node();
+            node["QuestionID"].Value = id;
+            node["IsVote"].Value = true;
+            List<Answer> answers = new List<Answer>(q.Answers);
+            answers.Sort(
+                delegate(Answer left, Answer right)
+                {
+                    return right.Votes.CompareTo(left.Votes);
+                });
+            foreach (Answer idx in answers)
+            {
+                node["Answers"]["A" + idx.ID]["Body"].Value = idx.Body;
+                node["Answers"]["A" + idx.ID]["Username"].Value = idx.Author.Username;
+                node["Answers"]["A" + idx.ID]["Email"].Value = idx.Author.Email;
+                node["Answers"]["A" + idx.ID]["Score"].Value = idx.Author.Score;
+                node["Answers"]["A" + idx.ID]["Asked"].Value = idx.Asked;
+                node["Answers"]["A" + idx.ID]["Votes"].Value = idx.Votes;
+                Answer.Vote xVote = idx.Voters.Find(
+                    delegate(Answer.Vote idxVote)
+                    {
+                        return idxVote.User == user;
+                    });
+                node["Answers"]["A" + idx.ID]["CurrentVote"].Value = xVote == null ? 0 : xVote.Points;
+                node["Answers"]["A" + idx.ID]["ID"].Value = idx.ID;
+            }
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "UpdateStackedAnswers",
                 node);
         }
 
