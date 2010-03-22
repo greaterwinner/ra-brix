@@ -37,7 +37,7 @@ namespace StackedRecords
         [ActiveField(IsOwner = false)]
         public User Author { get; set; }
 
-        [ActiveField(IsOwner = false)]
+        [ActiveField]
         public LazyList<Answer> Answers { get; set; }
 
         public static Question FindArticle(string contentId)

@@ -17,6 +17,7 @@ using System.Security.Cryptography;
 using HelperGlobals;
 using System.Configuration;
 using Ra.Effects;
+using Ra.Widgets;
 
 namespace StackedModules
 {
@@ -29,11 +30,30 @@ namespace StackedModules
         protected global::Ra.Widgets.TextBox filter;
         protected global::Ra.Widgets.Panel repWrp;
 
+        protected bool CanDelete
+        {
+            get { return (bool)ViewState["CanDelete"]; }
+            set { ViewState["CanDelete"] = value; }
+        }
+
+        protected void DeletePost(object sender, EventArgs e)
+        {
+            LinkButton lb = sender as LinkButton;
+            int id = int.Parse(lb.Xtra);
+            Node node = new Node();
+            node["ID"].Value = id;
+            ActiveEvents.Instance.RaiseActiveEvent(
+                this,
+                "DeleteStackedQuestion",
+                node);
+        }
+
         public void InitialLoading(Node node)
         {
             Load +=
                 delegate
                 {
+                    CanDelete = node["CanDelete"].Get<bool>();
                     rep.DataSource = node["Questions"];
                     rep.DataBind();
                     ask.DataBind();

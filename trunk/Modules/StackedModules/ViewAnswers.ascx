@@ -113,6 +113,24 @@
 	font-size:18px;
 	font-weight:bold;
 }
+
+.deleteQuestionBtn
+{
+	position:absolute;
+	top:5px;
+	right:5px;
+	margin-top:-13px;
+	margin-right:-10px;
+	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1248px;
+	width:16px;
+	height:16px;
+	z-index:500;
+}
+
+.deleteQuestionBtn:hover
+{
+	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1264px;
+}
 </style>
 
 <ra:Panel 
@@ -123,6 +141,14 @@
         ID="rep">
         <ItemTemplate>
             <div class="answer">
+                <ra:LinkButton 
+                    runat="server" 
+                    OnClick="DeletePost"
+                    Text="&nbsp;"
+                    Xtra='<%#Eval("[ID].Value")%>'
+                    ToolTip='<%#LanguageRecords.Language.Instance["DeleteQuestion", null, "Delete answer"] %>'
+                    CssClass="deleteQuestionBtn"
+                    Visible='<%#CanDelete %>' />
                 <a href='<%#GetUsernameLink(Eval("[Username].Value")) %>' class="user">
                     <img 
                         runat="server" 
