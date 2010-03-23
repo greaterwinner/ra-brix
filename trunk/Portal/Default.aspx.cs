@@ -15,6 +15,9 @@ using System.Web.UI;
 using Ra.Brix.Loader;
 using SettingsRecords;
 using UserSettingsRecords;
+using Ra.Brix.Data;
+using System.Text;
+using System.IO;
 
 namespace Ra.Brix.Portal
 {
@@ -111,6 +114,27 @@ namespace Ra.Brix.Portal
             string defaultControl = ConfigurationManager.AppSettings["PortalViewDriver"];
             Control ctrl = PluginLoader.Instance.LoadControl(defaultControl);
             Form.Controls.Add(ctrl);
+        }
+
+        private PageStatePersister _pageStatePersister;
+        protected override PageStatePersister PageStatePersister
+        {
+            get
+            {
+                if (Ra.Brix.Data.Internal.Adapter.Instance is IPersistViewState)
+                {
+                    if (Settings.Instance.Get<bool>("StoreViewStateInDataBaseIfPossible", true))
+                    {
+                        if (_pageStatePersister == null)
+                            _pageStatePersister = new RaBrixPageStatePersister(this);
+                        return _pageStatePersister;
+                    }
+                    else
+                        return base.PageStatePersister;
+                }
+                else
+                    return base.PageStatePersister;
+            }
         }
     }
 }

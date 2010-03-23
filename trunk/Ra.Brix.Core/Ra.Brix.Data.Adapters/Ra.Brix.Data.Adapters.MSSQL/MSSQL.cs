@@ -16,6 +16,7 @@ using Ra.Brix.Types;
 using System.Collections;
 using System.IO;
 using Ra.Brix.Data.Internal;
+using System.Text;
 
 /**
  * Namespace for Microsoft SQL Server Database Adapters in Ra-Brix
@@ -27,7 +28,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
      * Ra-Brix. Contains all MS SQL specific logic needed to use Ra-Brix 
      * together with MS SQL 2005 and higher.
      */
-    public class MSSQL : StdSQLDataAdapter
+    public class MSSQL : StdSQLDataAdapter, IPersistViewState
     {
         private SqlConnection _connection;
         private static bool _hasInitialised;
@@ -589,6 +590,33 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         public override void Close()
         {
             _connection.Close();
+        }
+
+        public void Save(string sessionId, string pageUrl, string content)
+        {
+            // Deleting *OLD* ViewState from table...
+            SqlCommand sql = new SqlCommand("delete from dbo.ViewStateStorage where ID like '" + sessionId + "|%'", _connection);
+            sql.ExecuteNonQuery();
+
+            // Saving new value
+            string key = sessionId + "|" + pageUrl;
+            sql = new SqlCommand(
+                "insert into dbo.ViewStateStorage (ID, Content, Created) values (@id, @content, @created)",
+                _connection);
+            sql.Parameters.Add(new SqlParameter("@id", key));
+            sql.Parameters.Add(new SqlParameter("@content", content));
+            sql.Parameters.Add(new SqlParameter("@created", DateTime.Now));
+            sql.ExecuteNonQuery();
+        }
+
+        public string Load(string sessionId, string pageUrl)
+        {
+            // Retrieving ViewState
+            string key = sessionId + "|" + pageUrl;
+            SqlCommand sql = new SqlCommand("select content from dbo.ViewStateStorage where ID=@id", _connection);
+            sql.Parameters.Add(new SqlParameter("@id", key));
+            string retVal = sql.ExecuteScalar() as string;
+            return retVal;
         }
     }
 }
