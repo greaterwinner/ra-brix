@@ -66,4 +66,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\PermanentRedirection"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\PermanentRedirection"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
