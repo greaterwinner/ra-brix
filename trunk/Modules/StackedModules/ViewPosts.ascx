@@ -17,12 +17,16 @@
 {
     margin:35px 5px 5px 0;
     padding:25px 25px 25px 25px;
-    border:dashed 1px #999;
+    border:solid 1px #999;
 	background-color:#d6f4ff;
 	position:relative;
 	overflow:auto;
 	display:block;
 	font-weight:bold;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .question:visited
@@ -72,10 +76,14 @@ span.question:hover
 	position:absolute;
 	margin-top:-25px;
 	top:5px;
-	right:25px;
+	right:35px;
 	border:solid 1px #999;
 	padding:5px;
 	background-color:#d0edff;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .user:hover
@@ -94,12 +102,16 @@ span.question:hover
 	position:absolute;
 	top:5px;
 	right:5px;
-	margin-top:-12px;
-	margin-right:-6px;
+	margin-top:0;
+	margin-right:5px;
 	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1248px;
 	width:16px;
 	height:16px;
 	z-index:500;
+	-webkit-box-shadow: 2px 2px 3px #777;
+	-moz-box-shadow: 2px 2px 3px #777;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
 }
 
 .deleteQuestionBtn:hover

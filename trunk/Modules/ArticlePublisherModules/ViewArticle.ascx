@@ -13,16 +13,6 @@
         id="header" 
         style="margin-bottom:25px;" />
 
-    <img 
-        runat="server" 
-        id="image" 
-        style="float:right;margin-left:15px;" />
-
-    <p 
-        runat="server" 
-        id="date" 
-        style="font-style:italic;color:#666;" />
-
     <p 
         runat="server" 
         id="ingress" 
@@ -30,8 +20,13 @@
 
     <div 
         runat="server" 
-        class="articleMainBody"
+        class='<%#GetArticleCssClass() %>'
         id="content" />
+
+    <p 
+        runat="server" 
+        id="date" 
+        style="font-style:italic;color:#666;" />
 
     <a 
         runat="server" 

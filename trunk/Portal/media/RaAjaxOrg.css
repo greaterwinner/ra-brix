@@ -1,11 +1,17 @@
 ﻿
 .headerLogoBg
 {
-	height:280px;
+	height:270px;
 	background:transparent url(ajax.png) no-repeat 0 0;
-	width:1024px;
+	width:1003px;
 	position:relative;
-	margin-bottom:12px;
+	margin-bottom:22px;
+	margin-top:15px;
+	margin-left:15px;
+	-webkit-box-shadow: 3px 3px 7px #777;
+	-moz-box-shadow: 3px 3px 7px #777;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
 }
 
 .logoRaBrix
@@ -14,6 +20,8 @@
 	height:200px;
 	left:15px;
 	top:15px;
+	-moz-box-shadow: 3px 3px 7px #777;
+	-moz-border-radius: 125px;
 }
 
 .logoRaBrix a

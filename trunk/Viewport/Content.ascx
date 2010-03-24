@@ -121,7 +121,7 @@
      </div>
 
     <!-- Left window... -->
-    <div style="padding:0 15px 0 15px;overflow:auto;">
+    <div style="padding:0 15px 0 15px;">
         <ra:Window 
             runat="server" 
             style="float:left;"

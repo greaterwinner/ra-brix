@@ -8,6 +8,7 @@
 
 <ra:Panel 
     runat="server" 
+    style="float:right;"
     id="answerBtnWrp">
     <ra:ExtButton 
         runat="server" 
@@ -19,6 +20,7 @@
 
 <ra:Panel 
     runat="server" 
+    style="clear:both;"
     Visible="false"
     id="allWrp">
 
