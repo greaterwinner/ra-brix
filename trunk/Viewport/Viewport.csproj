@@ -111,4 +111,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Viewports"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Viewports"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
