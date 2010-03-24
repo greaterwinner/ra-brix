@@ -370,6 +370,10 @@ Thank you for your answer"];
 
         private static void ShowQuestionsLandingPage()
         {
+            // Settings title of page
+            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
+                Settings.Instance.Get<string>("StackedLandingPageTitle", "Welcome to Stacked, and Open Source Q&A/Forum system");
+
             // Viewing all questions...
             Node node = new Node();
             foreach (Question idx in Question.Select(Criteria.Sort("LastAnswer", false)))

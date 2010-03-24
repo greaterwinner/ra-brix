@@ -150,8 +150,8 @@
             </ra:Window>
         </div>
     </div>
-    <p class="copyright">
+    <footer class="copyright">
         <%=LanguageRecords.Language.Instance["CopyrightFooter", null, @"<a href=""http://ra-brix.org"">Created by Ra-Software, Inc.</a>"] %>
-    </p>
+    </footer>
 </div>
 

@@ -8,25 +8,27 @@
 
 <div style="position:relative;margin-top:15px;">
 
-    <h1 
-        runat="server" 
-        id="header" 
-        style="margin-bottom:25px;" />
+    <article>
+        <h1 
+            runat="server" 
+            id="header" 
+            style="margin-bottom:25px;" />
 
-    <p 
-        runat="server" 
-        id="ingress" 
-        style="font-style:italic;color:#666;" />
+        <summary 
+            runat="server" 
+            id="ingress" 
+            style="font-style:italic;color:#666;" />
 
-    <div 
-        runat="server" 
-        class='<%#GetArticleCssClass() %>'
-        id="content" />
+        <div 
+            runat="server" 
+            class='<%#GetArticleCssClass() %>'
+            id="content" />
 
-    <p 
-        runat="server" 
-        id="date" 
-        style="font-style:italic;color:#666;" />
+        <p 
+            runat="server" 
+            id="date" 
+            style="font-style:italic;color:#666;" />
+    </article>
 
     <a 
         runat="server" 
