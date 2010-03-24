@@ -219,7 +219,7 @@ namespace ArticlePublisherController
                                     // Saving main image
                                     int maxSize = 350;
                                     if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", false))
-                                        maxSize = 235;
+                                        maxSize = 350;
                                     if (img.Width > maxSize || img.Height > maxSize)
                                     {
                                         using (Image main = new Bitmap(350, (int)(350 * ratio)))

@@ -35,11 +35,21 @@
 	-moz-box-shadow: 3px 3px 3px #777;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
+	-webkit-transition-property:background-color;
+	-moz-transition-property:background-color;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
 }
 
 .user:hover
 {
 	background-color:#c8e6f7;
+}
+
+.user img
+{
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 .answerVote

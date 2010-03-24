@@ -53,6 +53,10 @@ http://ra-ajax.org
 .window
 {
 	display:block;
+	-webkit-box-shadow: 3px 3px 7px #777;
+	-moz-box-shadow: 3px 3px 7px #777;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
 }
 
 .window_nw
@@ -835,6 +839,17 @@ http://ra-ajax.org
 
 .tree .tree-active
 {
+	background-color:Transparent;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-transition-property:background-color;
+	-moz-transition-property:background-color;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
+}
+
+.tree .tree-active:hover
+{
 	background-color:#bfdcef;
 }
 
@@ -847,6 +862,8 @@ http://ra-ajax.org
 .tree .selected
 {
 	background-color:#afccdf;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 .tree .selected ul
