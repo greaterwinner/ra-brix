@@ -82,4 +82,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\Sitemap"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\Sitemap"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
