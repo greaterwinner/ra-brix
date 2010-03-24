@@ -57,17 +57,19 @@
         </asp:Repeater>
     </ra:Window>
 
-    <ra:SlidingMenu 
-        runat="server" 
-        style="width:100%;height:100%;" 
-        OnItemClicked="menu_ItemClicked"
-        OnNavigate="menu_Navigate"
-        ID="menu">
-
-        <ra:SlidingMenuLevel 
+    <nav style="width:100%;height:100%;">
+        <ra:SlidingMenu 
             runat="server" 
-            ID="root" />
+            style="width:100%;height:100%;" 
+            OnItemClicked="menu_ItemClicked"
+            OnNavigate="menu_Navigate"
+            ID="menu">
 
-    </ra:SlidingMenu>
+            <ra:SlidingMenuLevel 
+                runat="server" 
+                ID="root" />
+
+        </ra:SlidingMenu>
+    </nav>
 
 </div>

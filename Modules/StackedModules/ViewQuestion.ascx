@@ -15,6 +15,11 @@
 	float:right;
 	display:block;
 	margin-left:15px;
+	margin-right:15px;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .userBig:hover

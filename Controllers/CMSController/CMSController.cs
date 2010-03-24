@@ -141,7 +141,8 @@ namespace CMSController
                 }
                 else
                 {
-                    node["ModuleSettings"]["Pages"]["Page" + idxNo]["URL"].Value = idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    node["ModuleSettings"]["Pages"]["Page" + idxNo]["URL"].Value = 
+                        idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                 }
                 idxNo += 1;
             }

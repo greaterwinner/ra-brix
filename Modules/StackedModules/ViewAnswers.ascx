@@ -9,12 +9,16 @@
 <style type="text/css">
 .answer
 {
-    margin:35px 5px 5px 0;
+    margin:35px 15px 25px 0;
     padding:35px 10px 15px 10px;
-    border:dashed 1px #999;
+    border:solid 1px #999;
 	background-color:#d6f4ff;
 	position:relative;
 	min-height:80px;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .user
@@ -23,10 +27,14 @@
 	position:absolute;
 	margin-top:-25px;
 	top:5px;
-	right:20px;
+	right:35px;
 	border:solid 1px #999;
 	padding:5px;
 	background-color:#d0edff;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .user:hover
@@ -41,6 +49,10 @@
 	background-color:#d0edff;
 	margin:0px 10px 10px 10px;
 	float:left;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .answerVote .answerVotePlus,
@@ -57,6 +69,8 @@
 .answerVote .answerVoteMinus:hover
 {
 	border:solid 1px #999;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 .answerVote .answerVotePlus
@@ -91,6 +105,10 @@
 	background-color:#d0edff;
 	min-width:16px;
 	text-align:center;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .bad
@@ -119,12 +137,16 @@
 	position:absolute;
 	top:5px;
 	right:5px;
-	margin-top:-13px;
-	margin-right:-10px;
+	margin-top:0;
+	margin-right:5px;
 	background:transparent url(media/skins/Gold/Gold/sprites.png) no-repeat 0 -1248px;
 	width:16px;
 	height:16px;
 	z-index:500;
+	-webkit-box-shadow: 2px 2px 3px #777;
+	-moz-box-shadow: 2px 2px 3px #777;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
 }
 
 .deleteQuestionBtn:hover

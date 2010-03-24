@@ -55,6 +55,36 @@ namespace StackedModules
             }
         }
 
+        [ActiveEvent(Name = "CMSInsertLink")]
+        protected void CMSInsertLink(object sender, ActiveEventArgs e)
+        {
+            string html = string.Format(
+                @"<a href=""{0}"">{1}</a>", 
+                e.Params["URL"].Get<string>(),
+                e.Params["Text"].Get<string>());
+            editor.PasteHTML(html);
+        }
+
+        [ActiveEvent(Name = "ImageFileChosenByFileDialog")]
+        protected void ImageFileChosenByFileDialog(object sender, ActiveEventArgs e)
+        {
+            string fileName = e.Params["File"].Get<string>();
+            string html = string.Format(
+                @"<img src=""{0}"" alt=""unknown"" />", fileName);
+            editor.PasteHTML(html);
+        }
+
+        [ActiveEvent(Name = "ResourceFileChosenByFileDialog")]
+        protected void ResourceFileChosenByFileDialog(object sender, ActiveEventArgs e)
+        {
+            string fileName = e.Params["File"].Get<string>();
+            string cssClass = "resourceDownload specificResource-" + 
+                fileName.Substring(fileName.LastIndexOf('.') + 1).ToLowerInvariant();
+            string html = string.Format(
+                @"<a target=""_blank"" href=""{0}"" class=""{1}"" />", fileName, cssClass);
+            editor.PasteHTML(html);
+        }
+
         protected void editor_GetExtraToolbarControls(object sender, RichEdit.ExtraToolbarControlsEventArgs e)
         {
             // Save button

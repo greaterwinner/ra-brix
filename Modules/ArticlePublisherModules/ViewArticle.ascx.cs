@@ -25,7 +25,6 @@ namespace ArticlePublisherModules
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ingress;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl date;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl content;
-        protected global::System.Web.UI.HtmlControls.HtmlImage image;
         protected global::System.Web.UI.HtmlControls.HtmlAnchor author;
         protected global::Ra.Extensions.Widgets.ExtButton edit;
         protected global::Ra.Extensions.Widgets.ExtButton delete;
@@ -62,7 +61,12 @@ namespace ArticlePublisherModules
                 };
             header.InnerHtml = node["Header"].Get<string>();
             ingress.InnerHtml = node["Ingress"].Get<string>();
-            content.InnerHtml = node["Body"].Get<string>();
+            content.InnerHtml =
+                string.Format(@"<img src=""{0}"" alt=""{1}"" class=""{2}"" />",
+                    node["MainImage"].Get<string>().Replace("~", ApplicationRoot.Root),
+                    node["Header"].Get<string>(),
+                    Settings.Instance.Get<bool>("DisplayArticlesAsNews", false) ? "articleMainBodyNewsImage" : "articleMainBodyImage") + 
+                node["Body"].Get<string>();
             date.InnerHtml = Language.Instance["Published", null, "Published"] + " " +
                 DateFormatter.FormatDate(node["Date"].Get<DateTime>()) +
                 " - " +
@@ -71,12 +75,18 @@ namespace ArticlePublisherModules
                 " - " +
                 string.Format(
                     Language.Instance["BookmarkedBy", null, "bookmarked {0} times"], node["BookmarkedBy"].Value);
-            image.Src = node["MainImage"].Get<string>();
-            image.Alt = node["Header"].Get<string>() + " - " + node["Ingress"].Get<string>();
             author.HRef = "~/authors/" + node["Author"].Get<string>().Replace(".", "--") + ConfigurationManager.AppSettings["DefaultPageExtension"];
             author.InnerHtml = "/.~ " + node["Author"].Get<string>();
             bookmark.Visible = Users.LoggedInUserName != null;
             bookmark.CssClass = node["Bookmarked"].Get<bool>() ? "bookmarked" : "bookmark";
+            content.DataBind();
+        }
+
+        protected string GetArticleCssClass()
+        {
+            if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", false))
+                return "articleMainBodyNews";
+            return "articleMainBody";
         }
 
         protected void bookmark_Click(object sender, EventArgs e)
