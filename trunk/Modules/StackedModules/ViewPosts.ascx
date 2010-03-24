@@ -108,7 +108,7 @@ span.question:hover
 .questionsHeader
 {
 	margin-top:-15px;
-	padding:10px 25px 15px 25px;
+	padding:12px 25px 12px 25px;
 }
 
 .deleteQuestionBtn
