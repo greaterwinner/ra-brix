@@ -14,7 +14,7 @@
     id="pnlWrp" 
     DefaultWidget="submit"
     style="position:relative;width:100%;height:100%;">
-    <table style="margin:5px;">
+    <table style="margin:0 5px 5px 5px;">
         <tr>
             <td><%#Language.Instance["ADGroups2RolesCreateNewLabel", null, "AD-Group Name: "]%></td>
             <td>
