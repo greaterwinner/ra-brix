@@ -224,11 +224,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModules", "Modules\Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E16544EB-0996-42DE-83B5-B29617C38495}"
 	ProjectSection(SolutionItems) = preProject
-		brix.appPool.build = brix.appPool.build
-		brix.components.build = brix.components.build
-		brix.core.build = brix.core.build
+		build-brix.xml = build-brix.xml
 		build.bat = build.bat
-		build.properties = build.properties
 		changelog.txt = changelog.txt
 		license-AGPL.txt = license-AGPL.txt
 		license.txt = license.txt

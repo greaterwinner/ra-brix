@@ -1,4 +1,5 @@
+SET PATH=%systemroot%\Microsoft.NET\Framework\v3.5
 
-nant -buildfile:brix.appPool.build %*
+msbuild build-brix.xml
 
 pause

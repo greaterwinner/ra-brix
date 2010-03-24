@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Build">
+    <Message 
+        Text="Building Ra.Brix.Core" />
+    <MSBuild 
+        Projects="Ra-Brix.sln" 
+        Targets="Build" 
+        Properties="Configuration=Release" />
+    <Delete 
+        Files="PrecompiledWeb/Portal/Web.config"/>
+    <Copy 
+        SourceFiles="PrecompiledWeb/Portal/Web.config.template" 
+        DestinationFiles="PrecompiledWeb/Portal/Web.config"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/Web.config.template"/>
+  </Target>
+</Project>
+
