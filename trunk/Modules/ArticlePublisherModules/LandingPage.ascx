@@ -27,7 +27,6 @@
         <ItemTemplate>
             <ra:Panel 
                 runat="server" 
-                style="opacity:0.5;"
                 CssClass="article">
                 <a 
                     class="mainLink"
@@ -35,16 +34,18 @@
                     href='<%#Eval("[URL].Value") %>'>
                     <ra:Label 
                         runat="server" 
+                        Tag="h3"
                         style="display:block;font-size:16px;font-weight:bold;margin-bottom:10px;"
                         Text='<%#Eval("[Header].Value") %>' />
                     <img 
                         runat="server"
-                        style="float:right;" 
+                        class="articleImage" 
                         alt='<%#Eval("[Header].Value") + " - " + Eval("[Ingress].Value") %>'
                         src='<%#Eval("[Icon].Value") %>' />
                     <ra:Label 
                         runat="server" 
                         style="display:block;"
+                        Tag="summary"
                         Text='<%#Eval("[Ingress].Value") %>' />
                 </a>
                 <span style="position:absolute;bottom:5px;left:5px;font-size:10px;">
@@ -57,9 +58,6 @@
                     style="position:absolute;bottom:5px;right:5px;font-size:10px;">
                     <%#Eval("[Author].Value") %>
                 </a>
-                <ra:BehaviorUnveiler 
-                    MinOpacity="0.5"
-                    runat="server" />
             </ra:Panel>
         </ItemTemplate>
     </asp:Repeater>

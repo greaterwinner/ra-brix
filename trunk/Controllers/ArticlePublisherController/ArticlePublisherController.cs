@@ -217,7 +217,10 @@ namespace ArticlePublisherController
                                     }
 
                                     // Saving main image
-                                    if (img.Width > 350 || img.Height > 350)
+                                    int maxSize = 350;
+                                    if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", false))
+                                        maxSize = 235;
+                                    if (img.Width > maxSize || img.Height > maxSize)
                                     {
                                         using (Image main = new Bitmap(350, (int)(350 * ratio)))
                                         {
@@ -1176,7 +1179,7 @@ The comment was;
             }
 
             // Showing landing page header
-            if (string.IsNullOrEmpty(userNameFilter))
+            if (string.IsNullOrEmpty(userNameFilter) && string.IsNullOrEmpty(filter))
                 ShowLandingPageHeader();
 
             // If user is not null, we also display the user profile...
@@ -1261,17 +1264,17 @@ The comment was;
                         if (node["ModuleSettings"]["Articles"].Exists(
                             delegate(Node idxNode)
                             {
-                                return idxNode["URL"].Get<string>() == "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                                return idxNode["URL"].Get<string>() == ApplicationRoot.Root + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                             }, true))
                             continue;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Header"].Value = idx.Header;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Ingress"].Value = idx.Ingress;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Body"].Value = idx.Body;
-                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = "~/" + idx.IconImage;
-                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = "~/" + idx.MainImage;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["Icon"].Value = ApplicationRoot.Root + idx.IconImage;
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["MainImage"].Value = ApplicationRoot.Root + idx.MainImage;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["Author"].Value = idx.Author == null ? "unknown" : idx.Author.Username;
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["DatePublished"].Value = idx.Published;
-                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = "~/" + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
+                        node["ModuleSettings"]["Articles"]["Article" + idxNo]["URL"].Value = ApplicationRoot.Root + idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"];
                         node["ModuleSettings"]["Articles"]["Article" + idxNo]["CommentCount"].Value = ForumPost.CountWhere(Criteria.Eq("URL", idx.URL + ConfigurationManager.AppSettings["DefaultPageExtension"])).ToString();
 
                         // Making sure we only show the x latest articles...

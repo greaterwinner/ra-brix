@@ -82,9 +82,9 @@ namespace ArticlePublisherRecords
             if (string.IsNullOrEmpty(Ingress))
             {
                 Ingress = Body;
-                if (Ingress.Length > 50)
+                if (Ingress.Length > 150)
                 {
-                    Ingress = Ingress.Substring(0, 50) + "...";
+                    Ingress = Ingress.Substring(0, 150) + "...";
                     Ingress = Ingress.Replace("<", "&lt;").Replace(">", "&gt;");
                 }
             }
@@ -94,8 +94,8 @@ namespace ArticlePublisherRecords
         private static void GetUniqueURL(Article page)
         {
             string url = page.Header.ToLower();
-            if (url.Length > 35)
-                url = url.Substring(0, 35);
+            if (url.Length > 65)
+                url = url.Substring(0, 65);
             int index = 0;
             while (index < url.Length)
             {

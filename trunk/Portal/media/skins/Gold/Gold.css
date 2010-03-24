@@ -1316,8 +1316,22 @@ span.buttonFlat
 	position:relative;
 	-webkit-box-shadow: 2px 2px 2px #777;
 	-moz-box-shadow: 2px 2px 2px #777;
-	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-transition-property:background-color, -webkit-box-shadow, opacity;
+	-moz-transition-property:background-color, -moz-box-shadow, opacity;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
+	background-color:#CFECFF;
+	opacity:0.3;
+}
+
+.article:hover
+{
+	opacity:1.0;
+	background-color:#bFdCeF;
+	-webkit-box-shadow: 5px 5px 5px #777;
+	-moz-box-shadow: 5px 5px 5px #777;
 }
 
 .article a.mainLink
@@ -1327,6 +1341,35 @@ span.buttonFlat
 	display:block;
 	margin-left:5px;
 	overflow:hidden;
+}
+
+.article a.mainLink:visited h3
+{
+	color:#666;
+}
+
+article h1
+{
+	margin-top:-50px;
+	margin-left:50px;
+	margin-bottom:5px;
+}
+
+h1,
+h2,
+h3
+{
+	text-shadow: 3px 3px 5px #aaa;
+}
+
+.articleImage
+{
+	float:right;
+	margin:0 5px 5px 10px;
+	-webkit-box-shadow: 2px 2px 2px #777;
+	-moz-box-shadow: 2px 2px 2px #777;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 .createArticle textarea
@@ -1562,8 +1605,13 @@ a.bookmarks
 	-webkit-column-gap:1em;
 	column-gap:1em;
 	text-align:justify;
-	font-size:12px;
+	font-size:14px;
 	font-family:Times New Roman;
+}
+
+summary
+{
+	text-shadow: 2px 2px 5px #bbb;
 }
 
 .articleMainBodyNews p:first-letter
