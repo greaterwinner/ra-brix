@@ -14,6 +14,7 @@ using Ra.Brix.Types;
 using System.Collections.Generic;
 using HelperGlobals;
 using System.Web;
+using System.Configuration;
 
 namespace SitemapController
 {
@@ -29,7 +30,7 @@ namespace SitemapController
         [ActiveEvent(Name = "GetMenuItems")]
         protected static void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonSitemap"].Value = "url:~/sitemap";
+            e.Params["ButtonSitemap"].Value = "url:~/sitemap" + ConfigurationManager.AppSettings["DefaultPageExtension"];
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]

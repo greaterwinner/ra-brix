@@ -27,6 +27,36 @@
 
     void Application_BeginRequest(object sender, EventArgs e)
     {
+        if (Request.Url.Port > 500)
+        {
+            // Assuming WebDev, rewriting internally just to make development easier...
+            string localUrl = Request.Url.ToString();
+            if (!localUrl.ToLower().Contains("default.aspx"))
+            {
+                string fileEnding = "";
+                if (localUrl.Contains("."))
+                {
+                    fileEnding = localUrl.Substring(localUrl.LastIndexOf("."));
+                }
+                
+                // In WebDev we only support empty file extensions and .aspx file extensions ...!
+                switch (fileEnding)
+                {
+                    case "":
+                    case ".aspx":
+                        {
+                            if (!string.IsNullOrEmpty(fileEnding))
+                            {
+                                localUrl = localUrl.Replace(fileEnding, "");
+                            }
+                            localUrl = localUrl.Replace("http://", "");
+                            localUrl = localUrl.Substring(localUrl.IndexOf("/") + 1);
+                            localUrl = localUrl.Substring(localUrl.IndexOf("/") + 1);
+                            HttpContext.Current.RewritePath("Default.aspx?ContentID=" + localUrl);
+                        } break;
+                }
+            }
+        }
     }
 
     void Application_AuthorizeRequest(object sender, EventArgs e)

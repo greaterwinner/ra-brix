@@ -354,12 +354,12 @@ namespace Viewport
 
         protected string GetMostWantedResponseUrl()
         {
-            return Settings.Instance["MostWantedResponseUrl"];
+            return Settings.Instance.Get<string>("MostWantedResponseUrl", "http://ra-brix.org");
         }
 
         protected string GetMostWantedResponseTooltip()
         {
-            return Settings.Instance["MostWantedResponseTooltip"];
+            return Settings.Instance.Get<string>("MostWantedResponseTooltip", "Download Ra-Brix");
         }
     }
 }

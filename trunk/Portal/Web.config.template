@@ -59,55 +59,14 @@
     <!-- MSSQL -->
     <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL" />
 
-    <add key="LegoConnectionString" value="Data Source=.;Initial Catalog=rabrix;User ID=sa;Password=8pr4ms" />
+    <add key="LegoConnectionString" value="Data Source=.;Initial Catalog=brix;User ID=sa;Password=8pr4ms" />
 
     <!-- Notice that to change this one, you also need to change the rewriting rules above to match -->
     <add key="DefaultPageExtension" value="" />
 
-    <add key="MostWantedResponseUrl" value="http://ra-brix.org" />
+    <add key="FlickrAPIKey" value="" />
 
-    <add key="MostWantedResponseTooltip" value="Download Ra-Brix" />
-
-    <add key="ArticleMainLandingPageTitle" value="Welcome to Ra-Brix Magazine" />
-
-    <add key="UseNotificationSounds" value="True" />
-
-    <add key="UseForumsForArticles" value="True" />
-
-    <add key="DefaultRoleForUsers" value="User" />
-
-    <add key="PointsForNewComment" value="5" />
-
-    <add key="PointsForNewArticle" value="25" />
-
-    <add key="PointsForUpVote" value="1" />
-
-    <add key="PointsForDownVote" value="-1" />
-
-    <add key="NumberOfArticlesToDisplay" value="50" />
-
-    <add key="LoginMaxVisibility" value="True" />
-
-    <add key="UseChromeFrame" value="True" />
-
-    <add key="RSSTitleText" value="RSS Feed from TheLightBringer.org" />
-
-    <add key="RSSDescriptionText" value="Latest news from TheLightBringer.Org - YOUR news provider" />
-
-    <add key="mapping-Login" value="LoginOpenIDModules.Login" />
-
-    <add key="RememberUsersAcrossSession" value="True" />
-
-    <add key="FlickrAPIKey" value="8a5e1c1056d9f7a3b041066501e535c1" />
-    <add key="FlickrAPISecret" value="b064504effb5de00" />
-
-    <add key="CandyStoreDefaultURL" value="http://ra-brix.org/CandyStoreWebService/CandyStore.asmx" />
-
-    <add key="ArticleLandingPageHeaderDefault" value="home" />
-
-    <add key="ArticleLandingPageHeaderLoggedIn" value="home" />
-
-    <add key="DefaultArticleLandingPage" value="news" />
+    <add key="FlickrAPISecret" value="" />
 
   </appSettings>
 

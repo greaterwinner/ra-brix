@@ -7,13 +7,38 @@
     Inherits="SitemapModules.ShowSitemap" %>
 
 <style type="text/css">
+.siteMapWrp
+{
+    margin:5px;
+    border:solid 1px #aaa;
+    float:left;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-box-shadow: 2px 2px 2px #777;
+	-moz-box-shadow: 2px 2px 2px #777;
+	-webkit-transition-property:text-shadow, background-color, opacity;
+	-moz-transition-property:text-shadow, background-color, opacity;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
+	opacity:0.3;
+}
+
+.siteMapWrp:hover
+{
+	-webkit-box-shadow: 5px 5px 5px #777;
+	-moz-box-shadow: 5px 5px 5px #777;
+	background-color:#b6d4ef;
+	opacity:1.0;
+	background-color:#b6d4ef;
+}
+
 .siteMapLink
 {
 	padding:8px;
 }
+
 .siteMapLink:hover
 {
-	background-color:#d6f4ff;
 }
 </style>
 
@@ -47,12 +72,10 @@ If you are logged in, you will probably have access to more items than if you're
             <ItemTemplate>
                 <ra:Panel 
                     runat="server" 
-                    style="margin:5px;border:dashed 1px #aaa;float:left;opacity:0.3;">
+                    CssClass="siteMapWrp">
                     <a style="display:block;" class="siteMapLink" href='<%#Eval("[URL].Value") %>'>
                         <%#Eval("[Name].Value") %>
                     </a>
-                    <ra:BehaviorUnveiler 
-                        runat="server" />
                 </ra:Panel>
             </ItemTemplate>
         </asp:Repeater>
