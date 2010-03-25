@@ -1868,9 +1868,10 @@ summary
 {
 	padding:15px;
 	display:block;
-	padding:15px;
-	border:dashed 1px #ddd;
+	border:solid 1px #ddd;
 	background-color:#d5f2FF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 }
 
 .tree .hasSample .icon
