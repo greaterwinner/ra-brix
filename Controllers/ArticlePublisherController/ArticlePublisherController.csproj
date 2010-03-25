@@ -69,6 +69,10 @@
       <Project>{636B27AB-8414-4792-8F33-B028F3A3B0AE}</Project>
       <Name>ArticlePublisherRecords</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Types\CMSRecords\CMSRecords.csproj">
+      <Project>{5959A08D-1E79-471C-A1F7-7EC5B1B8C06A}</Project>
+      <Name>CMSRecords</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Types\ForumRecords\ForumRecords.csproj">
       <Project>{892A0048-3A6C-4404-82BF-5E586A75180A}</Project>
       <Name>ForumRecords</Name>

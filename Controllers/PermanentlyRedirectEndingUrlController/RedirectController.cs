@@ -21,7 +21,7 @@ namespace PermanentlyRedirectEndingUrlController
         protected void Page_Init(object sender, ActiveEventArgs e)
         {
             // Dummy issue for old Ra-Ajax blogs...
-            string oldExtension = Settings.Instance["OldPageExtensionsToRemove"];
+            string oldExtension = Settings.Instance.Get<string>("OldPageExtensionsToRemove", ".blog");
             if (HttpContext.Current.Request.Params["ContentID"] != null &&
                 HttpContext.Current.Request.Params["ContentID"].Contains(oldExtension))
             {

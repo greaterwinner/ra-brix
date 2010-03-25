@@ -104,7 +104,7 @@ namespace InitializeController
         private static void TryToAutoLoginUserFromCookie()
         {
             // We only try to autologin users if settings allows it ...
-            if (Settings.Instance["RememberUsersAcrossSession"] != "True")
+            if (Settings.Instance.Get<bool>("RememberUsersAcrossSession", true))
                 return;
 
             // Checking to see if user has logged in before, if he has we "auto login" him...
@@ -237,7 +237,7 @@ This is a global setting though and will make those changes for all users of the
                 }
                 else
                 {
-                    string defaultRoleForUser = Settings.Instance["DefaultRoleForUsers"];
+                    string defaultRoleForUser = Settings.Instance.Get<string>("DefaultRoleForUsers", "User");
                     if (!string.IsNullOrEmpty(defaultRoleForUser))
                         user.Roles.Add(ActiveType<Role>.SelectFirst(
                             Criteria.Eq("Name", defaultRoleForUser)));
@@ -377,9 +377,9 @@ If this is not correct, then please click the button..."],
             node["GiveFocus"].Value = Settings.Instance["AutoGiveLoginFocus"] == "True";
             node["AddToExistingCollection"].Value = true;
             node["ModuleSettings"]["MaxVisibility"].Value = 
-                Settings.Instance["LoginMaxVisibility"] == "True";
+                Settings.Instance.Get<bool>("LoginMaxVisibility", true);
             ActiveEvents.Instance.RaiseLoadControl(
-                "Login",
+                "LoginOpenIDModules.Login",
                 "dynTop",
                 node);
             if (Settings.Instance["HideLogin"] == "True")

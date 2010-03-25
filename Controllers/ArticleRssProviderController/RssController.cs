@@ -49,7 +49,7 @@ namespace ArticleRssProviderController
             c.TagName = "link";
             c.Attributes.Add("rel", "alternate");
             c.Attributes.Add("type", "application/rss+xml");
-            c.Attributes.Add("title", Settings.Instance["RSSTitleText"]);
+            c.Attributes.Add("title", Settings.Instance.Get<string>("RSSTitleText", "RSS Feed from TheLightBringer.org"));
             c.Attributes.Add("href",
                 ApplicationRoot.Root + "rss" + ConfigurationManager.AppSettings["DefaultPageExtension"]);
             (HttpContext.Current.Handler as Page).Header.Controls.Add(c);
@@ -77,7 +77,7 @@ namespace ArticleRssProviderController
             // Title node
             XmlNode title = doc.CreateNode(XmlNodeType.Element, "title", "");
             XmlNode titleContent = doc.CreateNode(XmlNodeType.Text, null, null);
-            titleContent.Value = Settings.Instance["RSSTitleText"];
+            titleContent.Value = Settings.Instance.Get<string>("RSSTitleText", "RSS Feed from TheLightBringer.org");
             title.AppendChild(titleContent);
             channel.AppendChild(title);
 
@@ -91,7 +91,7 @@ namespace ArticleRssProviderController
             // description
             XmlNode description = doc.CreateNode(XmlNodeType.Element, "description", "");
             XmlNode descriptionContent = doc.CreateNode(XmlNodeType.Text, "", "");
-            descriptionContent.Value = Settings.Instance["RSSDescriptionText"];
+            descriptionContent.Value = Settings.Instance.Get<string>("RSSDescriptionText", "Latest news from TheLightBringer.Org - YOUR news provider");
             description.AppendChild(descriptionContent);
             channel.AppendChild(description);
 

@@ -31,9 +31,21 @@
                 runat="server" 
                 Xtra='<%#Eval("ID")%>'
                 OnClick="PropertyChosen">
-                <ra:Label runat="server" ID="returnTypeLabel" Text='<%#Eval("Returns")%>' Visible="false" style="color:#b21;" />
-                <ra:Label runat="server" Text='<%#Eval("Name")%>' />
-                <ra:Label runat="server" ID="paramsLabel" Text='<%#Eval("Params")%>' Visible="false" style="color:#b21;" />
+                <ra:Label 
+                    runat="server" 
+                    ID="returnTypeLabel" 
+                    Text='<%#Eval("Returns")%>' 
+                    Visible="false" 
+                    style="color:#b21;" />
+                <ra:Label 
+                    runat="server" 
+                    Text='<%#Eval("Name")%>' />
+                <ra:Label 
+                    runat="server" 
+                    ID="paramsLabel" 
+                    Text='<%#Eval("Params")%>' 
+                    Visible="false" 
+                    style="color:#b21;" />
             </ra:LinkButton>
             <ra:Panel 
                 runat="server" 

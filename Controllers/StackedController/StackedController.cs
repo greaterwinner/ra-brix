@@ -19,6 +19,7 @@ using UserRecords;
 using HelperGlobals;
 using SettingsRecords;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace StackedController
 {
@@ -34,7 +35,7 @@ namespace StackedController
         [ActiveEvent(Name = "GetMenuItems")]
         protected static void GetMenuItems(object sender, ActiveEventArgs e)
         {
-            e.Params["ButtonStacked"].Value = "url:~/stacked";
+            e.Params["ButtonStacked"].Value = "url:~/stacked" + ConfigurationManager.AppSettings["DefaultPageExtension"];
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]

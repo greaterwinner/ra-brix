@@ -34,9 +34,7 @@ namespace CandyStoreController
 
         private string GetWebSvcURL()
         {
-            string webSvc = Settings.Instance["CandyStoreDefaultURL"];
-            if (string.IsNullOrEmpty(webSvc))
-                webSvc = "http://localhost:8081/CandyStoreWebService/CandyStore.asmx";
+            string webSvc = Settings.Instance.Get<string>("CandyStoreDefaultURL", "http://ra-brix.org/CandyStoreWebService/CandyStore.asmx");
             return webSvc;
         }
 

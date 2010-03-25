@@ -52,7 +52,7 @@ namespace Ra.Brix.Portal
 
         private void InitializeChromeFrame()
         {
-            if (Settings.Instance["UseChromeFrame"] == "True")
+            if (Settings.Instance.Get<bool>("UseChromeFrame", true))
             {
                 LiteralControl lit = new LiteralControl();
                 lit.Text = string.Format(@"

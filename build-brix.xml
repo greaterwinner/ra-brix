@@ -2,7 +2,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
     <Message 
-        Text="Building Ra.Brix.Core" />
+        Text="Building Ra-Brix" />
+    <RemoveDir 
+        Directories="PrecompiledWeb"/>
     <MSBuild 
         Projects="Ra-Brix.sln" 
         Targets="Build" 
@@ -14,6 +16,9 @@
         DestinationFiles="PrecompiledWeb/Portal/Web.config"/>
     <Delete
         Files="PrecompiledWeb/Portal/Web.config.template"/>
+    <Copy
+        SourceFiles="start-webdev.bat"
+        DestinationFiles="PrecompiledWeb/Portal/start-webdev.bat"/>
   </Target>
 </Project>
 

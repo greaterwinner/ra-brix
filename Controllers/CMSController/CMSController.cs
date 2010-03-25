@@ -35,7 +35,7 @@ namespace CMSController
                 "CMS Page was deleted. Application had to be refreshed");
 
             // Creating default page - if necessary...!
-            if (ActiveType<Page>.Count == 0)
+            if (Page.CountWhere(Criteria.Eq("URL", "home")) == 0)
             {
                 Page p = new Page();
                 p.Header = "Home";

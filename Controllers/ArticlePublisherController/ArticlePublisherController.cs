@@ -47,6 +47,20 @@ namespace ArticlePublisherController
             Language.Instance.SetDefaultValue("ButtonAdministrateTags", "Edit Tags");
             Language.Instance.SetDefaultValue("ButtonImportRSS", "Import RSS");
             Language.Instance.SetDefaultValue("ButtonNews", "News");
+
+            // Creating article landing page...
+            // Creating default page - if necessary...!
+            if (Settings.Instance.Get<string>("ArticleLandingPageHeaderDefault", "article-landing-page") == "article-landing-page"
+                && Article.CountWhere(Criteria.Eq("URL", "article-landing-page")) == 0)
+            {
+                CMSRecords.Page p = new CMSRecords.Page();
+                p.Header = "News from Acme, Inc.";
+                p.Body = string.Format(@"
+<p>News from Acme, Inc.</p>");
+                p.URL = "article-landing-page";
+                p.HideFromMenu = true;
+                p.Save();
+            }
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
@@ -56,7 +70,7 @@ namespace ArticlePublisherController
             e.Params["ButtonAdmin"]["ButtonArticles"].Value = "Menu-Articles";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonAdministrateTags"].Value = "Menu-EditArticleTags";
             e.Params["ButtonAdmin"]["ButtonArticles"]["ButtonImportRSS"].Value = "Menu-ImportRSSIntoArticles";
-            string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
+            string defaultArticleLandingPage = Settings.Instance.Get<string>("DefaultArticleLandingPage", "news");
             if (!string.IsNullOrEmpty(defaultArticleLandingPage))
             {
                 e.Params["ButtonNews"].Value = "url:~/" + defaultArticleLandingPage + ConfigurationManager.AppSettings["DefaultPageExtension"];
@@ -603,9 +617,9 @@ The comment was;
 
             // Giving user score
             if (score > 0)
-                vote.User.Score += int.Parse(Settings.Instance["PointsForUpVote"]);
+                vote.User.Score += Settings.Instance.Get<int>("PointsForUpVote", 1);
             else
-                vote.User.Score += int.Parse(Settings.Instance["PointsForDownVote"]);
+                vote.User.Score += Settings.Instance.Get<int>("PointsForDownVote", -1);
             vote.User.Save();
         }
 
@@ -680,7 +694,7 @@ The comment was;
                     return;
             }
 
-            string defaultArticleLandingPage = Settings.Instance["DefaultArticleLandingPage"];
+            string defaultArticleLandingPage = Settings.Instance.Get<string>("DefaultArticleLandingPage", "news");
             if (defaultArticleLandingPage != null)
             {
                 if (defaultArticleLandingPage == contentId)
@@ -693,7 +707,7 @@ The comment was;
             {
                 // Setting title of page
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
-                    Settings.Instance["ArticleMainLandingPageTitle"];
+                    Settings.Instance.Get<string>("ArticleMainLandingPageTitle", "Welcome to Ra-Brix Magazine");
 
                 // Showing sticky tags at the top...
                 ShowLandingPageTags();
@@ -792,9 +806,9 @@ The comment was;
         {
             string header = "";
             if (Users.LoggedInUserName == null)
-                header = Settings.Instance["ArticleLandingPageHeaderDefault"];
+                header = Settings.Instance.Get<string>("ArticleLandingPageHeaderDefault", "article-landing-page");
             else
-                header = Settings.Instance["ArticleLandingPageHeaderLoggedIn"];
+                header = Settings.Instance.Get<string>("ArticleLandingPageHeaderLoggedIn", "article-landing-page");
 
             if (!string.IsNullOrEmpty(header))
             {
@@ -950,7 +964,7 @@ The comment was;
                 node);
 
             // Then loading Forum
-            if (Settings.Instance["UseForumsForArticles"] == "True")
+            if (Settings.Instance.Get<bool>("UseForumsForArticles", true))
             {
                 node = new Node();
                 Forum forum = Forum.SelectFirst(Criteria.Eq("Name", a.URL));
@@ -1149,10 +1163,7 @@ The comment was;
 
         private void ShowArticles(string userNameFilter, string filter, string tag)
         {
-            string number = Settings.Instance["NumberOfArticlesToDisplay"];
-            if (string.IsNullOrEmpty(number))
-                number = "100";
-            int noArticlesToDisplay = int.Parse(number);
+            int noArticlesToDisplay = Settings.Instance.Get<int>("NumberOfArticlesToDisplay", 50);
             Node node = new Node();
 
             // Showing bookmarks module
@@ -1324,7 +1335,7 @@ The comment was;
             }
 
             // Then showing latest comments...
-            if (Settings.Instance["UseForumsForArticles"] == "True")
+            if (Settings.Instance.Get<bool>("UseForumsForArticles", true))
             {
                 bool shouldShow = true;
                 node = new Node();
