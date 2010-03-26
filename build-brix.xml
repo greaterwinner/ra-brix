@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Target Name="Build">
+  <Import 
+      Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <PropertyGroup>
+    <Version>0.7.0</Version>
+  </PropertyGroup>
+  
+  <Target 
+      Name="Build">
 
     <!-- Giving feedback... -->
     <Message 
@@ -151,11 +159,85 @@
     <ItemGroup>
       <FilesToDelete Include="**\*.pdb"/>
     </ItemGroup>
-
     <Delete
         Files="@(FilesToDelete)" />
+    
+    
+    <!-- Creating source folder -->
+    <MakeDir
+        Directories="PrecompiledWeb/Source"/>
 
-  
+    <ItemGroup>
+      <SourceFiles 
+          Include="**\*.cs;**\*.ascx;**\*.sln;**\*.asax;**\*.css;**\*.png;**\*.jpg;**\*.jpeg;**\*.gif;**\*.csproj;**\*.aspx;**\*.sql;"
+          Exclude="ADLogin\**\*.*;BrixGen\**\*.*;CandyStoreWebService\**\*.*;languages\**\*.*;Portal\docs-xml\**\*.*;Portal\Resources\**\*.*;Portal\TemporaryFiles\**\*.*;Portal\tutorials\**\*.*;PrecompiledWeb\**\*.*;Ra.Brix.Generator\**\*.*;Ra.Brix.Tests\**\*.*;Resouces\**\*.*;**\.svn\**\*.*;Controllers\ADGroups2Roles\**\*.*;Controllers\CandyStoreController\**\*.*;Controllers\DoxygenDotNetViewDocsController\**\*.*;Modules\ActiveDirectoryLogin\**\*.*;Modules\ADGroups2Roles\**\*.*;Modules\CandyStoreModules\**\*.*;Modules\DoxygentDotNetViewDocsModules\**\*.*;Modules\RaAjaxSamples\**\*.*;Types\ADGroups2Roles\**\*.*;Types\\**\*.*;"/>
+    </ItemGroup>
+
+    <Copy
+        SourceFiles="@(SourceFiles)"
+        DestinationFiles="@(SourceFiles->'PrecompiledWeb\Source\%(RecursiveDir)%(Filename)%(Extension)')"/>
+
+    <!-- Creating source folder -->
+    <MakeDir
+        Directories="PrecompiledWeb/Source/References"/>
+    <ItemGroup>
+      <ReferenceFiles
+          Include="References\*.dll;"/>
+    </ItemGroup>
+    <Copy
+        SourceFiles="@(ReferenceFiles)"
+        DestinationFiles="@(ReferenceFiles->'PrecompiledWeb\Source\References\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/bin"/>
+    <ItemGroup>
+      <BinFolders
+          Include="Portal\bin\**\*.dll;"/>
+    </ItemGroup>
+    <Copy
+        SourceFiles="@(BinFolders)"
+        DestinationFiles="@(BinFolders->'PrecompiledWeb\Source\Portal\bin\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <ItemGroup>
+      <BinFoldersRemoveDlls
+          Include="PrecompiledWeb\Source\Portal\bin\**\*.dll;"/>
+    </ItemGroup>
+    <Delete 
+        Files="@(BinFoldersRemoveDlls)"/>
+
+    <Copy
+        SourceFiles="Portal/Web.config.template"
+        DestinationFiles="PrecompiledWeb/Source/Portal/Web.config"/>
+
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/Resources"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/Resources/Images"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/Resources/Images/Small"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/Resources/Images/Medium"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/Resources/Images/Large"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Source/Portal/TemporaryFiles"/>
+    <Copy
+        SourceFiles="Portal/media/empty-article-image.png"
+        DestinationFiles="PrecompiledWeb/Source/Portal/media/empty-article-image.png"/>
+    <Copy
+        SourceFiles="Portal/media/empty-article-image.png"
+        DestinationFiles="PrecompiledWeb/Source/Portal/Resources/Images/empty-article-image.png"/>
+
+
+
+    <!-- Creating .zip file... -->
+    <ItemGroup>
+        <ZipFiles Include="PrecompiledWeb\Portal\**\*.*" />
+        <ZipFiles Include="PrecompiledWeb\Source\**\*.*" />
+    </ItemGroup>
+    <Zip Files="@(ZipFiles)" 
+         WorkingDirectory="PrecompiledWeb\"
+         ZipFileName="PrecompiledWeb\Ra-Brix-$(Version).zip"
+         ZipLevel="9" />
+
   </Target>
   
 </Project>

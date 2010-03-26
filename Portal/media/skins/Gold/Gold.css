@@ -1663,7 +1663,7 @@ summary
 .articleMainBodyNewsImage
 {
 	display:table;
-	margin:0 auto 0 auto;
+	margin:0 auto 10px auto;
 	margin-left:auto;
 	margin-right:auto;
 }
