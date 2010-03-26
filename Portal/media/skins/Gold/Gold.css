@@ -1604,8 +1604,16 @@ a.bookmarks
 {
 	padding:15px;
 	margin:25px 27px 25px 25px;
-	border:dashed 1px #999;
+	border:solid 1px #999;
 	overflow:auto;
+	-webkit-box-shadow: 3px 3px 3px #777;
+	-moz-box-shadow: 3px 3px 3px #777;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-webkit-transition-property:background-color;
+	-moz-transition-property:background-color;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
 }
 
 .articleMainBody
@@ -1655,7 +1663,7 @@ summary
 .articleMainBodyNewsImage
 {
 	display:table;
-	margin:10px auto 10px auto;
+	margin:0 auto 0 auto;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -1670,6 +1678,7 @@ summary
 	-moz-transition-property:width, height;
 	-webkit-transition-duration: 0.5s, 0.5s;
 	-moz-transition-duration: 0.5s, 0.5s;
+	z-index:500;
 }
 
 .articleMainBodyNewsImage:hover,
@@ -1677,7 +1686,6 @@ summary
 {
 	width:350px !important;
 	position:absolute;
-	z-index:500;
 }
 
 .forumMainBody

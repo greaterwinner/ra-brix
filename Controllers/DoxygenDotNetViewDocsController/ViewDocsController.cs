@@ -117,6 +117,8 @@ namespace DoxygenDotNetViewDocsController
             Class c = RaDocs.GetTypeByName(className) as Class;
             Node node = new Node();
             node["Class"].Value = c;
+            ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
+                Language.Instance["DocumentationFor", null, "Documentation for "] + c.Name; ;
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "DoxygentDotNetShowClass",

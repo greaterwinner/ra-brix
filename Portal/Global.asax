@@ -31,6 +31,12 @@
         {
             // Assuming WebDev, rewriting internally just to make development easier...
             string localUrl = Request.Url.ToString();
+            string parameters = "";
+            if (localUrl.Contains("?"))
+            {
+                parameters = "&" + localUrl.Substring(localUrl.IndexOf("?") + 1);
+                localUrl = localUrl.Substring(0, localUrl.IndexOf("?"));
+            }
             if (!localUrl.ToLower().Contains("default.aspx"))
             {
                 string fileEnding = "";
@@ -38,7 +44,7 @@
                 {
                     fileEnding = localUrl.Substring(localUrl.LastIndexOf("."));
                 }
-                
+
                 // In WebDev we only support empty file extensions and .aspx file extensions ...!
                 switch (fileEnding)
                 {
@@ -52,7 +58,11 @@
                             localUrl = localUrl.Replace("http://", "");
                             localUrl = localUrl.Substring(localUrl.IndexOf("/") + 1);
                             localUrl = localUrl.Substring(localUrl.IndexOf("/") + 1);
-                            HttpContext.Current.RewritePath("Default.aspx?ContentID=" + localUrl);
+                            if (!string.IsNullOrEmpty(localUrl))
+                            {
+                                HttpContext.Current.RewritePath("~/Default.aspx?ContentID=" +
+                                    HttpContext.Current.Server.UrlPathEncode(localUrl) + parameters);
+                            }
                         } break;
                 }
             }

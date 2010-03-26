@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <Target Name="Build">
+
+    <!-- Giving feedback... -->
     <Message 
         Text="Building Ra-Brix" />
+
+    <!-- Cleaning up from previous builds -->
     <RemoveDir 
         Directories="PrecompiledWeb"/>
+    
+    <!-- Building everything in the Ra-Brix solution -->
     <MSBuild 
         Projects="Ra-Brix.sln" 
         Targets="Build" 
         Properties="Configuration=Release" />
+    
+    <!-- Deleting web.config and settings the template file as the active web.config -->
     <Delete 
         Files="PrecompiledWeb/Portal/Web.config"/>
     <Copy 
@@ -16,9 +25,138 @@
         DestinationFiles="PrecompiledWeb/Portal/Web.config"/>
     <Delete
         Files="PrecompiledWeb/Portal/Web.config.template"/>
+
+    <!-- Copying some of the files needed inside of our release -->
     <Copy
         SourceFiles="start-webdev.bat"
         DestinationFiles="PrecompiledWeb/Portal/start-webdev.bat"/>
+    <Copy
+        SourceFiles="changelog.txt"
+        DestinationFiles="PrecompiledWeb/Portal/changelog.txt"/>
+    <Copy
+        SourceFiles="license.txt"
+        DestinationFiles="PrecompiledWeb/Portal/license.txt"/>
+    <Copy
+        SourceFiles="ReadMe.txt"
+        DestinationFiles="PrecompiledWeb/Portal/ReadMe.txt"/>
+
+
+    
+    
+    <!-- Deleting some files and directories not needed in the distribution -->
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/Resources"/>
+
+    
+    
+    
+    <!-- Deleting BETA or unstable components -->
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/Favourites"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/Help"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/History"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/IFrame"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/LanguageImportExport"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/ListPDF"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/RssReader"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/ADGroup2Roles"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/Calendar"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/CandyStore"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/ChangeSkin"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/Chat"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/MigraDoc.DocumentObjectModel.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/MigraDoc.Rendering.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/MigraDoc.RtfRendering.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/MySql.Data.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/PdfSharp.Charting.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/PdfSharp.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/Ra.Brix.Data.Adapters.MySQL.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/Ra.Brix.Data.Adapters.XML.dll"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/TipOfToday"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/TreeMenu"/>
+
+
+
+
+    <!-- If building Ra-Ajax.Org, please comment away the next paragraph -->
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/DoxygenDotNetViewDocs"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/PermanentRedirection"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/Doxygen.NET.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/bin/ColorizerLibrary.dll"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/highlight.xml"/>
+    <Delete
+        Files="PrecompiledWeb/Portal/highlight.xsl"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/docs-xml"/>
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/tutorials"/>
+
+    
+
+    
+    <!-- If building TheLightBringer.Org, please comment away the next section -->
+    <RemoveDir
+        Directories="PrecompiledWeb/Portal/bin/TipTheAuthors"/>
+
+    
+
+    <!-- Creating some directories actually *needed* in the distribution -->
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/Resources"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/Resources/Images"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/Resources/Images/Small"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/Resources/Images/Medium"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/Resources/Images/Large"/>
+    <MakeDir
+        Directories="PrecompiledWeb/Portal/TemporaryFiles"/>
+    <Copy
+        SourceFiles="Portal/media/empty-article-image.png"
+        DestinationFiles="PrecompiledWeb/Portal/media/empty-article-image.png"/>
+    <Copy
+        SourceFiles="Portal/media/empty-article-image.png"
+        DestinationFiles="PrecompiledWeb/Portal/Resources/Images/empty-article-image.png"/>
+
+
+    <!-- Deleting all .pdb files -->
+    <ItemGroup>
+      <FilesToDelete Include="**\*.pdb"/>
+    </ItemGroup>
+
+    <Delete
+        Files="@(FilesToDelete)" />
+
+  
   </Target>
+  
 </Project>
 

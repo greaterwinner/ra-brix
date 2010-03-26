@@ -232,7 +232,7 @@ namespace ArticlePublisherController
 
                                     // Saving main image
                                     int maxSize = 350;
-                                    if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", false))
+                                    if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", true))
                                         maxSize = 350;
                                     if (img.Width > maxSize || img.Height > maxSize)
                                     {
@@ -912,7 +912,7 @@ The comment was;
             node["ModuleSettings"]["ArticleID"].Value = a.ID;
             node["ModuleSettings"]["ViewCount"].Value = a.ViewCount;
             node["ModuleSettings"]["Author"].Value = a.Author == null ? "unknown" : a.Author.Username;
-            node["ModuleSettings"]["MainImage"].Value = "~/" + a.MainImage;
+            node["ModuleSettings"]["MainImage"].Value = ApplicationRoot.Root + a.MainImage;
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
             {
                 Bookmark bookmark = Bookmark.SelectFirst(

@@ -70,13 +70,6 @@
 
   </appSettings>
 
-  <!-- 
-  <ColorizerLibrary>
-    <param name="syntax" value="~/highlight.xml"/>
-    <param name="style" value="~/highlight.xsl"/>
-  </ColorizerLibrary>
-  -->
-
   <system.web>
     <!-- 
     Intelligencia URL rewriter continued ...
@@ -86,7 +79,9 @@
 				name="UrlRewriter" />
     </httpModules>
     -->
-    <customErrors mode="Off" />
+    <customErrors mode="RemoteOnly">
+      <error statusCode="500" redirect="server-error.html" />
+    </customErrors>
     <pages>
       <controls>
         <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra" />
