@@ -25,9 +25,7 @@ namespace Ra.Brix.Portal
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            // Changing the URL to un-escaped to get rid of the ContentID parameter and
-            // make the URL for the form "beautiful"...
-            Form.Action = Request.RawUrl.Replace("default.aspx", "").Replace("Default.aspx", "");
+            RewriteForm();
 
             // Setting the base for the page to get correct path to images and such
             baseElement.Attributes.Add("href", ApplicationRoot.Root);
@@ -48,6 +46,21 @@ namespace Ra.Brix.Portal
                     "Page_Init_InitialLoading");
             }
             LoadComplete += MainWebPage_LoadComplete;
+        }
+
+        private void RewriteForm()
+        {
+            if (Request.Url.Port > 500)
+            {
+                // Assuming WebDev, rewriting internally just to make development easier...
+                Form.Action = Request.Url.ToString();
+            }
+            else
+            {
+                // Changing the URL to un-escaped to get rid of the ContentID parameter and
+                // make the URL for the form "beautiful"...
+                Form.Action = Request.RawUrl.Replace("default.aspx", "").Replace("Default.aspx", "");
+            }
         }
 
         private void InitializeChromeFrame()

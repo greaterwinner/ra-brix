@@ -65,7 +65,7 @@ namespace ArticlePublisherModules
                 string.Format(@"<img src=""{0}"" alt=""{1}"" class=""{2}"" />",
                     node["MainImage"].Get<string>().Replace("~", ApplicationRoot.Root),
                     node["Header"].Get<string>(),
-                    Settings.Instance.Get<bool>("DisplayArticlesAsNews", false) ? "articleMainBodyNewsImage" : "articleMainBodyImage") + 
+                    Settings.Instance.Get<bool>("DisplayArticlesAsNews", true) ? "articleMainBodyNewsImage" : "articleMainBodyImage") + 
                 node["Body"].Get<string>();
             date.InnerHtml = Language.Instance["Published", null, "Published"] + " " +
                 DateFormatter.FormatDate(node["Date"].Get<DateTime>()) +
@@ -84,7 +84,7 @@ namespace ArticlePublisherModules
 
         protected string GetArticleCssClass()
         {
-            if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", false))
+            if (Settings.Instance.Get<bool>("DisplayArticlesAsNews", true))
                 return "articleMainBodyNews";
             return "articleMainBody";
         }
