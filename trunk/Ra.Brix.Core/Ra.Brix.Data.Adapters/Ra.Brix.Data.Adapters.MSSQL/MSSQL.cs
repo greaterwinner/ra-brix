@@ -595,11 +595,11 @@ namespace Ra.Brix.Data.Adapters.MSSQL
         public void Save(string sessionId, string pageUrl, string content)
         {
             // Deleting *OLD* ViewState from table...
-            SqlCommand sql = new SqlCommand("delete from dbo.ViewStateStorage where ID like '" + sessionId + "|%'", _connection);
+            string key = sessionId + "|" + pageUrl;
+            SqlCommand sql = new SqlCommand("delete from dbo.ViewStateStorage where ID='" + key + "'", _connection);
             sql.ExecuteNonQuery();
 
             // Saving new value
-            string key = sessionId + "|" + pageUrl;
             sql = new SqlCommand(
                 "insert into dbo.ViewStateStorage (ID, Content, Created) values (@id, @content, @created)",
                 _connection);

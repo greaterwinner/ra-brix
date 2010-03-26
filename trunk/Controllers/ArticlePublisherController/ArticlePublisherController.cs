@@ -48,10 +48,9 @@ namespace ArticlePublisherController
             Language.Instance.SetDefaultValue("ButtonImportRSS", "Import RSS");
             Language.Instance.SetDefaultValue("ButtonNews", "News");
 
-            // Creating article landing page...
             // Creating default page - if necessary...!
             if (Settings.Instance.Get<string>("ArticleLandingPageHeaderDefault", "article-landing-page") == "article-landing-page"
-                && Article.CountWhere(Criteria.Eq("URL", "article-landing-page")) == 0)
+                && CMSRecords.Page.CountWhere(Criteria.Eq("URL", "article-landing-page")) == 0)
             {
                 CMSRecords.Page p = new CMSRecords.Page();
                 p.Header = "News from Acme, Inc.";
