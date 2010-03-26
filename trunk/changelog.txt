@@ -7,6 +7,23 @@
 
   ------------------------------------------------------------------
 
+                          Version 0.7.2
+
+  ------------------------------------------------------------------
+
+* Fixed a bug in ViewState serialization process that made multiple
+  open windows towards same application crash the ViewState of first 
+  window opened.
+
+* Fixed a bug that made multiple default CMS pages be made as 
+  headers for the News system.
+
+
+
+
+
+  ------------------------------------------------------------------
+
                           Version 0.6.1
 
   ------------------------------------------------------------------
