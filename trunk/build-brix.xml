@@ -5,7 +5,7 @@
       Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 
   <PropertyGroup>
-    <Version>0.7.0</Version>
+    <Version>0.7.1</Version>
   </PropertyGroup>
   
   <Target 
@@ -191,7 +191,7 @@
         Directories="PrecompiledWeb/Source/Portal/bin"/>
     <ItemGroup>
       <BinFolders
-          Include="Portal\bin\**\*.dll;"/>
+          Include="Portal\bin\**\*.dll;Portal\bin\**\*.txt;"/>
     </ItemGroup>
     <Copy
         SourceFiles="@(BinFolders)"

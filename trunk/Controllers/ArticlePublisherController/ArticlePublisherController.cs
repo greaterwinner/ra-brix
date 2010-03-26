@@ -699,8 +699,6 @@ The comment was;
             {
                 if (defaultArticleLandingPage == contentId)
                     contentId = null;
-                else if(string.IsNullOrEmpty(contentId))
-                    return;
             }
 
             if (string.IsNullOrEmpty(contentId) || contentId == "/")

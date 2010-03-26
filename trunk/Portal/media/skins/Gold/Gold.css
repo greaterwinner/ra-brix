@@ -1622,6 +1622,7 @@ a.bookmarks
 	line-height:24px;
 	font-size:14px;
 	font-family:"Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif;
+	margin-top:15px;
 }
 
 .articleMainBodyImage
@@ -1641,11 +1642,12 @@ a.bookmarks
 	text-align:justify;
 	font-size:14px;
 	font-family:Times New Roman;
+	margin-top:15px;
+	min-height:350px;
 }
 
 summary
 {
-	text-shadow: 2px 2px 5px #bbb;
 }
 
 .articleMainBodyNews p:first-letter
