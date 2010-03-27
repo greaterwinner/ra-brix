@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{90BE29CE-9FBD-446F-B74B-0FCC6B070D48}</ProjectGuid>
+    <ProjectGuid>{ECE8BF46-824B-4375-9CCB-1FC055AD900C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonModules</RootNamespace>
-    <AssemblyName>CommonModules</AssemblyName>
+    <RootNamespace>DatedIEVersionController</RootNamespace>
+    <AssemblyName>DatedIEVersionController</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,38 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ra, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Builder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Builder.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Ra.Selector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Ra.Selector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageBox.ascx.cs">
-      <DependentUpon>MessageBox.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="DateIEController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Helpers\Components\Components.csproj">
-      <Project>{C38BEB2B-CBC6-4280-9D02-1AE52B0DB47B}</Project>
-      <Name>Components</Name>
+    <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
+      <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
+      <Name>Ra.Brix.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Loader\Ra.Brix.Loader.csproj">
       <Project>{0423B777-2C18-4B0F-B87E-0AD059529167}</Project>
@@ -72,15 +53,10 @@
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Types\Language\LanguageRecords.csproj">
-      <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
-      <Name>LanguageRecords</Name>
+    <ProjectReference Include="..\..\Types\Settings\SettingsRecords.csproj">
+      <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
+      <Name>SettingsRecords</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MessageBox.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -90,4 +66,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)Portal\bin\DatedIEVersion"
+copy "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Portal\bin\DatedIEVersion"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
