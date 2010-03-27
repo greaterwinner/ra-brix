@@ -150,6 +150,11 @@
             </ra:Window>
         </div>
     </div>
+    <ra:Dynamic
+        runat="server"
+        CssClass="footer"
+        OnReload="dynamic_LoadControls"
+        id="dynFooter" />        
     <footer class="copyright">
         <%=LanguageRecords.Language.Instance["CopyrightFooter", null, @"<a href=""http://ra-brix.org"">Created by Ra-Software, Inc.</a>"] %>
     </footer>

@@ -1978,3 +1978,18 @@ summary
 	background: transparent url(Images/light-window-vert.png) repeat-x 0 -40px;
 	height:40px;
 }
+
+.footer
+{
+	display:table;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:500px;
+	padding-left:150px;
+	text-align:center;   
+}
+
+.footerContent
+{
+}
