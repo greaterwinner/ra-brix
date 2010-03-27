@@ -39,6 +39,7 @@ namespace Viewport
         protected global::Ra.Widgets.Dynamic dynTop;
         protected global::Ra.Widgets.Dynamic dynLeft;
         protected global::Ra.Widgets.Dynamic dynMid;
+        protected global::Ra.Widgets.Dynamic dynFooter;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerBackground;
         private Node _initializingParameter;
 
