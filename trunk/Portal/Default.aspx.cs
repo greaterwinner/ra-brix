@@ -35,7 +35,6 @@ namespace Ra.Brix.Portal
             // we are unfortunately stuck in a logic where order counts (for now)
             // TODO: Fix cohesion here ...!
             InitializeViewport();
-            InitializeChromeFrame();
             ActiveEvents.Instance.RaiseActiveEvent(
                 this,
                 "Page_Init");
@@ -60,26 +59,6 @@ namespace Ra.Brix.Portal
                 // Changing the URL to un-escaped to get rid of the ContentID parameter and
                 // make the URL for the form "beautiful"...
                 Form.Action = Request.RawUrl.Replace("default.aspx", "").Replace("Default.aspx", "");
-            }
-        }
-
-        private void InitializeChromeFrame()
-        {
-            if (Settings.Instance.Get<bool>("UseChromeFrame", true))
-            {
-                LiteralControl lit = new LiteralControl();
-                lit.Text = string.Format(@"
-        <!--[if IE]>
-        <script type=""text/javascript"" src=""http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js""></script>
-        <div id=""placeholder""></div>
-        <script>
-            CFInstall.check({{
-                node: ""placeholder"",
-                destination: ""{0}""
-            }});
-        </script>
-        <![endif]-->", GetRedirectUrl());
-                Form.Controls.Add(lit);
             }
         }
 

@@ -23,7 +23,6 @@
             href='<%# GetCssRootFolder() + "/Gold.css" %>' 
             rel="stylesheet" 
             type="text/css" />
-        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     </head>
     <body>
         <form 
