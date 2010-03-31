@@ -41,6 +41,7 @@ namespace Viewport
         protected global::Ra.Widgets.Dynamic dynMid;
         protected global::Ra.Widgets.Dynamic dynFooter;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl headerBackground;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pingSound;
         private Node _initializingParameter;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -322,7 +323,7 @@ namespace Viewport
             if (Settings.Instance.Get("UseNotificationSounds", true))
             {
                 if (Request.Browser.Browser == "Firefox")
-                    AjaxManager.Instance.WriterAtBack.Write("Ra.$('ctl03_informationPanel_pingSound').play();");
+                    AjaxManager.Instance.WriterAtBack.Write("Ra.$('" + pingSound.ClientID + "').play();");
             }
         }
 

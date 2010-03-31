@@ -89,7 +89,7 @@
         <ra:ExtButton 
             runat="server" 
             id="handleInformationEvt" 
-            style="position:absolute;bottom:2px;right:2px;"
+            style="position:absolute;bottom:10px;right:10px;"
             OnClick="handleInformationEvt_Click" />
     </ra:Window>
 

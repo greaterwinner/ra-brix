@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Data\BaseTest.cs" />
     <Compile Include="Data\ArticleTests.cs" />
+    <Compile Include="Data\QuestionTests.cs" />
     <Compile Include="Data\WhiteboardTest.cs" />
     <Compile Include="Data\UserUnitTest.cs" />
     <Compile Include="Data\LanguageTest.cs" />
@@ -123,6 +124,10 @@
       <Project>{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}</Project>
       <Name>SettingsRecords</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Types\StackedRecords\StackedRecords.csproj">
+      <Project>{63E2A334-5CAD-49F6-9BE9-54D4733E904D}</Project>
+      <Name>StackedRecords</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Types\User\UserRecords.csproj">
       <Project>{0A16609A-B619-43FF-9C64-9FC970AF46D8}</Project>
       <Name>UserRecords</Name>
@@ -133,6 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="App.config.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

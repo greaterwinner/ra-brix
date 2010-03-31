@@ -18,6 +18,10 @@
 * Fixed a bug that made multiple default CMS pages be made as 
   headers for the News system.
 
+* Fixed a bug in the MS SQL DataAdapter that would delete LazyLists
+  if they were not retrieved and the LazyList was uninitialized and
+  the object was saved in this state.
+
 
 
 
