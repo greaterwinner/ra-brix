@@ -375,6 +375,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                 }
             }
             List<int> listOfIDsOfChildren = new List<int>();
+            List<string> listOfParentPropertyNamesToNotDelete = new List<string>();
             foreach (PropertyInfo idxProp in props)
             {
                 ActiveFieldAttribute[] attrs =
@@ -456,7 +457,11 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                                 if (listRetrieved != null)
                                 {
                                     // LazyList...
-                                    if ((bool)listRetrieved.GetGetMethod(true).Invoke(enumerable, null))
+                                    if (!(bool)listRetrieved.GetGetMethod(true).Invoke(enumerable, null))
+                                    {
+                                        listOfParentPropertyNamesToNotDelete.Add(idxProp.Name);
+                                    }
+                                    else
                                     {
                                         if (attrs[0].IsOwner)
                                         {
@@ -563,8 +568,21 @@ namespace Ra.Brix.Data.Adapters.MSSQL
                 whereDelete += idx.ToString();
             }
             string andNotIn = string.IsNullOrEmpty(whereDelete) ? "" : string.Format(" and ID not in({0})", whereDelete);
+            whereDelete = "";
+            first = true;
+            foreach (string idx in listOfParentPropertyNamesToNotDelete)
+            {
+                if (!first)
+                    whereDelete += ",";
+                first = false;
+                whereDelete += "'" + idx + "'";
+            }
+            string andNotInParentPropertyNames = 
+                string.IsNullOrEmpty(whereDelete) 
+                    ? "" 
+                    : string.Format(" and ParentPropertyName not in({0})", whereDelete);
             SqlCommand cmdDeleteAllInfants = new SqlCommand(
-                string.Format("select ID from dbo.Documents where Parent={0}{1}", id, andNotIn),
+                string.Format("select ID from dbo.Documents where Parent={0}{1}{2}", id, andNotIn, andNotInParentPropertyNames),
                 _connection,
                 transaction);
             List<int> idsToDelete = new List<int>();

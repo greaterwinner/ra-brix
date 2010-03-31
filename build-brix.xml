@@ -5,7 +5,7 @@
       Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 
   <PropertyGroup>
-    <Version>0.7.1</Version>
+    <Version>0.7.2</Version>
   </PropertyGroup>
   
   <Target 

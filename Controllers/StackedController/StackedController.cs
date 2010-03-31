@@ -174,6 +174,7 @@ namespace StackedController
                 e.Params["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 e.Params["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 e.Params["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                e.Params["Questions"]["Q" + idx.ID]["Viewed"].Value = idx.Viewed;
                 e.Params["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (e.Params["Questions"].Count >= 50)
                     break;
@@ -198,6 +199,7 @@ namespace StackedController
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Viewed"].Value = idx.Viewed;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (node.Count >= 50)
                     break;
@@ -285,6 +287,8 @@ Thank you for your answer"];
         private void ShowQuestion(string contentId)
         {
             Question q = Question.FindArticle(contentId);
+            q.Viewed += 1;
+            q.Save();
             ShowQuestion(q);
             ShowAnswers(q);
             if (!string.IsNullOrEmpty(Users.LoggedInUserName))
@@ -388,6 +392,7 @@ Thank you for your answer"];
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Asked"].Value = idx.Asked;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Answers"].Value = idx.Answers.Count;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["LastAnswer"].Value = idx.LastAnswer;
+                node["ModuleSettings"]["Questions"]["Q" + idx.ID]["Viewed"].Value = idx.Viewed;
                 node["ModuleSettings"]["Questions"]["Q" + idx.ID]["ID"].Value = idx.ID;
                 if (node.Count >= 50)
                     break;

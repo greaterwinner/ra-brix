@@ -62,11 +62,18 @@ span.question:hover
 	width:110px;
 }
 
+.qViews
+{
+	display:block;
+	float:left;
+	width:70px;
+}
+
 .qHeader
 {
 	display:block;
 	float:left;
-	width:350px;
+	width:300px;
 }
 
 .headerStacked
@@ -78,7 +85,7 @@ span.question:hover
 {
 	display:block;
 	position:absolute;
-	margin-top:-25px;
+	margin-top:-30px;
 	top:5px;
 	right:35px;
 	border:solid 1px #999;
@@ -114,7 +121,7 @@ span.question:hover
 .deleteQuestionBtn
 {
 	position:absolute;
-	top:5px;
+	top:4px;
 	right:5px;
 	margin-top:0;
 	margin-right:5px;
@@ -172,6 +179,9 @@ span.question:hover
                     <span class="qDate headerStacked">
                         <%=LanguageRecords.Language.Instance["Activity", null, "Activity"]%>
                     </span>
+                    <span class="qViews headerStacked">
+                        <%=LanguageRecords.Language.Instance["Viewed", null, "Viewed"]%>
+                    </span>
                     <span class="qHeader headerStacked">
                         <%=LanguageRecords.Language.Instance["Header", null, "Header"]%>
                     </span>
@@ -200,6 +210,9 @@ span.question:hover
                         </span>
                         <span class="qDate">
                             <%#HelperGlobals.DateFormatter.FormatDate((DateTime)Eval("[LastAnswer].Value"))%>
+                        </span>
+                        <span class="qViews">
+                            <%#Eval("[Viewed].Value") %>
                         </span>
                         <span class="qHeader">
                             <%#Eval("[Header].Value") %>

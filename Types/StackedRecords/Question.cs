@@ -19,6 +19,11 @@ namespace StackedRecords
     [ActiveType]
     public class Question : ActiveType<Question>
     {
+        public Question()
+        {
+            Answers = new LazyList<Answer>();
+        }
+
         [ActiveField]
         public string Header { get; set; }
 
@@ -33,6 +38,9 @@ namespace StackedRecords
 
         [ActiveField]
         public DateTime LastAnswer { get; set; }
+
+        [ActiveField]
+        public int Viewed { get; set; }
 
         [ActiveField(IsOwner = false)]
         public User Author { get; set; }
