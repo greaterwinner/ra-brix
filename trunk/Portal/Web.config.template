@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- 
+  This is for using Intelligencia UrlRewriter since the Microsoft one doesn't work in IIS6...
+  <configSections>
+    <section
+			name="rewriter"
+			requirePermission="false"
+			type="Intelligencia.UrlRewriter.Configuration.RewriterConfigurationSectionHandler, Intelligencia.UrlRewriter" />
+  </configSections>
+  <rewriter>
+    <rewrite url="^([^\.]+[a-zA-Z0-9-_]+)$" to="~/Default.aspx?ContentID=$1" />
+    <rewrite url="^([^\.]+[a-zA-Z0-9-_]+)\.blog$" to="~/Default.aspx?ContentID=$1" />
+    <rewrite url="^([^\.]+[a-zA-Z0-9-_]+)\?{1}(.+)$" to="~/Default.aspx?ContentID=$1&amp;$2" />
+  </rewriter>
+  -->
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="HardCodeFriendlyUrls" stopProcessing="true">
+          <match url="^Default\.aspx$" />
+          <conditions>
+            <add input="{REQUEST_METHOD}" negate="true" pattern="^POST$" />
+            <add input="{QUERY_STRING}" pattern="^ContentID=([^=&amp;]+)$" />
+          </conditions>
+          <action type="Redirect" url="{C:1}" appendQueryString="false" redirectType="Permanent" />
+        </rule>
+        <rule name="FriendlyUrlsRewrite" stopProcessing="true">
+          <!--
+          Can contain / in path, but *NOT* at the end. Must not contain any extensions
+          If you want to use any type of extensions you must add this between the ) and the $ at the end
+          Like for instance for .html it becomes; ^([^\.]+[a-zA-Z0-9-_]+)\.html$
+          If you change it to have and extension, remember to also change the "DefaultPageExtension"'
+          setting below.
+          -->
+          <match url="^([^\.]+[a-zA-Z0-9-_]+)$" />
+          <!--
+          In case you want to use .html as the file extension for your files...
+          Remember to also change the "DefaultPageExtension" setting below if so...
+          <match url="^([^\.]+[a-z-A-Z-0-9]+)\.html$" />
+          -->
+          <conditions>
+            <!-- Make sure it's not registered by IIS as a "folder" even though it has no extensions -->
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <!-- Output URL. Internally used and mapped to ... -->
+          <action type="Rewrite" url="Default.aspx?ContentID={R:1}" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+
+  <appSettings>
+
+    <!-- Portal plugin, our "viewport driver"... -->
+    <add key="PortalViewDriver" value="Viewport.Content" />
+
+    <!-- MSSQL -->
+    <add key="LegoDatabaseAdapter" value="Ra.Brix.Data.Adapters.MSSQL.MSSQL" />
+
+    <add key="LegoConnectionString" value="Data Source=.;Initial Catalog=brix;User ID=sa;Password=8pr4ms" />
+
+    <!-- Notice that to change this one, you also need to change the rewriting rules above to match -->
+    <add key="DefaultPageExtension" value="" />
+
+    <add key="FlickrAPIKey" value="" />
+
+    <add key="FlickrAPISecret" value="" />
+
+  </appSettings>
+
+  <system.web>
+    <!-- 
+    Intelligencia URL rewriter continued ...
+    <httpModules>
+      <add
+				type="Intelligencia.UrlRewriter.RewriterHttpModule, Intelligencia.UrlRewriter"
+				name="UrlRewriter" />
+    </httpModules>
+    -->
+    <customErrors mode="RemoteOnly">
+      <error statusCode="500" redirect="server-error.html" />
+    </customErrors>
+    <pages>
+      <controls>
+        <add assembly="Ra" namespace="Ra.Widgets" tagPrefix="ra" />
+        <add assembly="Ra" namespace="Ra.Behaviors" tagPrefix="ra" />
+        <add assembly="Ra.Extensions" namespace="Ra.Extensions.Widgets" tagPrefix="ra" />
+        <add assembly="Components" namespace="Components" tagPrefix="ext" />
+      </controls>
+    </pages>
+    <compilation debug="false" />
+    <authentication mode="Windows" />
+  </system.web>
+</configuration>
