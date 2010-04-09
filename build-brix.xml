@@ -73,49 +73,17 @@
     
     <!-- Deleting BETA or unstable components -->
     <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/Favourites"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/Help"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/History"/>
-    <RemoveDir
         Directories="PrecompiledWeb/Portal/bin/IFrame"/>
     <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/LanguageImportExport"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/ListPDF"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/RssReader"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/ADGroup2Roles"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/Calendar"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/CandyStore"/>
-    <RemoveDir
         Directories="PrecompiledWeb/Portal/bin/ChangeSkin"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/Chat"/>
-    <Delete
-        Files="PrecompiledWeb/Portal/bin/MigraDoc.DocumentObjectModel.dll"/>
-    <Delete
-        Files="PrecompiledWeb/Portal/bin/MigraDoc.Rendering.dll"/>
-    <Delete
-        Files="PrecompiledWeb/Portal/bin/MigraDoc.RtfRendering.dll"/>
     <Delete
         Files="PrecompiledWeb/Portal/bin/MySql.Data.dll"/>
-    <Delete
-        Files="PrecompiledWeb/Portal/bin/PdfSharp.Charting.dll"/>
-    <Delete
-        Files="PrecompiledWeb/Portal/bin/PdfSharp.dll"/>
     <Delete
         Files="PrecompiledWeb/Portal/bin/Ra.Brix.Data.Adapters.MySQL.dll"/>
     <Delete
         Files="PrecompiledWeb/Portal/bin/Ra.Brix.Data.Adapters.XML.dll"/>
     <RemoveDir
         Directories="PrecompiledWeb/Portal/bin/TipOfToday"/>
-    <RemoveDir
-        Directories="PrecompiledWeb/Portal/bin/TreeMenu"/>
 
 
 
