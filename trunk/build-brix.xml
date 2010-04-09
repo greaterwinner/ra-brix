@@ -5,7 +5,7 @@
       Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 
   <PropertyGroup>
-    <Version>0.7.2</Version>
+    <Version>0.7.5</Version>
   </PropertyGroup>
   
   <Target 
@@ -24,7 +24,20 @@
         Projects="Ra-Brix.sln" 
         Targets="Build" 
         Properties="Configuration=Release" />
-    
+
+
+
+    <ItemGroup>
+      <WebSiteFiles
+          Include="Portal\**\*.dll;Portal\**\*.template;Portal\**\*.config;Portal\**\*.asax;Portal\**\*.css;Portal\**\*.png;Portal\**\*.jpg;Portal\**\*.jpeg;Portal\**\*.gif;Portal\**\*.aspx;"
+          Exclude="**\*.pdb;Portal\obj\**\*.*;"/>
+    </ItemGroup>
+    <Copy
+        SourceFiles="@(WebSiteFiles)"
+        DestinationFiles="@(WebSiteFiles->'PrecompiledWeb\Portal\%(RecursiveDir)%(Filename)%(Extension)')"/>
+
+
+
     <!-- Deleting web.config and settings the template file as the active web.config -->
     <Delete 
         Files="PrecompiledWeb/Portal/Web.config"/>

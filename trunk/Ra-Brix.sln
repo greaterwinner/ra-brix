@@ -1,25 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Portal", "Portal\", "{1AD4776D-55DB-449A-A00F-124A87FFA47D}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "2.0"
-		ProjectReferences = "{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}|Ra.Brix.Data.dll;{0423B777-2C18-4B0F-B87E-0AD059529167}|Ra.Brix.Loader.dll;{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}|Ra.Brix.Types.dll;{EA4DB865-734B-44D3-9AD9-132FD680446D}|HelperGlobals.dll;{853598D1-F9CF-48C2-90DD-354480F34F91}|Ra.Brix.Data.Adapters.MSSQL.dll;{B2969964-A410-4A2B-B1E2-528BF9D435D0}|Ra.Brix.Data.Adapters.MySQL.dll;{87C08A87-ACE9-4B8C-95A9-73DA83EE1F0A}|Ra.Brix.Data.Adapters.XML.dll;{C38BEB2B-CBC6-4280-9D02-1AE52B0DB47B}|Components.dll;{90BE29CE-9FBD-446F-B74B-0FCC6B070D48}|CommonModules.dll;{FDBF4787-9F3B-4983-AADA-5F4F115B2EAE}|SettingsRecords.dll;{421D0A33-2270-4388-BC1E-0BFDD68340B2}|UserSettingsRecords.dll;{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}|LanguageRecords.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/Portal"
-		Debug.AspNetCompiler.PhysicalPath = "Portal\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Portal\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/Portal"
-		Release.AspNetCompiler.PhysicalPath = "Portal\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Portal\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ADLogin", "ADLogin\", "{D50274F6-BF19-4B24-A8C3-7ED342C9E41B}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "2.0"
@@ -299,6 +279,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FooterController", "Control
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FooterModules", "Modules\FooterModules\FooterModules.csproj", "{ADD94414-B741-4546-944B-1A2368C501FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationPool", "Portal\ApplicationPool.csproj", "{583311C0-6511-409C-86EE-18C8436CA9FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -312,22 +294,6 @@ Global
 		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|.NET.ActiveCfg = Debug|.NET
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|.NET.Build.0 = Debug|.NET
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.DebugTests|.NET.ActiveCfg = Debug|.NET
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.DebugTests|.NET.Build.0 = Debug|.NET
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.DebugTests|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.DebugTests|Any CPU.Build.0 = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.DebugTests|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Release|.NET.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1AD4776D-55DB-449A-A00F-124A87FFA47D}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{D50274F6-BF19-4B24-A8C3-7ED342C9E41B}.Debug|.NET.ActiveCfg = Debug|.NET
 		{D50274F6-BF19-4B24-A8C3-7ED342C9E41B}.Debug|.NET.Build.0 = Debug|.NET
 		{D50274F6-BF19-4B24-A8C3-7ED342C9E41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -1813,6 +1779,21 @@ Global
 		{ADD94414-B741-4546-944B-1A2368C501FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADD94414-B741-4546-944B-1A2368C501FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ADD94414-B741-4546-944B-1A2368C501FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.DebugTests|.NET.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.DebugTests|Any CPU.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.DebugTests|Any CPU.Build.0 = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.DebugTests|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.DebugTests|Mixed Platforms.Build.0 = Debug|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Release|.NET.ActiveCfg = Release|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{583311C0-6511-409C-86EE-18C8436CA9FD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
