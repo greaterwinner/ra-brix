@@ -615,7 +615,7 @@ namespace Ra.Brix.Data.Adapters.MSSQL
             // Deleting *OLD* ViewState from table...
             string key = sessionId + "|" + pageUrl;
             SqlCommand sql = new SqlCommand("delete from dbo.ViewStateStorage where ID='" + key + "' or Created < @dateNow", _connection);
-            sql.Parameters.Add(new SqlParameter("@dateNow", DateTime.Now.AddHours(-24)));
+            sql.Parameters.Add(new SqlParameter("@dateNow", DateTime.Now.AddHours(-4)));
             sql.ExecuteNonQuery();
 
             // Saving new value
