@@ -121,6 +121,7 @@
 
 
     <!-- If building Ra-Ajax.Org, please comment away the next paragraph -->
+    <!--
     <RemoveDir
         Directories="PrecompiledWeb/Portal/bin/DoxygenDotNetViewDocs"/>
     <RemoveDir
@@ -137,6 +138,7 @@
         Directories="PrecompiledWeb/Portal/docs-xml"/>
     <RemoveDir
         Directories="PrecompiledWeb/Portal/tutorials"/>
+    -->
 
     
 

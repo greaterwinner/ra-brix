@@ -15,8 +15,7 @@ using System.Collections.Generic;
 
 namespace LanguageRecords
 {
-    [ActiveType]
-    public sealed class Language : ActiveType<Language>
+    public sealed class Language
     {
         [ActiveType]
         private sealed class LanguageEntity : ActiveType<LanguageEntity>
@@ -40,7 +39,7 @@ namespace LanguageRecords
 
         private Language()
         {
-            Entities = new LazyList<LanguageEntity>();
+            Entities = new List<LanguageEntity>(LanguageEntity.Select());
         }
 
         public static void Reset()
@@ -58,12 +57,7 @@ namespace LanguageRecords
                     {
                         if (_instance == null)
                         {
-                            _instance = SelectFirst();
-                            if (_instance == null)
-                            {
-                                _instance = new Language();
-                                _instance.Save();
-                            }
+                            _instance = new Language();
                         }
                     }
                 }
@@ -90,22 +84,6 @@ namespace LanguageRecords
             }
         }
 
-        public IEnumerable<string> LanguageKeys
-        {
-            get
-            {
-                Dictionary<string, bool> sentItems = new Dictionary<string, bool>();
-                foreach (LanguageEntity idx in Entities)
-                {
-                    if (!sentItems.ContainsKey(idx.Language))
-                    {
-                        sentItems[idx.Language] = true;
-                        yield return idx.Language;
-                    }
-                }
-            }
-        }
-
         public void SetLanguageForUser(string language)
         {
             HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] = language;
@@ -123,14 +101,14 @@ namespace LanguageRecords
                 else
                 {
                     string defaultLanguage = HttpContext.Current.Request.UserLanguages != null &&
-                                             HttpContext.Current.Request.UserLanguages[0].Length > 0 ?
-                                                                                                         HttpContext.Current.Request.UserLanguages[0] :
+                        HttpContext.Current.Request.UserLanguages[0].Length > 0 ?
+                        HttpContext.Current.Request.UserLanguages[0] :
                                                                                                                                                           "en";
                     if (HttpContext.Current == null)
                         return "en";
-                    return HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] == null ?
-                                                                                                            defaultLanguage :
-                                                                                                                                HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"].ToString();
+                    return HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] == null ? 
+                        defaultLanguage :
+                        HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"].ToString();
                 }
             }
             set 
@@ -143,19 +121,6 @@ namespace LanguageRecords
                 {
                     HttpContext.Current.Session["LanguageRecords.Language.UserLanguage"] = value;
                 }
-            }
-        }
-
-        public string this[string key, string lang]
-        {
-            get
-            {
-                LanguageEntity retVal = Entities.Find(
-                    delegate(LanguageEntity idx)
-                    {
-                        return idx.Key == key && lang == idx.Language;
-                    });
-                return retVal == null ? null : retVal.Value;
             }
         }
 
@@ -176,8 +141,8 @@ namespace LanguageRecords
                 Value = defaultValue,
                 Language = "en"
             };
+            le.Save();
             Entities.Add(le);
-            Save();
         }
 
         public string this[string key]
@@ -226,28 +191,22 @@ namespace LanguageRecords
                     Language = language ?? UserLanguage
                 };
                 Entities.Add(le);
-                Save();
+                le.Save();
                 return le.Value;
             }
         }
 
         public void ChangeValue(string key, string language, string value)
         {
-            ChangeValue(key, language, value, false);
-        }
-
-        public void ChangeValue(string key, string language, string value, bool skipSave)
-        {
             LanguageEntity le = Entities.Find(
                 delegate(LanguageEntity idx)
-                    {
-                        return idx.Key == key && idx.Language == (language == null ? UserLanguage : language);
-                    });
+                {
+                    return idx.Key == key && idx.Language == (language == null ? UserLanguage : language);
+                });
             if (le != null)
             {
                 le.Value = value;
-                if (!skipSave)
-                    le.Save();
+                le.Save();
             }
             else
             {
@@ -256,21 +215,10 @@ namespace LanguageRecords
                 le2.Language = language == null ? UserLanguage : language;
                 le2.Value = value;
                 Entities.Add(le2);
-                if (!skipSave)
-                    Save();
+                le2.Save();
             }
         }
 
-        [ActiveField]
-        private LazyList<LanguageEntity> Entities { get; set; }
-
-        public override void Save()
-        {
-            foreach (LanguageEntity idx in Entities)
-            {
-                idx.Prepare();
-            }
-            base.Save();
-        }
+        private List<LanguageEntity> Entities { get; set; }
     }
 }
