@@ -190,6 +190,10 @@
     <EmbeddedResource Include="CodeFiles\Docs_Controls_Window.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
+    <Compile Include="Docs_Controls_BehaviorFingerScroll.ascx.cs">
+      <DependentUpon>Docs_Controls_BehaviorFingerScroll.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Docs_Controls_BehaviorDraggable.ascx.cs">
       <DependentUpon>Docs_Controls_BehaviorDraggable.ascx</DependentUpon>
@@ -522,6 +526,11 @@
       <Project>{F266D261-5A5F-4BB6-84F6-A71EA2B5090E}</Project>
       <Name>Ra.Brix.Types</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Docs_Controls_BehaviorFingerScroll.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

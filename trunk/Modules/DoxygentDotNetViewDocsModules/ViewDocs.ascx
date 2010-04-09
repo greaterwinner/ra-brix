@@ -6,7 +6,13 @@
     AutoEventWireup="true" 
     Inherits="DoxygentDotNetViewDocsModules.ViewDocs" %>
 
-<div style="overflow:auto;height:100%;">
+<div style="position:relative;height:100%;z-index:1;overflow:auto;">
+<ra:Panel 
+    runat="server" 
+    id="pnlScrWrp">
+    <ra:BehaviorFingerScroll 
+        runat="server" 
+        id="scroller" />
     <ra:Panel 
         runat="server"
         DefaultWidget="filterSearch"
@@ -54,4 +60,5 @@
             </ra:TreeNode>
         </ra:TreeNodes>
     </ra:Tree>
+</ra:Panel>
 </div>
