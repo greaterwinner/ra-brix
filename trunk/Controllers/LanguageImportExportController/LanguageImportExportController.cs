@@ -78,11 +78,10 @@ namespace LanguageImportExportController
                 {
                     string key = idx.Attributes["key"].Value;
                     string value = idx.Attributes["value"].Value;
-                    Language.Instance.ChangeValue(key, language, value, true);
+                    Language.Instance.ChangeValue(key, language, value);
                 }
-                Language.Instance.Save();
-                
-            } ActiveEvents.Instance.RaiseClearControls("dynPopup");
+            }
+            ActiveEvents.Instance.RaiseClearControls("dynPopup");
         }
 
         [ActiveEvent(Name = "ExportLanguage")]
