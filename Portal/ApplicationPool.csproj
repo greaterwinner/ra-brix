@@ -181,6 +181,8 @@
     <Content Include="tutorials\timer-tutorial.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="media\future.png" />
+    <Content Include="media\RaSoftwareFactoryCom.css" />
     <Content Include="Web.config" />
     <None Include="Web.config.template" />
   </ItemGroup>
