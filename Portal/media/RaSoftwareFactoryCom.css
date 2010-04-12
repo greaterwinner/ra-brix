@@ -45,3 +45,10 @@
 	position:absolute;
 }
 
+.cmsMainBody div img
+{
+	-webkit-box-shadow: 3px 3px 7px #777;
+	-webkit-border-radius: 25px;
+	margin:5px;
+}
+
