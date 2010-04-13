@@ -23,7 +23,7 @@ namespace ResourcesController
     public class ResourcesController
     {
         [ActiveEvent(Name = "ApplicationStartup")]
-        protected static void ApplicationStartup2(object sender, ActiveEventArgs e)
+        protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonResourceManager", "Resources");
         }

@@ -418,7 +418,7 @@ namespace CMSController
                     return;
             }
             Page page = Page.FindPage(contentId);
-            
+
             if (page != null)
             {
                 string pageUrl = page.URL == "home" ? "" : (page.URL + ConfigurationManager.AppSettings["DefaultPageExtension"]);
