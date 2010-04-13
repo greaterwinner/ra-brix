@@ -1993,3 +1993,35 @@ summary
 .footerContent
 {
 }
+
+
+.promo
+{
+	border:solid 1px #777;
+	margin:0 50px 30px 10px;
+	padding:25px;
+	-webkit-box-shadow: 5px 5px 5px #777;
+	-moz-box-shadow: 5px 5px 5px #777;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	float:left;
+	width:250px;
+}
+
+.promoTable
+{
+	width:100%;
+}
+
+.promoTable tr td
+{
+	padding:3px;
+	text-align:left;
+}
+
+.promoTable tr td input[type=text]
+{
+	width:100%;
+}
+
+

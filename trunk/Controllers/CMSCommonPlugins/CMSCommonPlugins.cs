@@ -13,6 +13,7 @@ using Ra.Brix.Loader;
 using System.Net.Mail;
 using SettingsRecords;
 using System.Net;
+using System.Web;
 
 namespace CMSCommonPlugins
 {
@@ -42,7 +43,10 @@ namespace CMSCommonPlugins
                 Language.Instance["ContactCredentials", null, "Contact credentials: "] + 
                 e.Params["Email"].Get<string>() + 
                 ". " + 
-                e.Params["Comment"].Get<string>();
+                e.Params["Comment"].Get<string>()
+                + @"
+
+Promo Code: " + HttpContext.Current.Session["PromoCode"];
             msg.IsBodyHtml = false;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = smtpServer;
