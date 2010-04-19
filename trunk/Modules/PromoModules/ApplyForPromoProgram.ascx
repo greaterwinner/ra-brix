@@ -7,7 +7,9 @@
     Inherits="PromoModules.ApplyForPromoProgram" %>
 
 <div style="padding:5px;">
-    <h1 style="margin-bottom:25px;">Ra-Software Promo Program</h1>
+    <h1 style="margin-bottom:25px;">
+        <%=LanguageRecords.Language.Instance["RaSoftwarePromoProgramHeader", null, "Ra-Software Promo Program - Earn $200 with every sale!"]%>
+    </h1>
     <ra:Panel 
         runat="server" 
         CssClass="promo"
