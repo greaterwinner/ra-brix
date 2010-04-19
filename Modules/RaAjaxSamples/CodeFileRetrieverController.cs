@@ -12,6 +12,8 @@ using Ra.Brix.Loader;
 using System.Reflection;
 using System.IO;
 using Ra.Brix.Types;
+using ColorizerLibrary;
+using System.Collections.Generic;
 
 namespace RaAjaxSamples
 {
@@ -57,38 +59,66 @@ namespace RaAjaxSamples
             GetCode(className, e.Params);
         }
 
+        private static Dictionary<string, string> _markupCode = new Dictionary<string, string>();
         private static void GetMarkup(string className, Node node)
         {
             string usxFile = "Docs_Controls_" + className + ".ascx";
-            using (Stream stream =
-                Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("RaAjaxSamples." + usxFile))
+            if (!_markupCode.ContainsKey(usxFile))
             {
-                if (stream != null)
+                using (Stream stream =
+                    Assembly.GetExecutingAssembly()
+                        .GetManifestResourceStream("RaAjaxSamples." + usxFile))
                 {
-                    using (TextReader reader = new StreamReader(stream))
+                    if (stream != null)
                     {
-                        node["Markup"].Value = reader.ReadToEnd();
+                        using (TextReader reader = new StreamReader(stream))
+                        {
+                            string code = reader.ReadToEnd();
+                            CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+                            code =
+                                colorizer.ProcessAndHighlightText(
+                                    "<pre lang=\"xml\">" +
+                                    code +
+                                    "</pre>")
+                                    .Replace("%@", "<span class=\"yellow-code\">%@</span>")
+                                    .Replace(" %", " <span class=\"yellow-code\">%</span>");
+                            _markupCode[usxFile] = code;
+                        }
                     }
                 }
             }
+            if (_markupCode.ContainsKey(usxFile))
+                node["Markup"].Value = _markupCode[usxFile];
         }
 
+        private static Dictionary<string, string> _codeCode = new Dictionary<string, string>();
         private static void GetCode(string className, Node node)
         {
             string usxFile = "Docs_Controls_" + className + ".ascx.cs";
-            using (Stream stream =
-                Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("RaAjaxSamples.CodeFiles." + usxFile))
+            if (!_codeCode.ContainsKey(usxFile))
             {
-                if (stream != null)
+                using (Stream stream =
+                    Assembly.GetExecutingAssembly()
+                        .GetManifestResourceStream("RaAjaxSamples.CodeFiles." + usxFile))
                 {
-                    using (TextReader reader = new StreamReader(stream))
+                    if (stream != null)
                     {
-                        node["Code"].Value = reader.ReadToEnd();
+                        using (TextReader reader = new StreamReader(stream))
+                        {
+                            string code = reader.ReadToEnd();
+                            CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+                            code =
+                                colorizer.ProcessAndHighlightText(
+                                    "<pre lang=\"cs\">" +
+                                    code +
+                                    "</pre>");
+                            _codeCode[usxFile] = code;
+                        }
                     }
                 }
             }
+            if (_codeCode.ContainsKey(usxFile))
+                node["Code"].Value = _codeCode[usxFile];
         }
     }
 }

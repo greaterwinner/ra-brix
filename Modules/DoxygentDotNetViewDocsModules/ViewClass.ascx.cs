@@ -70,28 +70,17 @@ namespace DoxygentDotNetViewDocsModules
                 this,
                 "DoxygenDotNetGetClassCodeFiles",
                 node);
-            CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
             if (node["Markup"].Value == null)
                 aspx.Text = "";
             else
             {
-                aspx.Text =
-                    colorizer.ProcessAndHighlightText(
-                        "<pre lang=\"xml\">" +
-                        node["Markup"].Get<string>() +
-                        "</pre>")
-                        .Replace("%@", "<span class=\"yellow-code\">%@</span>")
-                        .Replace(" %", " <span class=\"yellow-code\">%</span>");
+                aspx.Text = node["Markup"].Get<string>();
             }
             if (node["Code"].Value == null)
                 code.Text = "";
             else
             {
-                code.Text =
-                    colorizer.ProcessAndHighlightText(
-                        "<pre lang=\"cs\">" +
-                        node["Code"].Get<string>() +
-                        "</pre>");
+                code.Text = node["Code"].Get<string>();
             }
         }
 
