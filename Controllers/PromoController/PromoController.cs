@@ -16,6 +16,7 @@ using Ra.Brix.Data;
 using System.Net.Mail;
 using System.Net;
 using SettingsRecords;
+using Ra.Brix.Types;
 
 namespace PromoController
 {
@@ -26,12 +27,44 @@ namespace PromoController
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
             Language.Instance.SetDefaultValue("ButtonApplyForPromo", "Promo Program");
+            Language.Instance.SetDefaultValue("ButtonViewPromoters", "View Promoters");
         }
 
         [ActiveEvent(Name = "GetMenuItems")]
         protected void GetMenuItems(object sender, ActiveEventArgs e)
         {
             e.Params["ButtonApplyForPromo"].Value = "url:~/promo-program";
+            e.Params["ButtonViewPromoters"].Value = "View-Promoters";
+        }
+
+        [ActiveEvent(Name = "View-Promoters")]
+        protected void ViewPromoters(object sender, ActiveEventArgs e)
+        {
+            Node node = new Node();
+
+            // Columns...
+            node["ModuleSettings"]["Grid"]["Columns"]["Email"]["Caption"].Value = Language.Instance["Email", null, "Email"];
+            node["ModuleSettings"]["Grid"]["Columns"]["Email"]["ControlType"].Value = "Label";
+
+            node["ModuleSettings"]["Grid"]["Columns"]["Code"]["Caption"].Value = Language.Instance["PromoCodeGridHeader", null, "Promo Code"];
+            node["ModuleSettings"]["Grid"]["Columns"]["Code"]["ControlType"].Value = "Label";
+
+            node["ModuleSettings"]["Grid"]["Columns"]["Cause"]["Caption"].Value = Language.Instance["PromoCodeCauseHeader", null, "Cause"];
+            node["ModuleSettings"]["Grid"]["Columns"]["Cause"]["ControlType"].Value = "Label";
+
+            node["ModuleSettings"]["Grid"]["Columns"]["Address"]["Caption"].Value = Language.Instance["Address", null, "Address"];
+            node["ModuleSettings"]["Grid"]["Columns"]["Address"]["ControlType"].Value = "Label";
+            foreach (PromoCode idx in PromoCode.Select())
+            {
+                node["ModuleSettings"]["Grid"]["Rows"]["Row" + idx.ID]["Email"].Value = idx.Email;
+                node["ModuleSettings"]["Grid"]["Rows"]["Row" + idx.ID]["Code"].Value = idx.Code;
+                node["ModuleSettings"]["Grid"]["Rows"]["Row" + idx.ID]["Cause"].Value = idx.Cause;
+                node["ModuleSettings"]["Grid"]["Rows"]["Row" + idx.ID]["Address"].Value = idx.Address;
+            }
+            ActiveEvents.Instance.RaiseLoadControl(
+                "PromoModules.ViewPromoters",
+                "dynMid",
+                node);
         }
 
         [ActiveEvent(Name = "Page_Init_InitialLoading")]
@@ -48,6 +81,9 @@ namespace PromoController
                 contentId = contentId.Trim('/');
                 if (contentId == "promo-program")
                 {
+                    // Setting title of page
+                    ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
+                        "Ra-Software Promo Program";
                     ActiveEvents.Instance.RaiseLoadControl(
                         "PromoModules.ApplyForPromoProgram",
                         "dynMid");
@@ -115,7 +151,7 @@ namespace PromoController
             msg.To.Add(email);
             msg.From = new MailAddress(adminEmail);
             msg.Subject = Language.Instance["PromoCodeProgramAccepted", null, "Welcome to our Promo Program"];
-            msg.Body = string.Format(Language.Instance["PromoAcceptedEmailBody", null, @"
+            msg.Body = string.Format(Language.Instance["PromoAcceptedMailBody", null, @"
 This email was sent due to someone applying for a promo code at http://rasoftwarefactory.com/promo-program
 If this person was not you, then please ignore this email.
 
@@ -130,6 +166,8 @@ All our ""contact us"" forms at http://rasoftwarefactory.com contains a field wh
 If you want to have a link that directly will associate any ""contact us"" request to your promo code you can use this link:
 
 http://rasoftwarefactory.com?promo={0}
+
+If you give people the above link, all ""contact us"" request they send in after clicking that link will automatically associate any purchase with you.
 
 We ask you to not send unsolicited emails [spam] with your promo code.
 

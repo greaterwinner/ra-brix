@@ -57,6 +57,10 @@
       <DependentUpon>ApplyForPromoProgram.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ViewPromoters.ascx.cs">
+      <DependentUpon>ViewPromoters.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +69,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Components\Components.csproj">
+      <Project>{C38BEB2B-CBC6-4280-9D02-1AE52B0DB47B}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ra.Brix.Core\Ra.Brix.Data\Ra.Brix.Data.csproj">
       <Project>{07B4583B-D2FB-4ADE-8F4A-FBAD56C2C8E0}</Project>
       <Name>Ra.Brix.Data</Name>
@@ -81,6 +89,11 @@
       <Project>{2C58869E-0F4A-4B4B-8B8D-6E9674CE909F}</Project>
       <Name>LanguageRecords</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewPromoters.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
