@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using Doxygen.NET;
 using System.IO;
 using Ra.Widgets;
+using System.Configuration;
 
 namespace DoxygentDotNetViewDocsModules
 {
@@ -102,7 +103,14 @@ namespace DoxygentDotNetViewDocsModules
                     TreeNode n = new TreeNode();
                     n.ID = "tutorial_" + idx.Replace(".txt", "").Replace(" ", "_").Replace(Server.MapPath("~/tutorials/"), "");
                     n.Text = idx.Replace(".txt", "").Replace(Server.MapPath("~/tutorials/"), "");
-                    n.Xtra = idx;
+
+                    string[] tmpSplits = idx.Split('-');
+                    string tutorialName = tmpSplits[tmpSplits.Length - 1].Replace(".txt", "").Trim();
+                    string tutorialUrl = tutorialName.Replace(" ", "-");
+                    tutorialUrl = "tutorials/" +
+                        tutorialUrl.ToLower() +
+                        ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    n.Xtra = tutorialUrl;
                     n.CssClass = "noSample";
                     rootTutorials.Controls.Add(n);
                 }

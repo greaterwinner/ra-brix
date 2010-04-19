@@ -16,12 +16,18 @@ using ColorizerLibrary;
 using Doxygen.NET;
 using System.Web;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace DoxygenDotNetViewDocsController
 {
     [ActiveController]
     public class ViewDocsController
     {
+        private static Dictionary<string, string> _tutorials = new Dictionary<string, string>();
+        private static bool _hasTutorials = true;
+        private static Dictionary<string, Tuple<string, string>> _tutorialContent = 
+            new Dictionary<string, Tuple<string, string>>();
+
         [ActiveEvent(Name = "ApplicationStartup")]
         protected static void ApplicationStartup(object sender, ActiveEventArgs e)
         {
@@ -35,18 +41,32 @@ namespace DoxygenDotNetViewDocsController
         {
             GetClassesMenuItems(e);
             e.Params["ButtonDocumentation"].Value = "Menu-ViewDocumentation";
-            string root = HttpContext.Current.Server.MapPath("~/");
-            if (Directory.Exists(root + "tutorials"))
+            if (_tutorials.Count == 0)
+            {
+                string root = HttpContext.Current.Server.MapPath("~/");
+                if (Directory.Exists(root + "tutorials"))
+                {
+                    foreach (string fileName in Directory.GetFiles(root + "tutorials/", "*.txt"))
+                    {
+                        string[] tmpSplits = fileName.Split('-');
+                        string tutorialName = tmpSplits[tmpSplits.Length - 1].Replace(".txt", "").Trim();
+                        string tutorialUrl = tutorialName.Replace(" ", "-");
+                        _tutorials[tutorialName] = "url:~/tutorials/" +
+                            tutorialUrl.ToLower() +
+                            ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    }
+                }
+                else
+                {
+                    _hasTutorials = false;
+                }
+            }
+            if (_hasTutorials)
             {
                 e.Params["ButtonTutorials"].Value = "tutorials";
-                foreach (string fileName in Directory.GetFiles(root + "tutorials/", "*.txt"))
+                foreach (string idxKey in _tutorials.Keys)
                 {
-                    string[] tmpSplits = fileName.Split('-');
-                    string tutorialName = tmpSplits[tmpSplits.Length - 1].Replace(".txt", "").Trim();
-                    string tutorialUrl = tutorialName.Replace(" ", "-");
-                    e.Params["ButtonTutorials"][tutorialName].Value = "url:~/tutorials/" + 
-                        tutorialUrl.ToLower() +
-                        ConfigurationManager.AppSettings["DefaultPageExtension"];
+                    e.Params["ButtonTutorials"][idxKey].Value = _tutorials[idxKey];
                 }
             }
         }
@@ -103,7 +123,7 @@ namespace DoxygenDotNetViewDocsController
                 return;
             else if (contentId.IndexOf("tutorials/") == 0)
             {
-                LoadTutorial(contentId);
+                LoadTutorial(contentId, true);
             }
             else if (contentId.IndexOf("class/") == 0)
             {
@@ -125,22 +145,31 @@ namespace DoxygenDotNetViewDocsController
                 node);
         }
 
-        private static void LoadTutorial(string contentId)
+        private static void LoadTutorial(string contentId, bool setTitle)
         {
             // We have a tutorial link...
-            string tutorialFileName = " - " + contentId.Replace("tutorials/", "").Replace("-", " ") + ".txt";
-            string root = HttpContext.Current.Server.MapPath("~/tutorials/");
-            string fileName = Directory.GetFiles(root, "*" + tutorialFileName)[0];
-            Node node = new Node();
-            using (TextReader reader = new StreamReader(fileName))
+            if (!_tutorialContent.ContainsKey(contentId))
             {
-                CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
-                string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
-                node["ModuleSettings"]["Text"].Value = tutorialSyntaxed;
-                node["ModuleSettings"]["Header"].Value = fileName.Substring(fileName.LastIndexOf("\\") + 1).Replace(".txt", "");
+                string tutorialFileName = " - " + contentId.Replace("tutorials/", "").Replace("-", " ") + ".txt";
+                string root = HttpContext.Current.Server.MapPath("~/tutorials/");
+                string fileName = Directory.GetFiles(root, "*" + tutorialFileName)[0];
+                using (TextReader reader = new StreamReader(fileName))
+                {
+                    CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
+                    string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
+                    _tutorialContent[contentId] = new Tuple<string, string>(
+                        fileName.Substring(fileName.LastIndexOf("\\") + 1).Replace(".txt", ""),
+                        tutorialSyntaxed);
+                }
+            }
+            Node node = new Node();
+            node["ModuleSettings"]["Header"].Value = _tutorialContent[contentId].Left;
+            node["ModuleSettings"]["Text"].Value = _tutorialContent[contentId].Right;
+            if (setTitle)
+            {
                 ((System.Web.UI.Page)HttpContext.Current.CurrentHandler).Title =
                     Language.Instance["Tutorial:", null, "Tutorials: "] +
-                    node["ModuleSettings"]["Header"].Value;
+                    _tutorialContent[contentId].Left;
             }
             ActiveEvents.Instance.RaiseLoadControl(
                 "DoxygentDotNetViewDocsModules.ViewTutorial",
@@ -179,18 +208,7 @@ namespace DoxygenDotNetViewDocsController
         [ActiveEvent(Name = "DoxygentDotNetShowTutorial")]
         protected void DoxygentDotNetShowTutorial(object sender, ActiveEventArgs e)
         {
-            Node node = new Node();
-            using (TextReader reader = new StreamReader(e.Params["TutorialFile"].Get<string>()))
-            {
-                CodeColorizer colorizer = ColorizerLibrary.Config.DOMConfigurator.Configure();
-                string tutorialSyntaxed = colorizer.ProcessAndHighlightText(reader.ReadToEnd());
-                node["ModuleSettings"]["Text"].Value = tutorialSyntaxed;
-                node["ModuleSettings"]["Header"].Value = e.Params["TutorialName"].Get<string>();
-            }
-            ActiveEvents.Instance.RaiseLoadControl(
-                "DoxygentDotNetViewDocsModules.ViewTutorial",
-                "dynMid",
-                node);
+            LoadTutorial(e.Params["TutorialFile"].Get<string>(), false);
         }
 
         [ActiveEvent(Name = "DoxygentDotNetShowClass")]

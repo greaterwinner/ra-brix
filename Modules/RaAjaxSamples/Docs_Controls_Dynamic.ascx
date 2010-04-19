@@ -15,10 +15,10 @@
         Value="nothing" />
     <ra:ListItem 
         Text="Button" 
-        Value="Ra.Widgets.Button.ascx" />
+        Value="RaAjaxSamples.Ra_Widgets_Button" />
     <ra:ListItem 
         Text="CheckBox" 
-        Value="Ra.Widgets.CheckBox.ascx" />
+        Value="RaAjaxSamples.Ra_Widgets_CheckBox" />
 </ra:SelectList>
 
 <ra:Dynamic 
