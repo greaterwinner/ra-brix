@@ -30,8 +30,16 @@ namespace RaAjaxSamples
 
         protected void dyn_Reload(object sender, Dynamic.ReloadEventArgs e)
         {
-            string fileName = "~/Docs-Controls/" + e.Key;
-            System.Web.UI.Control ctrl = Page.LoadControl(fileName);
+            // Notice that this loading mechanism uses the Ra-Brix 
+            // PluginLoader, while you if you use only Ra-Ajax should 
+            // use Page.LoadControl but due to the nature of this 
+            // website, which is a Ra-Brix application we need to 
+            // load our UserControls as ActiveModules. You would 
+            // probably use, in a pure Ra-Ajax solution, 
+            // Page.LoadControl and it would work perfectly well 
+            // none the less ...
+            System.Web.UI.Control ctrl = 
+                PluginLoader.Instance.LoadControl(e.Key);
             dyn.Controls.Add(ctrl);
         }
     }

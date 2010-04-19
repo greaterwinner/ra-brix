@@ -45,13 +45,11 @@
 
 <ra:Window 
     runat="server" 
-    style="z-index:1000;position:fixed;right:50px;top:10px;overflow:hidden;"
+    style="z-index:1000;position:fixed;right:50px;top:10px;overflow:hidden;opacity:0.3;"
     Visible="false"
     CssClass="window"
-    Caption="&nbsp;"
-    OnMouseOut="popupWindow2_MouseOut"
+    Caption=""
     OnClosed="popupWindow2_Closed"
-    OnCreateTitleBarControls="popupWindow2_CreateTitleBarControls"
     id="popupWindow2">
     <div style="position:relative;">
         <ra:Dynamic 
@@ -59,15 +57,10 @@
             CssClass="dynamic-content dynamic-content-no-overflow"
             OnReload="dynamic_LoadControls"
             id="dynPopup2" />
-        <ra:Image 
-            runat="server" 
-            OnClick="zoomImage_MouseOver"
-            AlternateText="Zoom here"
-            CssClass="zoomImage"
-            Text="&nbsp;"
-            ImageUrl='<%# GetCssRootFolder() + "/Images/zoom.png" %>'
-            id="zoomImage" />
     </div>
+    <ra:BehaviorUnveiler 
+        runat="server" 
+        id="unveiler" />
 </ra:Window>
 
 <div id="paper">

@@ -190,6 +190,17 @@
     <EmbeddedResource Include="CodeFiles\Docs_Controls_Window.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CodeFiles\Docs_Controls_BehaviorFingerScroll.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <Compile Include="Ra_Widgets_CheckBox.ascx.cs">
+      <DependentUpon>Ra_Widgets_CheckBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ra_Widgets_Button.ascx.cs">
+      <DependentUpon>Ra_Widgets_Button.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Docs_Controls_BehaviorFingerScroll.ascx.cs">
       <DependentUpon>Docs_Controls_BehaviorFingerScroll.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -529,6 +540,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Docs_Controls_BehaviorFingerScroll.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ra_Widgets_Button.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ra_Widgets_CheckBox.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
